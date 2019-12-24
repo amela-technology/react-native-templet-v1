@@ -1,11 +1,5 @@
 import * as React from "react"
-import {
-    StyleProp,
-    StyleSheet,
-    Text,
-    TextProps,
-    TextStyle,
-} from "react-native"
+import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from "react-native"
 import {Themes} from "../../assets/themes"
 
 interface AMTextProps extends TextProps {
@@ -15,14 +9,12 @@ interface AMTextProps extends TextProps {
 
 const AMText = (props: AMTextProps) => {
     return (
-        <Text
-            style={[styles.text, props.customStyle]}
-            {...props}>
+        <Text style={[styles.text, props.customStyle]} {...props}>
             {props.text}
         </Text>
     )
 }
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
     text: {
         color: Themes.colors.textPrimary,
         fontSize: 12,

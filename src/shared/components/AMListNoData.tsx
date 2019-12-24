@@ -5,12 +5,12 @@ import AMText from "./AMText"
 import TouchableRipple from "./AMTouchable"
 
 interface AMListNoDataProps {
-    text?: string,
-    refreshable?: boolean,
+    text?: string
+    refreshable?: boolean
 
     loading?: boolean
 
-    onRefresh?(): any,
+    onRefresh?(): any
 }
 
 const AMListNoData = (props: AMListNoDataProps) => {
@@ -18,19 +18,18 @@ const AMListNoData = (props: AMListNoDataProps) => {
         <View style={styles.container}>
             {props.loading ? (
                 <View style={{alignItems: "center"}}>
-                    <ActivityIndicator/>
+                    <ActivityIndicator />
                 </View>
             ) : (
                 <Text>{props.text || "Không có dữ liệu"}</Text>
             )}
             {!!props.refreshable && !props.loading ? (
-                <TouchableRipple
-                    onPress={props.onRefresh}
-                >
-                    <AMText text={"Tải lại"} customStyle={styles.textReload}/>
+                <TouchableRipple onPress={props.onRefresh}>
+                    <AMText text={"Tải lại"} customStyle={styles.textReload} />
                 </TouchableRipple>
-            ) : <View/>}
-
+            ) : (
+                <View />
+            )}
         </View>
     )
 }

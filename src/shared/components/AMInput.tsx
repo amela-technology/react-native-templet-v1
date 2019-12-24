@@ -10,14 +10,13 @@ interface AMInputProps extends TextInputProps {
 const AMInput = (props: AMInputProps) => {
     let input: any
 
-
     function focus() {
-        input && input.focus()
+        input?.focus()
     }
 
     return (
         <TextInput
-            ref={(ref) => input = ref}
+            ref={ref => (input = ref)}
             style={[styles.textInput, props.customStyle]}
             placeholderTextColor={props.placeholderTextColor || "black"}
             placeholder={props.placeholder}
@@ -26,7 +25,7 @@ const AMInput = (props: AMInputProps) => {
         />
     )
 }
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
     textInput: {
         height: 32,
         width: 128,

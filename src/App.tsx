@@ -16,23 +16,18 @@ import AppContainer from "./services/navigation/AppNavigation"
 import NavigationService from "./services/navigation/NavigationService"
 import {persistor, store} from "./shared/store/store"
 
-
 const App = () => {
     return (
         // <Provider store={store}>
-        //     <PersistGate
-        //         loading={<ActivityIndicator/>}
-        //         persistor={persistor}
-        //     >
-                <AppContainer
-                    ref={(navigatorRef) => {
-                        NavigationService.setTopLevelNavigator(navigatorRef)
-                    }}
-                />
+        //     <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+        <AppContainer
+            ref={navigatorRef => {
+                NavigationService.setTopLevelNavigator(navigatorRef)
+            }}
+        />
         //     </PersistGate>
         // </Provider>
     )
 }
-
 
 export default App

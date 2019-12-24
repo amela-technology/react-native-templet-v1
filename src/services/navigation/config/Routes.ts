@@ -10,8 +10,4 @@ const LoginRoute = {
 const HomeRoute = {
     HOME: "HOME",
 }
-export {
-    AppRoute,
-    LoginRoute,
-    HomeRoute,
-}
+export {AppRoute, LoginRoute, HomeRoute}

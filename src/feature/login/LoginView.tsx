@@ -8,13 +8,19 @@ const LoginView = () => {
     return (
         <View style={{flex: 1}}>
             <Text>I am Login screen</Text>
-            <AMButton title={"hiihi"} onPress={() => {
-                return null
-            }}/>
+            <AMButton
+                title={"hiihi"}
+                onPress={() => {
+                    return null
+                }}
+            />
             <AMInput value={"hiihi"} />
-            <AMList data={[]} renderItem={() => {
-                return null
-            }}/>
+            <AMList
+                data={[]}
+                renderItem={() => {
+                    return null
+                }}
+            />
         </View>
     )
 }

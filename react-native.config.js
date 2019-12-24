@@ -4,4 +4,4 @@ module.exports = {
         android: {},
         ios: {},
     },
-};
+}

@@ -21,15 +21,12 @@ interface AMTouchableProps {
 const DEFAULT_OPACITY = 0.5
 
 const AMTouchable = (props: AMTouchableProps) => {
-
     function handlePress() {
         props.onPress && props.onPress()
-
     }
 
     function handlePressIn() {
         props.onPressIn && props.onPressIn()
-
     }
 
     function handlePressOut() {
@@ -49,11 +46,8 @@ const AMTouchable = (props: AMTouchableProps) => {
                 onPressOut={handlePressOut}
                 onLongPress={handleLongPress}
                 accessibilityTraits={"button"}
-                disabled={disabled}
-            >
-                <View style={customStyle}>
-                    {children}
-                </View>
+                disabled={disabled}>
+                <View style={customStyle}>{children}</View>
             </TouchableNativeFeedback>
         )
     }
@@ -69,11 +63,8 @@ const AMTouchable = (props: AMTouchableProps) => {
                 accessibilityTraits={"button"}
                 activeOpacity={DEFAULT_OPACITY}
                 disabled={disabled}
-                {...props}
-            >
-                <View style={customStyle}>
-                    {children}
-                </View>
+                {...props}>
+                <View style={customStyle}>{children}</View>
             </TouchableOpacity>
         )
     }

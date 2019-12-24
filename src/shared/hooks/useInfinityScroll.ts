@@ -8,9 +8,7 @@ export interface Pagination {
     lastItem?: any
 }
 
-export const useInfinityScroll = (
-    callback: (options: Pagination) => void,
-): UseInfinityScroll => {
+export const useInfinityScroll = (callback: (options: Pagination) => void): UseInfinityScroll => {
     const [isFetching, setIsFetching] = useState(true)
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)

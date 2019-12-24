@@ -25,15 +25,10 @@ if (__DEV__) {
 
 const reducer = persistReducer(persistConfig, rootReducer)
 
-const store = createStore(reducer, compose(
-    applyMiddleware(...middleware),
-))
+const store = createStore(reducer, compose(applyMiddleware(...middleware)))
 
 const persistor = persistStore(store)
 
 // sagaMiddleware.run(rootSaga)
 
-export {
-    store,
-    persistor,
-}
+export {store, persistor}

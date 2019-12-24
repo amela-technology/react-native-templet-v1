@@ -14,10 +14,7 @@ interface AMButtonProps {
 
 const AMButton = (props: AMButtonProps) => {
     return (
-        <TouchableRipple
-            customStyle={styles.container}
-            onPress={props.onPress}
-            onLongPress={props.onLongPress}>
+        <TouchableRipple customStyle={styles.container} onPress={props.onPress} onLongPress={props.onLongPress}>
             <Text style={styles.title}>{props.title}</Text>
         </TouchableRipple>
     )

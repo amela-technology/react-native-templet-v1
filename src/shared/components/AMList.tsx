@@ -4,15 +4,14 @@ import {Themes} from "../../assets/themes"
 import NoData from "./AMListNoData"
 
 interface Props extends FlatListProps<any> {
+    [key: string]: any
 
-    [key: string]: any,
-
-    loading?: boolean,
-    data: any[],
-    noDataText?: string,
-    ListHeaderComponent?: any,
-    scrollEnabled?: boolean,
-    noDataRefreshable?: boolean,
+    loading?: boolean
+    data: any[]
+    noDataText?: string
+    ListHeaderComponent?: any
+    scrollEnabled?: boolean
+    noDataRefreshable?: boolean
 
     customStyle?: any
 
@@ -22,7 +21,6 @@ interface Props extends FlatListProps<any> {
 }
 
 const AMList = (props: Props) => {
-
     const [momentumScrolled, setMomentumScrolled] = useState(false)
     const list: any = useRef(null)
 
@@ -58,7 +56,7 @@ const AMList = (props: Props) => {
 
     function handleNoDataRefresh() {
         const {onNoDataRefresh} = props
-        onNoDataRefresh && onNoDataRefresh()
+        onNoDataRefresh?.()
     }
 
     function onMomentumScrollBegin() {
@@ -66,18 +64,18 @@ const AMList = (props: Props) => {
     }
 
     function scrollToFooter() {
-        list && list.scrollToEnd({animated: true})
+        list?.scrollToEnd({animated: true})
     }
 
     function scrollToTop() {
-        list && list.scrollTo({y: 0, animated: true})
+        list?.scrollTo({y: 0, animated: true})
     }
 
     function renderFooter() {
         if (hasData && loading !== undefined && !!loading) {
             return (
                 <View style={{alignItems: "center", marginVertical: 8}}>
-                    <ActivityIndicator/>
+                    <ActivityIndicator />
                 </View>
             )
         }

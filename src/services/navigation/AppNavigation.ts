@@ -6,27 +6,33 @@ import SplashView from "../../feature/splash/SplashView"
 import {AppRoute, LoginRoute} from "./config/Routes"
 import {TransitionConfiguration} from "./config/Transition"
 
-const LoginStack = createStackNavigator({
-    [LoginRoute.LOGIN]: {
-        screen: LoginView,
+const LoginStack = createStackNavigator(
+    {
+        [LoginRoute.LOGIN]: {
+            screen: LoginView,
+        },
+        [LoginRoute.REGISTER]: {
+            screen: HomeView,
+        },
     },
-    [LoginRoute.REGISTER]: {
-        screen: HomeView,
+    {
+        initialRouteName: LoginRoute.REGISTER,
+        defaultNavigationOptions: {
+            gesturesEnabled: true,
+        },
+        transitionConfig: TransitionConfiguration,
     },
-}, {
-    initialRouteName: LoginRoute.REGISTER,
-    defaultNavigationOptions: {
-        gesturesEnabled: true,
-    },
-    transitionConfig: TransitionConfiguration,
-})
+)
 
-const RootSwitch = createSwitchNavigator({
-    [AppRoute.LOGIN_ROUTE]: LoginStack,
-    [AppRoute.AUTH_LOADING]: SplashView,
-}, {
-    initialRouteName: AppRoute.AUTH_LOADING,
-})
+const RootSwitch = createSwitchNavigator(
+    {
+        [AppRoute.LOGIN_ROUTE]: LoginStack,
+        [AppRoute.AUTH_LOADING]: SplashView,
+    },
+    {
+        initialRouteName: AppRoute.AUTH_LOADING,
+    },
+)
 
 const AppContainer = createAppContainer(RootSwitch)
 export default AppContainer

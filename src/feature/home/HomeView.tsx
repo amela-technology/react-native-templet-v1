@@ -6,7 +6,6 @@ import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScrol
 import i18n from "../../shared/utilities/i18n"
 
 const HomeView = () => {
-
     const fetchMoreListItems = async (options: Pagination) => {
         const {currentPage, lastIndex, lastItem} = options
         console.log(options)
@@ -34,12 +33,12 @@ const HomeView = () => {
     const [loading, data, onLoadMore, onRefresh] = useInfinityScroll(fetchMoreListItems)
 
     function renderItem({item, index}: any) {
-        return (<AMText customStyle={{height: 50}} text={item.commit.message}/>)
+        return <AMText customStyle={{height: 50}} text={item.commit.message} />
     }
 
     return (
         <View>
-            <AMText text={i18n.t("common.defaultLanguage")}/>
+            <AMText text={i18n.t("common.defaultLanguage")} />
             <AMList
                 loading={loading}
                 data={data}

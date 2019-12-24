@@ -7,13 +7,6 @@ interface AMImageProps extends FastImageProperties {
 
 const AMImage = (props: AMImageProps) => {
     const {customStyle, source, resizeMode} = props
-    return (
-        <FastImage
-            style={customStyle}
-            source={source}
-            resizeMode={resizeMode}
-            {...props}
-        />
-    )
+    return <FastImage style={customStyle} source={source} resizeMode={resizeMode} {...props} />
 }
 export default AMImage

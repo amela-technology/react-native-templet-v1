@@ -5,7 +5,6 @@ const Logo = () => {
     return (
         <View>
             <Text>I am Logo</Text>
-
         </View>
     )
 }
