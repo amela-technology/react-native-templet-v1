@@ -1,8 +1,8 @@
 import * as React from "react"
 
 export interface AppContextInterface {
-    theme: string,
-    language: string,
+    theme: string
+    language: string
     // .....
 }
 
@@ -11,7 +11,6 @@ const ctx = React.createContext<AppContextInterface | null>(null)
 export const AppContext = ctx.Provider
 
 export const AppContextConsumer = ctx.Consumer
-
 
 // You can use templet for Providing the Context
 // import * as React from 'react';

@@ -9,9 +9,9 @@
     "ios": "react-native run-ios",
     "test": "jest",
     "pod-install": "cd ios && pod install",
-    "prepush": "npm run lint",
     "assets-link": "npx react-native link",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
@@ -62,5 +62,10 @@
       "json",
       "node"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }

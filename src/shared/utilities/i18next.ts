@@ -4,7 +4,6 @@ import en from "../../assets/locates/en"
 import jp from "../../assets/locates/jp"
 
 const DEFAULT_LANG = "en"
-
 i18next.init({
     interpolation: {
         // React already does escaping

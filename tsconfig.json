@@ -6,6 +6,7 @@
     "module": "commonjs",
     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": [
+      "dom",
       "es6",
       "es2015",
       "es2016"
@@ -20,7 +21,7 @@
     "sourceMap": true,
     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
-    "outDir": "build/dist",
+    "outDir": "./build/dist",
     /* Redirect output structure to the directory. */
     // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     // "removeComments": true,                /* Do not emit comments to output. */
@@ -84,6 +85,7 @@
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js"
+    "jest.config.js",
+    "react-native.config.js"
   ]
 }

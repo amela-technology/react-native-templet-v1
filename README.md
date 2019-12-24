@@ -119,7 +119,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   └── store.ts
 │   └── utilities
 │       ├── helper.ts
-│       └── i18n.ts
+│       └── i18next.ts
 └── types
     └── typing.d.ts
 

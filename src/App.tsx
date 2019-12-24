@@ -28,6 +28,6 @@ const App = () => {
         //     </PersistGate>
         // </Provider>
     )
-}
+};
 
 export default App

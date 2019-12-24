@@ -3,7 +3,7 @@ import {View} from "react-native"
 import AMList from "../../shared/components/AMList"
 import AMText from "../../shared/components/AMText"
 import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScroll"
-import i18n from "../../shared/utilities/i18n"
+import i18n from "../../shared/utilities/i18next"
 
 const HomeView = () => {
     const fetchMoreListItems = async (options: Pagination) => {
