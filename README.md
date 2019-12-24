@@ -3,17 +3,35 @@ This project was development by **Amela Technology**
 Below you'll find information about performing common tasks.
 
 ## Table of Contents
+...
+## Introdution
+- Easy to start
+- React native version 0.61.5
+- Fully using typescript for typing
+- Folder structs using package-by-feature (why)
+- Redux, redux-saga, redux-persist, redux-logger
+- React navigation v4 (we have plan for upgrade to v5 when release)
+- 100% Hook
+- Alot of custom components
+- i18next for multiple language
+- Custom hooks for share state logic between components
+- Eslint using prettier plugin for checking code convention
+- Husky for pre-commit (we check lint have no errors first when commit)
 
-## Integration to new project
-1. Create new React Native project. Please read [the official React Native document](https://facebook.github.io/react-native/docs/getting-started) for more information
-2. Copy this file/folder listed below from templet project to your new project:
-   - File package.json
-        - Copy all element `script`, `devDependencies`, `jest`
-        - `dependencies`: exclude react and react-native
-        - Run `npm assets-link`  for link assets to native project
-        - Run `npm outdate` for update new version dependencies
-   - File babel.config.js, jest.config.js, metro.config.js, react-native-config.js, .gitignore
-   - Folder src (keep all file contain) 
+
+## Getting Started
+
+1. Clone this repo, `git clone https://github.com/amela-technology/react-native-templet-v1.git <your project name>`
+2. Go to project's root directory, `cd <your project name>`
+3. Remove `.git` folder,  `rm -rf .git`
+4. Open `package.json` and change the `name` property with your project name
+5. Open `app.json` and replace `'ReactNativeBase'` by your project name 
+
+6. Run `yarn` or `npm install` to install dependencies
+
+7. Run `npm run init-project` to create iOS & Android Folders.
+
+8. Run your project with `npm run android` or `npm run ios` 
 ## Available Scripts
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
@@ -50,14 +68,18 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
  Link assets and font from **src/assets** to Native project
 ## Folder structures
 ```
+.
 ├── App.tsx
 ├── AppContext.tsx
+├── api
+│   ├── HomeAPI.ts
+│   ├── LoginAPI.ts
+│   └── config.ts
 ├── assets
 │   ├── fonts
 │   │   ├── Montserrat-Light.ttf
 │   │   ├── Montserrat-Regular.ttf
 │   │   └── Montserrat-SemiBold.ttf
-│   ├── fonts.ts
 │   ├── images
 │   ├── images.ts
 │   ├── locates
@@ -87,12 +109,6 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   └── splash
 │       └── SplashView.tsx
 ├── services
-│   ├── api
-│   │   ├── HomeAPI.ts
-│   │   ├── LoginAPI.ts
-│   │   └── config.ts
-│   ├── codepush
-│   │   └── config.ts
 │   └── navigation
 │       ├── AppNavigation.ts
 │       ├── NavigationHelpers.ts
@@ -106,7 +122,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── AMImage.tsx
 │   │   ├── AMInput.tsx
 │   │   ├── AMList.tsx
-│   │   ├── AMListNoData.tsx
+│   │   ├── AMNoData.tsx
 │   │   ├── AMText.tsx
 │   │   └── AMTouchable.tsx
 │   ├── hooks
@@ -123,5 +139,6 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 └── types
     └── typing.d.ts
 
-23 directories, 49 files
+22 directories, 47 files
+
 ```

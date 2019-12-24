@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react"
 import {ActivityIndicator, FlatList, FlatListProps, RefreshControl, View} from "react-native"
 import {Themes} from "../../assets/themes"
-import NoData from "./AMListNoData"
+import NoData from "./AMNoData"
 
 interface Props extends FlatListProps<any> {
     [key: string]: any

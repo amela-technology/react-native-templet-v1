@@ -13,7 +13,7 @@ interface AMListNoDataProps {
     onRefresh?(): any
 }
 
-const AMListNoData = (props: AMListNoDataProps) => {
+const AMNoData = (props: AMListNoDataProps) => {
     return (
         <View style={styles.container}>
             {props.loading ? (
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AMListNoData
+export default AMNoData
