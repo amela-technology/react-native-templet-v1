@@ -11,7 +11,7 @@ Below you'll find information about performing common tasks.
 - Folder structs using package-by-feature (why)
 - Redux, redux-saga, redux-persist, redux-logger
 - React navigation v4 (we have plan for upgrade to v5 when release)
-- 100% Hook
+- 100% functional component with hook
 - Alot of custom components
 - i18next for multiple language
 - Custom hooks for share state logic between components

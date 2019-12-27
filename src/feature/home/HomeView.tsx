@@ -4,6 +4,7 @@ import AMList from "../../shared/components/AMList"
 import AMText from "../../shared/components/AMText"
 import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScroll"
 import i18n from "../../shared/utilities/i18next"
+import SampleUseApi from "./SampleUseApi"
 
 const HomeView = () => {
     const fetchMoreListItems = async (options: Pagination) => {
@@ -38,7 +39,7 @@ const HomeView = () => {
 
     return (
         <View>
-            <AMText text={i18n.t("common.defaultLanguage")} />
+            {/*<AMText text={i18n.t("common.defaultLanguage")} />*/}
             <AMList
                 loading={loading}
                 data={data}
