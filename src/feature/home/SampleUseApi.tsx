@@ -9,7 +9,6 @@ const SampleUseApi = () => {
     //         Accept: "application/vnd.github.cloak-preview",
     //     }),
     // })
-
     // if (error) {
     //     return <Text>Error</Text>
     // }

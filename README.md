@@ -114,8 +114,8 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │       ├── NavigationHelpers.ts
 │       ├── NavigationService.ts
 │       └── config
-│           ├── routes.ts
-│           └── transition.ts
+│           ├── Routes.ts
+│           └── Transition.ts
 ├── shared
 │   ├── components
 │   │   ├── AMButton.tsx
@@ -134,7 +134,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── rootSaga.ts
 │   │   └── store.ts
 │   └── utilities
-│       ├── helper.ts
+│       ├── Helper.ts
 │       └── i18next.ts
 └── types
     └── typing.d.ts

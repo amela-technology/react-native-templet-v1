@@ -3,8 +3,8 @@ import {createStackNavigator} from "react-navigation-stack"
 import HomeView from "../../feature/home/HomeView"
 import LoginView from "../../feature/login/LoginView"
 import SplashView from "../../feature/splash/SplashView"
-import {AppRoute, LoginRoute} from "./config/routes"
-import {TransitionConfiguration} from "./config/transition"
+import {AppRoute, LoginRoute} from "./config/Routes"
+import {TransitionConfiguration} from "./config/Transition"
 
 const LoginStack = createStackNavigator(
     {
