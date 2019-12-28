@@ -1,8 +1,8 @@
 import * as React from "react"
 import {Text, View} from "react-native"
-import AMButton from "../../shared/components/AMButton"
-import AMInput from "../../shared/components/AMInput"
-import AMList from "../../shared/components/AMList"
+import AMButton from "../../shared/components/common/AMButton"
+import AMInput from "../../shared/components/common/AMInput"
+import AMList from "../../shared/components/common/AMList"
 
 const LoginView = () => {
     return (

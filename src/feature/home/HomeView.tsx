@@ -1,32 +1,27 @@
 import * as React from "react"
 import {View} from "react-native"
-import AMList from "../../shared/components/AMList"
-import AMText from "../../shared/components/AMText"
+import Config from "react-native-config"
+import endpoint from "../../services/request/config/Urls"
+import urls from "../../services/request/config/Urls"
+import instance from "../../services/request/ApiServices"
+import AMList from "../../shared/components/common/AMList"
+import AMText from "../../shared/components/common/AMText"
 import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScroll"
 import i18n from "../../shared/utilities/i18next"
-import SampleUseApi from "./SampleUseApi"
+import RequestServices from "../../services/request/ApiServices"
 
 const HomeView = () => {
     const fetchMoreListItems = async (options: Pagination) => {
         const {currentPage, lastIndex, lastItem} = options
         console.log(options)
         try {
-            const response = await fetch(
-                `https://api.github.com/search/commits?q=repo:facebook/react+css&page=${currentPage}`,
-                {
-                    method: "GET",
-                    headers: new Headers({
-                        Accept: "application/vnd.github.cloak-preview",
-                    }),
-                },
-            )
-            const json = await response.json()
-            console.log(json)
-            if (json.items) {
-                return json.items
+            const response = await RequestServices.get(endpoint.LOGIN + "?q=repo:facebook/react+css")
+            if (response.data.items) {
+                return response.data.items
             }
             return []
         } catch (e) {
+            console.log(e)
             return []
         }
     }
@@ -34,7 +29,7 @@ const HomeView = () => {
     const [loading, data, onLoadMore, onRefresh] = useInfinityScroll(fetchMoreListItems)
 
     function renderItem({item, index}: any) {
-        return <AMText customStyle={{height: 50}} text={item.commit.message} />
+        return <AMText customStyle={{height: 50}} text={item.commit.message}/>
     }
 
     return (

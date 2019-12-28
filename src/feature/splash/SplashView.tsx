@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-community/async-storage"
 import React, {useEffect} from "react"
 import {ActivityIndicator, StatusBar, StyleSheet, View} from "react-native"
-import {AppRoute} from "../../services/navigation/config/Routes"
+import {AppRoute} from "../../services/navigation/config/routes"
 import NavigationService from "../../services/navigation/NavigationService"
 
 // interface Props {

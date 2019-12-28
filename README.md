@@ -114,8 +114,8 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │       ├── NavigationHelpers.ts
 │       ├── NavigationService.ts
 │       └── config
-│           ├── Routes.ts
-│           └── Transition.ts
+│           ├── routes.ts
+│           └── transition.ts
 ├── shared
 │   ├── components
 │   │   ├── AMButton.tsx

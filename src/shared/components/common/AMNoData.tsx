@@ -1,6 +1,6 @@
 import * as React from "react"
 import {ActivityIndicator, StyleSheet, Text, View} from "react-native"
-import {Themes} from "../../assets/themes"
+import {Themes} from "../../../assets/themes"
 import AMText from "./AMText"
 import TouchableRipple from "./AMTouchable"
 

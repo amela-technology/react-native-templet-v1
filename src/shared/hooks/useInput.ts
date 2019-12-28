@@ -7,5 +7,5 @@ export default function useInput(initialState = "") {
         setValue(text)
     }
 
-    return [value, onChangeText, setValue]
+    return [value, onChangeText]
 }

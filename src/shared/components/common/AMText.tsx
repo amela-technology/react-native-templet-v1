@@ -1,6 +1,6 @@
 import * as React from "react"
 import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from "react-native"
-import {Themes} from "../../assets/themes"
+import {Themes} from "../../../assets/themes"
 
 interface AMTextProps extends TextProps {
     text: string

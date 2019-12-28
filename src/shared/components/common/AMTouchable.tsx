@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react"
 import {StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle} from "react-native"
-import {isAndroid} from "../utilities/helper"
+import {isAndroid} from "../../utilities/helper"
 
 interface AMTouchableProps {
     customStyle?: StyleProp<ViewStyle>
