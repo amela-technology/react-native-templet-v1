@@ -1,12 +1,12 @@
 import axios from "axios"
 import Config from "react-native-config"
 
-const Api = axios.create({
+const ApiService = axios.create({
     baseURL: Config.API_URL,
     timeout: 5000,
     headers: {Accept: "application/vnd.github.cloak-preview"},
 })
-Api.interceptors.request.use(
+ApiService.interceptors.request.use(
     function(config) {
         // Do something before request is sent
         __DEV__ &&
@@ -28,7 +28,7 @@ Api.interceptors.request.use(
         return Promise.reject(error)
     },
 )
-Api.interceptors.response.use(
+ApiService.interceptors.response.use(
     function(response) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
@@ -52,4 +52,4 @@ Api.interceptors.response.use(
         return Promise.reject(error)
     },
 )
-export default Api
+export default ApiService

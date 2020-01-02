@@ -1,6 +1,6 @@
 import axios, {AxiosResponse, Method} from "axios"
 import {useEffect, useState} from "react"
-import Api from "../../services/request/ApiServices"
+import Api from "../../services/request/RequestServices"
 
 const {CancelToken} = axios
 
@@ -43,7 +43,7 @@ function useAPI(method: Method, url: string, initialRequest = true) {
         }
 
         return () => {
-            source.cancel("useEffect cleanup.")
+            source.cancel("useEffect cleanup...")
         }
     }, [url])
 

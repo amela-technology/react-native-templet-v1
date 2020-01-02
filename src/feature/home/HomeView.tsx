@@ -1,22 +1,23 @@
 import * as React from "react"
 import {View} from "react-native"
 import Config from "react-native-config"
-import instance from "../../services/request/ApiServices"
+import instance from "../../services/request/RequestServices"
 import AMList from "../../shared/components/common/AMList"
 import AMText from "../../shared/components/common/AMText"
 import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScroll"
 import i18n from "../../shared/utilities/i18next"
-import RequestServices from "../../services/request/ApiServices"
+import ApiService from "../../services/request/RequestServices"
+import {AuthUrl} from "../../services/request/config/Urls"
 
 const HomeView = () => {
     const fetchMoreListItems = async (options: Pagination) => {
         const {currentPage, lastIndex, lastItem} = options
         console.log(options)
         try {
-            // const response = await RequestServices.get(endpoint.LOGIN + "?q=repo:facebook/react+css")
-            // if (response.data.items) {
-            //     return response.data.items
-            // }
+            const response = await ApiService.get(AuthUrl.LOGIN + "?q=repo:facebook/react+css")
+            if (response.data.items) {
+                return response.data.items
+            }
             return []
         } catch (e) {
             console.log(e)
@@ -27,7 +28,7 @@ const HomeView = () => {
     const [loading, data, onLoadMore, onRefresh] = useInfinityScroll(fetchMoreListItems)
 
     function renderItem({item, index}: any) {
-        return <AMText customStyle={{height: 50}} text={item.commit.message} />
+        return <AMText customStyle={{height: 50}} text={item.commit.message}/>
     }
 
     return (

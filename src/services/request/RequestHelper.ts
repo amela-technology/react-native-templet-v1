@@ -1,5 +1,5 @@
-import Api from "../../services/request/ApiServices"
-import {AuthUrl} from "../../services/request/config/Urls"
+import Api from "../../services/request/RequestServices"
+import {AuthUrl} from "./config/Urls"
 
 const AuthApi = {
     login: async (email: string, password: string) => {
@@ -13,9 +13,9 @@ const AuthApi = {
             token,
         })
     },
-    refreshToken: async (refreshToken: string) => {
+    refreshToken: async (storedRefreshToken: string) => {
         return await Api.post(AuthUrl.REFRESH_TOKEN, {
-            refreshToken,
+            storedRefreshToken,
         })
     },
 }
