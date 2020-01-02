@@ -28,7 +28,7 @@ const HomeView = () => {
     const [loading, data, onLoadMore, onRefresh] = useInfinityScroll(fetchMoreListItems)
 
     function renderItem({item, index}: any) {
-        return <AMText customStyle={{height: 50}} text={item.commit.message}/>
+        return <AMText customStyle={{height: 50}} text={item.commit.message} />
     }
 
     return (
