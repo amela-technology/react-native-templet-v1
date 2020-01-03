@@ -18,7 +18,7 @@ const styles: any = StyleSheet.create({
     text: {
         color: Themes.colors.textPrimary,
         fontSize: 12,
-        fontFStyledily: Themes.fonts.defaultFont,
+        fontFamily: Themes.fonts.defaultFont,
     },
 })
 export default StyledText
