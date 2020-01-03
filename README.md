@@ -110,15 +110,15 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │       └── SplashView.tsx
 ├── services
 │   └── navigation
-│       ├── AppNavigation.ts
+│       ├── AppContainer.ts
 │       ├── NavigationHelpers.ts
 │       ├── NavigationService.ts
 │       └── config
-│           ├── Routes.ts
-│           └── Transition.ts
+│           ├── routes.ts
+│           └── transition.ts
 ├── shared
 │   ├── components
-│   │   ├── AMButton.tsx
+│   │   ├── AmButton.tsx
 │   │   ├── AMImage.tsx
 │   │   ├── AMInput.tsx
 │   │   ├── AMList.tsx
@@ -134,7 +134,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── rootSaga.ts
 │   │   └── store.ts
 │   └── utilities
-│       ├── Helper.ts
+│       ├── helper.ts
 │       └── i18next.ts
 └── types
     └── typing.d.ts

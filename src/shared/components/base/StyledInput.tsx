@@ -1,13 +1,13 @@
 import * as React from "react"
 import {StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle} from "react-native"
 
-interface AMInputProps extends TextInputProps {
+interface StyledInputProps extends TextInputProps {
     customStyle?: StyleProp<TextStyle>
     placeholder?: string
     placeholderTextColor?: string
 }
 
-const AMInput = (props: AMInputProps) => {
+const StyledInput = (props: StyledInputProps) => {
     let input: any
 
     function focus() {
@@ -35,4 +35,4 @@ const styles: any = StyleSheet.create({
         borderBottomColor: "black",
     },
 })
-export default AMInput
+export default StyledInput

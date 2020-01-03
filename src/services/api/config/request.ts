@@ -1,14 +1,14 @@
 import axios from "axios"
 import Config from "react-native-config"
 
-const ApiService = axios.create({
+const request = axios.create({
     baseURL: Config.API_URL,
     timeout: 5000,
     headers: {Accept: "application/vnd.github.cloak-preview"},
 })
-ApiService.interceptors.request.use(
+request.interceptors.request.use(
     function(config) {
-        // Do something before request is sent
+        // Do something before api is sent
         __DEV__ &&
             console.log(
                 `%c ${config.method?.toUpperCase()} from ${config.url}:`,
@@ -18,7 +18,7 @@ ApiService.interceptors.request.use(
         return config
     },
     function(error) {
-        // Do something with request error
+        // Do something with api error
         __DEV__ &&
             console.log(
                 `%c FAILED ${error.response.method?.toUpperCase()} from ${error.response.config.url}:`,
@@ -28,7 +28,7 @@ ApiService.interceptors.request.use(
         return Promise.reject(error)
     },
 )
-ApiService.interceptors.response.use(
+request.interceptors.response.use(
     function(response) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
@@ -52,4 +52,4 @@ ApiService.interceptors.response.use(
         return Promise.reject(error)
     },
 )
-export default ApiService
+export default request

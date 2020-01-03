@@ -1,22 +1,22 @@
-import Api from "../../services/request/RequestServices"
-import {AuthUrl} from "./config/Urls"
+import request from "./config/request"
+import {AUTH_URL} from "./config/urls"
 
 const AuthApi = {
     login: async (email: string, password: string) => {
-        return await Api.post(AuthUrl.LOGIN, {
+        return await request.post(AUTH_URL.login, {
             email,
             password,
         })
     },
     logout: async (token: string) => {
-        return await Api.post(AuthUrl.LOGOUT, {
+        return await request.post(AUTH_URL.logout, {
             token,
         })
     },
     refreshToken: async (storedRefreshToken: string) => {
-        return await Api.post(AuthUrl.REFRESH_TOKEN, {
+        return await request.post(AUTH_URL.refreshToken, {
             storedRefreshToken,
         })
     },
 }
-export {AuthApi}
+export default AuthApi

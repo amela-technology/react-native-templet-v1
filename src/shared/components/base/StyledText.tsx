@@ -2,12 +2,12 @@ import * as React from "react"
 import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from "react-native"
 import {Themes} from "../../../assets/themes"
 
-interface AMTextProps extends TextProps {
+interface StyledTextProps extends TextProps {
     text: string
     customStyle?: StyleProp<TextStyle>
 }
 
-const AMText = (props: AMTextProps) => {
+const StyledText = (props: StyledTextProps) => {
     return (
         <Text style={[styles.text, props.customStyle]} {...props}>
             {props.text}
@@ -18,7 +18,7 @@ const styles: any = StyleSheet.create({
     text: {
         color: Themes.colors.textPrimary,
         fontSize: 12,
-        fontFamily: Themes.fonts.defaultFont,
+        fontFStyledily: Themes.fonts.defaultFont,
     },
 })
-export default AMText
+export default StyledText

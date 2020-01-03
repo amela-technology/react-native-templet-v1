@@ -40,7 +40,7 @@ const translateYTransition = (index: any, position: any, layout: any) => {
     return {opacity, transform: [{translateY}]}
 }
 
-export const TransitionConfiguration = (): any => {
+export const transition = (): any => {
     return {
         transitionSpec: {
             duration: 250,

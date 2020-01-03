@@ -1,6 +1,6 @@
 import axios, {AxiosResponse, Method} from "axios"
 import {useEffect, useState} from "react"
-import Api from "../../services/request/RequestServices"
+import Api from "../../services/api/config/request"
 
 const {CancelToken} = axios
 

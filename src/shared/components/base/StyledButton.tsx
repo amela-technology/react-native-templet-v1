@@ -1,9 +1,9 @@
 import * as React from "react"
 import {StyleProp, StyleSheet, Text, ViewStyle} from "react-native"
 import {Themes} from "../../../assets/themes"
-import TouchableRipple from "./AMTouchable"
+import TouchableRipple from "./StyledTouchable"
 
-interface AMButtonProps {
+interface StyledButtonProps {
     title: string
     customStyle?: StyleProp<ViewStyle>
 
@@ -12,7 +12,7 @@ interface AMButtonProps {
     onLongPress?(): void
 }
 
-const AMButton = (props: AMButtonProps) => {
+const StyledButton = (props: StyledButtonProps) => {
     return (
         <TouchableRipple customStyle={styles.container} onPress={props.onPress} onLongPress={props.onLongPress}>
             <Text style={styles.title}>{props.title}</Text>
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
         color: Themes.colors.textPrimary,
     },
 })
-export default AMButton
+export default StyledButton

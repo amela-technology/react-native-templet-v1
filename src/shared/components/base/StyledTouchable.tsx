@@ -1,8 +1,8 @@
 import React, {ReactNode} from "react"
 import {StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle} from "react-native"
-import {isAndroid} from "../../utilities/Helper"
+import {isAndroid} from "../../utilities/helper"
 
-interface AMTouchableProps {
+interface StyledTouchableProps {
     customStyle?: StyleProp<ViewStyle>
 
     disabled?: boolean
@@ -20,7 +20,7 @@ interface AMTouchableProps {
 
 const DEFAULT_OPACITY = 0.5
 
-const AMTouchable = (props: AMTouchableProps) => {
+const StyledTouchable = (props: StyledTouchableProps) => {
     function handlePress() {
         props.onPress && props.onPress()
     }
@@ -72,4 +72,4 @@ const AMTouchable = (props: AMTouchableProps) => {
     return isAndroid() ? renderAndroidButton() : renderIosButton()
 }
 
-export default AMTouchable
+export default StyledTouchable

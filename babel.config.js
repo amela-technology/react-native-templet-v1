@@ -6,7 +6,7 @@ module.exports = {
             {
                 root: ["./src"],
                 alias: {
-                    "@base-component": ["/shared/components/common/"],
+                    "@base-component": ["/shared/components/base/"],
                     "@navigation": ["/service/navigation/"],
                 },
             },

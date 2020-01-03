@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react"
 import {ActivityIndicator, FlatList, FlatListProps, RefreshControl, View} from "react-native"
 import {Themes} from "../../../assets/themes"
-import NoData from "./AMNoData"
+import NoData from "./StyledNoData"
 
 interface Props extends FlatListProps<any> {
     [key: string]: any
@@ -20,7 +20,7 @@ interface Props extends FlatListProps<any> {
     onNoDataRefresh?(): void
 }
 
-const AMList = (props: Props) => {
+const StyledList = (props: Props) => {
     const [momentumScrolled, setMomentumScrolled] = useState(false)
     const list: any = useRef(null)
 
@@ -121,4 +121,4 @@ const AMList = (props: Props) => {
     )
 }
 
-export default AMList
+export default StyledList

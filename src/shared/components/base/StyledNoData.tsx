@@ -1,10 +1,10 @@
 import * as React from "react"
 import {ActivityIndicator, StyleSheet, Text, View} from "react-native"
 import {Themes} from "../../../assets/themes"
-import AMText from "./AMText"
-import TouchableRipple from "./AMTouchable"
+import StyledText from "./StyledText"
+import TouchableRipple from "./StyledTouchable"
 
-interface AMListNoDataProps {
+interface StyledListNoDataProps {
     text?: string
     refreshable?: boolean
 
@@ -13,7 +13,7 @@ interface AMListNoDataProps {
     onRefresh?(): any
 }
 
-const AMNoData = (props: AMListNoDataProps) => {
+const StyledNoData = (props: StyledListNoDataProps) => {
     return (
         <View style={styles.container}>
             {props.loading ? (
@@ -25,7 +25,7 @@ const AMNoData = (props: AMListNoDataProps) => {
             )}
             {!!props.refreshable && !props.loading ? (
                 <TouchableRipple onPress={props.onRefresh}>
-                    <AMText text={"Tải lại"} customStyle={styles.textReload} />
+                    <StyledText text={"Tải lại"} customStyle={styles.textReload} />
                 </TouchableRipple>
             ) : (
                 <View />
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AMNoData
+export default StyledNoData

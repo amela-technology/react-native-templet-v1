@@ -12,7 +12,7 @@ import React from "react"
 import {ActivityIndicator, View} from "react-native"
 import {Provider} from "react-redux"
 import {PersistGate} from "redux-persist/integration/react"
-import AppContainer from "./services/navigation/AppNavigation"
+import AppContainer from "./services/navigation/config/AppContainer"
 import NavigationService from "./services/navigation/NavigationService"
 import {persistor, store} from "./shared/store/store"
 
