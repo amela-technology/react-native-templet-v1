@@ -71,10 +71,6 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 .
 ├── App.tsx
 ├── AppContext.tsx
-├── api
-│   ├── HomeAPI.ts
-│   ├── LoginAPI.ts
-│   └── config.ts
 ├── assets
 │   ├── fonts
 │   │   ├── Montserrat-Light.ttf
@@ -86,6 +82,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── en.ts
 │   │   └── jp.ts
 │   ├── metrics.ts
+│   ├── sizes.ts
 │   └── themes.ts
 ├── feature
 │   ├── home
@@ -95,7 +92,8 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── redux
 │   │   │   ├── actions.ts
 │   │   │   ├── reducer.ts
-│   │   │   └── saga.ts
+│   │   │   ├── saga.ts
+│   │   │   └── types.ts
 │   │   └── styles.ts
 │   ├── login
 │   │   ├── LoginView.tsx
@@ -104,29 +102,40 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── redux
 │   │   │   ├── actions.ts
 │   │   │   ├── reducer.ts
-│   │   │   └── saga.ts
+│   │   │   ├── saga.ts
+│   │   │   └── types.ts
 │   │   └── styles.ts
 │   └── splash
 │       └── SplashView.tsx
 ├── services
+│   ├── api
+│   │   ├── AuthApi.ts
+│   │   ├── CommentApi.ts
+│   │   ├── UserApi.ts
+│   │   └── config
+│   │       ├── request.ts
+│   │       └── urls.ts
 │   └── navigation
-│       ├── AppContainer.ts
 │       ├── NavigationHelpers.ts
 │       ├── NavigationService.ts
 │       └── config
+│           ├── AppContainer.ts
 │           ├── routes.ts
 │           └── transition.ts
 ├── shared
 │   ├── components
-│   │   ├── AmButton.tsx
-│   │   ├── AMImage.tsx
-│   │   ├── AMInput.tsx
-│   │   ├── AMList.tsx
-│   │   ├── AMNoData.tsx
-│   │   ├── AMText.tsx
-│   │   └── AMTouchable.tsx
+│   │   └── base
+│   │       ├── StyledButton.tsx
+│   │       ├── StyledImage.tsx
+│   │       ├── StyledInput.tsx
+│   │       ├── StyledList.tsx
+│   │       ├── StyledNoData.tsx
+│   │       ├── StyledText.tsx
+│   │       ├── StyledTouchable.tsx
+│   │       └── index.ts
 │   ├── hooks
 │   │   ├── NavigationHooks.ts
+│   │   ├── useApi.ts
 │   │   ├── useInfinityScroll.ts
 │   │   └── useInput.ts
 │   ├── store
@@ -139,6 +148,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 └── types
     └── typing.d.ts
 
-22 directories, 47 files
+24 directories, 54 files
+
 
 ```
