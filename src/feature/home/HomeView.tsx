@@ -1,8 +1,8 @@
 import * as React from "react"
 import {View} from "react-native"
 import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScroll"
-import ApiService from "../../services/api/config/request"
-import {AUTH_URL} from "../../services/api/config/urls"
+import ApiService from "../../api/config/request"
+import {AUTH_URL} from "../../api/config/urls"
 import {StyledList} from "../../shared/components/base"
 import StyledText from "../../shared/components/base/StyledText"
 
