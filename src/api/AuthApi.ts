@@ -1,5 +1,5 @@
-import request from "./config/request"
-import {AUTH_URL} from "./config/urls"
+import request from './config/request'
+import {AUTH_URL} from './config/urls'
 
 const AuthApi = {
     login: (email: string, password: string) => request.post(AUTH_URL.login, {email, password}),

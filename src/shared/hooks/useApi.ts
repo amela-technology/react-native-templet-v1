@@ -1,6 +1,6 @@
-import axios, {AxiosResponse, Method} from "axios"
-import {useEffect, useState} from "react"
-import Api from "../../api/config/request"
+import axios, {AxiosResponse, Method} from 'axios'
+import {useEffect, useState} from 'react'
+import Api from '../../api/config/request'
 
 const {CancelToken} = axios
 
@@ -28,7 +28,7 @@ function useAPI(method: Method, url: string, initialRequest = true) {
             })
             .catch(error => {
                 if (axios.isCancel(error)) {
-                    console.log("Request canceled by cleanup: ", error.message)
+                    console.log('Request canceled by cleanup: ', error.message)
                 } else {
                     setState({error, response: undefined, isLoading: false})
                 }
@@ -43,7 +43,7 @@ function useAPI(method: Method, url: string, initialRequest = true) {
         }
 
         return () => {
-            source.cancel("useEffect cleanup...")
+            source.cancel('useEffect cleanup...')
         }
     }, [url])
 

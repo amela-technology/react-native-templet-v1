@@ -1,17 +1,17 @@
-import * as React from "react"
-import {View} from "react-native"
-import useInfinityScroll, {Pagination} from "../../shared/hooks/useInfinityScroll"
-import ApiService from "../../api/config/request"
-import {AUTH_URL} from "../../api/config/urls"
-import {StyledList} from "../../shared/components/base"
-import StyledText from "../../shared/components/base/StyledText"
+import * as React from 'react'
+import {View} from 'react-native'
+import useInfinityScroll, {Pagination} from '../../shared/hooks/useInfinityScroll'
+import ApiService from '../../api/config/request'
+import {AUTH_URL} from '../../api/config/urls'
+import {StyledList} from '../../shared/components/base'
+import StyledText from '../../shared/components/base/StyledText'
 
 const HomeView = () => {
     const fetchMoreListItems = async (options: Pagination) => {
         const {currentPage, lastIndex, lastItem} = options
         console.log(options)
         try {
-            const response = await ApiService.get(AUTH_URL.login + "?q=repo:facebook/react+css")
+            const response = await ApiService.get(AUTH_URL.login + '?q=repo:facebook/react+css')
             if (response.data.items) {
                 return response.data.items
             }
@@ -23,7 +23,7 @@ const HomeView = () => {
     }
     const _ahihi = () => {
         return {
-            ahihi: "ahihi",
+            ahihi: 'ahihi',
         }
     }
     const [loading, data, onLoadMore, onRefresh] = useInfinityScroll(fetchMoreListItems)

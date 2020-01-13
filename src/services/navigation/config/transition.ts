@@ -1,4 +1,4 @@
-import {Animated, Easing} from "react-native"
+import {Animated, Easing} from 'react-native'
 
 const opacityTransition = (index: any, position: any) => {
     const opacity = position.interpolate({
@@ -53,7 +53,7 @@ export const transition = (): any => {
             const {layout, position, scene} = sceneProps
             const {index, route} = scene
             const params = route.params || {}
-            const transition = params.transition || "translateX"
+            const transition = params.transition || 'translateX'
 
             const trans: any = {
                 opacity: opacityTransition(index, position),
@@ -64,7 +64,7 @@ export const transition = (): any => {
             return trans[transition]
         },
         containerStyle: {
-            backgroundColor: "fff",
+            backgroundColor: 'fff',
         },
     }
 }
