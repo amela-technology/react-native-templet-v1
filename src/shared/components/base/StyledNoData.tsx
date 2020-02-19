@@ -1,8 +1,8 @@
-import * as React from "react"
-import {ActivityIndicator, StyleSheet, Text, View} from "react-native"
-import {Themes} from "../../../assets/themes"
-import StyledText from "./StyledText"
-import TouchableRipple from "./StyledTouchable"
+import * as React from 'react'
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native'
+import {Themes} from 'assets/themes'
+import StyledText from './StyledText'
+import TouchableRipple from './StyledTouchable'
 
 interface StyledListNoDataProps {
     text?: string
@@ -17,15 +17,15 @@ const StyledNoData = (props: StyledListNoDataProps) => {
     return (
         <View style={styles.container}>
             {props.loading ? (
-                <View style={{alignItems: "center"}}>
+                <View style={{alignItems: 'center'}}>
                     <ActivityIndicator />
                 </View>
             ) : (
-                <Text>{props.text || "Không có dữ liệu"}</Text>
+                <Text>{props.text || 'Không có dữ liệu'}</Text>
             )}
             {!!props.refreshable && !props.loading ? (
                 <TouchableRipple onPress={props.onRefresh}>
-                    <StyledText text={"Tải lại"} customStyle={styles.textReload} />
+                    <StyledText text={'Tải lại'} customStyle={styles.textReload} />
                 </TouchableRipple>
             ) : (
                 <View />
@@ -35,19 +35,19 @@ const StyledNoData = (props: StyledListNoDataProps) => {
 }
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
         padding: 8,
     },
     text: {
-        fontWeight: "600",
+        fontWeight: '600',
         fontSize: 14,
-        color: Themes.colors.primary,
-        textAlign: "center",
+        color: Themes.COLORS.primary,
+        textAlign: 'center',
     },
     textReload: {
         margin: 12,
-        color: Themes.colors.primary,
+        color: Themes.COLORS.primary,
     },
 })
 
