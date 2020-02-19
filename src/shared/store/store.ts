@@ -1,16 +1,16 @@
-import AsyncStorage from "@react-native-community/async-storage"
-import {applyMiddleware, compose, createStore} from "redux"
-import logger from "redux-logger"
-import {persistReducer, persistStore} from "redux-persist"
+import AsyncStorage from '@react-native-community/async-storage'
+import {applyMiddleware, compose, createStore} from 'redux'
+import logger from 'redux-logger'
+import {persistReducer, persistStore} from 'redux-persist'
 
-import createSagaMiddleware from "redux-saga"
-import rootReducer from "./rootReducer"
-import rootSaga from "./rootSaga"
+import createSagaMiddleware from 'redux-saga'
+import rootReducer from './rootReducer'
+import rootSaga from './rootSaga'
 
 // persitsInit
 const persistConfig = {
-    blacklist: ["AlertReducer"],
-    key: "amela@2019",
+    blacklist: ['AlertReducer'],
+    key: 'amela@2019',
     debug: __DEV__,
     storage: AsyncStorage,
 }

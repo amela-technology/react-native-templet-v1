@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useLayoutEffect, useRef, useState} from "react"
+import {useCallback, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react'
 
 import {
     EventType,
@@ -8,7 +8,7 @@ import {
     NavigationParams,
     NavigationRoute,
     NavigationScreenProp,
-} from "react-navigation"
+} from 'react-navigation'
 
 export function useNavigation<S>(): NavigationScreenProp<S & NavigationRoute> {
     const navigation = useContext(NavigationContext) as any // TODO typing?
@@ -16,7 +16,7 @@ export function useNavigation<S>(): NavigationScreenProp<S & NavigationRoute> {
         throw new Error(
             "react-navigation hooks require a navigation context but it couldn't be found. " +
                 "Make sure you didn't forget to create and render the react-navigation app container. " +
-                "If you need to access an optional navigation object, you can useContext(NavigationContext), which may return",
+                'If you need to access an optional navigation object, you can useContext(NavigationContext), which may return',
         )
     }
     return navigation
@@ -63,11 +63,11 @@ export function useNavigationEvents(callback: NavigationEventCallback) {
 
         const subs = [
             // TODO should we remove "action" here? it's not in the published typedefs
-            navigation.addListener("action" as any, subscribedCallback),
-            navigation.addListener("willFocus", subscribedCallback),
-            navigation.addListener("didFocus", subscribedCallback),
-            navigation.addListener("willBlur", subscribedCallback),
-            navigation.addListener("didBlur", subscribedCallback),
+            navigation.addListener('action' as any, subscribedCallback),
+            navigation.addListener('willFocus', subscribedCallback),
+            navigation.addListener('didFocus', subscribedCallback),
+            navigation.addListener('willBlur', subscribedCallback),
+            navigation.addListener('didBlur', subscribedCallback),
         ]
         return () => {
             subs.forEach(sub => sub.remove())
@@ -95,7 +95,7 @@ const willFocusState: FocusState = {...emptyFocusState, isFocusing: true}
 
 function nextFocusState(eventName: EventType, currentState: FocusState): FocusState {
     switch (eventName) {
-        case "willFocus":
+        case 'willFocus':
             return {
                 ...willFocusState,
                 // /!\ willFocus will fire on screen mount, while the screen is already marked as focused.
@@ -106,11 +106,11 @@ function nextFocusState(eventName: EventType, currentState: FocusState): FocusSt
                 // See also https://twitter.com/sebastienlorber/status/1166986080966578176
                 isFocused: currentState.isFocused,
             }
-        case "didFocus":
+        case 'didFocus':
             return didFocusState
-        case "willBlur":
+        case 'willBlur':
             return willBlurState
-        case "didBlur":
+        case 'didBlur':
             return didBlurState
         default:
             // preserve current state for other events ("action"?)
@@ -148,7 +148,7 @@ export const useFocusEffect = (callback: EffectCallback) => {
             isFocused = true
         }
 
-        const focusSubscription = navigation.addListener("willFocus", () => {
+        const focusSubscription = navigation.addListener('willFocus', () => {
             // If callback was already called for focus, avoid calling it again
             // The focus event may also fire on intial render, so we guard against runing the effect twice
             if (isFocused) {
@@ -160,7 +160,7 @@ export const useFocusEffect = (callback: EffectCallback) => {
             isFocused = true
         })
 
-        const blurSubscription = navigation.addListener("willBlur", () => {
+        const blurSubscription = navigation.addListener('willBlur', () => {
             cleanup?.()
             cleanup = undefined
             isFocused = false
@@ -181,8 +181,8 @@ export const useIsFocused = () => {
 
     useEffect(() => {
         const nav = getNavigation()
-        const focusSubscription = nav.addListener("willFocus", () => setFocused(true))
-        const blurSubscription = nav.addListener("willBlur", () => setFocused(false))
+        const focusSubscription = nav.addListener('willFocus', () => setFocused(true))
+        const blurSubscription = nav.addListener('willBlur', () => setFocused(false))
         return () => {
             focusSubscription.remove()
             blurSubscription.remove()

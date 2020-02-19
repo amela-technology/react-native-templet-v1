@@ -48,7 +48,7 @@ buck-out/
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
 # screenshots whenever they are needed.
-# For more information about the recommended setup visit:
+# For more information about the recommended basicinfo visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
 */fastlane/report.xml
@@ -60,5 +60,8 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+/ios/Podfile.lock
 yarn.lock
 package-lock.json
+# react-native-config codegen
+ios/tmp.xcconfig

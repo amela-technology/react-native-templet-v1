@@ -1,7 +1,7 @@
-import * as React from "react"
-import {StyleProp, StyleSheet, Text, ViewStyle} from "react-native"
-import {Themes} from "../../../assets/themes"
-import TouchableRipple from "./StyledTouchable"
+import * as React from 'react'
+import {StyleProp, StyleSheet, Text, ViewStyle} from 'react-native'
+import {Themes} from 'assets/themes'
+import TouchableRipple from './StyledTouchable'
 
 interface StyledButtonProps {
     title: string
@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
         height: 42,
         width: 128,
         margin: 4,
-        borderColor: "red",
-        justifyContent: "center",
-        alignItems: "center",
+        borderColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 10,
         borderWidth: 1,
     },
     title: {
-        color: Themes.colors.textPrimary,
+        color: Themes.COLORS.textPrimary,
     },
 })
 export default StyledButton

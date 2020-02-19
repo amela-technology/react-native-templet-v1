@@ -1,6 +1,6 @@
-import React, {ReactNode} from "react"
-import {StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle} from "react-native"
-import {isAndroid} from "../../utilities/helper"
+import React, {ReactNode} from 'react'
+import {StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle} from 'react-native'
+import {isAndroid} from '../../utilities/helper'
 
 interface StyledTouchableProps {
     customStyle?: StyleProp<ViewStyle>
@@ -45,7 +45,7 @@ const StyledTouchable = (props: StyledTouchableProps) => {
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
                 onLongPress={handleLongPress}
-                accessibilityTraits={"button"}
+                accessibilityTraits={'button'}
                 disabled={disabled}>
                 <View style={customStyle}>{children}</View>
             </TouchableNativeFeedback>
@@ -60,7 +60,7 @@ const StyledTouchable = (props: StyledTouchableProps) => {
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
                 onLongPress={handleLongPress}
-                accessibilityTraits={"button"}
+                accessibilityTraits={'button'}
                 activeOpacity={DEFAULT_OPACITY}
                 disabled={disabled}
                 {...props}>
