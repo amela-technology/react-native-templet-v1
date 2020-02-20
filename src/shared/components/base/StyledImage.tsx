@@ -1,5 +1,5 @@
-import React from "react"
-import FastImage, {FastImageProperties} from "react-native-fast-image"
+import React from 'react'
+import FastImage, {FastImageProperties} from 'react-native-fast-image'
 
 interface StyledImageProps extends FastImageProperties {
     customStyle?: any

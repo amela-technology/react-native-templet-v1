@@ -1,7 +1,7 @@
-import {TransitionSpec} from "react-navigation-stack/src/vendor/types"
+import {TransitionSpec} from 'react-navigation-stack/src/vendor/types'
 
 const transition: TransitionSpec = {
-    animation: "spring",
+    animation: 'spring',
     config: {
         stiffness: 1000,
         damping: 100,

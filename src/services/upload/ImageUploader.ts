@@ -1,5 +1,5 @@
-import ImagePicker from "react-native-image-crop-picker"
-import {awsApi} from "services/upload/awsApi"
+import ImagePicker from 'react-native-image-crop-picker'
+import {awsApi} from 'services/upload/awsApi'
 
 class ImageUploader {
     async chooseImageFromGallery() {
@@ -16,9 +16,9 @@ class ImageUploader {
     async uploadImage(localImage: any): Promise<string> {
         return new Promise(async function(resolve, reject) {
             try {
-                console.log("uploading an image....")
+                console.log('uploading an image....')
                 const remoteImage = await awsApi.upload(localImage.path)
-                console.log("upload finished ...." + JSON.stringify(remoteImage))
+                console.log('upload finished ....' + JSON.stringify(remoteImage))
                 resolve(remoteImage.body.postResponse.location)
             } catch (e) {
                 reject(e)

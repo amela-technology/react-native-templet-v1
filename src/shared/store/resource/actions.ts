@@ -1,4 +1,4 @@
-import {ActionType} from "./types"
+import {ActionType} from './types'
 
 export function updateResource(data: any) {
     return {

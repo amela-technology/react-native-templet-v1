@@ -1,33 +1,33 @@
-import React from "react"
-import {StyleSheet, View, Text, Modal, ActivityIndicator, Keyboard} from "react-native"
-import {Themes} from "assets/themes"
+import React from 'react'
+import {StyleSheet, View, Text, Modal, ActivityIndicator, Keyboard} from 'react-native'
+import {Themes} from 'assets/themes'
 
-const transparent = "transparent"
+const transparent = 'transparent'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: transparent,
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         bottom: 0,
         left: 0,
         right: 0,
     },
     background: {
-        position: "absolute",
-        backgroundColor: "rgba(0, 0, 0, 0.25)",
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.25)',
         top: 0,
         bottom: 0,
         left: 0,
         right: 0,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     circle: {
         width: 36,
         height: 36,
         borderRadius: 18,
-        backgroundColor: "white",
+        backgroundColor: 'white',
     },
     textContainer: {
         flex: 1,
@@ -35,15 +35,15 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
     },
     textContent: {
         top: 80,
         height: 50,
         fontSize: 20,
-        fontWeight: "bold",
+        fontWeight: 'bold',
     },
     activityIndicator: {
         flex: 1,
@@ -87,7 +87,7 @@ export default class StyledOverlayLoading extends React.PureComponent<Props> {
             <Modal
                 // animationType={this.props.animation}
                 onRequestClose={this.props.onRequestClose}
-                supportedOrientations={["portrait"]}
+                supportedOrientations={['portrait']}
                 transparent
                 visible={this.props.visible}>
                 {spinner}
