@@ -1,8 +1,8 @@
-import * as React from 'react'
-import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from 'react-native'
-import {Themes} from 'assets/themes'
-import Size from 'assets/sizes'
-import {useTranslation} from 'react-i18next'
+import * as React from "react"
+import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from "react-native"
+import {Themes} from "assets/themes"
+import Size from "assets/sizes"
+import {useTranslation} from "react-i18next"
 
 interface StyledTextProps extends TextProps {
     text: string

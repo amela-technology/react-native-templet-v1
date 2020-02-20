@@ -1,4 +1,4 @@
-import {ActionType} from 'shared/store/resource/types'
+import {ActionType} from "shared/store/resource/types"
 
 const initialState: any = {}
 

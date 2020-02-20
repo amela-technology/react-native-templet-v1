@@ -1,5 +1,5 @@
 export default {
     common: {
-        defaultLanguage: 'English',
+        defaultLanguage: "English",
     },
 }

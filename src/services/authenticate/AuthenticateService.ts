@@ -1,11 +1,11 @@
 // import appleAuth, {AppleAuthRequestOperation, AppleAuthRequestScope} from "@invertase/react-native-apple-authentication"
-import {AxiosRequestConfig, AxiosResponse} from 'axios'
-import request from 'api/config/request'
-import {AUTH_URL} from 'api/config/urls'
+import {AxiosRequestConfig, AxiosResponse} from "axios"
+import request from "api/config/request"
+import {AUTH_URL} from "api/config/urls"
 // import {dismissDialog} from "services/dialog/DialogService"
-import TokenProvider from 'services/authenticate/TokenProvider'
-import NavigationService from 'services/navigation/NavigationService'
-import {LOGIN_ROUTE} from 'services/navigation/config/routes'
+import TokenProvider from "services/authenticate/TokenProvider"
+import NavigationService from "services/navigation/NavigationService"
+import {LOGIN_ROUTE} from "services/navigation/config/routes"
 
 export interface LoginRequestParams extends AxiosRequestConfig {
     phone: string
@@ -33,7 +33,7 @@ class AuthenticateService {
         if (phone.length < 6 || pwd.length < 8 || pwd.length > 16) {
             return false
         }
-        if (email === '' && email.length < 2) {
+        if (email === "" && email.length < 2) {
             return false
         }
         return true
@@ -63,11 +63,11 @@ class AuthenticateService {
             AUTH_URL.verifyOTP,
             {
                 code: Number.parseInt(smsOtp),
-                type: 'reg',
+                type: "reg",
             },
             {
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: "Bearer " + token,
                 },
             },
         )

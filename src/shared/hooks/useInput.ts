@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import {useState} from "react"
 
-export default function useInput(initialState = '') {
+export default function useInput(initialState = "") {
     const [value, setValue] = useState(initialState)
 
     function onChangeText(text: string) {

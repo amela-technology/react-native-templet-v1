@@ -1,7 +1,7 @@
-import React, {useRef, useState} from 'react'
-import {ActivityIndicator, RefreshControl, SectionList, SectionListProps, View} from 'react-native'
-import {Themes} from 'assets/themes'
-import NoData from './StyledNoData'
+import React, {useRef, useState} from "react"
+import {ActivityIndicator, RefreshControl, SectionList, SectionListProps, View} from "react-native"
+import {Themes} from "assets/themes"
+import NoData from "./StyledNoData"
 
 interface Props extends SectionListProps<any> {
     [key: string]: any
@@ -29,11 +29,11 @@ const StyledSectionList = (props: Props) => {
     const hasData = sections.length !== 0
     if (!hasData) {
         contentContainerStyle.flex = 1
-        contentContainerStyle.alignItems = 'center'
-        contentContainerStyle.justifyContent = 'center'
+        contentContainerStyle.alignItems = "center"
+        contentContainerStyle.justifyContent = "center"
     }
     let styles
-    if (typeof ListHeaderComponent === 'undefined' && !hasData) {
+    if (typeof ListHeaderComponent === "undefined" && !hasData) {
         styles = [contentContainerStyle, customStyle]
     } else {
         styles = customStyle
@@ -77,7 +77,7 @@ const StyledSectionList = (props: Props) => {
     function renderFooter() {
         if (hasData && loading !== undefined && !!loading) {
             return (
-                <View style={{alignItems: 'center', marginVertical: 8}}>
+                <View style={{alignItems: "center", marginVertical: 8}}>
                     <ActivityIndicator />
                 </View>
             )
@@ -120,7 +120,7 @@ const StyledSectionList = (props: Props) => {
                     onRefresh={handleRefresh}
                 />
             }
-            keyboardShouldPersistTaps={'handled'}
+            keyboardShouldPersistTaps={"handled"}
             {...props}
         />
     )

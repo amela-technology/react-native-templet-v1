@@ -1,5 +1,5 @@
-import * as React from 'react'
-import {StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle} from 'react-native'
+import * as React from "react"
+import {StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle} from "react-native"
 
 interface StyledInputProps extends TextInputProps {
     customStyle?: StyleProp<TextStyle>
@@ -18,7 +18,7 @@ const StyledInput = (props: StyledInputProps) => {
         <TextInput
             ref={ref => (input = ref)}
             style={[styles.textInput, props.customStyle]}
-            placeholderTextColor={props.placeholderTextColor || 'black'}
+            placeholderTextColor={props.placeholderTextColor || "black"}
             placeholder={props.placeholder}
             underlineColorAndroid="transparent"
             {...props}
@@ -32,7 +32,7 @@ const styles: any = StyleSheet.create({
         margin: 4,
         padding: 2,
         borderBottomWidth: 1,
-        borderBottomColor: 'black',
+        borderBottomColor: "black",
     },
 })
 export default StyledInput

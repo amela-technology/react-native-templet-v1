@@ -1,6 +1,6 @@
-import axios from 'axios'
-import {useEffect, useState} from 'react'
-import requestToApi from 'api/config/request'
+import axios from "axios"
+import {useEffect, useState} from "react"
+import requestToApi from "api/config/request"
 const {CancelToken} = axios
 const DEFAULT_PAGING = 25
 function usePaging(url: string, params?: any) {
@@ -23,7 +23,7 @@ function usePaging(url: string, params?: any) {
             })()
         }
         return () => {
-            source.cancel('useEffect cleanup...')
+            source.cancel("useEffect cleanup...")
         }
     }, [pageIndex])
 
@@ -57,7 +57,7 @@ function usePaging(url: string, params?: any) {
             setLoading(false)
             setError(error)
             if (axios.isCancel(error)) {
-                console.log('Request canceled by cleanup: ', error.message)
+                console.log("Request canceled by cleanup: ", error.message)
             } else {
                 setResponse(response)
             }
