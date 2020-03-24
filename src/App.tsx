@@ -12,19 +12,21 @@ import React from 'react'
 import {ActivityIndicator, View} from 'react-native'
 import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
-import AppContainer from 'services/navigation/sence/AppContainer'
 import NavigationService from './services/navigation/NavigationService'
 import {persistor, store} from './shared/store/store'
+import {NavigationContainer} from '@react-navigation/native'
+import Navigation from './services/navigation/sence/Navigation'
 
 const App = () => {
     return (
         // <Provider store={store}>
         //     <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <AppContainer
-            ref={navigatorRef => {
+        <NavigationContainer
+            ref={(navigatorRef: any) => {
                 NavigationService.setTopLevelNavigator(navigatorRef)
-            }}
-        />
+            }}>
+            <Navigation />
+        </NavigationContainer>
         //     </PersistGate>
         // </Provider>
     )

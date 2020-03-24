@@ -1,10 +1,10 @@
 import * as React from 'react'
-import {Text, View} from 'react-native'
+import {Text, View, SafeAreaView} from 'react-native'
 import {StyledButton, StyledInput, StyledList} from '../../shared/components/base'
 
 const LoginView = () => {
     return (
-        <View style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1}}>
             <Text>I am Login screen</Text>
             <StyledButton
                 title={'hiihi'}
@@ -19,7 +19,7 @@ const LoginView = () => {
                     return null
                 }}
             />
-        </View>
+        </SafeAreaView>
     )
 }
 export default LoginView

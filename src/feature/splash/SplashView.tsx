@@ -9,16 +9,16 @@ import {APP_ROUTE} from '../../services/navigation/config/routes'
 // }
 
 const SplashView = () => {
-    async function _bootstrapAsync() {
-        const userToken = await AsyncStorage.getItem('userToken')
-        // This will switch to the App screen or Auth screen and this loading
-        // screen will be unmounted and thrown away.
-        NavigationService.navigate(userToken ? APP_ROUTE.homeRoute : APP_ROUTE.loginRoute)
-    }
+    // async function _bootstrapAsync() {
+    //     const userToken = await AsyncStorage.getItem('userToken')
+    //     // This will switch to the App screen or Auth screen and this loading
+    //     // screen will be unmounted and thrown away.
+    //     NavigationService.navigate(userToken ? APP_ROUTE.homeRoute : APP_ROUTE.loginRoute)
+    // }
 
-    useEffect(() => {
-        _bootstrapAsync()
-    }, [])
+    // useEffect(() => {
+    //     _bootstrapAsync()
+    // }, [])
 
     return (
         <View style={styles.container}>

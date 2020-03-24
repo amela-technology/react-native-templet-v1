@@ -31,7 +31,9 @@ local.properties
 # Visual Studio Code
 #
 .vscode/
-
+.history
+android
+ios
 # node.js
 #
 node_modules/
