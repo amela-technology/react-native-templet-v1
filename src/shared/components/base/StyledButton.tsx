@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {StyleProp, StyleSheet, Text, ViewStyle} from 'react-native'
-import {Themes} from 'assets/themes'
+import {Themes} from '../../../assets/themes'
 import TouchableRipple from './StyledTouchable'
 
 interface StyledButtonProps {

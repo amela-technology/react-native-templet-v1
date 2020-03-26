@@ -16,7 +16,7 @@ const StyledInput = (props: StyledInputProps) => {
 
     return (
         <TextInput
-            ref={ref => (input = ref)}
+            ref={(ref) => (input = ref)}
             style={[styles.textInput, props.customStyle]}
             placeholderTextColor={props.placeholderTextColor || 'black'}
             placeholder={props.placeholder}

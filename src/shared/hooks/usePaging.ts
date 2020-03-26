@@ -1,24 +1,24 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import requestToApi from 'api/config/request'
+import requestToApi from '../../api/config/request'
 const {CancelToken} = axios
 const DEFAULT_PAGING = 25
 function usePaging(url: string, params?: any) {
     const [loading, setLoading] = useState(true)
-    const [response, setResponse] = useState()
-    const [error, setError] = useState()
+    const [response, setResponse] = useState<any | null>()
+    const [error, setError] = useState<any | null>()
     const [data, setData] = useState([])
     const [pageIndex, setPageIndex] = useState(1)
 
     const source = CancelToken.source()
     useEffect(() => {
-        ;(async function() {
+        ;(async function () {
             await request()
         })()
     }, [])
     useEffect(() => {
         if (pageIndex > 1) {
-            ;(async function() {
+            ;(async function () {
                 await request()
             })()
         }
@@ -64,7 +64,7 @@ function usePaging(url: string, params?: any) {
         }
     }
     const totalItem = response ? response.data.total_item : -1
-    const totalPage = response ? response.data.total_page : -1
+    const totalPage = response ? response?.data.total_page : -1
     const errorMessage = error ? error.message : undefined
     return {loading, data, response, error, errorMessage, totalItem, totalPage, onLoadMore}
 }

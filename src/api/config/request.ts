@@ -1,9 +1,9 @@
 import axios from 'axios'
 import Config from 'react-native-config'
-import i18next from 'shared/utilities/i18next'
-import TokenProvider from 'services/authenticate/TokenProvider'
-import AuthenticateService from 'services/authenticate/AuthenticateService'
-import {AUTH_URL} from 'api/config/urls'
+import i18next from '../../shared/utilities/i18next'
+import TokenProvider from '../../services/authenticate/TokenProvider'
+import AuthenticateService from '../../services/authenticate/AuthenticateService'
+import {AUTH_URL} from '../../api/config/urls'
 const request = axios.create({
     baseURL: Config.API_URL,
     timeout: 5000,
@@ -25,7 +25,7 @@ const processQueue = (error: any, token = null) => {
     failedQueue = []
 }
 request.interceptors.request.use(
-    async function(config) {
+    async function (config) {
         // Do something before api is sent
         const userToken = await TokenProvider.getToken()
         if (userToken) {
@@ -39,7 +39,7 @@ request.interceptors.request.use(
             )
         return config
     },
-    function(error) {
+    function (error) {
         // Do something with api error
         __DEV__ &&
             console.log(
@@ -51,7 +51,7 @@ request.interceptors.request.use(
     },
 )
 request.interceptors.response.use(
-    function(response) {
+    function (response) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
         __DEV__ &&
@@ -62,7 +62,7 @@ request.interceptors.response.use(
             )
         return response
     },
-    async function(error) {
+    async function (error) {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         const {response} = error || {}
@@ -85,14 +85,14 @@ request.interceptors.response.use(
             !originalRequest.retry
         ) {
             if (isRefreshing) {
-                return new Promise(function(resolve, reject) {
+                return new Promise(function (resolve, reject) {
                     failedQueue.push({resolve, reject})
                 })
-                    .then(token => {
+                    .then((token) => {
                         originalRequest.headers['Authorization'] = 'Bearer ' + token
                         return request(originalRequest)
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         return Promise.reject(err)
                     })
             }
@@ -100,7 +100,7 @@ request.interceptors.response.use(
             originalRequest.retry = true
             isRefreshing = true
             const localRefreshToken = await TokenProvider.getRefreshToken()
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
                 // we use pure axios when refreshing token
                 axios
                     .post(Config.API_URL + '/' + AUTH_URL.refreshToken, {refresh_token: localRefreshToken})
@@ -111,7 +111,7 @@ request.interceptors.response.use(
                         processQueue(null, token)
                         resolve(request(originalRequest))
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         processQueue(err, null)
                         reject(err)
                     })

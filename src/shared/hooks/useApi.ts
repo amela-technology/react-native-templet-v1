@@ -1,6 +1,6 @@
 import axios, {AxiosResponse, Method} from 'axios'
 import {useEffect, useState} from 'react'
-import requestToApi from 'api/config/request'
+import requestToApi from '../../api/config/request'
 const {CancelToken} = axios
 export interface State {
     loading: boolean
@@ -35,7 +35,7 @@ function useAPI(method: Method, url: string, initialRequest = true) {
         setState({...state, loading: true})
 
         if (initialRequest) {
-            ;(async function() {
+            ;(async function () {
                 await request()
             })()
         }

@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import {ActivityIndicator, RefreshControl, SectionList, SectionListProps, View} from 'react-native'
-import {Themes} from 'assets/themes'
+import {Themes} from '../../../assets/themes'
 import NoData from './StyledNoData'
 
 interface Props extends SectionListProps<any> {

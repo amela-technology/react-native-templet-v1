@@ -1,10 +1,10 @@
-import {Themes} from 'assets/themes'
+import {Themes} from '../../assets/themes'
 import * as React from 'react'
 import {StyleSheet, View} from 'react-native'
-import NavigationService from 'services/navigation/NavigationService'
+import NavigationService from '../../services/navigation/NavigationService'
 // import WebView from "react-native-webview"
 import {APP_ROUTE} from '../navigation/config/routes'
-import {useNavigationParam} from 'shared/hooks/NavigationHooks'
+// import {useNavigationParam} from '../../shared/hooks/NavigationHooks'
 interface BrowserParams {
     title: string
     url: string
@@ -16,8 +16,8 @@ export function startBrowser(params: BrowserParams) {
 const PARAMS_TITLE = 'title'
 const PARAMS_URL = 'url'
 const Browser = () => {
-    const title = useNavigationParam(PARAMS_TITLE)
-    const url = useNavigationParam(PARAMS_URL)
+    // const title = useNavigationParam(PARAMS_TITLE)
+    // const url = useNavigationParam(PARAMS_URL)
     function handleBackPress() {
         NavigationService.goBack()
     }

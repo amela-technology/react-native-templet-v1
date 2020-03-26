@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyleSheet, View, Text, Modal, ActivityIndicator, Keyboard} from 'react-native'
-import {Themes} from 'assets/themes'
+import {Themes} from '../../../assets/themes'
 
 const transparent = 'transparent'
 const styles = StyleSheet.create({
