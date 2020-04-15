@@ -16,19 +16,22 @@ import NavigationService from './services/navigation/NavigationService'
 import {persistor, store} from './shared/store/store'
 import {NavigationContainer} from '@react-navigation/native'
 import Navigation from './services/navigation/sence/Navigation'
+import {RootSiblingParent} from 'react-native-root-siblings'
 
 const App = () => {
     return (
-        // <Provider store={store}>
-        //     <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <NavigationContainer
-            ref={(navigatorRef: any) => {
-                NavigationService.setTopLevelNavigator(navigatorRef)
-            }}>
-            <Navigation />
-        </NavigationContainer>
-        //     </PersistGate>
-        // </Provider>
+        <Provider store={store}>
+            <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+                <RootSiblingParent>
+                    <NavigationContainer
+                        ref={(navigatorRef: any) => {
+                            NavigationService.setTopLevelNavigator(navigatorRef)
+                        }}>
+                        <Navigation />
+                    </NavigationContainer>
+                </RootSiblingParent>
+            </PersistGate>
+        </Provider>
     )
 }
 

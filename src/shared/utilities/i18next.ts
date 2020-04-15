@@ -2,9 +2,10 @@ import i18next from 'i18next'
 import {getLocales} from 'react-native-localize'
 import en from '../../assets/locates/en'
 import jp from '../../assets/locates/jp'
+import {initReactI18next} from 'react-i18next'
 
 const DEFAULT_LANG = 'en'
-i18next.init({
+i18next.use(initReactI18next).init({
     interpolation: {
         // React already does escaping
         escapeValue: false,
