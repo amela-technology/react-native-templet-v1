@@ -1,12 +1,12 @@
-import {CommonActions} from '@react-navigation/native'
+import { CommonActions } from '@react-navigation/native'
 
 let navigator: any
 
-function setTopLevelNavigator(navigatorRef: any) {
+const setTopLevelNavigator = (navigatorRef: any) => {
     navigator = navigatorRef
 }
 
-function navigate(routeName: any, params?: any) {
+const navigate = (routeName: any, params?: any) => {
     navigator.dispatch(
         CommonActions.navigate({
             name: routeName,
@@ -15,7 +15,7 @@ function navigate(routeName: any, params?: any) {
     )
 }
 
-function goBack(route?: any, state?: any) {
+const goBack = (route?: any, state?: any) => {
     navigator.dispatch({
         ...CommonActions.goBack(),
         source: route.key,

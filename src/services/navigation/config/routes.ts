@@ -10,4 +10,4 @@ const LOGIN_ROUTE = {
 const HOME_ROUTE = {
     home: 'HOME',
 }
-export {APP_ROUTE, LOGIN_ROUTE, HOME_ROUTE}
+export { APP_ROUTE, LOGIN_ROUTE, HOME_ROUTE }

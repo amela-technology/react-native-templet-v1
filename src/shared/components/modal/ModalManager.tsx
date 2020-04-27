@@ -20,7 +20,7 @@ interface ModalCotrol {
 let modalControl: ModalCotrol[] = []
 let isKeyBoradShow = false
 
-const {height} = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 const ModalManager = () => {
     const [slideMargin] = React.useState(new Animated.Value(0))
@@ -94,7 +94,7 @@ const ModalManager = () => {
 
     const show = (id: string, element: React.ReactNode) => {
         if (modalControl.find((e: ModalCotrol) => e.id === id)) {
-            throw `id of must be unique: ${id} is exist, try different id`
+            throw new Error(`id of must be unique: ${id} is exist, try different id`)
         }
         const sibling = new RootSiblings(
             (
@@ -104,7 +104,8 @@ const ModalManager = () => {
                     visible={true}
                     onRequestClose={() => {
                         // Alert.alert('Modal has been closed.')
-                    }}>
+                    }}
+                >
                     <TouchableWithoutFeedback onPress={() => hideModal(id)} accessible={false}>
                         <View style={styles.offSetStyle} />
                     </TouchableWithoutFeedback>
@@ -114,7 +115,8 @@ const ModalManager = () => {
                             bottom: sildeModal,
                             marginBottom: slideMargin,
                             width: '100%',
-                        }}>
+                        }}
+                    >
                         <View style={styles.modalView}>{element}</View>
                     </Animated.View>
                 </Modal>
@@ -125,7 +127,7 @@ const ModalManager = () => {
                     duration: 300,
                     useNativeDriver: false,
                 }).start(() => {
-                    modalControl.push({id: id, element: sibling})
+                    modalControl.push({ id, element: sibling })
                 })
             },
         )
@@ -146,7 +148,7 @@ const ModalManager = () => {
         })
     }
 
-    return {show, dissmiss}
+    return { show, dissmiss }
 }
 
 export default ModalManager

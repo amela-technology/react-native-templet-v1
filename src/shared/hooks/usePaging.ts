@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {useEffect, useState} from 'react'
-import requestToApi from '../../api/config/request'
-const {CancelToken} = axios
+import { useEffect, useState } from 'react'
+import requestToApi from 'api/config/request'
+const { CancelToken } = axios
 const DEFAULT_PAGING = 25
-function usePaging(url: string, params?: any) {
+const usePaging = (url: string, params?: any) => {
     const [loading, setLoading] = useState(true)
     const [response, setResponse] = useState<any | null>()
     const [error, setError] = useState<any | null>()
@@ -12,28 +12,30 @@ function usePaging(url: string, params?: any) {
 
     const source = CancelToken.source()
     useEffect(() => {
-        ;(async function () {
+        const doStuff = async () => {
             await request()
-        })()
+        }
+        doStuff()
     }, [])
     useEffect(() => {
         if (pageIndex > 1) {
-            ;(async function () {
+            const doStuff = async () => {
                 await request()
-            })()
+            }
+            doStuff()
         }
         return () => {
             source.cancel('useEffect cleanup...')
         }
     }, [pageIndex])
 
-    function onLoadMore() {
+    const onLoadMore = () => {
         setPageIndex(pageIndex + 1)
     }
-    async function request() {
+    const request = async () => {
         setLoading(true)
         try {
-            const response = await requestToApi.post(
+            const responseApi = await requestToApi.post(
                 url,
                 {
                     // eslint-disable-next-line @typescript-eslint/camelcase
@@ -47,17 +49,17 @@ function usePaging(url: string, params?: any) {
                 },
             )
             setLoading(false)
-            setResponse(response)
-            const responseData = response.data || {}
+            setResponse(responseApi)
+            const responseData = responseApi.data || {}
             const newData: [] = responseData.data || []
             if (newData.length > 0) {
                 setData([...data, ...newData])
             }
-        } catch (error) {
+        } catch (e) {
             setLoading(false)
-            setError(error)
-            if (axios.isCancel(error)) {
-                console.log('Request canceled by cleanup: ', error.message)
+            setError(e)
+            if (axios.isCancel(e)) {
+                console.log('Request canceled by cleanup: ', e.message)
             } else {
                 setResponse(response)
             }
@@ -66,7 +68,16 @@ function usePaging(url: string, params?: any) {
     const totalItem = response ? response.data.total_item : -1
     const totalPage = response ? response?.data.total_page : -1
     const errorMessage = error ? error.message : undefined
-    return {loading, data, response, error, errorMessage, totalItem, totalPage, onLoadMore}
+    return {
+        loading,
+        data,
+        response,
+        error,
+        errorMessage,
+        totalItem,
+        totalPage,
+        onLoadMore,
+    }
 }
 
 export default usePaging

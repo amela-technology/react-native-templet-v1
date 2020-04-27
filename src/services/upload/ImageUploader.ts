@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/typedef */
 import ImagePicker from 'react-native-image-crop-picker'
-import {awsApi} from './awsApi'
+import { awsApi } from './awsApi'
 
 class ImageUploader {
     async chooseImageFromGallery() {
@@ -14,7 +15,8 @@ class ImageUploader {
         })
     }
     async uploadImage(localImage: any): Promise<string> {
-        return new Promise(async function (resolve, reject) {
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+        return new Promise(async function (resolve: any, reject: any) {
             try {
                 console.log('uploading an image....')
                 const remoteImage = await awsApi.upload(localImage.path)

@@ -1,8 +1,5 @@
-import AsyncStorage from '@react-native-community/async-storage'
-import React, {useEffect} from 'react'
-import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native'
-import NavigationService from '../../services/navigation/NavigationService'
-import {APP_ROUTE} from '../../services/navigation/config/routes'
+import React from 'react'
+import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native'
 
 // interface Props {
 //     navigation: NavigationStackProp

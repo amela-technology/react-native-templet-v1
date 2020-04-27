@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle} from 'react-native'
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native'
 
 interface StyledInputProps extends TextInputProps {
     customStyle?: StyleProp<TextStyle>
@@ -8,15 +8,11 @@ interface StyledInputProps extends TextInputProps {
 }
 
 const StyledInput = (props: StyledInputProps) => {
-    let input: any
-
-    function focus() {
-        input?.focus()
-    }
+    const input = React.useRef<TextInput>(null)
 
     return (
         <TextInput
-            ref={(ref) => (input = ref)}
+            ref={input}
             style={[styles.textInput, props.customStyle]}
             placeholderTextColor={props.placeholderTextColor || 'black'}
             placeholder={props.placeholder}

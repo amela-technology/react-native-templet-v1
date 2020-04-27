@@ -1,8 +1,8 @@
 import * as React from 'react'
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native'
-import ModalManager from '../../../shared/components/modal/ModalManager'
-import {Themes} from '../../../assets/themes'
-import StyledText from '../../../shared/components/base/StyledText'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import ModalManager from 'shared/components/modal/ModalManager'
+import { Themes } from 'assets/themes'
+import StyledText from 'shared/components/base/StyledText'
 
 const ModalInputView = () => {
     const modal = ModalManager()
@@ -14,14 +14,15 @@ const ModalInputView = () => {
                     modal.show(
                         'modal-input-1',
                         <View style={styles.modalContainer}>
-                            <StyledText text={'Helllooo'} />
+                            <StyledText>{'12:00 Hello'}</StyledText>
                             <TouchableOpacity style={styles.btnClose} onPress={() => modal.dissmiss('modal-input-1')}>
-                                <StyledText text={'Close'} customStyle={{color: Themes.COLORS.white}} />
+                                <StyledText customStyle={{ color: Themes.COLORS.white }}>Close</StyledText>
                             </TouchableOpacity>
                         </View>,
                     )
-                }>
-                <StyledText text={'Display input modal 1'} />
+                }
+            >
+                <StyledText>{'modalInput.button'}</StyledText>
             </TouchableOpacity>
         </View>
     )

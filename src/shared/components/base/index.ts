@@ -5,4 +5,4 @@ import StyledList from './StyledList'
 import StyledNoData from './StyledNoData'
 import StyledText from './StyledText'
 import StyledTouchable from './StyledTouchable'
-export {StyledButton, StyledImage, StyledInput, StyledList, StyledNoData, StyledText, StyledTouchable}
+export { StyledButton, StyledImage, StyledInput, StyledList, StyledNoData, StyledText, StyledTouchable }

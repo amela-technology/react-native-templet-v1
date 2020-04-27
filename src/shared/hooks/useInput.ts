@@ -1,11 +1,13 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
-export default function useInput(initialState = '') {
+const useInput = (initialState: string = '') => {
     const [value, setValue] = useState(initialState)
 
-    function onChangeText(text: string) {
+    const onChangeText = (text: string) => {
         setValue(text)
     }
 
     return [value, onChangeText]
 }
+
+export default useInput
