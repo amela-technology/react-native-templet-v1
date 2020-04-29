@@ -1,11 +1,9 @@
 // import appleAuth, {AppleAuthRequestOperation, AppleAuthRequestScope} from "@invertase/react-native-apple-authentication"
-import {AxiosRequestConfig, AxiosResponse} from 'axios'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import request from '../../api/config/request'
-import {AUTH_URL} from '../../api/config/urls'
+import { AUTH_URL } from '../../api/config/urls'
 // import {dismissDialog} from "services/dialog/DialogService"
 import TokenProvider from '../../services/authenticate/TokenProvider'
-import NavigationService from '../../services/navigation/NavigationService'
-import {LOGIN_ROUTE} from '../../services/navigation/config/routes'
 
 export interface LoginRequestParams extends AxiosRequestConfig {
     phone: string
@@ -62,7 +60,7 @@ class AuthenticateService {
         return await request.post(
             AUTH_URL.verifyOTP,
             {
-                code: Number.parseInt(smsOtp),
+                code: Number.parseInt(smsOtp, 10),
                 type: 'reg',
             },
             {

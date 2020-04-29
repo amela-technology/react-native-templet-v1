@@ -1,6 +1,6 @@
-import React, {useRef, useState} from 'react'
-import {ActivityIndicator, FlatList, FlatListProps, RefreshControl, View} from 'react-native'
-import {Themes} from '../../../assets/themes'
+import React, { useRef, useState } from 'react'
+import { ActivityIndicator, FlatList, FlatListProps, RefreshControl, View } from 'react-native'
+import { Themes } from 'assets/themes'
 import NoData from './StyledNoData'
 
 interface Props extends FlatListProps<any> {
@@ -24,7 +24,7 @@ const StyledList = (props: Props) => {
     const [momentumScrolled, setMomentumScrolled] = useState(false)
     const list: any = useRef(null)
 
-    const {loading, data, ListHeaderComponent, refreshing, customStyle} = props
+    const { loading, data, ListHeaderComponent, refreshing, customStyle } = props
     const contentContainerStyle: any = {}
     const hasData = data.length !== 0
     if (!hasData) {
@@ -39,42 +39,42 @@ const StyledList = (props: Props) => {
         styles = customStyle
     }
 
-    function keyExtractor(item: any, i: any): string {
+    const keyExtractor = (item: any, i: any): string => {
         return `${i}`
     }
 
-    function handleRefresh() {
+    const handleRefresh = () => {
         props.onRefresh && props.onRefresh()
     }
 
-    function handleEndReached(info: any) {
+    const handleEndReached = (info: any) => {
         if (!momentumScrolled) {
             props.onLoadMore && props.onLoadMore()
             setMomentumScrolled(true)
         }
     }
 
-    function handleNoDataRefresh() {
-        const {onNoDataRefresh} = props
+    const handleNoDataRefresh = () => {
+        const { onNoDataRefresh } = props
         onNoDataRefresh?.()
     }
 
-    function onMomentumScrollBegin() {
+    const onMomentumScrollBegin = () => {
         setMomentumScrolled(false)
     }
 
-    function scrollToFooter() {
-        list?.scrollToEnd({animated: true})
+    const scrollToFooter = () => {
+        list?.scrollToEnd({ animated: true })
     }
 
-    function scrollToTop() {
-        list?.scrollTo({y: 0, animated: true})
+    const scrollToTop = () => {
+        list?.scrollTo({ y: 0, animated: true })
     }
 
-    function renderFooter() {
+    const renderFooter = () => {
         if (hasData && loading !== undefined && !!loading) {
             return (
-                <View style={{alignItems: 'center', marginVertical: 8}}>
+                <View style={{ alignItems: 'center', marginVertical: 8 }}>
                     <ActivityIndicator />
                 </View>
             )
@@ -82,8 +82,8 @@ const StyledList = (props: Props) => {
         return null
     }
 
-    function renderNoData() {
-        const {noDataText, noDataRefreshable} = props
+    const renderNoData = () => {
+        const { noDataText, noDataRefreshable } = props
         return (
             <NoData
                 loading={loading}

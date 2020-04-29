@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-community/async-storage'
-import {applyMiddleware, compose, createStore} from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import logger from 'redux-logger'
-import {persistReducer, persistStore} from 'redux-persist'
+import { persistReducer, persistStore } from 'redux-persist'
 
-import createSagaMiddleware from 'redux-saga'
+// import createSagaMiddleware from 'redux-saga';
 import rootReducer from './rootReducer'
-import rootSaga from './rootSaga'
+// import rootSaga from './rootSaga';
 
 // persitsInit
 const persistConfig = {
@@ -31,4 +31,4 @@ const persistor = persistStore(store)
 
 // sagaMiddleware.run(rootSaga)
 
-export {store, persistor}
+export { store, persistor }

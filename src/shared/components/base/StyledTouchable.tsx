@@ -1,6 +1,6 @@
-import React, {ReactNode} from 'react'
-import {StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle} from 'react-native'
-import {isAndroid} from '../../utilities/helper'
+import React, { ReactNode } from 'react'
+import { StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { isAndroid } from '../../utilities/helper'
 
 interface StyledTouchableProps {
     customStyle?: StyleProp<ViewStyle>
@@ -21,24 +21,24 @@ interface StyledTouchableProps {
 const DEFAULT_OPACITY = 0.5
 
 const StyledTouchable = (props: StyledTouchableProps) => {
-    function handlePress() {
+    const handlePress = () => {
         props.onPress && props.onPress()
     }
 
-    function handlePressIn() {
+    const handlePressIn = () => {
         props.onPressIn && props.onPressIn()
     }
 
-    function handlePressOut() {
+    const handlePressOut = () => {
         props.onPressOut && props.onPressOut()
     }
 
-    function handleLongPress() {
+    const handleLongPress = () => {
         props.onLongPress && props.onLongPress()
     }
 
-    function renderAndroidButton() {
-        const {customStyle, disabled, children} = props
+    const renderAndroidButton = () => {
+        const { customStyle, disabled, children } = props
         return (
             <TouchableNativeFeedback
                 onPress={handlePress}
@@ -46,14 +46,15 @@ const StyledTouchable = (props: StyledTouchableProps) => {
                 onPressOut={handlePressOut}
                 onLongPress={handleLongPress}
                 accessibilityTraits={'button'}
-                disabled={disabled}>
+                disabled={disabled}
+            >
                 <View style={customStyle}>{children}</View>
             </TouchableNativeFeedback>
         )
     }
 
-    function renderIosButton() {
-        const {customStyle, disabled, children} = props
+    const renderIosButton = () => {
+        const { customStyle, disabled, children } = props
         return (
             <TouchableOpacity
                 onPress={handlePress}
@@ -63,7 +64,8 @@ const StyledTouchable = (props: StyledTouchableProps) => {
                 accessibilityTraits={'button'}
                 activeOpacity={DEFAULT_OPACITY}
                 disabled={disabled}
-                {...props}>
+                {...props}
+            >
                 <View style={customStyle}>{children}</View>
             </TouchableOpacity>
         )

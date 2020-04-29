@@ -1,6 +1,6 @@
 import React from 'react'
-import {StyleSheet, View, Text, Modal, ActivityIndicator, Keyboard} from 'react-native'
-import {Themes} from '../../../assets/themes'
+import { StyleSheet, View, Modal, ActivityIndicator, Keyboard } from 'react-native'
+import { Themes } from '../../../assets/themes'
 
 const transparent = 'transparent'
 const styles = StyleSheet.create({
@@ -61,7 +61,7 @@ export default class StyledOverlayLoading extends React.PureComponent<Props> {
     }
 
     close() {
-        this.setState({visible: false})
+        this.setState({ visible: false })
     }
 
     renderDefaultContent() {
@@ -75,7 +75,9 @@ export default class StyledOverlayLoading extends React.PureComponent<Props> {
     }
 
     renderSpinner() {
-        if (!this.props.visible) return null
+        if (!this.props.visible) {
+            return null
+        }
         Keyboard.dismiss()
         const spinner = (
             <View style={[styles.container]} key={`spinner_${Date.now()}`}>
@@ -89,7 +91,8 @@ export default class StyledOverlayLoading extends React.PureComponent<Props> {
                 onRequestClose={this.props.onRequestClose}
                 supportedOrientations={['portrait']}
                 transparent
-                visible={this.props.visible}>
+                visible={this.props.visible}
+            >
                 {spinner}
             </Modal>
         )

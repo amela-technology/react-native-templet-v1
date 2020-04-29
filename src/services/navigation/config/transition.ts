@@ -1,4 +1,4 @@
-import {TransitionSpec} from '@react-navigation/stack/lib/typescript/src/types'
+import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
 
 const transition: TransitionSpec = {
     animation: 'spring',
