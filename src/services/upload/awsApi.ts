@@ -10,7 +10,7 @@ const options = {
 }
 
 export const awsApi = {
-    upload: (url: string, mine: string = 'image/jpeg') => {
+    upload: (url: string, mine = 'image/jpeg') => {
         const timeStamp = new Date().getTime()
         const bodyFormData = {
             uri: url,
