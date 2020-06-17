@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const useInput = (initialState: string = '') => {
+const useInput = (initialState = '') => {
     const [value, setValue] = useState(initialState)
 
     const onChangeText = (text: string) => {

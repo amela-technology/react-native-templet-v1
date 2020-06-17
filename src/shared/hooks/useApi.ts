@@ -8,7 +8,7 @@ export interface State {
     response?: any
 }
 
-const useAPI = (method: Method, url: string, initialRequest: boolean = true) => {
+const useAPI = (method: Method, url: string, initialRequest = true) => {
     const [state, setState] = useState<State>({
         loading: true,
     })

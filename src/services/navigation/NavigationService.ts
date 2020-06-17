@@ -1,32 +1,19 @@
-import { CommonActions } from '@react-navigation/native'
+import React, { RefObject } from 'react'
+import { StackActions } from '@react-navigation/native'
 
-let navigator: any
-
-const setTopLevelNavigator = (navigatorRef: any) => {
-    navigator = navigatorRef
+export const navigationRef: RefObject<any> = React.createRef()
+// export function push(name: string, params?: any) {
+//     console.log(`${'push to ' + name}`, params)
+//     navigationRef.current.push(name, params)
+// }
+export function navigate(name: string, params?: any) {
+    console.log(`${'navigate to ' + name}`, params)
+    navigationRef.current.navigate(name, params)
 }
-
-const navigate = (routeName: any, params?: any) => {
-    navigator.dispatch(
-        CommonActions.navigate({
-            name: routeName,
-            params,
-        }),
-    )
+export function goBack() {
+    navigationRef.current.goBack()
 }
-
-const goBack = (route?: any, state?: any) => {
-    navigator.dispatch({
-        ...CommonActions.goBack(),
-        source: route.key,
-        target: state.key,
-    })
-}
-
-// add other navigation functions that you need and export them
-
-export default {
-    goBack,
-    navigate,
-    setTopLevelNavigator,
+export function navigateReplace(name: string, params?: any) {
+    console.log(`${'navigate replace  ' + name}`, params)
+    navigationRef.current.dispatch(StackActions.replace(name, params))
 }
