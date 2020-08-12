@@ -1,21 +1,33 @@
 import * as React from 'react'
-import { StyleProp, StyleSheet, Text, ViewStyle } from 'react-native'
+import { StyleProp, StyleSheet, ViewStyle, TextStyle } from 'react-native'
 import { Themes } from 'assets/themes'
 import TouchableRipple from './StyledTouchable'
+import { StyledText } from '.'
 
 interface StyledButtonProps {
     title: string
     customStyle?: StyleProp<ViewStyle>
+    titleStyle?: StyleProp<TextStyle>
+    iconStyle?: StyleProp<ViewStyle>
+    i18Key?: any
+    i18Params?: any
 
     onPress(): void
 
     onLongPress?(): void
+
+    disabled?: boolean
 }
 
 const StyledButton = (props: StyledButtonProps) => {
     return (
-        <TouchableRipple customStyle={styles.container} onPress={props.onPress} onLongPress={props.onLongPress}>
-            <Text style={styles.title}>{props.title}</Text>
+        <TouchableRipple
+            customStyle={styles.container}
+            onPress={props.onPress}
+            onLongPress={props.onLongPress}
+            disabled={props.disabled}
+        >
+            <StyledText customStyle={[styles?.title, props.titleStyle]} i18Key={props.title} numberOfLines={1} />
         </TouchableRipple>
     )
 }
