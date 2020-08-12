@@ -5,7 +5,7 @@ import StyledText from 'shared/components/base/StyledText'
 const HomeView = () => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <StyledText>{'Home'}</StyledText>
+            <StyledText text={'Home'} />
         </View>
     )
 }

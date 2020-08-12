@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View, StyleProp, TextStyle } from 'react-native'
 import { Themes } from 'assets/themes'
 import StyledText from './StyledText'
 import TouchableRipple from './StyledTouchable'
@@ -7,7 +7,7 @@ import TouchableRipple from './StyledTouchable'
 interface StyledListNoDataProps {
     text?: string
     refreshable?: boolean
-
+    customStyle?: StyleProp<TextStyle>
     loading?: boolean
 
     onRefresh?(): any
@@ -15,7 +15,7 @@ interface StyledListNoDataProps {
 
 const StyledNoData = (props: StyledListNoDataProps) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, props.customStyle]}>
             {props.loading ? (
                 <View style={{ alignItems: 'center' }}>
                     <ActivityIndicator />
@@ -25,7 +25,7 @@ const StyledNoData = (props: StyledListNoDataProps) => {
             )}
             {!!props.refreshable && !props.loading ? (
                 <TouchableRipple onPress={props.onRefresh}>
-                    <StyledText customStyle={styles.textReload}>Tải lại</StyledText>
+                    <StyledText text={'Tải lại'} customStyle={styles.textReload} />
                 </TouchableRipple>
             ) : (
                 <View />

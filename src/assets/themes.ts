@@ -10,6 +10,9 @@ const Light = {
         secondary: '#607d8b',
         textPrimary: '#607d8b',
         textSecondary: '#607d8b',
+
+        border: '#EFEFEF',
+        divider: '#A8A7AC',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',

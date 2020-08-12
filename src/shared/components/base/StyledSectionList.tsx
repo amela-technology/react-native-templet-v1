@@ -101,7 +101,7 @@ const StyledSectionList = (props: Props) => {
         <SectionList
             ref={list}
             contentContainerStyle={styles}
-            sections={sections || []}
+            // sections={sections || []}
             stickySectionHeadersEnabled={true}
             keyExtractor={keyExtractor}
             initialNumToRender={1}

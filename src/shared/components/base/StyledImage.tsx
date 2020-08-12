@@ -6,7 +6,7 @@ interface StyledImageProps extends FastImageProps {
 }
 
 const StyledImage = (props: StyledImageProps) => {
-    const { customStyle, source, resizeMode } = props
-    return <FastImage style={customStyle} source={source} resizeMode={resizeMode} {...props} />
+    const { customStyle } = props
+    return <FastImage style={customStyle} {...props} />
 }
 export default React.memo(StyledImage)

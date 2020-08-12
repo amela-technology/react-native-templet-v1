@@ -1,18 +1,22 @@
 import React, { useRef, useState } from 'react'
-import { ActivityIndicator, FlatList, FlatListProps, RefreshControl, View } from 'react-native'
+import { ActivityIndicator, FlatList, FlatListProps, RefreshControl, View, StyleProp, TextStyle } from 'react-native'
 import { Themes } from 'assets/themes'
 import NoData from './StyledNoData'
+import { useTranslation } from 'react-i18next'
 
 interface Props extends FlatListProps<any> {
     [key: string]: any
-
+    FlatListComponent?: any
     loading?: boolean
     data: any[]
+    loadingMore?: boolean
     noDataText?: string
     ListHeaderComponent?: any
     scrollEnabled?: boolean
     noDataRefreshable?: boolean
-
+    i18Params?: any
+    noDataTextI18Key?: any
+    noDataStyle?: StyleProp<TextStyle>
     customStyle?: any
 
     onLoadMore?(): void
@@ -23,6 +27,7 @@ interface Props extends FlatListProps<any> {
 const StyledList = (props: Props) => {
     const [momentumScrolled, setMomentumScrolled] = useState(false)
     const list: any = useRef(null)
+    const { t } = useTranslation()
 
     const { loading, data, ListHeaderComponent, refreshing, customStyle } = props
     const contentContainerStyle: any = {}
@@ -86,8 +91,9 @@ const StyledList = (props: Props) => {
         const { noDataText, noDataRefreshable } = props
         return (
             <NoData
+                customStyle={props.noDataStyle}
                 loading={loading}
-                text={noDataText}
+                text={props.noDataTextI18Key ? t(props.noDataTextI18Key, props.i18Params) : noDataText}
                 refreshable={noDataRefreshable}
                 onRefresh={handleNoDataRefresh}
             />
@@ -113,6 +119,7 @@ const StyledList = (props: Props) => {
                     onRefresh={handleRefresh}
                 />
             }
+            ListFooterComponent={renderFooter}
             keyboardShouldPersistTaps={'handled'}
             {...props}
         />
