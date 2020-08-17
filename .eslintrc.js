@@ -66,6 +66,7 @@ module.exports = {
         '@typescript-eslint/ban-ts-ignore': 'off',
         'no-return-await': 'off',
         'no-async-promise-executor': 'off',
+        'no-shadow': 'off',
     },
     settings: {
         react: {

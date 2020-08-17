@@ -1,82 +1,128 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import requestToApi from 'api/config/request'
+import { useRequest, useUnmount } from 'ahooks'
+import axios, { AxiosRequestConfig } from 'axios'
+import { useCallback, useEffect, useState } from 'react'
+import request from 'api/config/request'
 
 const { CancelToken } = axios
-const DEFAULT_PAGING = 25
-const usePaging = (url: string, params?: any) => {
-    const [loading, setLoading] = useState(true)
-    const [response, setResponse] = useState<any | null>()
-    const [error, setError] = useState<any | null>()
-    const [data, setData] = useState([])
+
+async function requestPaging(config: AxiosRequestConfig): Promise<{ success: boolean }> {
+    return await request.request(config)
+}
+const SIZE_LIMIT = 25
+const usePaging = (url: any, initialParams?: any, onSuccess?: any, onError?: any) => {
+    const [refreshing, setRefreshing] = useState(false)
+    const [loadingMore, setLoadingMore] = useState(false)
     const [pageIndex, setPageIndex] = useState(1)
-
+    const [list, setList] = useState<Array<any>>([])
+    const [error, setError] = useState<any>()
+    const [params, setParams] = useState<any>(initialParams)
+    const [noMore, setNoMore] = useState(false)
     const source = CancelToken.source()
-    useEffect(() => {
-        const doStuff = async () => {
-            await request()
-        }
-        doStuff()
-    }, [])
-    useEffect(() => {
-        if (pageIndex > 1) {
-            const doStuff = async () => {
-                await request()
-            }
-            doStuff()
-        }
-        return () => {
-            source.cancel('useEffect cleanup...')
-        }
-    }, [pageIndex])
 
-    const onLoadMore = () => {
-        setPageIndex(pageIndex + 1)
-    }
-    const request = async () => {
-        setLoading(true)
-        try {
-            const responseApi = await requestToApi.post(
+    const handleOnSuccess = useCallback(
+        (data: any, params: any) => {
+            const responseData = data.data || {}
+            const newList: [] = responseData.data || []
+            if (refreshing) {
+                setList(newList)
+            } else if (newList.length > 0) {
+                setList([...list, ...newList])
+            }
+            setNoMore(pageIndex >= responseData?.totalPage)
+            setRefreshing(false)
+            setLoadingMore(false)
+            setError(null)
+            onSuccess?.(data, params)
+        },
+        [onSuccess, pageIndex, params, refreshing],
+    )
+    const handleOnError = useCallback(
+        (e: any, params: any) => {
+            setError(error)
+            setRefreshing(false)
+            setLoadingMore(false)
+            onError?.(e, params)
+        },
+        [onError, pageIndex, refreshing, params],
+    )
+
+    const umiRequest: any = useRequest(requestPaging, {
+        loadMore: false,
+        manual: true,
+        onSuccess: handleOnSuccess,
+        onError: handleOnError,
+        defaultLoading: true,
+    })
+
+    const runRequest = useCallback(
+        (params?: any) => {
+            umiRequest.run({
                 url,
-                {
-                    page_index: pageIndex,
-                    page_size: DEFAULT_PAGING,
+                method: 'POST',
+                data: {
+                    pageIndex,
+                    pageSize: SIZE_LIMIT,
                     ...params,
                 },
-                {
+                config: {
                     cancelToken: source.token,
                 },
-            )
-            setLoading(false)
-            setResponse(responseApi)
-            const responseData = responseApi.data || {}
-            const newData: [] = responseData.data || []
-            if (newData.length > 0) {
-                setData([...data, ...newData])
-            }
-        } catch (e) {
-            setLoading(false)
-            setError(e)
-            if (axios.isCancel(e)) {
-                console.log('Request canceled by cleanup: ', e.message)
-            } else {
-                setResponse(response)
-            }
+            })
+        },
+        [pageIndex, params, source],
+    )
+    useEffect(() => {
+        if (pageIndex > 1) {
+            setLoadingMore(true)
         }
-    }
-    const totalItem = response ? response.data.total_item : -1
-    const totalPage = response ? response?.data.total_page : -1
-    const errorMessage = error ? error.message : undefined
-    return {
-        loading,
-        data,
-        response,
-        error,
-        errorMessage,
-        totalItem,
-        totalPage,
-        onLoadMore,
-    }
-}
+        runRequest({
+            pageIndex,
+            pageSize: SIZE_LIMIT,
+            ...params,
+        })
+    }, [pageIndex])
 
+    useEffect(() => {
+        if (!umiRequest.loading) {
+            onRefresh()
+        }
+    }, [params])
+
+    // useEffect(() => {
+    //     if (refreshing) {
+    //         console.log('refresh')
+    //         if (pageIndex > 1) {
+    //             setPageIndex(1)
+    //         }
+    //         if (pageIndex === 1) {
+    //             runRequest({
+    //                 pageIndex: 1,
+    //                 pageSize: SIZE_LIMIT,
+    //                 ...params,
+    //             })
+    //         }
+    //     }
+    // }, [refreshing, params, pageIndex])
+    useUnmount(() => {
+        source.cancel('useEffect cleanup...')
+    })
+    const onRefresh = useCallback(() => {
+        setRefreshing(true)
+        if (pageIndex > 1) {
+            setPageIndex(1)
+        } else {
+            runRequest({
+                pageIndex: 1,
+                pageSize: SIZE_LIMIT,
+                ...params,
+            })
+        }
+    }, [params, pageIndex])
+    const onLoadMore = useCallback(() => {
+        if (!loadingMore) {
+            setPageIndex(pageIndex + 1)
+        }
+    }, [pageIndex, loadingMore])
+    return { ...umiRequest, list, noMore, refreshing, loadingMore, onRefresh, onLoadMore, setParams, setList }
+}
 export default usePaging
