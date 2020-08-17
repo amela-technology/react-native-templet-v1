@@ -16,15 +16,18 @@ import { NavigationContainer } from '@react-navigation/native'
 import { RootSiblingParent } from 'react-native-root-siblings'
 import 'shared/utilities/i18next'
 import { navigationRef } from 'services/navigation/NavigationService'
+import { APIProvider } from 'shared/context/APIProvider'
 import { persistor, store } from './shared/store/store'
 
 const App = () => {
     return (
         <Provider store={store}>
             <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-                <RootSiblingParent>
-                    <NavigationContainer ref={navigationRef}>{/* <RootStack /> */}</NavigationContainer>
-                </RootSiblingParent>
+                <APIProvider>
+                    <RootSiblingParent>
+                        <NavigationContainer ref={navigationRef}>{/* <RootStack /> */}</NavigationContainer>
+                    </RootSiblingParent>
+                </APIProvider>
             </PersistGate>
         </Provider>
     )
