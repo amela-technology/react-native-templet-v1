@@ -26,20 +26,20 @@ const ModalManager = () => {
     const [slideMargin] = React.useState(new Animated.Value(0))
     const [sildeModal] = React.useState(new Animated.Value(-height))
     React.useEffect(() => {
-        Keyboard.addListener('keyboardWillShow', _keyboardWillShow)
-        Keyboard.addListener('keyboardWillHide', _keyboardWillHide)
-        Keyboard.addListener('keyboardDidHide', _keyboardDidHide)
-        Keyboard.addListener('keyboardDidShow', _keyboardDidShow)
+        Keyboard.addListener('keyboardWillShow', keyboardWillShow)
+        Keyboard.addListener('keyboardWillHide', keyboardWillHide)
+        Keyboard.addListener('keyboardDidHide', keyboardDidHide)
+        Keyboard.addListener('keyboardDidShow', keyboardDidShow)
 
         // cleanup function
         return () => {
-            Keyboard.removeListener('keyboardWillShow', _keyboardWillShow)
-            Keyboard.removeListener('keyboardWillHide', _keyboardWillHide)
-            Keyboard.removeListener('keyboardDidHide', _keyboardDidHide)
-            Keyboard.removeListener('keyboardDidShow', _keyboardDidShow)
+            Keyboard.removeListener('keyboardWillShow', keyboardWillShow)
+            Keyboard.removeListener('keyboardWillHide', keyboardWillHide)
+            Keyboard.removeListener('keyboardDidHide', keyboardDidHide)
+            Keyboard.removeListener('keyboardDidShow', keyboardDidShow)
         }
     }, [])
-    const _keyboardWillShow = (e: KeyboardEvent) => {
+    const keyboardWillShow = (e: KeyboardEvent) => {
         if (Platform.OS === 'ios') {
             Animated.parallel([
                 Animated.timing(slideMargin, {
@@ -52,7 +52,7 @@ const ModalManager = () => {
         }
     }
 
-    const _keyboardWillHide = () => {
+    const keyboardWillHide = () => {
         if (Platform.OS === 'ios') {
             Animated.parallel([
                 Animated.timing(slideMargin, {
@@ -65,7 +65,7 @@ const ModalManager = () => {
         }
     }
 
-    const _keyboardDidHide = () => {
+    const keyboardDidHide = () => {
         if (Platform.OS === 'android') {
             Animated.parallel([
                 Animated.timing(slideMargin, {
@@ -78,7 +78,7 @@ const ModalManager = () => {
         }
     }
 
-    const _keyboardDidShow = () => {
+    const keyboardDidShow = () => {
         if (Platform.OS === 'android') {
             isKeyBoradShow = true
         }
@@ -100,8 +100,8 @@ const ModalManager = () => {
             (
                 <Modal
                     animationType="fade"
-                    transparent={true}
-                    visible={true}
+                    transparent
+                    visible
                     onRequestClose={() => {
                         // Alert.alert('Modal has been closed.')
                     }}

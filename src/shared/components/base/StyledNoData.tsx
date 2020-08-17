@@ -25,7 +25,7 @@ const StyledNoData = (props: StyledListNoDataProps) => {
             )}
             {!!props.refreshable && !props.loading ? (
                 <TouchableRipple onPress={props.onRefresh}>
-                    <StyledText text={'Tải lại'} customStyle={styles.textReload} />
+                    <StyledText text="Tải lại" customStyle={styles.textReload} />
                 </TouchableRipple>
             ) : (
                 <View />

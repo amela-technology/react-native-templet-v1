@@ -7,13 +7,13 @@ export const navigationRef: RefObject<any> = React.createRef()
 //     navigationRef.current.push(name, params)
 // }
 export function navigate(name: string, params?: any) {
-    console.log(`${'navigate to ' + name}`, params)
+    console.log(`${`navigate to ${name}`}`, params)
     navigationRef.current.navigate(name, params)
 }
 export function goBack() {
     navigationRef.current.goBack()
 }
 export function navigateReplace(name: string, params?: any) {
-    console.log(`${'navigate replace  ' + name}`, params)
+    console.log(`${`navigate replace  ${name}`}`, params)
     navigationRef.current.dispatch(StackActions.replace(name, params))
 }

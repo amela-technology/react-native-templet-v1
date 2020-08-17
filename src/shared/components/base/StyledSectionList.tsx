@@ -44,12 +44,12 @@ const StyledSectionList = (props: Props) => {
     }
 
     const handleRefresh = () => {
-        props.onRefresh && props.onRefresh()
+        props?.onRefresh?.()
     }
 
     const handleEndReached = (info: any) => {
         if (!momentumScrolled) {
-            props.onLoadMore && props.onLoadMore()
+            props?.onLoadMore?.()
             setMomentumScrolled(true)
         }
     }
@@ -102,7 +102,7 @@ const StyledSectionList = (props: Props) => {
             ref={list}
             contentContainerStyle={styles}
             // sections={sections || []}
-            stickySectionHeadersEnabled={true}
+            stickySectionHeadersEnabled
             keyExtractor={keyExtractor}
             initialNumToRender={1}
             onEndReached={handleEndReached}
@@ -120,7 +120,7 @@ const StyledSectionList = (props: Props) => {
                     onRefresh={handleRefresh}
                 />
             }
-            keyboardShouldPersistTaps={'handled'}
+            keyboardShouldPersistTaps="handled"
             {...props}
         />
     )

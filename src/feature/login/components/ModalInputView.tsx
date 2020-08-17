@@ -14,15 +14,15 @@ const ModalInputView = () => {
                     modal.show(
                         'modal-input-1',
                         <View style={styles.modalContainer}>
-                            <StyledText text={'12:00 Hello'} />
+                            <StyledText text="12:00 Hello" />
                             <TouchableOpacity style={styles.btnClose} onPress={() => modal.dissmiss('modal-input-1')}>
-                                <StyledText text={'Close'} customStyle={{ color: Themes.COLORS.white }}></StyledText>
+                                <StyledText text="Close" customStyle={{ color: Themes.COLORS.white }} />
                             </TouchableOpacity>
                         </View>,
                     )
                 }
             >
-                <StyledText i18Key={'modalInput.button'}></StyledText>
+                <StyledText i18Key="modalInput.button" />
             </TouchableOpacity>
         </View>
     )

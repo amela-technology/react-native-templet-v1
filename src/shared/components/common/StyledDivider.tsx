@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, StyleProp, TextStyle } from 'react-native'
 import { Themes } from 'assets/themes'
+
 interface Props {
     customStyle?: StyleProp<TextStyle>
 }

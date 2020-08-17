@@ -1,0 +1,21 @@
+{
+    "javascript.validate.enable": false,
+    "files.trimTrailingWhitespace": true,
+    "eslint.enable": true,
+    "editor.insertSpaces": true,
+    "files.autoSave": "onFocusChange",
+    "editor.tabSize": 4,
+    "files.exclude": {
+      "nls.*.json": true,
+      "**/*.js": {
+        "when": "$(basename).ts"
+      },
+      "**/*.js.map": true
+    }
+  ,
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "workbench.editor.enablePreview": false
+  }

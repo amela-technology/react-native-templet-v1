@@ -3,7 +3,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import request from '../../api/config/request'
 import { AUTH_URL } from '../../api/config/urls'
 // import {dismissDialog} from "services/dialog/DialogService"
-import TokenProvider from '../../services/authenticate/TokenProvider'
+import TokenProvider from './TokenProvider'
 
 export interface LoginRequestParams extends AxiosRequestConfig {
     phone: string
@@ -36,6 +36,7 @@ class AuthenticateService {
         }
         return true
     }
+
     // async handleAppleIdPress() {
     //     return await appleAuth.performRequest({
     //         requestedOperation: AppleAuthRequestOperation.LOGIN,
@@ -45,6 +46,7 @@ class AuthenticateService {
     async login(options: LoginRequestParams) {
         return request.post<LoginRequestResponse>(AUTH_URL.login, options)
     }
+
     async register(options: RegisterRequestParams) {
         return await request.post(AUTH_URL.register, {
             phone: options.phone.trim(),
@@ -56,6 +58,7 @@ class AuthenticateService {
             gender: options.gender,
         })
     }
+
     async verifySMSOtp(token: string, smsOtp: string) {
         return await request.post(
             AUTH_URL.verifyOTP,
@@ -65,16 +68,18 @@ class AuthenticateService {
             },
             {
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
             },
         )
     }
+
     async refreshToken(refreshToken: string) {
         return request.post(AUTH_URL.refreshToken, {
             refresh_token: refreshToken,
         })
     }
+
     async logOut() {
         await TokenProvider.clearToken()
         // dismissDialog()

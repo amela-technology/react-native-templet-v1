@@ -15,6 +15,7 @@ class DialogComponent extends Component<any, any> {
         width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT,
     }
+
     render() {
         const { children } = this.props
         return (

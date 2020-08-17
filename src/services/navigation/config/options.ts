@@ -1,7 +1,7 @@
-import transition from '../config/transition'
 import { Themes } from 'assets/themes'
 import { CardStyleInterpolators } from '@react-navigation/stack'
 import Metrics from 'assets/metrics'
+import transition from './transition'
 
 const navigationConfigs = {
     cardStyle: {

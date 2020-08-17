@@ -22,19 +22,19 @@ const DEFAULT_OPACITY = 0.5
 
 const StyledTouchable = (props: StyledTouchableProps) => {
     const handlePress = () => {
-        props.onPress && props.onPress()
+        props.onPress?.()
     }
 
     const handlePressIn = () => {
-        props.onPressIn && props.onPressIn()
+        props.onPressIn?.()
     }
 
     const handlePressOut = () => {
-        props.onPressOut && props.onPressOut()
+        props.onPressOut?.()
     }
 
     const handleLongPress = () => {
-        props.onLongPress && props.onLongPress()
+        props.onLongPress?.()
     }
 
     const renderAndroidButton = () => {
@@ -45,7 +45,7 @@ const StyledTouchable = (props: StyledTouchableProps) => {
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
                 onLongPress={handleLongPress}
-                accessibilityTraits={'button'}
+                accessibilityTraits="button"
                 disabled={disabled}
             >
                 <View style={customStyle}>{children}</View>
@@ -61,7 +61,7 @@ const StyledTouchable = (props: StyledTouchableProps) => {
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
                 onLongPress={handleLongPress}
-                accessibilityTraits={'button'}
+                accessibilityTraits="button"
                 activeOpacity={DEFAULT_OPACITY}
                 disabled={disabled}
                 {...props}

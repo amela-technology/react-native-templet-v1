@@ -12,13 +12,17 @@ class DialogManager {
     static show(arg0: { children: JSX.Element; modalStyle: { backgroundColor: string } }, arg1: () => void) {
         throw new Error('Method not implemented.')
     }
+
     static dismiss() {
         throw new Error('Method not implemented.')
     }
+
     modalElements: ModalElement[] = []
+
     constructor() {
         this.modalElements = []
     }
+
     getTopModalElementId = (modalId?: number) => {
         if (modalId !== 0) {
             modalId = modalId || this.modalElements?.[this.modalElements.length - 1]?.id
@@ -41,8 +45,8 @@ class DialogManager {
                     }}
                     {...props}
                     modalId={modalId}
-                    onDismissed={(modalId: number) => {
-                        this.onDialogDismissed(modalId, props.onDismissed)
+                    onDismissed={(id: number) => {
+                        this.onDialogDismissed(id, props.onDismissed)
                     }}
                 />
             ),

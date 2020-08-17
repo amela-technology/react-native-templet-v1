@@ -1,6 +1,7 @@
 import axios, { Method } from 'axios'
 import { useEffect, useState } from 'react'
 import requestToApi from '../../api/config/request'
+
 const { CancelToken } = axios
 export interface State {
     loading: boolean

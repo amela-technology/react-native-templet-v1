@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { ActivityIndicator, FlatList, FlatListProps, RefreshControl, View, StyleProp, TextStyle } from 'react-native'
 import { Themes } from 'assets/themes'
-import NoData from './StyledNoData'
 import { useTranslation } from 'react-i18next'
+import NoData from './StyledNoData'
 
 interface Props extends FlatListProps<any> {
     [key: string]: any
@@ -49,12 +49,12 @@ const StyledList = (props: Props) => {
     }
 
     const handleRefresh = () => {
-        props.onRefresh && props.onRefresh()
+        props?.onRefresh?.()
     }
 
     const handleEndReached = (info: any) => {
         if (!momentumScrolled) {
-            props.onLoadMore && props.onLoadMore()
+            props?.onLoadMore?.()
             setMomentumScrolled(true)
         }
     }
@@ -120,7 +120,7 @@ const StyledList = (props: Props) => {
                 />
             }
             ListFooterComponent={renderFooter}
-            keyboardShouldPersistTaps={'handled'}
+            keyboardShouldPersistTaps="handled"
             {...props}
         />
     )

@@ -2,9 +2,9 @@ import * as React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { StyledText, StyledTouchable } from 'shared/components/base'
 
-import DialogManager from '../index'
 import StyledDivider from 'shared/components/common/StyledDivider'
 import { Themes } from 'assets/themes'
+import DialogManager from '../index'
 
 interface AlertComponentProps {
     title?: string

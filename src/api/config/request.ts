@@ -4,6 +4,7 @@ import i18next from 'shared/utilities/i18next'
 import TokenProvider from 'services/authenticate/TokenProvider'
 import AuthenticateService from 'services/authenticate/AuthenticateService'
 import { AUTH_URL } from 'api/config/urls'
+
 const request = axios.create({
     baseURL: Config.API_URL,
     timeout: 5000,
@@ -29,7 +30,7 @@ request.interceptors.request.use(
         // Do something before api is sent
         const userToken = await TokenProvider.getToken()
         if (userToken) {
-            config.headers['Authorization'] = 'Bearer ' + userToken
+            config.headers.Authorization = `Bearer ${userToken}`
         }
         // __DEV__ &&
         //     console.log(
@@ -81,7 +82,8 @@ request.interceptors.response.use(
             // logout here
             await AuthenticateService.logOut()
             return Promise.reject(error)
-        } else if (
+        }
+        if (
             ((error.response && error.response.status === 401) || errorMessage === 'Token_Expire') &&
             !originalRequest.retry
         ) {
@@ -90,7 +92,7 @@ request.interceptors.response.use(
                     failedQueue.push({ resolve, reject })
                 })
                     .then((token: any) => {
-                        originalRequest.headers['Authorization'] = 'Bearer ' + token
+                        originalRequest.headers.Authorization = `Bearer ${token}`
                         return request(originalRequest)
                     })
                     .catch((err: any) => {
@@ -104,13 +106,13 @@ request.interceptors.response.use(
             return new Promise(function (resolve: any, reject: any) {
                 // we use pure axios when refreshing token
                 axios
-                    .post(Config.API_URL + '/' + AUTH_URL.refreshToken, {
+                    .post(`${Config.API_URL}/${AUTH_URL.refreshToken}`, {
                         refresh_token: localRefreshToken,
                     })
                     .then(async ({ data: response_data }: any) => {
                         const { token, refreshToken } = response_data
                         await TokenProvider.setAllNewToken(token, refreshToken)
-                        originalRequest.headers['Authorization'] = 'Bearer ' + refreshToken
+                        originalRequest.headers.Authorization = `Bearer ${refreshToken}`
                         processQueue(null, token)
                         resolve(request(originalRequest))
                     })

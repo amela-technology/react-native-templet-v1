@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved,@typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { RNS3 } from 'react-native-aws3'
 

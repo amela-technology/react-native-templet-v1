@@ -1,8 +1,8 @@
 import React from 'react'
+import i18next from 'shared/utilities/i18next'
 import DialogManager from '../index'
 import NoticeComponent from './NoticeComponent'
 import AlertComponent from './AlertComponent'
-import i18next from 'shared/utilities/i18next'
 
 interface NoticeDialogProps {
     title?: string
@@ -34,7 +34,7 @@ export function showNoticeDialog(props: NoticeDialogProps, callbackShow?: any) {
 export function showAPIMessage(result: any, params?: NoticeDialogProps) {
     if (result === null) return
     let msg = result?.message
-        ? i18next.t(`${'SERVER.ja.' + result.message}`, {
+        ? i18next.t(`${`SERVER.ja.${result.message}`}`, {
               defaultValue: result.message,
           })
         : result.message

@@ -45,6 +45,7 @@ class ImageUploader {
                 })
         })
     }
+
     async chooseImageFromGallery() {
         return new Promise(async (resolve, reject) => {
             await ImagePicker.openPicker({
@@ -82,13 +83,13 @@ class ImageUploader {
                 })
         })
     }
+
     async uploadImage(localImage: any): Promise<string> {
         return new Promise(async function (resolve, reject) {
             try {
                 console.log('uploading an image....')
                 const remoteImage = await awsApi.upload(localImage?.path || localImage)
-                console.log('upload finished ....' + JSON.stringify(remoteImage))
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                console.log(`upload finished ....${JSON.stringify(remoteImage)}`)
                 // @ts-ignore
                 resolve(remoteImage?.body?.postResponse.location)
             } catch (e) {

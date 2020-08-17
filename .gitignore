@@ -30,7 +30,7 @@ local.properties
 
 # Visual Studio Code
 #
-.vscode/
+# .vscode/
 .history
 android
 ios

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import requestToApi from 'api/config/request'
+
 const { CancelToken } = axios
 const DEFAULT_PAGING = 25
 const usePaging = (url: string, params?: any) => {
@@ -38,9 +39,7 @@ const usePaging = (url: string, params?: any) => {
             const responseApi = await requestToApi.post(
                 url,
                 {
-                    // eslint-disable-next-line @typescript-eslint/camelcase
                     page_index: pageIndex,
-                    // eslint-disable-next-line @typescript-eslint/camelcase
                     page_size: DEFAULT_PAGING,
                     ...params,
                 },

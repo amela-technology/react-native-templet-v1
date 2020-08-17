@@ -2,9 +2,9 @@
  * platform/application wide metrics for proper styling
  */
 import { Dimensions, Platform } from 'react-native'
+import StaticSafeAreaInsets from 'react-native-static-safe-area-insets'
 
 const { width, height } = Dimensions.get('window')
-import StaticSafeAreaInsets from 'react-native-static-safe-area-insets'
 
 const safeTopPadding = StaticSafeAreaInsets.safeAreaInsetsTop
 const safeBottomPadding = StaticSafeAreaInsets.safeAreaInsetsBottom

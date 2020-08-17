@@ -55,16 +55,8 @@ interface Props {
     textContent?: boolean
     onRequestClose?(): void
 }
-export default class StyledOverlayLoading extends React.PureComponent<Props> {
-    constructor(props: Props) {
-        super(props)
-    }
-
-    close() {
-        this.setState({ visible: false })
-    }
-
-    renderDefaultContent() {
+export default class StyledOverlayLoading extends React.PureComponent<Props, any> {
+    renderDefaultContent = () => {
         return (
             <View style={styles.background}>
                 <View style={styles.circle}>
@@ -74,7 +66,7 @@ export default class StyledOverlayLoading extends React.PureComponent<Props> {
         )
     }
 
-    renderSpinner() {
+    renderSpinner = () => {
         if (!this.props.visible) {
             return null
         }
