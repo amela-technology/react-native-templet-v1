@@ -1,4 +1,4 @@
-import {NavigationActions} from 'react-navigation'
+import {CommonActions} from '@react-navigation/native'
 
 let navigator: any
 
@@ -8,19 +8,19 @@ function setTopLevelNavigator(navigatorRef: any) {
 
 function navigate(routeName: any, params?: any) {
     navigator.dispatch(
-        NavigationActions.navigate({
-            routeName,
+        CommonActions.navigate({
+            name: routeName,
             params,
         }),
     )
 }
 
-function goBack(key?: any) {
-    navigator.dispatch(
-        NavigationActions.back({
-            key,
-        }),
-    )
+function goBack(route?: any, state?: any) {
+    navigator.dispatch({
+        ...CommonActions.goBack(),
+        source: route.key,
+        target: state.key,
+    })
 }
 
 // add other navigation functions that you need and export them

@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
     text: {
         fontWeight: '600',
         fontSize: 14,
-        color: Themes.colors.primary,
+        color: Themes.COLORS.primary,
         textAlign: 'center',
     },
     textReload: {
         margin: 12,
-        color: Themes.colors.primary,
+        color: Themes.COLORS.primary,
     },
 })
 

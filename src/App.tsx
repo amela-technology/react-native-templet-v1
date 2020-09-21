@@ -12,21 +12,26 @@ import React from 'react'
 import {ActivityIndicator, View} from 'react-native'
 import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
-import AppContainer from './services/navigation/config/AppContainer'
 import NavigationService from './services/navigation/NavigationService'
 import {persistor, store} from './shared/store/store'
+import {NavigationContainer} from '@react-navigation/native'
+import Navigation from './services/navigation/sence/Navigation'
+import {RootSiblingParent} from 'react-native-root-siblings'
 
 const App = () => {
     return (
-        // <Provider store={store}>
-        //     <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <AppContainer
-            ref={navigatorRef => {
-                NavigationService.setTopLevelNavigator(navigatorRef)
-            }}
-        />
-        //     </PersistGate>
-        // </Provider>
+        <Provider store={store}>
+            <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+                <RootSiblingParent>
+                    <NavigationContainer
+                        ref={(navigatorRef: any) => {
+                            NavigationService.setTopLevelNavigator(navigatorRef)
+                        }}>
+                        <Navigation />
+                    </NavigationContainer>
+                </RootSiblingParent>
+            </PersistGate>
+        </Provider>
     )
 }
 

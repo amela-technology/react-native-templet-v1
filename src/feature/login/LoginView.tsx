@@ -1,25 +1,15 @@
 import * as React from 'react'
-import {Text, View} from 'react-native'
-import {StyledButton, StyledInput, StyledList} from '../../shared/components/base'
+import {Text, View, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, TextInput} from 'react-native'
+import ModalInputView from './components/ModalInputView'
 
 const LoginView = () => {
     return (
-        <View style={{flex: 1}}>
-            <Text>I am Login screen</Text>
-            <StyledButton
-                title={'hiihi'}
-                onPress={() => {
-                    return null
-                }}
-            />
-            <StyledInput value={'hiihi'} />
-            <StyledList
-                data={[]}
-                renderItem={() => {
-                    return null
-                }}
-            />
-        </View>
+        <SafeAreaView style={{flex: 1}}>
+            <View style={{flex: 1}}>
+                <ModalInputView />
+            </View>
+        </SafeAreaView>
     )
 }
+
 export default LoginView

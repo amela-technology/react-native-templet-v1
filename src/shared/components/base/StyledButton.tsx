@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     title: {
-        color: Themes.colors.textPrimary,
+        color: Themes.COLORS.textPrimary,
     },
 })
 export default StyledButton

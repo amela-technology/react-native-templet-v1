@@ -27,11 +27,13 @@ Below you'll find information about performing common tasks.
 4. Open `package.json` and change the `name` property with your project name
 5. Open `app.json` and replace `'ReactNativeBase'` by your project name 
 
-6. Run `yarn` or `npm install` to install dependencies
+6. Remove to line 35, 36 `android` & `ios` in `.gitignore`
 
-7. Run `npm run init-project` to create iOS & Android Folders.
+7. Run `yarn` or `npm install` to install dependencies
 
-8. Run your project with `npm run android` or `npm run ios` 
+8. Run `npm run init-project` to create iOS & Android Folders.
+
+9. Run your project with `npm run android` or `npm run ios` 
 ## Available Scripts
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.

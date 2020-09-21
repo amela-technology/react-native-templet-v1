@@ -1,5 +1,4 @@
 const APP_ROUTE = {
-    commonComponents: 'COMMON_COMPONENT_ROUTER',
     authLoading: 'AUTH_LOADING',
     loginRoute: 'LOGIN_ROUTE',
     homeRoute: 'HOME_ROUTE',

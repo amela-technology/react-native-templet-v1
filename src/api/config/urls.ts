@@ -1,3 +1,7 @@
+const MASTER_DATA_URL = {
+    getAll: 'resource',
+    getAllCity: 'zone',
+}
 const USER_URL = {
     getInfo: 'xxx',
 }
@@ -6,8 +10,10 @@ const COMMENT_URL = {
 }
 const AUTH_URL = {
     //authenticate
-    login: 'search/commits',
-    logout: 'authenticate/logout',
-    refreshToken: 'authenticate/refresh_token',
+    register: 'auth/reg',
+    verifyOTP: 'auth/verify',
+    login: 'auth/login',
+    logout: 'auth/logout',
+    refreshToken: 'auth/refresh',
 }
-export {USER_URL, COMMENT_URL, AUTH_URL}
+export {MASTER_DATA_URL, USER_URL, COMMENT_URL, AUTH_URL}

@@ -1,14 +1,17 @@
+const common = {
+    white: '#fff',
+    transparent: 'transparent',
+}
+
 const Light = {
-    colors: {
-        header: '#273148',
-        background: '#ffffff',
+    COLORS: {
+        ...common,
         primary: '#607d8b',
         secondary: '#607d8b',
         textPrimary: '#607d8b',
         textSecondary: '#607d8b',
-        white: '#ffffff',
     },
-    fonts: {
+    FONTS: {
         defaultFont: 'Montserrat-Regular',
         boldFont: 'Montserrat-SemiBold',
         thinFont: 'Montserrat-Light',
@@ -17,6 +20,7 @@ const Light = {
 
 const Dark = {
     colors: {
+        ...common,
         primary: '#607d8b',
         secondary: '#607d8b',
         textPrimary: '#607d8b',

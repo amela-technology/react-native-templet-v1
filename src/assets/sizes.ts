@@ -1,10 +1,10 @@
 const Size = {
-    fontSize: {
-        fontSizeSmall: 10,
-        fontSizeNormal: 12,
-        fontSizeLarge: 14,
+    FONTSIZE: {
+        small: 12,
+        normal: 14,
+        large: 16,
     },
-    padding: {
+    PADDING: {
         defaultTextPadding: 4,
         defaultButtonPadding: 4,
     },

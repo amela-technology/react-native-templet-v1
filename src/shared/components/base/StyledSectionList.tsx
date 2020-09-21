@@ -1,13 +1,13 @@
 import React, {useRef, useState} from 'react'
-import {ActivityIndicator, FlatList, FlatListProps, RefreshControl, View} from 'react-native'
+import {ActivityIndicator, RefreshControl, SectionList, SectionListProps, View} from 'react-native'
 import {Themes} from '../../../assets/themes'
 import NoData from './StyledNoData'
 
-interface Props extends FlatListProps<any> {
+interface Props extends SectionListProps<any> {
     [key: string]: any
 
     loading?: boolean
-    data: any[]
+    sections: any[]
     noDataText?: string
     ListHeaderComponent?: any
     scrollEnabled?: boolean
@@ -20,13 +20,13 @@ interface Props extends FlatListProps<any> {
     onNoDataRefresh?(): void
 }
 
-const StyledList = (props: Props) => {
+const StyledSectionList = (props: Props) => {
     const [momentumScrolled, setMomentumScrolled] = useState(false)
     const list: any = useRef(null)
 
-    const {loading, data, ListHeaderComponent, refreshing, customStyle} = props
+    const {loading, sections, ListHeaderComponent, refreshing, customStyle} = props
     const contentContainerStyle: any = {}
-    const hasData = data.length !== 0
+    const hasData = sections.length !== 0
     if (!hasData) {
         contentContainerStyle.flex = 1
         contentContainerStyle.alignItems = 'center'
@@ -40,7 +40,7 @@ const StyledList = (props: Props) => {
     }
 
     function keyExtractor(item: any, i: any): string {
-        return `${i}`
+        return `${i.toString()}`
     }
 
     function handleRefresh() {
@@ -70,6 +70,9 @@ const StyledList = (props: Props) => {
     function scrollToTop() {
         list?.scrollTo({y: 0, animated: true})
     }
+    function scrollTo(index: number, animated?: boolean) {
+        list?.scrollToIndex({index, animated})
+    }
 
     function renderFooter() {
         if (hasData && loading !== undefined && !!loading) {
@@ -95,16 +98,20 @@ const StyledList = (props: Props) => {
     }
 
     return (
-        <FlatList
+        <SectionList
             ref={list}
             contentContainerStyle={styles}
+            sections={sections || []}
+            stickySectionHeadersEnabled={true}
             keyExtractor={keyExtractor}
             initialNumToRender={1}
             onEndReached={handleEndReached}
             onEndReachedThreshold={0.5}
             onMomentumScrollBegin={onMomentumScrollBegin}
             ListEmptyComponent={renderNoData}
+            ListFooterComponent={renderFooter}
             showsVerticalScrollIndicator={false}
+            refreshing={!!refreshing}
             refreshControl={
                 <RefreshControl
                     refreshing={!!refreshing}
@@ -119,4 +126,4 @@ const StyledList = (props: Props) => {
     )
 }
 
-export default React.memo(StyledList)
+export default React.memo(StyledSectionList)

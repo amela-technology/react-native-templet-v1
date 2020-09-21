@@ -1,53 +1,51 @@
 import axios, {AxiosResponse, Method} from 'axios'
 import {useEffect, useState} from 'react'
-import Api from '../../api/config/request'
-
+import requestToApi from '../../api/config/request'
 const {CancelToken} = axios
-
 export interface State {
-    isLoading: boolean
-    data?: any
+    loading: boolean
     error?: any
-    response?: AxiosResponse<any>
+    response?: any
 }
 
 function useAPI(method: Method, url: string, initialRequest = true) {
     const [state, setState] = useState<State>({
-        isLoading: true,
+        loading: true,
     })
 
     const source = CancelToken.source()
 
-    function request() {
-        Api(url, {
-            method: method,
-            cancelToken: source.token,
-        })
-            .then(response => {
-                setState({error: undefined, response, isLoading: false})
+    async function request() {
+        try {
+            const response: any = await requestToApi(url, {
+                method: method,
+                cancelToken: source.token,
             })
-            .catch(error => {
-                if (axios.isCancel(error)) {
-                    console.log('Request canceled by cleanup: ', error.message)
-                } else {
-                    setState({error, response: undefined, isLoading: false})
-                }
-            })
+            setState({error: undefined, response, loading: false})
+        } catch (error) {
+            if (axios.isCancel(error)) {
+                console.log('Request canceled by cleanup: ', error.message)
+            } else {
+                setState({error, response: undefined, loading: false})
+            }
+        }
     }
 
     useEffect(() => {
-        setState({...state, isLoading: true})
+        setState({...state, loading: true})
 
         if (initialRequest) {
-            request()
+            ;(async function () {
+                await request()
+            })()
         }
 
         return () => {
             source.cancel('useEffect cleanup...')
         }
-    }, [url])
+    }, [url, initialRequest])
 
-    const {response, error, isLoading} = state
+    const {response, error, loading} = state
 
     function setData(newData: any) {
         // Used to update state from component
@@ -55,8 +53,8 @@ function useAPI(method: Method, url: string, initialRequest = true) {
         setState({...state, response: newResponse})
     }
 
-    const data = response ? response.data : undefined
-    return {isLoading, data, response, error, request, setData}
+    const data = response ? response.data : []
+    return {loading, data, response, error, request}
 }
 
 export default useAPI
