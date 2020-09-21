@@ -1,20 +1,21 @@
 import * as React from 'react'
-import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from 'react-native'
-import {Themes} from '../../../assets/themes'
-import Size from '../../../assets/sizes'
-import {useTranslation} from 'react-i18next'
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native'
+import { Themes } from 'assets/themes'
+import Size from 'assets/sizes'
+import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 
 interface StyledTextProps extends TextProps {
-    text: string
+    children: string
     i18Params?: any
     customStyle?: StyleProp<TextStyle>
 }
 
 const StyledText = (props: StyledTextProps) => {
-    const {t} = useTranslation()
+    const { t } = useTranslation()
     return (
         <Text style={[styles.text, props.customStyle]} {...props}>
-            {t(props.text, props.i18Params)}
+            {i18next.exists(props.children, props.i18Params) ? t(props.children, props.i18Params) : props.children}
         </Text>
     )
 }

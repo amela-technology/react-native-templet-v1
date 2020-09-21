@@ -1,14 +1,13 @@
-// import appleAuth, {AppleAuthRequestOperation, AppleAuthRequestScope} from "@invertase/react-native-apple-authentication"
-import {AxiosRequestConfig, AxiosResponse} from 'axios'
-import request from '../../api/config/request'
-import {AUTH_URL} from '../../api/config/urls'
-// import {dismissDialog} from "services/dialog/DialogService"
-import TokenProvider from '../../services/authenticate/TokenProvider'
-import NavigationService from '../../services/navigation/NavigationService'
-import {LOGIN_ROUTE} from '../../services/navigation/config/routes'
+/* eslint-disable no-console */
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import request from 'api/config/request'
+import { AUTH_URL } from 'api/config/urls'
+import { store } from 'shared/store/store'
+import { signOut, signIn } from 'shared/store/authentication/actions'
+import { useState } from 'react'
 
 export interface LoginRequestParams extends AxiosRequestConfig {
-    phone: string
+    username: string
     password: string
 }
 
@@ -16,6 +15,7 @@ export interface LoginRequestResponse extends AxiosResponse {
     token: string
     refreshToken: string
 }
+
 export interface RegisterRequestParams extends AxiosRequestConfig {
     phone: string
     password: string
@@ -25,6 +25,7 @@ export interface RegisterRequestParams extends AxiosRequestConfig {
     birthday: any
     gender: any
 }
+
 class AuthenticateService {
     validPhonePasswordEmail(phone: string, pwd: string, email?: string): boolean {
         if (!(phone && pwd)) {
@@ -38,15 +39,7 @@ class AuthenticateService {
         }
         return true
     }
-    // async handleAppleIdPress() {
-    //     return await appleAuth.performRequest({
-    //         requestedOperation: AppleAuthRequestOperation.LOGIN,
-    //         requestedScopes: [AppleAuthRequestScope.EMAIL, AppleAuthRequestScope.FULL_NAME],
-    //     })
-    // }
-    async login(options: LoginRequestParams) {
-        return request.post<LoginRequestResponse>(AUTH_URL.login, options)
-    }
+
     async register(options: RegisterRequestParams) {
         return await request.post(AUTH_URL.register, {
             phone: options.phone.trim(),
@@ -58,11 +51,12 @@ class AuthenticateService {
             gender: options.gender,
         })
     }
+
     async verifySMSOtp(token: string, smsOtp: string) {
         return await request.post(
             AUTH_URL.verifyOTP,
             {
-                code: Number.parseInt(smsOtp),
+                code: Number.parseInt(smsOtp, 10),
                 type: 'reg',
             },
             {
@@ -72,15 +66,45 @@ class AuthenticateService {
             },
         )
     }
+
     async refreshToken(refreshToken: string) {
         return request.post(AUTH_URL.refreshToken, {
             refresh_token: refreshToken,
         })
     }
-    async logOut() {
-        await TokenProvider.clearToken()
-        // dismissDialog()
-        // NavigationService.navigate(LOGIN_ROUTE.start)
+
+    logOut() {
+        store.dispatch(signOut())
     }
 }
+
+export const useLogin = (options: LoginRequestParams) => {
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState<any>(null)
+
+    const login = async () => {
+        try {
+            setLoading(true)
+            const response = await request.post<LoginRequestResponse>(AUTH_URL.login, options)
+            if (response) {
+                // using data to set token
+                const { data } = response
+                setLoading(false)
+                const signInAction = signIn('DUMMY_TOKEN', 'DUMMY_REFRESH', 1)
+                store.dispatch(signInAction)
+            }
+        } catch (error) {
+            setLoading(false)
+            setError(error)
+            __DEV__ && console.log(error)
+        } finally {
+            __DEV__ && console.warn('You should remove finally in your code')
+            const signInAction = signIn('DUMMY_TOKEN', 'DUMMY_REFRESH', 1)
+            store.dispatch(signInAction)
+        }
+    }
+
+    return { loading, login, error }
+}
+
 export default new AuthenticateService()

@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-unresolved,@typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import {RNS3} from 'react-native-aws3'
+import { RNS3 } from 'react-native-aws3'
 
 const options = {
     secretKey: 'xxx',

@@ -1,29 +1,34 @@
+/* eslint-disable no-console */
 import AsyncStorage from '@react-native-community/async-storage'
+import { store } from 'shared/store/store'
+import { restoreToken } from 'shared/store/authentication/actions'
 const KEY_TOKEN = 'TOKEN'
-const KEY_REFRESH_TOKEN = 'REFESH_TOKEN'
+const KEY_REFRESH_TOKEN = 'REFRESH_TOKEN'
 class TokenProvider {
-    token: any
-    refreshToken: any
-    async setAllNewToken(token: string, refreshToken: string) {
+    token?: string | null
+    refreshToken?: string | null
+
+    constructor(token?: string, refreshToken?: string) {
         this.token = token
         this.refreshToken = refreshToken
-        await AsyncStorage.setItem(KEY_TOKEN, token)
-        await AsyncStorage.setItem(KEY_REFRESH_TOKEN, refreshToken)
-        console.log('Got new token = ' + token)
-        console.log('Got new refreshToken = ' + refreshToken)
     }
-    async getToken(): Promise<string> {
-        if (this.token) {
-            return this.token
-        }
-        return (await AsyncStorage.getItem(KEY_TOKEN)) || ''
+
+    setAllNewToken(token: string, refreshToken: string) {
+        __DEV__ && console.log('Got new token = ' + token)
+        __DEV__ && console.log('Got new refreshToken = ' + refreshToken)
+        store.dispatch(restoreToken(token, refreshToken))
     }
-    async getRefreshToken(): Promise<string> {
-        if (this.refreshToken) {
-            return this.refreshToken
-        }
-        return (await AsyncStorage.getItem(KEY_REFRESH_TOKEN)) || ''
+
+    getToken(): string {
+        const { authentication } = store.getState()
+        return authentication.userToken || ''
     }
+
+    getRefreshToken(): string {
+        const { authentication } = store.getState()
+        return authentication.refreshToken || ''
+    }
+
     async clearToken() {
         this.token = null
         this.refreshToken = null

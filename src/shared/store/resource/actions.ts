@@ -1,6 +1,6 @@
-import {ActionType} from './types'
+import { ActionType } from './types'
 
-export function updateResource(data: any) {
+export const updateResource = (data: any) => {
     return {
         type: ActionType.UPDATE_RESOURCE,
         data,
