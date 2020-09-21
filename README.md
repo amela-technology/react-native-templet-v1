@@ -1,4 +1,4 @@
-This project was development by **Amela Technology**
+This project was development by **CuongNm base on https://github.com/amela-technology/react-native-templet-v1**
 
 Below you'll find information about performing common tasks.
 
@@ -34,6 +34,19 @@ Below you'll find information about performing common tasks.
 8. Run `npm run init-project` to create iOS & Android Folders.
 
 9. Run your project with `npm run android` or `npm run ios` 
+
+## Getting Started IOS
+
+1. Check workspaces of project in project/ios/${PROJECT_NAME}.xcworkspace
+2. Go to Project workspaces in Xocde delete everything except project name
+3. Should delete them in pod file 
+4. Setup react-native config following guide: https://docs.google.com/document/d/1EGlP-Z0OAfJ0n6DIHD1iQEFvZFulwKvD/edit
+
+## Getting Started Android
+
+1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
+2. Setup react-native config following guide: https://docs.google.com/document/d/1EGlP-Z0OAfJ0n6DIHD1iQEFvZFulwKvD/edit
+
 ## Available Scripts
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
@@ -110,16 +123,18 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   └── splash
 │       └── SplashView.tsx
 ├── services
-│   ├── api
-│   │   ├── AuthApi.ts
-│   │   ├── CommentApi.ts
-│   │   ├── UserApi.ts
-│   │   └── config
-│   │       ├── request.ts
-│   │       └── urls.ts
-│   └── navigation
+│   └── api
+│       ├── AuthApi.ts
+│       ├── CommentApi.ts
+│       ├── UserApi.ts
+│       └── config
+│           ├── request.ts
+│           └── urls.ts
+└── navigation
 │       ├── NavigationHelpers.ts
 │       ├── NavigationService.ts
+|       ├── sence
+│       │   └── RootSences.ts
 │       └── config
 │           ├── AppContainer.ts
 │           ├── routes.ts
@@ -136,7 +151,6 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │       ├── StyledTouchable.tsx
 │   │       └── index.ts
 │   ├── hooks
-│   │   ├── NavigationHooks.ts
 │   │   ├── useApi.ts
 │   │   ├── useInfinityScroll.ts
 │   │   └── useInput.ts

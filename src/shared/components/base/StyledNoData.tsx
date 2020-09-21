@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native'
-import {Themes} from '../../../assets/themes'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
+import { Themes } from 'assets/themes'
 import StyledText from './StyledText'
 import TouchableRipple from './StyledTouchable'
 
@@ -17,7 +17,7 @@ const StyledNoData = (props: StyledListNoDataProps) => {
     return (
         <View style={styles.container}>
             {props.loading ? (
-                <View style={{alignItems: 'center'}}>
+                <View style={{ alignItems: 'center' }}>
                     <ActivityIndicator />
                 </View>
             ) : (
@@ -25,7 +25,7 @@ const StyledNoData = (props: StyledListNoDataProps) => {
             )}
             {!!props.refreshable && !props.loading ? (
                 <TouchableRipple onPress={props.onRefresh}>
-                    <StyledText text={'Tải lại'} customStyle={styles.textReload} />
+                    <StyledText customStyle={styles.textReload}>Tải lại</StyledText>
                 </TouchableRipple>
             ) : (
                 <View />

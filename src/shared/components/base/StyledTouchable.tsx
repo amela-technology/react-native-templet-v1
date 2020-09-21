@@ -1,75 +1,62 @@
-import React, {ReactNode} from 'react'
-import {StyleProp, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle} from 'react-native'
-import {isAndroid} from '../../utilities/helper'
+/* eslint-disable no-console */
+import React from 'react'
+import { StyleProp, ViewStyle, Pressable, PressableProps } from 'react-native'
 
-interface StyledTouchableProps {
+interface StyledTouchableProps extends PressableProps {
     customStyle?: StyleProp<ViewStyle>
-
     disabled?: boolean
-
-    children?: ReactNode
-
     onPress?(): void
-
     onPressIn?(): void
-
     onPressOut?(): void
-
     onLongPress?(): void
 }
 
-const DEFAULT_OPACITY = 0.5
-
 const StyledTouchable = (props: StyledTouchableProps) => {
-    function handlePress() {
-        props.onPress && props.onPress()
+    const { customStyle, disabled, children, style } = props
+
+    if (style) {
+        __DEV__ && console.warn('You should use customStyle to implement this component to avoid conflict')
     }
 
-    function handlePressIn() {
-        props.onPressIn && props.onPressIn()
+    const handlePress = () => {
+        props?.onPress?.()
     }
 
-    function handlePressOut() {
-        props.onPressOut && props.onPressOut()
+    const handlePressIn = () => {
+        props?.onPressIn?.()
     }
 
-    function handleLongPress() {
-        props.onLongPress && props.onLongPress()
+    const handlePressOut = () => {
+        props?.onPressOut?.()
     }
 
-    function renderAndroidButton() {
-        const {customStyle, disabled, children} = props
-        return (
-            <TouchableNativeFeedback
-                onPress={handlePress}
-                onPressIn={handlePressIn}
-                onPressOut={handlePressOut}
-                onLongPress={handleLongPress}
-                accessibilityTraits={'button'}
-                disabled={disabled}>
-                <View style={customStyle}>{children}</View>
-            </TouchableNativeFeedback>
-        )
+    const handleLongPress = () => {
+        props?.onLongPress?.()
     }
 
-    function renderIosButton() {
-        const {customStyle, disabled, children} = props
-        return (
-            <TouchableOpacity
-                onPress={handlePress}
-                onPressIn={handlePressIn}
-                onPressOut={handlePressOut}
-                onLongPress={handleLongPress}
-                accessibilityTraits={'button'}
-                activeOpacity={DEFAULT_OPACITY}
-                disabled={disabled}
-                {...props}>
-                <View style={customStyle}>{children}</View>
-            </TouchableOpacity>
-        )
-    }
-
-    return isAndroid() ? renderAndroidButton() : renderIosButton()
+    return (
+        <Pressable
+            onPress={handlePress}
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}
+            onLongPress={handleLongPress}
+            accessibilityTraits={'button'}
+            disabled={disabled}
+            android_disableSound={false}
+            android_ripple={{ radius: 20 }}
+            hitSlop={20}
+            style={({ pressed }) => [
+                {
+                    backgroundColor: pressed ? '#dbdbd9' : undefined,
+                    opacity: pressed ? 0.6 : 1,
+                },
+                customStyle,
+            ]}
+            {...props}
+        >
+            {children}
+        </Pressable>
+    )
 }
 
 export default StyledTouchable

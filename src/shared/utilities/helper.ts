@@ -1,9 +1,13 @@
-import {Platform} from 'react-native'
+import { Platform } from 'react-native'
 
-export function isAndroid() {
+export const isAndroid = () => {
     return Platform.OS === 'android'
 }
 
-export function isIos() {
-    return Platform.OS === 'ios'
+export const isIos = Platform.OS === 'ios'
+
+export function wait(timeout: number) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, timeout)
+    })
 }

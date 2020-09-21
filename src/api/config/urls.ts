@@ -9,11 +9,11 @@ const COMMENT_URL = {
     getComment: 'xxx',
 }
 const AUTH_URL = {
-    //authenticate
+    // authenticate
     register: 'auth/reg',
     verifyOTP: 'auth/verify',
     login: 'auth/login',
     logout: 'auth/logout',
     refreshToken: 'auth/refresh',
 }
-export {MASTER_DATA_URL, USER_URL, COMMENT_URL, AUTH_URL}
+export { MASTER_DATA_URL, USER_URL, COMMENT_URL, AUTH_URL }
