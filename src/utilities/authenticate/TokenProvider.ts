@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import AsyncStorage from '@react-native-community/async-storage'
-import { store } from 'redux/store'
-import { restoreToken } from 'redux/authentication/actions'
+import { store } from 'app-redux/store'
+import { restoreToken } from 'app-redux/authentication/actions'
 const KEY_TOKEN = 'TOKEN'
 const KEY_REFRESH_TOKEN = 'REFRESH_TOKEN'
 class TokenProvider {

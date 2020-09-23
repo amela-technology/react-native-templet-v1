@@ -4,7 +4,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { persistReducer, persistStore } from 'redux-persist'
 
 // import createSagaMiddleware from 'redux-saga';
-import rootReducer from './rootReducer'
+import rootReducer from 'app-redux/rootReducer'
 // import rootSaga from './rootSaga';
 
 // persistInit

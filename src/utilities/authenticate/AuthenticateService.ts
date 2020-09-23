@@ -2,8 +2,8 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import request from 'api/request'
 import { AUTH_URL } from 'api/urls'
-import { store } from 'redux/store'
-import { signOut, signIn } from 'redux/authentication/actions'
+import { store } from 'app-redux/store'
+import { signOut, signIn } from 'app-redux/authentication/actions'
 import { useState } from 'react'
 
 export interface LoginRequestParams extends AxiosRequestConfig {

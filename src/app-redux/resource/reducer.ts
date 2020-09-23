@@ -1,4 +1,4 @@
-import { ActionType } from 'redux/resource/types'
+import { ActionType } from './types'
 
 const initialState: any = {}
 
