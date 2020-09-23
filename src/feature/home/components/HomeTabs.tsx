@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { Text, View } from 'react-native'
+import * as React from 'react';
+import { Text, View } from 'react-native';
 
-const HomeTabs = () => {
+const HomeTabs: React.FunctionComponent = () => {
     return (
         <View>
             <Text>I am HomeTabs screen</Text>
         </View>
-    )
-}
-export default HomeTabs
+    );
+};
+export default HomeTabs;

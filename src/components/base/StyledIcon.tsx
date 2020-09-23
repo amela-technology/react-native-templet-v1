@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { StyleProp, Image, ImageStyle, ImageProps } from 'react-native'
-import { scale } from 'react-native-size-matters'
+import * as React from 'react';
+import { StyleProp, Image, ImageStyle, ImageProps } from 'react-native';
+import { scale } from 'react-native-size-matters';
 
 interface Props extends ImageProps {
-    size: number
-    customStyle?: StyleProp<ImageStyle>
+    size: number;
+    customStyle?: StyleProp<ImageStyle>;
 }
 
 const StyledIcon = (props: Props) => {
@@ -14,7 +14,7 @@ const StyledIcon = (props: Props) => {
             resizeMode={'contain'}
             {...props}
         />
-    )
-}
+    );
+};
 
-export default React.memo(StyledIcon)
+export default React.memo(StyledIcon);

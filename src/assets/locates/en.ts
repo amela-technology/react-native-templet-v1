@@ -12,4 +12,4 @@ export default {
         notification: 'Notification',
         setting: 'Setting',
     },
-}
+};

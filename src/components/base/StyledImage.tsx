@@ -1,13 +1,13 @@
-import React from 'react'
-import FastImage, { FastImageProps } from 'react-native-fast-image'
+import React from 'react';
+import FastImage, { FastImageProps } from 'react-native-fast-image';
 
 interface StyledImageProps extends FastImageProps {
-    customStyle?: any
+    customStyle?: any;
 }
 
 const StyledImage = (props: StyledImageProps) => {
-    const { customStyle, resizeMode } = props
-    return <FastImage style={customStyle} resizeMode={resizeMode} {...props} />
-}
+    const { customStyle, resizeMode } = props;
+    return <FastImage style={customStyle} resizeMode={resizeMode} {...props} />;
+};
 
-export default React.memo(StyledImage)
+export default React.memo(StyledImage);

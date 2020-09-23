@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { View } from 'react-native'
-import StyledText from 'components/base/StyledText'
-import { StyledButton } from 'components/base'
-import AuthenticateService from 'utilities/authenticate/AuthenticateService'
+import * as React from 'react';
+import { View } from 'react-native';
+import StyledText from 'components/base/StyledText';
+import { StyledButton } from 'components/base';
+import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 
 const SettingView: React.FunctionComponent = () => {
     return (
@@ -10,6 +10,6 @@ const SettingView: React.FunctionComponent = () => {
             <StyledText>Setting</StyledText>
             <StyledButton onPress={() => AuthenticateService.logOut()} title={'Log out'} />
         </View>
-    )
-}
-export default SettingView
+    );
+};
+export default SettingView;

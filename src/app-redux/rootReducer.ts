@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux'
-import resource from './resource/reducer'
-import authentication from './authentication/reducer'
+import { combineReducers } from 'redux';
+import resource from './resource/reducer';
+import authentication from './authentication/reducer';
 
 const rootReducer = combineReducers({
     resource,
     authentication,
-})
+});
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;
 
-export default rootReducer
+export default rootReducer;

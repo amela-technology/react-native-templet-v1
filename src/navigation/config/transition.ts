@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
+import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types';
 
 const transition: TransitionSpec = {
     animation: 'spring',
@@ -11,6 +11,6 @@ const transition: TransitionSpec = {
         restDisplacementThreshold: 0.01,
         restSpeedThreshold: 0.01,
     },
-}
+};
 
-export default transition
+export default transition;

@@ -1,26 +1,26 @@
-import React from 'react'
-import { StyleSheet, View, Modal, ActivityIndicator, Keyboard, ViewProps } from 'react-native'
-import { Themes } from 'assets/themes'
+import React from 'react';
+import { StyleSheet, View, Modal, ActivityIndicator, Keyboard, ViewProps } from 'react-native';
+import { Themes } from 'assets/themes';
 
 interface Props extends ViewProps {
-    visible: boolean
-    textContent?: boolean
-    onRequestClose?(): void
-    children?: React.FunctionComponent
+    visible: boolean;
+    textContent?: boolean;
+    onRequestClose?(): void;
+    children?: React.FunctionComponent;
 }
 
 const StyledOverlayLoading = (props: Props) => {
     React.useEffect(() => {
-        Keyboard.dismiss()
-    }, [props.visible])
+        Keyboard.dismiss();
+    }, [props.visible]);
 
     if (!props.visible) {
-        return null
+        return null;
     }
 
     const spinner = () => {
         if (props.children) {
-            return <View style={[styles.container]}>{props.children}</View>
+            return <View style={[styles.container]}>{props.children}</View>;
         }
         return (
             <View style={[styles.container]}>
@@ -30,8 +30,8 @@ const StyledOverlayLoading = (props: Props) => {
                     </View>
                 </View>
             </View>
-        )
-    }
+        );
+    };
 
     return (
         <Modal
@@ -42,8 +42,8 @@ const StyledOverlayLoading = (props: Props) => {
         >
             {spinner}
         </Modal>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
     activityIndicator: {
         flex: 1,
     },
-})
+});
 
-export default React.memo(StyledOverlayLoading)
+export default React.memo(StyledOverlayLoading);
