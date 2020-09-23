@@ -59,13 +59,13 @@
     "paths": {
       "api": ["api"],
       "services": ["services"],
-      "shared": ["shared"],
       "assets": ["assets"],
       "feature": ["feature"],
-      "navigation": ["navigation"],
-      "base-component": ["shared/components/base/"]
+      "components": ["components"],
+      "utilities": ["utilities"],
+      "redux": ["redux"],
     },
-    "typeRoots" : ["./src/types"],
+    "typeRoots" : ["src/utilities/types"],
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
     // "types": [],                           /* Type declaration files to be included in compilation. */
