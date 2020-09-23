@@ -12,7 +12,7 @@ import SettingView from 'feature/setting/SettingScreen'
 
 import { APP_ROUTE, TAB_NAVIGATION_ROOT, AUTHENTICATE_ROUTE } from '../config/routes'
 import { useSelector } from 'react-redux'
-import { RootState } from 'redux/rootReducer'
+import { RootState } from 'app-redux/rootReducer'
 import { isIos } from 'utilities/helper'
 
 const MainStack = createStackNavigator()

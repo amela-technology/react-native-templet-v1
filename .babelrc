@@ -4,11 +4,14 @@
     ["module-resolver", {
       "alias": {
         "api": "./src/api",
-        "base-component": "./src/shared/components/base/index",
         "services": "./src/services/",
         "shared": "./src/shared/",
         "assets": "./src/assets/",
-        "feature": "./src/feature/"
+        "feature": "./src/feature/",
+        "navigation": "./src/navigation",
+        "components": "./src/components",
+        "app-redux": "./src/app-redux",
+        "utilities": "./src/utilities"
       }
     }]
   ]

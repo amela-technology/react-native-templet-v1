@@ -63,7 +63,7 @@
       "feature": ["feature"],
       "components": ["components"],
       "utilities": ["utilities"],
-      "redux": ["redux"],
+      "app-redux": ["app-redux"]
     },
     "typeRoots" : ["src/utilities/types"],
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
