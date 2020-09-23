@@ -1,4 +1,4 @@
-This project was development by **CuongNm base on https://github.com/amela-technology/react-native-templet-v1**
+This project was development by **Amela Technology**
 
 Below you'll find information about performing common tasks.
 
@@ -84,87 +84,134 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 ## Folder structures
 ```
 .
-├── App.tsx
-├── AppContext.tsx
-├── assets
-│   ├── fonts
-│   │   ├── Montserrat-Light.ttf
-│   │   ├── Montserrat-Regular.ttf
-│   │   └── Montserrat-SemiBold.ttf
-│   ├── images
-│   ├── images.ts
-│   ├── locates
-│   │   ├── en.ts
-│   │   └── jp.ts
-│   ├── metrics.ts
-│   ├── sizes.ts
-│   └── themes.ts
-├── feature
-│   ├── home
-│   │   ├── HomeView.tsx
-│   │   ├── components
-│   │   │   └── HomeTabs.tsx
-│   │   ├── redux
-│   │   │   ├── actions.ts
-│   │   │   ├── reducer.ts
-│   │   │   ├── saga.ts
-│   │   │   └── types.ts
-│   │   └── styles.ts
-│   ├── login
-│   │   ├── LoginView.tsx
-│   │   ├── components
-│   │   │   └── Logo.tsx
-│   │   ├── redux
-│   │   │   ├── actions.ts
-│   │   │   ├── reducer.ts
-│   │   │   ├── saga.ts
-│   │   │   └── types.ts
-│   │   └── styles.ts
-│   └── splash
-│       └── SplashView.tsx
-├── services
-│   └── api
-│       ├── AuthApi.ts
-│       ├── CommentApi.ts
-│       ├── UserApi.ts
-│       └── config
-│           ├── request.ts
-│           └── urls.ts
-└── navigation
-│       ├── NavigationHelpers.ts
-│       ├── NavigationService.ts
-|       ├── sence
-│       │   └── RootSences.ts
-│       └── config
-│           ├── AppContainer.ts
-│           ├── routes.ts
-│           └── transition.ts
-├── shared
-│   ├── components
-│   │   └── base
-│   │       ├── StyledButton.tsx
-│   │       ├── StyledImage.tsx
-│   │       ├── StyledInput.tsx
-│   │       ├── StyledList.tsx
-│   │       ├── StyledNoData.tsx
-│   │       ├── StyledText.tsx
-│   │       ├── StyledTouchable.tsx
-│   │       └── index.ts
-│   ├── hooks
-│   │   ├── useApi.ts
-│   │   ├── useInfinityScroll.ts
-│   │   └── useInput.ts
-│   ├── store
-│   │   ├── rootReducer.ts
-│   │   ├── rootSaga.ts
-│   │   └── store.ts
-│   └── utilities
-│       ├── helper.ts
-│       └── i18next.ts
-└── types
-    └── typing.d.ts
+├── scripts
+│   ├── react-native-keyboard-aware-scroll-view
+│   │   └── lib
+│   │       ├── KeyboardAwareFlatList.js
+│   │       └── KeyboardAwareScrollView.js
+│   ├── react-native-size-matters
+│   │   └── scaling-utils.js
+│   └── fix-lib.sh
+├── src
+│   ├── api
+│   │   ├── modules
+│   │   │   └── api-app
+│   │   │       └── general.ts
+│   │   ├── request.ts
+│   │   └── urls.ts
+│   ├── assets
+│   │   ├── fonts
+│   │   │   ├── Montserrat-Light.ttf
+│   │   │   ├── Montserrat-Regular.ttf
+│   │   │   └── Montserrat-SemiBold.ttf
+│   │   ├── icon
+│   │   │   ├── ic_back.png
+│   │   │   ├── ic_check_radio.png
+│   │   │   ├── ic_home.png
+│   │   │   ├── ic_notification.png
+│   │   │   ├── ic_select.png
+│   │   │   ├── ic_setting.png
+│   │   │   └── ic_uncheck_radio.png
+│   │   ├── locates
+│   │   │   ├── en.ts
+│   │   │   └── jp.ts
+│   │   ├── images.ts
+│   │   ├── metrics.ts
+│   │   ├── sizes.ts
+│   │   └── themes.ts
+│   ├── components
+│   │   ├── base
+│   │   │   ├── modal
+│   │   │   │   ├── DialogComponent.tsx
+│   │   │   │   ├── DialogManager.tsx
+│   │   │   │   └── index.tsx
+│   │   │   ├── picker
+│   │   │   │   └── StyledModalPicker.tsx
+│   │   │   ├── StyledButton.tsx
+│   │   │   ├── StyledIcon.tsx
+│   │   │   ├── StyledImage.tsx
+│   │   │   ├── StyledInput.tsx
+│   │   │   ├── StyledList.tsx
+│   │   │   ├── StyledNoData.tsx
+│   │   │   ├── StyledOverlayLoading.tsx
+│   │   │   ├── StyledSectionList.tsx
+│   │   │   ├── StyledText.tsx
+│   │   │   ├── StyledTouchable.tsx
+│   │   │   └── index.ts
+│   │   └── common
+│   │       └── Browser.tsx
+│   ├── feature
+│   │   ├── authentication
+│   │   │   ├── components
+│   │   │   │   └── Logo.tsx
+│   │   │   ├── ForgotPwdScreen.tsx
+│   │   │   ├── LoginScreen.tsx
+│   │   │   └── RegisterScreen.tsx
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   └── HomeTabs.tsx
+│   │   │   └── HomeScreen.tsx
+│   │   ├── notification
+│   │   │   ├── components
+│   │   │   │   └── HomeTabs.tsx
+│   │   │   └── NotificationScreen.tsx
+│   │   └── setting
+│   │       ├── components
+│   │       │   └── HomeTabs.tsx
+│   │       └── SettingScreen.tsx
+│   ├── hooks
+│   │   ├── useApi.ts
+│   │   ├── useInput.ts
+│   │   └── usePaging.ts
+│   ├── navigation
+│   │   ├── components
+│   │   │   └── StyledTabBar.tsx
+│   │   ├── config
+│   │   │   ├── options.ts
+│   │   │   ├── routes.ts
+│   │   │   └── transition.ts
+│   │   ├── sence
+│   │   │   └── RootSences.tsx
+│   │   └── NavigationService.ts
+│   ├── redux
+│   │   ├── authentication
+│   │   │   ├── actions.ts
+│   │   │   ├── reducer.ts
+│   │   │   └── types.ts
+│   │   ├── resource
+│   │   │   ├── actions.ts
+│   │   │   ├── reducer.ts
+│   │   │   └── types.ts
+│   │   ├── rootReducer.ts
+│   │   ├── rootSaga.ts
+│   │   └── store.ts
+│   ├── utilities
+│   │   ├── authenticate
+│   │   │   ├── AuthenticateService.ts
+│   │   │   └── TokenProvider.ts
+│   │   ├── types
+│   │   │   └── typing.d.ts
+│   │   ├── upload
+│   │   │   ├── ImageUploader.ts
+│   │   │   └── awsApi.ts
+│   │   ├── helper.ts
+│   │   ├── i18next.ts
+│   │   └── moment.ts
+│   ├── App.tsx
+│   └── AppContext.tsx
+├── README.md
+├── app.json
+├── babel.config.js
+├── index.js
+├── jest.config.js
+├── metro.config.js
+├── package.json
+├── react-native.config.js
+├── settings.json
+├── tsconfig.json
+└── yarn.lock
 
-24 directories, 54 files
+38 directories, 88 files
 
 
 ```
