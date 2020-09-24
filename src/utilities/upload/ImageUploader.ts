@@ -1,11 +1,12 @@
+/* eslint-disable no-async-promise-executor */
 /* eslint-disable no-console */
-import ImagePicker from 'react-native-image-crop-picker'
-import { awsApi } from './awsApi'
+import ImagePicker from 'react-native-image-crop-picker';
+import awsApi from './awsApi';
 // import {openSettings} from 'react-native-permissions'
-const MAX_WIDTH = 800
-const MAX_HEIGHT = 800
+const MAX_WIDTH = 800;
+const MAX_HEIGHT = 800;
 class ImageUploaded {
-    async chooseImageFromCamera() {
+    chooseImageFromCamera = async () => {
         return new Promise(async (resolve, reject) => {
             await ImagePicker.openCamera({
                 width: MAX_WIDTH,
@@ -18,8 +19,8 @@ class ImageUploaded {
                 cropping: true,
             })
                 .then((res) => {
-                    console.log(res)
-                    return resolve(res)
+                    console.log(res);
+                    return resolve(res);
                 })
                 .catch((err) => {
                     if (err.code === 'E_PERMISSION_MISSING') {
@@ -42,11 +43,12 @@ class ImageUploaded {
                         //     showAPIAlertDialog(err)
                         // })
                     }
-                    return reject(err)
-                })
-        })
-    }
-    async chooseImageFromGallery() {
+                    return reject(err);
+                });
+        });
+    };
+
+    chooseImageFromGallery = async () => {
         return new Promise(async (resolve, reject) => {
             await ImagePicker.openPicker({
                 width: MAX_WIDTH,
@@ -60,8 +62,8 @@ class ImageUploaded {
                 cropping: true,
             })
                 .then((res) => {
-                    console.log(res)
-                    return resolve(res)
+                    console.log(res);
+                    return resolve(res);
                 })
                 .catch((err) => {
                     if (err.code === 'E_PERMISSION_MISSING') {
@@ -79,21 +81,22 @@ class ImageUploaded {
                         //     },
                         // })
                     }
-                    return reject(err)
-                })
-        })
-    }
-    async uploadImage(localImage: any): Promise<string> {
-        return new Promise(async function (resolve, reject) {
+                    return reject(err);
+                });
+        });
+    };
+
+    uploadImage = async (localImage: any): Promise<string> => {
+        return new Promise(async (resolve, reject) => {
             try {
-                console.log('uploading an image....')
-                const remoteImage = await awsApi.upload(localImage?.path || localImage)
-                console.log('upload finished ....' + JSON.stringify(remoteImage))
-                resolve(remoteImage?.body?.postResponse.location)
+                console.log('uploading an image....');
+                const remoteImage = await awsApi.upload(localImage?.path || localImage);
+                console.log(`upload finished ....${JSON.stringify(remoteImage)}`);
+                resolve(remoteImage?.body?.postResponse.location);
             } catch (e) {
-                reject(e)
+                reject(e);
             }
-        })
-    }
+        });
+    };
 }
-export default new ImageUploaded()
+export default new ImageUploaded();

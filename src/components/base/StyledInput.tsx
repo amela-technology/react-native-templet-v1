@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native'
+import * as React from 'react';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
 
 interface StyledInputProps extends TextInputProps {
-    customStyle?: StyleProp<TextStyle>
-    placeholder?: string
-    placeholderTextColor?: string
+    customStyle?: StyleProp<TextStyle>;
+    placeholder?: string;
+    placeholderTextColor?: string;
 }
 
 const StyledInput: React.FunctionComponent<StyledInputProps> = (props: StyledInputProps) => {
-    const input = React.useRef<TextInput>(null)
+    const input = React.useRef<TextInput>(null);
 
     return (
         <TextInput
@@ -19,8 +19,8 @@ const StyledInput: React.FunctionComponent<StyledInputProps> = (props: StyledInp
             underlineColorAndroid="transparent"
             {...props}
         />
-    )
-}
+    );
+};
 const styles: any = StyleSheet.create({
     textInput: {
         height: 32,
@@ -30,5 +30,5 @@ const styles: any = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'black',
     },
-})
-export default StyledInput
+});
+export default StyledInput;

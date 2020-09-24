@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/typedef */
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 
-const { width, height } = Dimensions.get('window')
-const [shortDimension, longDimension] = width < height ? [width, height] : [height, width]
+const { width, height } = Dimensions.get('window');
+const [shortDimension, longDimension] = width < height ? [width, height] : [height, width];
 
-const guidelineBaseWidth = 375
-const guidelineBaseHeight = 812
+const guidelineBaseWidth = 375;
+const guidelineBaseHeight = 812;
 
-const scale = (size) => (shortDimension / guidelineBaseWidth) * size
-const verticalScale = (size) => (longDimension / guidelineBaseHeight) * size
-const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * factor
+const scale = (size) => (shortDimension / guidelineBaseWidth) * size;
+const verticalScale = (size) => (longDimension / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * factor;
 
-export { scale, verticalScale, moderateScale }
+export { scale, verticalScale, moderateScale };

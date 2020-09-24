@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { View, SafeAreaView } from 'react-native'
-import { StyledText } from 'components/base'
+import * as React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { StyledText } from 'components/base';
 
 const RegisterScreen: React.FunctionComponent = () => {
     return (
@@ -9,7 +9,7 @@ const RegisterScreen: React.FunctionComponent = () => {
                 <StyledText>{'Register screen'}</StyledText>
             </View>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default RegisterScreen
+export default RegisterScreen;

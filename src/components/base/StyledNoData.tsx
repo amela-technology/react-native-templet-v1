@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
-import { Themes } from 'assets/themes'
-import StyledText from './StyledText'
-import TouchableRipple from './StyledTouchable'
+import * as React from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { Themes } from 'assets/themes';
+import StyledText from './StyledText';
+import TouchableRipple from './StyledTouchable';
 
 interface StyledListNoDataProps {
-    text?: string
-    redressable?: boolean
-    loading?: boolean
-    onRefresh?(): any
+    text?: string;
+    redressable?: boolean;
+    loading?: boolean;
+    onRefresh?(): any;
 }
 
 const StyledNoData: React.FunctionComponent<StyledListNoDataProps> = (props: StyledListNoDataProps) => {
@@ -29,8 +29,8 @@ const StyledNoData: React.FunctionComponent<StyledListNoDataProps> = (props: Sty
                 <View />
             )}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
         margin: 12,
         color: Themes.COLORS.primary,
     },
-})
+});
 
-export default StyledNoData
+export default StyledNoData;

@@ -1,24 +1,24 @@
-import React from 'react'
-import { TAB_NAVIGATION_ROOT } from '../config/routes'
-import { ScaledSheet } from 'react-native-size-matters'
-import { Platform, View, TouchableOpacity, Image } from 'react-native'
-import Metrics from 'assets/metrics'
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { StyledText } from 'components/base'
-import { Themes } from 'assets/themes'
-import Images from 'assets/images'
+import React from 'react';
+import { ScaledSheet } from 'react-native-size-matters';
+import { Platform, View, TouchableOpacity, Image } from 'react-native';
+import Metrics from 'assets/metrics';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { StyledText } from 'components/base';
+import { Themes } from 'assets/themes';
+import Images from 'assets/images';
+import { TAB_NAVIGATION_ROOT } from '../config/routes';
 
 const StyledTabBarIcon = ({ name, focus, customStyle }: any) => {
-    let iconSource = Images.icons.tab.home
+    let iconSource = Images.icons.tab.home;
     if (name === TAB_NAVIGATION_ROOT.HOME_ROUTE.ROOT) {
-        iconSource = focus ? Images.icons.tab.home : Images.icons.tab.home
+        iconSource = focus ? Images.icons.tab.home : Images.icons.tab.home;
     } else if (name === TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT) {
-        iconSource = focus ? Images.icons.tab.setting : Images.icons.tab.setting
+        iconSource = focus ? Images.icons.tab.setting : Images.icons.tab.setting;
     } else if (name === TAB_NAVIGATION_ROOT.NOTIFICATION_ROUTE.ROOT) {
-        iconSource = focus ? Images.icons.tab.notification : Images.icons.tab.notification
+        iconSource = focus ? Images.icons.tab.notification : Images.icons.tab.notification;
     }
-    return <Image source={iconSource} style={[styles.tabIcon, customStyle]} />
-}
+    return <Image source={iconSource} style={[styles.tabIcon, customStyle]} />;
+};
 
 const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
     state,
@@ -28,44 +28,44 @@ const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
     return (
         <View style={styles.tabContainer}>
             {state.routes.map((route: any, index: any) => {
-                const { options } = descriptors[route.key]
+                const { options } = descriptors[route.key];
 
                 // config label of navigation
-                let label = 'UNKNOWN'
+                let label = 'UNKNOWN';
                 switch (route.name) {
                     case TAB_NAVIGATION_ROOT.HOME_ROUTE.ROOT:
-                        label = 'tab.home'
-                        break
+                        label = 'tab.home';
+                        break;
                     case TAB_NAVIGATION_ROOT.NOTIFICATION_ROUTE.ROOT:
-                        label = 'tab.notification'
-                        break
+                        label = 'tab.notification';
+                        break;
                     case TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT:
-                        label = 'tab.setting'
-                        break
+                        label = 'tab.setting';
+                        break;
                     default:
-                        break
+                        break;
                 }
 
-                const isFocused = state.index === index
+                const isFocused = state.index === index;
 
                 const onPress = () => {
                     const event = navigation.emit({
                         type: 'tabPress',
                         target: route.key,
                         canPreventDefault: true,
-                    })
+                    });
 
                     if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name)
+                        navigation.navigate(route.name);
                     }
-                }
+                };
 
                 const onLongPress = () => {
                     navigation.emit({
                         type: 'tabLongPress',
                         target: route.key,
-                    })
-                }
+                    });
+                };
 
                 return (
                     <TouchableOpacity
@@ -82,11 +82,11 @@ const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
                         <StyledTabBarIcon name={route.name} focus={isFocused} />
                         <StyledText customStyle={styles.tabLabel}>{label}</StyledText>
                     </TouchableOpacity>
-                )
+                );
             })}
         </View>
-    )
-}
+    );
+};
 
 const styles = ScaledSheet.create({
     tabContainer: {
@@ -112,6 +112,6 @@ const styles = ScaledSheet.create({
         marginTop: 4,
         color: Themes.COLORS.black,
     },
-})
+});
 
-export default StyledTabBar
+export default StyledTabBar;

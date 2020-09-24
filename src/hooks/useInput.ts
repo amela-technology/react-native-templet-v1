@@ -1,13 +1,14 @@
-import { useState } from 'react'
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { useState } from 'react';
 
 const useInput = (initialState = '') => {
-    const [value, setValue] = useState(initialState)
+    const [value, setValue] = useState(initialState);
 
     const onChangeText = (text: string) => {
-        setValue(text)
-    }
+        setValue(text);
+    };
 
-    return [value, onChangeText]
-}
+    return [value, onChangeText];
+};
 
-export default useInput
+export default useInput;

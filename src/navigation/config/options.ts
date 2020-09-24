@@ -1,6 +1,6 @@
-import transition from '../config/transition'
-import { Themes } from 'assets/themes'
-import { CardStyleInterpolators } from '@react-navigation/stack'
+import { Themes } from 'assets/themes';
+import { CardStyleInterpolators } from '@react-navigation/stack';
+import transition from './transition';
 
 const navigationConfigs = {
     cardStyle: {
@@ -17,6 +17,6 @@ const navigationConfigs = {
         open: transition,
         close: transition,
     },
-}
+};
 
-export default navigationConfigs
+export default navigationConfigs;

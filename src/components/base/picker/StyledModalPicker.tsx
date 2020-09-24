@@ -1,28 +1,28 @@
 /* eslint-disable react/display-name */
-import React from 'react'
-import { ScaledSheet } from 'react-native-size-matters'
-import { StyledText, StyledIcon, StyledTouchable } from 'components/base'
-import { View, ImageSourcePropType, StyleProp, ViewStyle, TouchableOpacity, Dimensions, TextStyle } from 'react-native'
-import { Themes } from 'assets/themes'
-import { Modalize } from 'react-native-modalize'
-import { Portal } from 'react-native-portalize'
-import Images from 'assets/images'
+import React from 'react';
+import { ScaledSheet } from 'react-native-size-matters';
+import { StyledText, StyledIcon, StyledTouchable } from 'components/base';
+import { View, ImageSourcePropType, StyleProp, ViewStyle, TouchableOpacity, Dimensions, TextStyle } from 'react-native';
+import { Themes } from 'assets/themes';
+import { Modalize } from 'react-native-modalize';
+import { Portal } from 'react-native-portalize';
+import Images from 'assets/images';
 
-const { height } = Dimensions.get('window')
+const { height } = Dimensions.get('window');
 
 interface PickerData {
-    id: string | number
-    name: string | number
+    id: string | number;
+    name: string | number;
 }
 
 interface StyledImageProps {
-    title?: string
-    value: string | number
-    customStyle?: StyleProp<ViewStyle>
-    customTitleStyle?: StyleProp<TextStyle>
-    icon?: ImageSourcePropType
-    data: Array<PickerData>
-    onChangeValue(label: string | number, value?: string | number): void
+    title?: string;
+    value: string | number;
+    customStyle?: StyleProp<ViewStyle>;
+    customTitleStyle?: StyleProp<TextStyle>;
+    icon?: ImageSourcePropType;
+    data: Array<PickerData>;
+    onChangeValue(label: string | number, value?: string | number): void;
 }
 
 const PickerItem = ({ check, onChange, label }: { check: boolean; onChange?(): void; label: string }) => {
@@ -48,22 +48,35 @@ const PickerItem = ({ check, onChange, label }: { check: boolean; onChange?(): v
                 </StyledText>
             </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
-const MemoPickerItem = React.memo(PickerItem)
+const MemoPickerItem = React.memo(PickerItem);
 
 const StyledModalPicker = (props: StyledImageProps) => {
-    const exits: PickerData | undefined = props.data.find((k: PickerData) => k?.id === props?.value)
-    const exitsLabel: string | number = exits ? exits.name : props.data.length > 0 ? props.data[0].name : ''
-    const exitsValue: string | number = exits ? exits.id : props.data.length > 0 ? props.data[0].id : ''
+    const exits: PickerData | undefined = props.data.find((k: PickerData) => k?.id === props?.value);
+    // const exitsLabel: string | number = exits ? exits.name : props.data.length > 0 ? props.data[0].name : ''
+    // const exitsValue: string | number = exits ? exits.id : props.data.length > 0 ? props.data[0].id : ''
 
-    const modalize = React.useRef<Modalize>(null)
-    const contentRef = React.useRef<any>(null)
+    let exitsLabel: string | number;
+    let exitsValue: string | number;
+    if (exits) {
+        exitsLabel = exits.name;
+        exitsValue = exits.id;
+    } else if (props.data.length > 0) {
+        exitsLabel = props.data[0].name;
+        exitsValue = props.data[0].id;
+    } else {
+        exitsLabel = '';
+        exitsValue = '';
+    }
+
+    const modalize = React.useRef<Modalize>(null);
+    const contentRef = React.useRef<any>(null);
 
     const renderPicker = () => {
-        modalize.current?.open()
-    }
+        modalize.current?.open();
+    };
 
     return (
         <View style={props.customStyle}>
@@ -83,10 +96,10 @@ const StyledModalPicker = (props: StyledImageProps) => {
                             <View style={styles.headerContainer}>
                                 <StyledText style={styles.headerTitle}>{props?.title || ''}</StyledText>
                             </View>
-                        )
+                        );
                     }}
                     FooterComponent={() => {
-                        return <View style={{ height: 50 }} />
+                        return <View style={{ height: 50 }} />;
                     }}
                     adjustToContentHeight={props.data.length < 12}
                     withHandle={false}
@@ -99,12 +112,12 @@ const StyledModalPicker = (props: StyledImageProps) => {
                                 <MemoPickerItem
                                     check={exitsValue === item.id}
                                     onChange={() => {
-                                        props.onChangeValue(item?.name, item?.id)
-                                        modalize.current?.close()
+                                        props.onChangeValue(item?.name, item?.id);
+                                        modalize.current?.close();
                                     }}
                                     label={item.name.toString()}
                                 />
-                            )
+                            );
                         },
                         contentContainerStyle: { paddingHorizontal: 15 },
                         initialScrollIndex: props.data.findIndex((k: PickerData) => k?.id === exitsValue),
@@ -114,8 +127,8 @@ const StyledModalPicker = (props: StyledImageProps) => {
                 />
             </Portal>
         </View>
-    )
-}
+    );
+};
 
 const styles = ScaledSheet.create({
     content: {
@@ -161,6 +174,6 @@ const styles = ScaledSheet.create({
         color: Themes.COLORS.black,
         marginLeft: '20@s',
     },
-})
+});
 
-export default React.memo(StyledModalPicker)
+export default React.memo(StyledModalPicker);

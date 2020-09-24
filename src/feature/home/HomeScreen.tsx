@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { View, Button } from 'react-native'
-import StyledText from 'components/base/StyledText'
-import { useNavigation } from '@react-navigation/native'
-import DialogManager from 'components/base/modal'
-import Images from 'assets/images'
-import StyledModalPicker from 'components/base/picker/StyledModalPicker'
+import * as React from 'react';
+import { View, Button } from 'react-native';
+import StyledText from 'components/base/StyledText';
+import { useNavigation } from '@react-navigation/native';
+import DialogManager from 'components/base/modal';
+import Images from 'assets/images';
+import StyledModalPicker from 'components/base/picker/StyledModalPicker';
 
 const HomeScreen: React.FunctionComponent = () => {
-    const navigation = useNavigation()
-    const [valuePicker, setValuePicker] = React.useState(1)
+    const navigation = useNavigation();
+    const [valuePicker, setValuePicker] = React.useState(1);
     return (
         <View style={{ flex: 1, alignItems: 'center', marginTop: 50, paddingHorizontal: 25 }}>
             <StyledModalPicker
@@ -36,7 +36,7 @@ const HomeScreen: React.FunctionComponent = () => {
                     { name: 'label17', id: 17 },
                 ]}
                 onChangeValue={(name: string, id: number) => {
-                    setValuePicker(id)
+                    setValuePicker(id);
                 }}
             />
             <Button
@@ -58,12 +58,12 @@ const HomeScreen: React.FunctionComponent = () => {
                         ),
                         width: 0.9,
                         onTouchOutside: () => {
-                            DialogManager.dismiss()
+                            DialogManager.dismiss();
                         },
                     })
                 }
             />
         </View>
-    )
-}
-export default HomeScreen
+    );
+};
+export default HomeScreen;

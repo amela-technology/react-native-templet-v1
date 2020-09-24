@@ -8,5 +8,5 @@ const Size = {
         defaultTextPadding: 4,
         defaultButtonPadding: 4,
     },
-}
-export default Size
+};
+export default Size;

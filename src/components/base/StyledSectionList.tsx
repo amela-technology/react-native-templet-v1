@@ -1,74 +1,74 @@
-import React, { useRef, useState } from 'react'
-import { ActivityIndicator, RefreshControl, SectionList, SectionListProps, View } from 'react-native'
-import { Themes } from 'assets/themes'
-import NoData from './StyledNoData'
+import React, { useRef, useState } from 'react';
+import { ActivityIndicator, RefreshControl, SectionList, SectionListProps, View } from 'react-native';
+import { Themes } from 'assets/themes';
+import NoData from './StyledNoData';
 
 interface Props extends SectionListProps<any> {
-    [key: string]: any
-    loading?: boolean
-    sections: any[]
-    noDataText?: string
-    ListHeaderComponent?: React.FunctionComponent
-    scrollEnabled?: boolean
-    noDataCanRefresh?: boolean
-    customStyle?: any
-    onLoadMore?(): void
-    onNoDataRefresh?(): void
+    [key: string]: any;
+    loading?: boolean;
+    sections: any[];
+    noDataText?: string;
+    ListHeaderComponent?: React.FunctionComponent;
+    scrollEnabled?: boolean;
+    noDataCanRefresh?: boolean;
+    customStyle?: any;
+    onLoadMore?(): void;
+    onNoDataRefresh?(): void;
 }
 
 const StyledSectionList = (props: Props) => {
-    const [momentumScrolled, setMomentumScrolled] = useState(false)
-    const list: any = useRef(null)
+    const [momentumScrolled, setMomentumScrolled] = useState(false);
+    const list: any = useRef(null);
 
-    const { loading, sections, ListHeaderComponent, refreshing, customStyle } = props
-    const contentContainerStyle: any = {}
-    const hasData = sections.length !== 0
+    const { loading, sections, ListHeaderComponent, refreshing, customStyle } = props;
+    const contentContainerStyle: any = {};
+    const hasData = sections.length !== 0;
     if (!hasData) {
-        contentContainerStyle.flex = 1
-        contentContainerStyle.alignItems = 'center'
-        contentContainerStyle.justifyContent = 'center'
+        contentContainerStyle.flex = 1;
+        contentContainerStyle.alignItems = 'center';
+        contentContainerStyle.justifyContent = 'center';
     }
-    let styles
+    let styles;
     if (typeof ListHeaderComponent === 'undefined' && !hasData) {
-        styles = [contentContainerStyle, customStyle]
+        styles = [contentContainerStyle, customStyle];
     } else {
-        styles = customStyle
+        styles = customStyle;
     }
 
     const keyExtractor = (item: any, i: any): string => {
-        return `${i.toString()}`
-    }
+        return `${i.toString()}`;
+    };
 
     const handleRefresh = () => {
-        props?.onRefresh?.()
-    }
+        props?.onRefresh?.();
+    };
 
     const handleEndReached = (info: any) => {
         if (!momentumScrolled) {
-            props?.onLoadMore?.()
-            setMomentumScrolled(true)
+            props?.onLoadMore?.();
+            setMomentumScrolled(true);
         }
-    }
+    };
 
     const handleNoDataRefresh = () => {
-        const { onNoDataRefresh } = props
-        onNoDataRefresh?.()
-    }
+        const { onNoDataRefresh } = props;
+        onNoDataRefresh?.();
+    };
 
     const onMomentumScrollBegin = () => {
-        setMomentumScrolled(false)
-    }
+        setMomentumScrolled(false);
+    };
 
     const scrollToFooter = () => {
-        list?.scrollToEnd({ animated: true })
-    }
+        list?.scrollToEnd({ animated: true });
+    };
 
     const scrollToTop = () => {
-        list?.scrollTo({ y: 0, animated: true })
-    }
+        list?.scrollTo({ y: 0, animated: true });
+    };
     const scrollTo = (index: number, animated?: boolean) => {
-        list?.scrollToIndex({ index, animated })
-    }
+        list?.scrollToIndex({ index, animated });
+    };
 
     const renderFooter = () => {
         if (hasData && loading !== undefined && !!loading) {
@@ -76,13 +76,13 @@ const StyledSectionList = (props: Props) => {
                 <View style={{ alignItems: 'center', marginVertical: 8 }}>
                     <ActivityIndicator />
                 </View>
-            )
+            );
         }
-        return null
-    }
+        return null;
+    };
 
     const renderNoData = () => {
-        const { noDataText, noDataCanRefresh } = props
+        const { noDataText, noDataCanRefresh } = props;
         return (
             <NoData
                 loading={loading}
@@ -90,8 +90,8 @@ const StyledSectionList = (props: Props) => {
                 redressable={noDataCanRefresh}
                 onRefresh={handleNoDataRefresh}
             />
-        )
-    }
+        );
+    };
 
     return (
         <SectionList
@@ -119,7 +119,7 @@ const StyledSectionList = (props: Props) => {
             keyboardShouldPersistTaps={'handled'}
             {...props}
         />
-    )
-}
+    );
+};
 
-export default React.memo(StyledSectionList)
+export default React.memo(StyledSectionList);
