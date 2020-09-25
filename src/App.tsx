@@ -17,6 +17,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import 'utilities/i18next';
 import { navigationRef } from 'navigation/NavigationService';
 import Navigation from 'navigation/sence/RootSences';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 LogBox.ignoreLogs(['Require cycle:']);
 
@@ -24,9 +25,11 @@ const App: React.FunctionComponent = () => {
     return (
         <Provider store={store}>
             <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-                <NavigationContainer ref={navigationRef}>
-                    <Navigation />
-                </NavigationContainer>
+                <RootSiblingParent>
+                    <NavigationContainer ref={navigationRef}>
+                        <Navigation />
+                    </NavigationContainer>
+                </RootSiblingParent>
             </PersistGate>
         </Provider>
     );

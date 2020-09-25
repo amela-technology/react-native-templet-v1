@@ -6,7 +6,8 @@ import Config from 'react-native-config';
 import i18next from 'utilities/i18next';
 import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
-import { AUTH_URL } from 'api/urls';
+
+const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
 
 const request = axios.create({
     baseURL: Config.API_URL,
@@ -109,7 +110,7 @@ request.interceptors.response.use(
             return new Promise((resolve: any, reject: any) => {
                 // we use pure axios when refreshing token
                 axios
-                    .post(`${Config.API_URL}/${AUTH_URL.refreshToken}`, {
+                    .post(`${Config.API_URL}/${AUTH_URL_REFRESH_TOKEN}`, {
                         refreshToken: localRefreshToken,
                     })
                     .then(async ({ data: responseData }: any) => {

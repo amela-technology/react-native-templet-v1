@@ -5,6 +5,7 @@ import { Host } from 'react-native-portalize';
 // Screen
 import LoginScreen from 'feature/authentication/LoginScreen';
 import HomeScreen from 'feature/home/HomeScreen';
+import HomeDetailScreen from 'feature/home/HomeDetailScreen';
 import NotificationView from 'feature/notification/NotificationScreen';
 import SettingView from 'feature/setting/SettingScreen';
 
@@ -17,6 +18,16 @@ import navigationConfigs from '../config/options';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
+
+const HomeStack = () => {
+    return (
+        <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs} keyboardHandlingEnabled={isIos}>
+            <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME} component={HomeScreen} />
+            <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DETAIL} component={HomeDetailScreen} />
+            <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.WEB_VIEW} component={HomeDetailScreen} />
+        </MainStack.Navigator>
+    );
+};
 
 const MainTabContainer = () => {
     const getTabBarVisible = (route: any) => {
@@ -34,7 +45,7 @@ const MainTabContainer = () => {
         <MainTab.Navigator tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
             <MainTab.Screen
                 name={TAB_NAVIGATION_ROOT.HOME_ROUTE.ROOT}
-                component={HomeScreen}
+                component={HomeStack}
                 options={({ route }: any) => ({
                     tabBarVisible: getTabBarVisible(route),
                 })}

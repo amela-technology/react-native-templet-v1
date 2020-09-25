@@ -1,10 +1,14 @@
 /* eslint-disable no-console */
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import request from 'api/request';
-import { AUTH_URL } from 'api/urls';
 import { store } from 'app-redux/store';
 import { signOut, signIn } from 'app-redux/authentication/actions';
 import { useState } from 'react';
+
+const AUTH_URL_REGISTER = '/register';
+const AUTH_URL_VERIFY_OTP = '/verify';
+const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
+const AUTH_URL_LOGIN = '/login';
 
 export interface LoginRequestParams extends AxiosRequestConfig {
     username: string;
@@ -42,7 +46,7 @@ class AuthenticateService {
 
     register = async (options: RegisterRequestParams) => {
         try {
-            return await request.post(AUTH_URL.register, {
+            return await request.post(AUTH_URL_REGISTER, {
                 phone: options.phone.trim(),
                 password: options.password,
                 email: options.email.trim(),
@@ -61,7 +65,7 @@ class AuthenticateService {
     verifySMSOtp = async (token: string, smsOtp: string) => {
         try {
             return await request.post(
-                AUTH_URL.verifyOTP,
+                AUTH_URL_VERIFY_OTP,
                 {
                     code: Number.parseInt(smsOtp, 10),
                     type: 'reg',
@@ -80,7 +84,7 @@ class AuthenticateService {
     };
 
     refreshToken = (refreshToken: string) => {
-        return request.post(AUTH_URL.refreshToken, {
+        return request.post(AUTH_URL_REFRESH_TOKEN, {
             refresh_token: refreshToken,
         });
     };
@@ -103,7 +107,7 @@ export const useLogin = (options: LoginRequestParams): LoginRequest => {
     const login = async () => {
         try {
             setLoading(true);
-            const response = await request.post<LoginRequestResponse>(AUTH_URL.login, options);
+            const response = await request.post<LoginRequestResponse>(AUTH_URL_LOGIN, options);
             if (response) {
                 // using data to set token
                 const { data } = response;
