@@ -18,7 +18,7 @@ const StyledOverlayLoading = (props: Props) => {
         return null;
     }
 
-    const spinner = () => {
+    const Spinner = () => {
         if (props.children) {
             return <View style={[styles.container]}>{props.children}</View>;
         }
@@ -40,7 +40,7 @@ const StyledOverlayLoading = (props: Props) => {
             transparent
             visible={props.visible}
         >
-            {spinner}
+            <Spinner />
         </Modal>
     );
 };

@@ -83,7 +83,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
  Link assets and font from **src/assets** to Native project
 ## Folder structures
 ```
-.
+.   folder contain file to fixing, batch lib    
 ├── scripts
 │   ├── react-native-keyboard-aware-scroll-view
 │   │   └── lib
@@ -92,7 +92,9 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   ├── react-native-size-matters
 │   │   └── scaling-utils.js
 │   └── fix-lib.sh
+|   folder contain source code of project 
 ├── src
+|   |   folder contain api content of project
 │   ├── api
 │   │   ├── modules
 │   │   │   └── api-app

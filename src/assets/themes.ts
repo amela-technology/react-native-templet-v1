@@ -2,6 +2,7 @@ const common = {
     white: '#fff',
     transparent: 'transparent',
     black: '#000',
+    blue: 'blue',
 };
 
 const Light = {
