@@ -6,7 +6,7 @@ import useModal from 'components/base/modal/useModal';
 import Images from 'assets/images';
 import StyledModalPicker from 'components/base/picker/StyledModalPicker';
 import StyledHeader from 'components/common/StyledHeader';
-import StyledWebView from 'components/base/StyledWebView';
+import { StyledWebView } from 'components/base';
 
 const HomeDetailScreen: React.FunctionComponent = () => {
     return (

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import ActionType from './types';
 
 const initialState: any = {};

@@ -1,11 +1,9 @@
-/* eslint-disable no-useless-concat */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-console */
 import axios from 'axios';
 import Config from 'react-native-config';
 import i18next from 'utilities/i18next';
 import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
+import { logger } from 'utilities/helper';
 
 const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
 
@@ -33,7 +31,7 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
 request.interceptors.request.use(
     async (config: any) => {
         // Do something before api is sent
-        const userToken = TokenProvider.getToken();
+        const userToken = TokenProvider().getToken();
         if (userToken) {
             config.headers.Authorization = `Bearer ${userToken}`;
         }
@@ -82,7 +80,7 @@ request.interceptors.response.use(
         //     )
         const originalRequest = error.config;
         if (errorMessage === 'RefreshToken_NotExist') {
-            console.log('RefreshToken_NotExist => logout');
+            logger('RefreshToken_NotExist => logout');
             // logout here
             AuthenticateService.logOut();
             return Promise.reject(error);
@@ -106,7 +104,7 @@ request.interceptors.response.use(
             // console.log('refreshing token...')
             originalRequest.retry = true;
             isRefreshing = true;
-            const localRefreshToken = TokenProvider.getRefreshToken();
+            const localRefreshToken = TokenProvider().getRefreshToken();
             return new Promise((resolve: any, reject: any) => {
                 // we use pure axios when refreshing token
                 axios
@@ -115,7 +113,7 @@ request.interceptors.response.use(
                     })
                     .then(async ({ data: responseData }: any) => {
                         const { token, refreshToken } = responseData.data;
-                        TokenProvider.setAllNewToken(token, refreshToken);
+                        TokenProvider().setAllNewToken(token, refreshToken);
                         originalRequest.headers.Authorization = `Bearer ${token}`;
                         processQueue(null, token);
                         resolve(request(originalRequest));
@@ -134,4 +132,5 @@ request.interceptors.response.use(
         return Promise.reject(error);
     },
 );
+
 export default request;

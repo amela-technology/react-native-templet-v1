@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import RootSiblings from 'react-native-root-siblings';
 import DialogComponent from './DialogComponent';
@@ -10,7 +9,7 @@ interface ModalElement {
     props: any;
 }
 
-const useModal = () => {
+const useModal = (): any => {
     let modalElements: ModalElement[] = [];
 
     const getTopModalElementId = (modalId?: number): number => {

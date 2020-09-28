@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import request from 'api/request';
 import { store } from 'app-redux/store';
 import { signOut, signIn } from 'app-redux/authentication/actions';
 import { useState } from 'react';
+import { logger } from 'utilities/helper';
 
 const AUTH_URL_REGISTER = '/register';
 const AUTH_URL_VERIFY_OTP = '/verify';
@@ -56,8 +56,7 @@ class AuthenticateService {
                 gender: options.gender,
             });
         } catch (error) {
-            // eslint-disable-next-line no-unused-expressions
-            __DEV__ && console.log(error);
+            logger(error);
             return null;
         }
     };
@@ -77,8 +76,7 @@ class AuthenticateService {
                 },
             );
         } catch (error) {
-            // eslint-disable-next-line no-unused-expressions
-            __DEV__ && console.log(error);
+            logger(error);
             return null;
         }
     };
@@ -118,11 +116,9 @@ export const useLogin = (options: LoginRequestParams): LoginRequest => {
         } catch (error) {
             setLoading(false);
             setErrorLogin(error);
-            // eslint-disable-next-line no-unused-expressions
-            __DEV__ && console.log(error);
+            logger(error);
         } finally {
-            // eslint-disable-next-line no-unused-expressions
-            __DEV__ && console.warn('You should remove finally in your code');
+            logger('You should remove finally in your code', true);
             const signInAction = signIn('DUMMY_TOKEN', 'DUMMY_REFRESH', 1);
             store.dispatch(signInAction);
         }

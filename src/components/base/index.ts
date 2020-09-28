@@ -6,5 +6,16 @@ import StyledNoData from './StyledNoData';
 import StyledText from './StyledText';
 import StyledTouchable from './StyledTouchable';
 import StyledIcon from './StyledIcon';
+import StyledWebView from './StyledWebView';
 
-export { StyledButton, StyledImage, StyledInput, StyledList, StyledNoData, StyledText, StyledTouchable, StyledIcon };
+export {
+    StyledButton,
+    StyledImage,
+    StyledInput,
+    StyledList,
+    StyledNoData,
+    StyledText,
+    StyledTouchable,
+    StyledIcon,
+    StyledWebView,
+};

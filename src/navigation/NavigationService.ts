@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { RefObject } from 'react';
 import { StackActions } from '@react-navigation/native';
 
@@ -14,6 +13,6 @@ export function goBack(): void {
 }
 
 export function navigateReplace(name: string, params = {}): void {
-    console.log(`${`navigate replace  ${name}`}`, params);
+    // console.log(`${`navigate replace  ${name}`}`, params);
     navigationRef.current.dispatch(StackActions.replace(name, params));
 }

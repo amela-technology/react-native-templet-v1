@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { StyleProp, ViewStyle, Pressable, PressableProps } from 'react-native';
+import { logger } from 'utilities/helper';
 
 interface StyledTouchableProps extends PressableProps {
     customStyle?: StyleProp<ViewStyle>;
@@ -15,8 +15,7 @@ const StyledTouchable: React.FunctionComponent<StyledTouchableProps> = (props: S
     const { customStyle, disabled, children, style } = props;
 
     if (style) {
-        // eslint-disable-next-line no-unused-expressions
-        __DEV__ && console.warn('You should use customStyle to implement this component to avoid conflict');
+        logger('You should use customStyle to implement this component to avoid conflict', true);
     }
 
     return (

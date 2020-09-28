@@ -9,3 +9,14 @@ export function wait(timeout: number): Promise<any> {
         setTimeout(resolve, timeout);
     });
 }
+
+export function logger(msg: string, isWarning?: boolean, params?: any): void {
+    if (__DEV__ && !isWarning) {
+        // eslint-disable-next-line no-console
+        console.log(msg, params);
+    }
+    if (__DEV__ && isWarning) {
+        // eslint-disable-next-line no-console
+        console.warn(msg, params);
+    }
+}

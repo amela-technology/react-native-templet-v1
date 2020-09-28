@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable no-console */
 import axios, { Method } from 'axios';
 import { useEffect, useState } from 'react';
 import requestToApi from 'api/request';
+import { logger } from 'utilities/helper';
 
 const { CancelToken } = axios;
 export interface State {
@@ -27,7 +26,7 @@ const useAPI = (method: Method, url: string, initialRequest = true) => {
             setState({ error: undefined, response: responseApi, loading: false });
         } catch (errorApi) {
             if (axios.isCancel(errorApi)) {
-                console.log('Request canceled by cleanup: ', errorApi.message);
+                logger('Request canceled by cleanup: ', false, errorApi.message);
             } else {
                 setState({ error: errorApi, response: undefined, loading: false });
             }
