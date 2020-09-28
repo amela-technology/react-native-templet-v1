@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/typedef */
 import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');

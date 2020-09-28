@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types';
 
 const transition: TransitionSpec = {

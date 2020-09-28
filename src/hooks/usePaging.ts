@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable no-console */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import requestToApi from 'api/request';
+import { logger } from 'utilities/helper';
 
 const { CancelToken } = axios;
 const DEFAULT_PAGING = 25;
-const usePaging = (url: string, params?: any) => {
+const usePaging = (url: string, params?: any): any => {
     const [loading, setLoading] = useState(true);
     const [response, setResponse] = useState<any | null>();
     const [error, setError] = useState<any | null>();
@@ -39,7 +38,7 @@ const usePaging = (url: string, params?: any) => {
             setLoading(false);
             setError(e);
             if (axios.isCancel(e)) {
-                console.log('Request canceled by cleanup: ', e.message);
+                logger('Request canceled by cleanup: ', false, e.message);
             } else {
                 setResponse(response);
             }

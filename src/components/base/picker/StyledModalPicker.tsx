@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React from 'react';
 import { ScaledSheet } from 'react-native-size-matters';
 import { StyledText, StyledIcon, StyledTouchable } from 'components/base';
@@ -78,6 +77,19 @@ const StyledModalPicker = (props: StyledImageProps) => {
         modalize.current?.open();
     };
 
+    const renderItem = ({ item }: { item: PickerData }) => {
+        return (
+            <MemoPickerItem
+                check={exitsValue === item.id}
+                onChange={() => {
+                    props.onChangeValue(item?.name, item?.id);
+                    modalize.current?.close();
+                }}
+                label={item.name.toString()}
+            />
+        );
+    };
+
     return (
         <View style={props.customStyle}>
             {props.title ? (
@@ -107,18 +119,7 @@ const StyledModalPicker = (props: StyledImageProps) => {
                     flatListProps={{
                         data: props.data,
                         keyExtractor: (item: PickerData) => item?.id.toString(),
-                        renderItem: ({ item }: { item: PickerData }) => {
-                            return (
-                                <MemoPickerItem
-                                    check={exitsValue === item.id}
-                                    onChange={() => {
-                                        props.onChangeValue(item?.name, item?.id);
-                                        modalize.current?.close();
-                                    }}
-                                    label={item.name.toString()}
-                                />
-                            );
-                        },
+                        renderItem,
                         contentContainerStyle: { paddingHorizontal: 15 },
                         initialScrollIndex: props.data.findIndex((k: PickerData) => k?.id === exitsValue),
                         initialNumToRender: 15,

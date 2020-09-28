@@ -1,102 +1,39 @@
-/* eslint-disable no-async-promise-executor */
-/* eslint-disable no-console */
 import ImagePicker from 'react-native-image-crop-picker';
 import awsApi from './awsApi';
-// import {openSettings} from 'react-native-permissions'
+
 const MAX_WIDTH = 800;
 const MAX_HEIGHT = 800;
+
 class ImageUploaded {
-    chooseImageFromCamera = async () => {
-        return new Promise(async (resolve, reject) => {
-            await ImagePicker.openCamera({
-                width: MAX_WIDTH,
-                height: MAX_HEIGHT,
-                compressImageMaxWidth: MAX_WIDTH,
-                compressImageMaxHeight: MAX_HEIGHT,
-                waitAnimationEnd: true,
-                // includeBase64: true,
-                forceJpg: true,
-                cropping: true,
-            })
-                .then((res) => {
-                    console.log(res);
-                    return resolve(res);
-                })
-                .catch((err) => {
-                    if (err.code === 'E_PERMISSION_MISSING') {
-                        // showAlertDialog({
-                        //     message: 'common.permissionsRequest.camera',
-                        //     rightText: 'OK',
-                        //     leftText: 'alert.defaultCancelText',
-                        //     onRightPress: () => {
-                        //         dismissAlertDialog(() => {
-                        //             openSettings()
-                        //         })
-                        //     },
-                        //     onLeftPress: () => {
-                        //         dismissAlertDialog()
-                        //     },
-                        // })
-                    }
-                    if (err.code === 'E_PICKER_CANNOT_RUN_CAMERA_ON_SIMULATOR') {
-                        // dismissAlertDialog(() => {
-                        //     showAPIAlertDialog(err)
-                        // })
-                    }
-                    return reject(err);
-                });
+    chooseImageFromCamera = () => {
+        return ImagePicker.openCamera({
+            width: MAX_WIDTH,
+            height: MAX_HEIGHT,
+            compressImageMaxWidth: MAX_WIDTH,
+            compressImageMaxHeight: MAX_HEIGHT,
+            waitAnimationEnd: true,
+            // includeBase64: true,
+            forceJpg: true,
+            cropping: true,
         });
     };
 
-    chooseImageFromGallery = async () => {
-        return new Promise(async (resolve, reject) => {
-            await ImagePicker.openPicker({
-                width: MAX_WIDTH,
-                height: MAX_HEIGHT,
-                compressImageMaxWidth: MAX_WIDTH,
-                compressImageMaxHeight: MAX_HEIGHT,
-                // compressImageQuality: 100,
-                waitAnimationEnd: true,
-                // includeBase64: true,
-                forceJpg: true,
-                cropping: true,
-            })
-                .then((res) => {
-                    console.log(res);
-                    return resolve(res);
-                })
-                .catch((err) => {
-                    if (err.code === 'E_PERMISSION_MISSING') {
-                        // showAlertDialog({
-                        //     message: 'common.permissionsRequest.photos',
-                        //     rightText: 'OK',
-                        //     leftText: 'alert.defaultCancelText',
-                        //     onRightPress: () => {
-                        //         dismissAlertDialog(() => {
-                        //             openSettings()
-                        //         })
-                        //     },
-                        //     onLeftPress: () => {
-                        //         dismissAlertDialog()
-                        //     },
-                        // })
-                    }
-                    return reject(err);
-                });
+    chooseImageFromGallery = () => {
+        return ImagePicker.openPicker({
+            width: MAX_WIDTH,
+            height: MAX_HEIGHT,
+            compressImageMaxWidth: MAX_WIDTH,
+            compressImageMaxHeight: MAX_HEIGHT,
+            // compressImageQuality: 100,
+            waitAnimationEnd: true,
+            // includeBase64: true,
+            forceJpg: true,
+            cropping: true,
         });
     };
 
-    uploadImage = async (localImage: any): Promise<string> => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                console.log('uploading an image....');
-                const remoteImage = await awsApi.upload(localImage?.path || localImage);
-                console.log(`upload finished ....${JSON.stringify(remoteImage)}`);
-                resolve(remoteImage?.body?.postResponse.location);
-            } catch (e) {
-                reject(e);
-            }
-        });
+    uploadImage = (localImage: any) => {
+        return awsApi.upload(localImage?.path || localImage);
     };
 }
 export default new ImageUploaded();
