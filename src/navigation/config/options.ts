@@ -4,7 +4,7 @@ import transition from './transition';
 
 const navigationConfigs = {
     cardStyle: {
-        backgroundColor: Themes.COLORS.primary,
+        backgroundColor: Themes.COLORS.white,
         // paddingBottom: Metrics.safeBottomPadding,
     },
     headerShown: false,

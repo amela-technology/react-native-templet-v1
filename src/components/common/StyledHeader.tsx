@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Metrics.safeTopPadding,
         paddingHorizontal: 20,
-        backgroundColor: Themes.COLORS.blue,
+        backgroundColor: Themes.COLORS.primary,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

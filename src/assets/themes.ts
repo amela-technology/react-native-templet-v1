@@ -3,12 +3,13 @@ const common = {
     transparent: 'transparent',
     black: '#000',
     blue: 'blue',
+    placeHolderGray: 'rgba(216, 216, 216, 0.6)',
 };
 
 const Light = {
     COLORS: {
         ...common,
-        primary: '#ffffff',
+        primary: '#4287f5',
         secondary: '#E9ECEF',
         textPrimary: '#000000',
         textSecondary: '#607d8b',
