@@ -54,8 +54,6 @@ const MemoPickerItem = React.memo(PickerItem);
 
 const StyledModalPicker = (props: StyledImageProps) => {
     const exits: PickerData | undefined = props.data.find((k: PickerData) => k?.id === props?.value);
-    // const exitsLabel: string | number = exits ? exits.name : props.data.length > 0 ? props.data[0].name : ''
-    // const exitsValue: string | number = exits ? exits.id : props.data.length > 0 ? props.data[0].id : ''
 
     let exitsLabel: string | number;
     let exitsValue: string | number;
@@ -90,6 +88,8 @@ const StyledModalPicker = (props: StyledImageProps) => {
         );
     };
 
+    const initScrollIndex = props.data.findIndex((k: PickerData) => k?.id === exitsValue);
+
     return (
         <View style={props.customStyle}>
             {props.title ? (
@@ -121,7 +121,7 @@ const StyledModalPicker = (props: StyledImageProps) => {
                         keyExtractor: (item: PickerData) => item?.id.toString(),
                         renderItem,
                         contentContainerStyle: { paddingHorizontal: 15 },
-                        initialScrollIndex: props.data.findIndex((k: PickerData) => k?.id === exitsValue),
+                        initialScrollIndex: initScrollIndex > 7 ? initScrollIndex - 3 : undefined,
                         initialNumToRender: 15,
                         getItemLayout: (data: any, index: number) => ({ length: 55, offset: 55 * index, index }),
                     }}

@@ -12,6 +12,7 @@ const HOME_ROUTE = {
     HOME: 'HOME',
     HOME_DETAIL: 'HOME_DETAIL',
     WEB_VIEW: 'WEB_VIEW',
+    HOME_DATA: 'HOME_DATA',
 };
 
 const SETTING_ROUTE = {
