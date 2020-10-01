@@ -1,101 +1,122 @@
-import React, { useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, FlatListProps, RefreshControl, View } from 'react-native';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { FlatList, FlatListProps, RefreshControl, View, TextStyle, StyleProp, ViewStyle } from 'react-native';
 import { Themes } from 'assets/themes';
+import { useTranslation } from 'react-i18next';
 import NoData from './StyledNoData';
+import StyledIndicator from './StyledIndicator';
 
 interface Props extends FlatListProps<any> {
     [key: string]: any;
+    FlatListComponent?: React.FunctionComponent<any>;
     loading?: boolean;
     data: any[];
+    loadingMore?: boolean;
     noDataText?: string;
-    ListHeaderComponent?: React.FunctionComponent;
+    ListHeaderComponent?: any;
     scrollEnabled?: boolean;
     noDataCanRefresh?: boolean;
+    i18Params?: any;
+    noDataTextI18Key?: any;
+    noDataStyle?: StyleProp<ViewStyle>;
     customStyle?: any;
+
     onLoadMore?(): void;
+
     onNoDataRefresh?(): void;
 }
 
-const StyledList = (props: Props) => {
+const StyledList = (props: Props, ref: any) => {
     const [momentumScrolled, setMomentumScrolled] = useState(false);
-    const list: any = useRef(null);
+    const list = useRef<FlatList>(null);
+    const { t } = useTranslation();
+    const { loading, loadingMore, data, ListHeaderComponent, refreshing, customStyle } = props;
+    const contentContainerStyle: StyleProp<ViewStyle> = {};
+    const hasData = data?.length !== 0;
 
-    const { loading, data, ListHeaderComponent, refreshing, customStyle } = props;
-    const contentContainerStyle: any = {};
-    const hasData = data.length !== 0;
     if (!hasData) {
         contentContainerStyle.flex = 1;
-        contentContainerStyle.alignItems = 'center';
-        contentContainerStyle.justifyContent = 'center';
+        // contentContainerStyle.alignItems = 'center'
+        // contentContainerStyle.justifyContent = 'center'
     }
-    let styles;
+
+    let styles: StyleProp<ViewStyle>;
     if (typeof ListHeaderComponent === 'undefined' && !hasData) {
         styles = [contentContainerStyle, customStyle];
     } else {
         styles = customStyle;
     }
 
-    const keyExtractor = (item: any, i: any): string => {
+    function keyExtractor(item: any, i: any): string {
         return `${i}`;
-    };
+    }
 
-    const handleRefresh = () => {
-        props?.onRefresh?.();
-    };
+    function handleRefresh() {
+        if (props.onRefresh) props.onRefresh();
+    }
 
-    const handleEndReached = (info: any) => {
+    // Bởi vì onEnReached call nhiều lần nên phải trick để chỉ call 1 lần thôi
+    useEffect(() => {
+        if (momentumScrolled) {
+            setMomentumScrolled(true);
+            if (props.onLoadMore) props.onLoadMore();
+        }
+    }, [momentumScrolled]);
+
+    function handleEndReached(info: any) {
         if (!momentumScrolled) {
-            props?.onLoadMore?.();
             setMomentumScrolled(true);
         }
-    };
+    }
 
-    const handleNoDataRefresh = () => {
+    function handleNoDataRefresh() {
         const { onNoDataRefresh } = props;
-        onNoDataRefresh?.();
-    };
+        if (onNoDataRefresh) onNoDataRefresh();
+    }
 
-    const onMomentumScrollBegin = () => {
+    function onMomentumScrollBegin() {
         setMomentumScrolled(false);
-    };
+    }
 
-    const scrollToFooter = () => {
-        list?.scrollToEnd({ animated: true });
-    };
+    React.useImperativeHandle(ref, () => ({
+        scrollToTop: () => {
+            list?.current?.scrollToOffset({ animated: true, offset: 0 });
+        },
+    }));
 
-    const scrollToTop = () => {
-        list?.scrollTo({ y: 0, animated: true });
-    };
-
-    const renderFooter = () => {
-        if (hasData && loading !== undefined && !!loading) {
+    function renderFooter() {
+        if (hasData && loadingMore) {
             return (
                 <View style={{ alignItems: 'center', marginVertical: 8 }}>
-                    <ActivityIndicator />
+                    <StyledIndicator size={24} />
                 </View>
             );
         }
         return null;
-    };
+    }
 
-    const renderNoData = () => {
-        const { noDataText, noDataCanRefresh } = props;
+    function renderNoData() {
+        const { noDataText, noDataTextI18Key, noDataCanRefresh } = props;
         return (
             <NoData
+                customStyle={props.noDataStyle}
                 loading={loading}
-                text={noDataText}
-                redressable={noDataCanRefresh}
+                text={noDataTextI18Key ? t(noDataTextI18Key, props.i18Params) : noDataText}
+                canRefresh={noDataCanRefresh}
                 onRefresh={handleNoDataRefresh}
             />
         );
-    };
+    }
+
+    const FlatListComponent: any = useMemo(() => {
+        return props?.FlatListComponent || FlatList;
+    }, [props?.FlatListComponent]);
 
     return (
-        <FlatList
+        <FlatListComponent
             ref={list}
             contentContainerStyle={styles}
             keyExtractor={keyExtractor}
-            initialNumToRender={1}
+            initialNumToRender={15}
             onEndReached={handleEndReached}
             onEndReachedThreshold={0.5}
             onMomentumScrollBegin={onMomentumScrollBegin}
@@ -109,10 +130,11 @@ const StyledList = (props: Props) => {
                     onRefresh={handleRefresh}
                 />
             }
-            keyboardShouldPersistTaps={'handled'}
+            ListFooterComponent={renderFooter}
+            keyboardShouldPersistTaps={'never'}
             {...props}
         />
     );
 };
 
-export default React.memo(StyledList);
+export default React.memo(React.forwardRef(StyledList));

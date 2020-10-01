@@ -1,29 +1,34 @@
 import * as React from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { Themes } from 'assets/themes';
 import StyledText from './StyledText';
 import TouchableRipple from './StyledTouchable';
 
 interface StyledListNoDataProps {
     text?: string;
-    redressable?: boolean;
+    canRefresh?: boolean;
     loading?: boolean;
     onRefresh?(): any;
+    customStyle?: StyleProp<ViewStyle>;
+    customStyleText?: StyleProp<TextStyle>;
 }
+
+const NO_DATA_TEXT = 'No data';
+const RELOAD = 'Reload';
 
 const StyledNoData: React.FunctionComponent<StyledListNoDataProps> = (props: StyledListNoDataProps) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, props.customStyle]}>
             {props.loading ? (
                 <View style={{ alignItems: 'center' }}>
                     <ActivityIndicator />
                 </View>
             ) : (
-                <Text>{props.text || 'Không có dữ liệu'}</Text>
+                <StyledText customStyle={props.customStyleText}>{props.text || NO_DATA_TEXT}</StyledText>
             )}
-            {!!props.redressable && !props.loading ? (
+            {!!props.canRefresh && !props.loading ? (
                 <TouchableRipple onPress={props.onRefresh}>
-                    <StyledText customStyle={styles.textReload}>Tải lại</StyledText>
+                    <StyledText customStyle={styles.textReload}>{RELOAD}</StyledText>
                 </TouchableRipple>
             ) : (
                 <View />

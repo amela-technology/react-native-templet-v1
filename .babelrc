@@ -8,6 +8,7 @@
         "shared": "./src/shared/",
         "assets": "./src/assets/",
         "feature": "./src/feature/",
+        "hooks": "./src/hooks/",
         "navigation": "./src/navigation",
         "components": "./src/components",
         "app-redux": "./src/app-redux",
