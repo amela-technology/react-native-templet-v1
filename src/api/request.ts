@@ -58,11 +58,6 @@ request.interceptors.response.use(
     (response: any) => {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
-        apiLogger(
-            `%c SUCCESS ${response.config.method?.toUpperCase()} from ${response.config.url}:`,
-            'background: green; color: #fff',
-            response.data,
-        );
         return response.data;
     },
     async (error: any) => {

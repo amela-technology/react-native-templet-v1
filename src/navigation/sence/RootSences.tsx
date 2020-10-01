@@ -9,6 +9,7 @@ import HomeDetailScreen from 'feature/home/HomeDetailScreen';
 import NotificationView from 'feature/notification/NotificationScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
 import SettingView from 'feature/setting/SettingScreen';
+import HomeUserListScreen from 'feature/home/HomeUserListScreen';
 
 import { useSelector } from 'react-redux';
 import { RootState } from 'app-redux/rootReducer';
@@ -27,6 +28,7 @@ const HomeStack = () => {
             <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DETAIL} component={HomeDetailScreen} />
             <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.WEB_VIEW} component={HomeDetailScreen} />
             <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DATA} component={HomeDataScreen} />
+            <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_USER_LIST} component={HomeUserListScreen} />
         </MainStack.Navigator>
     );
 };

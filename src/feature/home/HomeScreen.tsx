@@ -78,6 +78,10 @@ const HomeScreen: React.FunctionComponent = () => {
                     title={'Data Screen'}
                     onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DATA)}
                 />
+                <Button
+                    title={'User List Screen'}
+                    onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_USER_LIST)}
+                />
             </View>
         </View>
     );

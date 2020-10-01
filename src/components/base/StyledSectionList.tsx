@@ -84,12 +84,7 @@ const StyledSectionList = (props: Props) => {
     const renderNoData = () => {
         const { noDataText, noDataCanRefresh } = props;
         return (
-            <NoData
-                loading={loading}
-                text={noDataText}
-                redressable={noDataCanRefresh}
-                onRefresh={handleNoDataRefresh}
-            />
+            <NoData loading={loading} text={noDataText} canRefresh={noDataCanRefresh} onRefresh={handleNoDataRefresh} />
         );
     };
 

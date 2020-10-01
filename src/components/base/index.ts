@@ -8,6 +8,7 @@ import StyledTouchable from './StyledTouchable';
 import StyledIcon from './StyledIcon';
 import StyledWebView from './StyledWebView';
 import ProgressiveImage from './ProgressiveImage';
+import StyledIndicator from './StyledIndicator';
 
 export {
     StyledButton,
@@ -20,4 +21,5 @@ export {
     StyledIcon,
     StyledWebView,
     ProgressiveImage,
+    StyledIndicator,
 };
