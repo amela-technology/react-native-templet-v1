@@ -1,18 +1,25 @@
+// models
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
 // Action name
-export const SIGN_IN = '@AUTHENTICATION/SIGN_IN';
-export const SIGN_OUT = '@AUTHENTICATION/SIGN_OUT';
+export const SET_USER_INFO = '@AUTHENTICATION/SET_USER_INFO';
+export const CLEAR_USER_INFO = '@AUTHENTICATION/CLEAR_USER_INFO';
 export const RESTORE_TOKEN = '@AUTHENTICATION/RESTORE_TOKEN';
 
 // Action interface
-interface SignInAction {
-    type: typeof SIGN_IN;
+interface SetUserInfoAction {
+    type: typeof SET_USER_INFO;
     token: string;
     refreshToken: string;
-    userId: number;
+    user: User;
 }
 
 interface SignOutAction {
-    type: typeof SIGN_OUT;
+    type: typeof CLEAR_USER_INFO;
 }
 
 interface RestoreTokenAction {
@@ -21,4 +28,4 @@ interface RestoreTokenAction {
     restoreRefreshToken: string;
 }
 
-export type AuthenticationTypes = SignInAction | SignOutAction | RestoreTokenAction;
+export type AuthenticationTypes = SetUserInfoAction | SignOutAction | RestoreTokenAction;

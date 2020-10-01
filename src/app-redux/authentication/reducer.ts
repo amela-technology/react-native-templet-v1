@@ -1,32 +1,32 @@
-import { SIGN_IN, AuthenticationTypes, SIGN_OUT, RESTORE_TOKEN } from './types';
+import { SET_USER_INFO, AuthenticationTypes, CLEAR_USER_INFO, RESTORE_TOKEN, User } from './types';
 
 export interface AuthenticationData {
     userToken?: string;
     refreshToken?: string;
-    userId?: number;
+    user?: User;
 }
 
 const initialState: AuthenticationData = {
     userToken: undefined,
     refreshToken: undefined,
-    userId: undefined,
+    user: undefined,
 };
 
 const authentication = (state = initialState, action: AuthenticationTypes): AuthenticationData => {
     switch (action.type) {
-        case SIGN_IN:
+        case SET_USER_INFO:
             return {
                 ...state,
                 userToken: action.token,
                 refreshToken: action.refreshToken,
-                userId: action.userId,
+                user: action.user,
             };
-        case SIGN_OUT:
+        case CLEAR_USER_INFO:
             return {
                 ...state,
                 userToken: undefined,
                 refreshToken: undefined,
-                userId: undefined,
+                user: undefined,
             };
         case RESTORE_TOKEN:
             return {

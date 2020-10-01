@@ -1,9 +1,12 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import request from 'api/request';
 import { store } from 'app-redux/store';
-import { signOut, signIn } from 'app-redux/authentication/actions';
+import { clearUserInfo, setUserInfo } from 'app-redux/authentication/actions';
 import { useState } from 'react';
 import { logger } from 'utilities/helper';
+import { useRequest } from 'ahooks';
+import apiAuthenticate from 'api/modules/api-app/authenticate';
+import apiUser from 'api/modules/api-app/user';
 
 const AUTH_URL_REGISTER = '/register';
 const AUTH_URL_VERIFY_OTP = '/verify';
@@ -88,7 +91,7 @@ class AuthenticateService {
     };
 
     logOut = () => {
-        store.dispatch(signOut());
+        store.dispatch(clearUserInfo());
     };
 }
 
@@ -99,32 +102,54 @@ interface LoginRequest {
 }
 
 export const useLogin = (options: LoginRequestParams): LoginRequest => {
-    const [loading, setLoading] = useState(false);
-    const [errorLogin, setErrorLogin] = useState<any>(null);
+    const { loading, run, error } = useRequest(apiAuthenticate.login, {
+        manual: true,
+        throwOnError: true,
+    });
+
+    const userInfoRequest = useRequest(apiUser.getUserDetail, {
+        manual: true,
+        throwOnError: true,
+    });
+
+    let errorData;
+    if (error || userInfoRequest.error) {
+        errorData = {
+            loginError: error,
+            userInfoError: userInfoRequest.error,
+        };
+    }
 
     const login = async () => {
         try {
-            setLoading(true);
-            const response = await request.post<LoginRequestResponse>(AUTH_URL_LOGIN, options);
+            const response = await run(options.username, options.password);
             if (response) {
-                // using data to set token
-                const { data } = response;
-                setLoading(false);
-                const signInAction = signIn('DUMMY_TOKEN', 'DUMMY_REFRESH', 1);
+                const userResponse = await userInfoRequest.run();
+                const signInAction = setUserInfo(response.token, response.refreshToken, {
+                    id: userResponse.id,
+                    name: userResponse.name,
+                    email: userResponse.email,
+                });
                 store.dispatch(signInAction);
             }
-        } catch (error) {
-            setLoading(false);
-            setErrorLogin(error);
-            logger(error);
+        } catch (e) {
+            logger(e);
         } finally {
             logger('You should remove finally in your code', true);
-            const signInAction = signIn('DUMMY_TOKEN', 'DUMMY_REFRESH', 1);
+            const signInAction = setUserInfo('DUMMY_TOKEN', 'DUMMY_REFRESH', {
+                id: 1,
+                name: 'username',
+                email: 'username@gmail.com',
+            });
             store.dispatch(signInAction);
         }
     };
 
-    return { loading, login, error: errorLogin };
+    return {
+        loading,
+        login,
+        error: errorData,
+    };
 };
 
 export default new AuthenticateService();

@@ -1,5 +1,4 @@
 import { useRequest, useUnmount } from 'ahooks';
-import apiGeneral from 'api/modules/api-app/general';
 import axios, { AxiosRequestConfig } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -45,7 +44,7 @@ const usePaging = (
     );
 
     const handleOnError = useCallback(
-        (e: any, cbParams: any) => {
+        (e: Error, cbParams: any) => {
             setError(error);
             setRefreshing(false);
             setLoadingMore(false);
