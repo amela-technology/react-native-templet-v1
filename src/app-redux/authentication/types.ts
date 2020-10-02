@@ -5,27 +5,19 @@ export interface User {
     email: string;
 }
 
+export interface AuthenticationData {
+    userToken?: string;
+    refreshToken?: string;
+    user?: User;
+}
+
 // Action name
 export const SET_USER_INFO = '@AUTHENTICATION/SET_USER_INFO';
-export const CLEAR_USER_INFO = '@AUTHENTICATION/CLEAR_USER_INFO';
-export const RESTORE_TOKEN = '@AUTHENTICATION/RESTORE_TOKEN';
 
 // Action interface
 interface SetUserInfoAction {
     type: typeof SET_USER_INFO;
-    token: string;
-    refreshToken: string;
-    user: User;
+    data: AuthenticationData;
 }
 
-interface SignOutAction {
-    type: typeof CLEAR_USER_INFO;
-}
-
-interface RestoreTokenAction {
-    type: typeof RESTORE_TOKEN;
-    restoreToken: string;
-    restoreRefreshToken: string;
-}
-
-export type AuthenticationTypes = SetUserInfoAction | SignOutAction | RestoreTokenAction;
+export type AuthenticationTypes = SetUserInfoAction;

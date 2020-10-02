@@ -6,10 +6,10 @@ import { useLogin } from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
 
 const LoginScreen: React.FunctionComponent = () => {
-    const { loading, login, error } = useLogin({ username: '2313123', password: '231231313' });
+    const { loading, requestLogin, error } = useLogin({ username: '2313123', password: '231231313' });
 
     const doLogin = () => {
-        login();
+        requestLogin();
     };
 
     if (error) {

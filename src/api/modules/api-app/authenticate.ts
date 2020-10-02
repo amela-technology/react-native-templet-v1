@@ -5,18 +5,11 @@ interface AuthenticateData {
     refreshToken: string;
 }
 
-const apiAuthenticate = {
-    login: (username: string, password: string): Promise<AuthenticateData> =>
-        request.post(
-            `/login`,
-            {
-                username,
-                password,
-            },
-            {
-                headers: { Accept: '*/*' },
-            },
-        ),
+export const login = (username: string, password: string): Promise<AuthenticateData> => {
+    return request.post(`/login`, {
+        username,
+        password,
+    });
 };
 
-export default apiAuthenticate;
+export const temp = null;
