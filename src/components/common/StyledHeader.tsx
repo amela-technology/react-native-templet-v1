@@ -46,9 +46,10 @@ const StyledHeaderLeading = (props: StyledHeaderLeadingProps) => {
                     size={35}
                     customStyle={props.backIconCustomStyle || { tintColor: Themes.COLORS.white }}
                 />
-                <StyledText customStyle={props.backTextCustomStyle || { fontSize: 18, color: Themes.COLORS.white }}>
-                    {props.backText || 'Back'}
-                </StyledText>
+                <StyledText
+                    customStyle={props.backTextCustomStyle || { fontSize: 18, color: Themes.COLORS.white }}
+                    i18nText={props.backText || 'Back'}
+                />
             </StyledTouchable>
         );
     }
@@ -97,7 +98,7 @@ const StyledHeader: React.FunctionComponent<StyledHeaderProps> = (props: StyledH
                     {...props}
                 />
             </View>
-            <StyledText style={styles.defaultHeader}>{props.title || ''}</StyledText>
+            <StyledText style={styles.defaultHeader} i18nText={props.title || ''} />
             <View onLayout={onLayoutAction}>
                 <StyledHeaderAction customAction={props.customAction} defaultWidthAction={defaultSize} />
             </View>

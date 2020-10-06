@@ -4,26 +4,55 @@ import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import { logger } from 'utilities/helper';
 
 interface StyledTextProps extends TextProps {
-    children: string;
-    i18Params?: any;
     customStyle?: StyleProp<TextStyle>;
+    i18nParams?: any;
 }
 
-const StyledText = (props: StyledTextProps) => {
+interface StyledTextWithOriginValue extends StyledTextProps {
+    originValue: string;
+    i18nText?: never;
+}
+
+interface StyledTextWithI18nValue extends StyledTextProps {
+    originValue?: never;
+    i18nText: string;
+}
+
+type StyledTextCombineProps = StyledTextWithOriginValue | StyledTextWithI18nValue;
+
+const StyledText = (props: StyledTextCombineProps) => {
     const { t } = useTranslation();
+    const { style, originValue, i18nText, i18nParams } = props;
+    let value;
+
+    if (style) {
+        logger('StyledText should use customStyle to avoid override default style text', true);
+    }
+
+    if (originValue) {
+        value = originValue;
+    } else if (i18nText || i18next.exists(i18nText || '', i18nParams)) {
+        value = t(i18nText || '', i18nParams);
+    } else {
+        value = i18nText || '';
+    }
+
     return (
         <Text style={[styles.text, props.customStyle]} {...props}>
-            {i18next.exists(props.children, props.i18Params) ? t(props.children, props.i18Params) : props.children}
+            {value}
         </Text>
     );
 };
-const styles: any = StyleSheet.create({
+
+const styles = StyleSheet.create({
     text: {
         color: Themes.COLORS.textPrimary,
         fontSize: Size.FONTSIZE.normal,
         // fontFamily: Themes.fonts.defaultFont,
     },
 });
+
 export default React.memo(StyledText);

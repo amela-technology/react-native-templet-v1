@@ -11,7 +11,7 @@ const authentication = (state = initialState, action: AuthenticationTypes): Auth
         case SET_USER_INFO:
             return {
                 ...state,
-                ...action,
+                ...action.data,
             };
         default:
             return state;

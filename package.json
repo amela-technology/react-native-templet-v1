@@ -99,7 +99,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run lint"
+            "pre-commit": "tsc --noEmit && npm run lint"
         }
     }
 }

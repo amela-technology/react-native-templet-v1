@@ -35,15 +35,15 @@ const UserCard: React.FunctionComponent<UserCardProps> = (props: UserCardProps) 
         return (
             <View style={styles.container}>
                 <View style={[styles.image, { backgroundColor: Themes.COLORS.placeHolderGray }]} />
-                <StyledText style={styles.name}>{'Error, User not exits'}</StyledText>
+                <StyledText style={styles.name} i18nText={'Error, User not exits'} />
                 <View style={styles.info}>
                     <View style={styles.infoContainer}>
-                        <StyledText style={{ flex: 1 }}>{'Phone: '}</StyledText>
-                        <StyledText style={{ flex: 3 }}>{'Error, User not exits'}</StyledText>
+                        <StyledText customStyle={{ flex: 1 }} i18nText={'Phone: '} />
+                        <StyledText customStyle={{ flex: 3 }} i18nText={'Error, User not exits'} />
                     </View>
                     <View style={styles.infoContainerMargin}>
-                        <StyledText style={{ flex: 1 }}>{'Email: '}</StyledText>
-                        <StyledText style={{ flex: 3 }}>{'Error, User not exits'}</StyledText>
+                        <StyledText customStyle={{ flex: 1 }} i18nText={'Email: '} />
+                        <StyledText customStyle={{ flex: 3 }} i18nText={'Error, User not exits'} />
                     </View>
                 </View>
             </View>
@@ -53,15 +53,15 @@ const UserCard: React.FunctionComponent<UserCardProps> = (props: UserCardProps) 
     return (
         <View style={styles.container}>
             <ProgressiveImage source={{ uri: data.avatar }} style={styles.image} />
-            <StyledText style={styles.name}>{data.name}</StyledText>
+            <StyledText customStyle={styles.name} originValue={data.name} />
             <View style={styles.info}>
                 <View style={styles.infoContainer}>
-                    <StyledText style={{ flex: 1 }}>{'Phone: '}</StyledText>
-                    <StyledText style={{ flex: 3 }}>{data.phone}</StyledText>
+                    <StyledText customStyle={{ flex: 1 }} i18nText={'Phone: '} />
+                    <StyledText customStyle={{ flex: 3 }} originValue={data.phone} />
                 </View>
                 <View style={styles.infoContainerMargin}>
-                    <StyledText style={{ flex: 1 }}>{'Email: '}</StyledText>
-                    <StyledText style={{ flex: 3 }}>{data.email}</StyledText>
+                    <StyledText customStyle={{ flex: 1 }} i18nText={'Email: '} />
+                    <StyledText customStyle={{ flex: 3 }} originValue={data.email} />
                 </View>
             </View>
         </View>

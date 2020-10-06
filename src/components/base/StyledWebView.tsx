@@ -17,8 +17,8 @@ const StyledWebView = (props: WebViewProps) => {
                 )}
                 renderError={(errorName) => (
                     <View style={{ flex: 1 }}>
-                        <StyledText>{`Error name: ${errorName}`}</StyledText>
-                        <StyledText style={{ marginTop: 10 }}>{`Pull down to try again`}</StyledText>
+                        <StyledText originValue={`Error name: ${errorName}`} />
+                        <StyledText customStyle={{ marginTop: 10 }} originValue={'Pull down to try again'} />
                     </View>
                 )}
             />

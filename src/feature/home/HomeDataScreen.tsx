@@ -26,7 +26,7 @@ const HomeDataScreen: React.FunctionComponent = () => {
                 ) : (
                     <View style={styles.errorContainer}>
                         <StyledButton title={'Reload'} onPress={() => run(Math.floor(Math.random() * 70))} />
-                        <StyledText style={{ marginTop: 20 }}>{error.message}</StyledText>
+                        <StyledText customStyle={{ marginTop: 20 }} i18nText={error.message} />
                     </View>
                 )}
             </View>

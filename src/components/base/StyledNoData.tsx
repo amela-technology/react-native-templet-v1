@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ActivityIndicator, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { Themes } from 'assets/themes';
 import StyledText from './StyledText';
-import TouchableRipple from './StyledTouchable';
+import StyledTouchable from './StyledTouchable';
 
 interface StyledListNoDataProps {
     text?: string;
@@ -24,12 +24,12 @@ const StyledNoData: React.FunctionComponent<StyledListNoDataProps> = (props: Sty
                     <ActivityIndicator />
                 </View>
             ) : (
-                <StyledText customStyle={props.customStyleText}>{props.text || NO_DATA_TEXT}</StyledText>
+                <StyledText i18nText={props.text || NO_DATA_TEXT} customStyle={props.customStyleText} />
             )}
             {!!props.canRefresh && !props.loading ? (
-                <TouchableRipple onPress={props.onRefresh}>
-                    <StyledText customStyle={styles.textReload}>{RELOAD}</StyledText>
-                </TouchableRipple>
+                <StyledTouchable onPress={props.onRefresh}>
+                    <StyledText i18nText={RELOAD} customStyle={styles.textReload} />
+                </StyledTouchable>
             ) : (
                 <View />
             )}

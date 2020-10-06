@@ -37,7 +37,7 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
 request.interceptors.request.use(
     async (config: any) => {
         // Do something before api is sent
-        const userToken = TokenProvider().getToken();
+        const userToken = TokenProvider.getToken();
         if (userToken) {
             config.headers.Authorization = `Bearer ${userToken}`;
         }
@@ -96,13 +96,13 @@ request.interceptors.response.use(
             logger('refreshing token...');
             originalRequest.retry = true;
             isRefreshing = true;
-            const localRefreshToken = TokenProvider().getRefreshToken();
+            const localRefreshToken = TokenProvider.getRefreshToken();
             try {
                 const refreshTokenResponse = await axios.post(AUTH_URL_REFRESH_TOKEN, {
                     refreshToken: localRefreshToken,
                 });
                 const { token, refreshToken } = refreshTokenResponse.data;
-                TokenProvider().setAllNewToken(token, refreshToken);
+                TokenProvider.setAllNewToken(token, refreshToken);
                 originalRequest.headers.Authorization = `Bearer ${token}`;
                 processQueue(null, token);
                 return request(originalRequest);

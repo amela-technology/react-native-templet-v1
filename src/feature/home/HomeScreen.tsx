@@ -60,7 +60,7 @@ const HomeScreen: React.FunctionComponent = () => {
                                         width: '100%',
                                     }}
                                 >
-                                    <StyledText>Hello</StyledText>
+                                    <StyledText originValue={'Hello'} />
                                     <Button title={'hide'} onPress={() => modal.dismiss()} />
                                 </View>
                             ),

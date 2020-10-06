@@ -80,7 +80,7 @@ const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
                         style={[styles.tabButton, { borderTopWidth: isFocused ? 2 : 0, paddingTop: isFocused ? 6 : 8 }]}
                     >
                         <StyledTabBarIcon name={route.name} focus={isFocused} />
-                        <StyledText customStyle={styles.tabLabel}>{label}</StyledText>
+                        <StyledText customStyle={styles.tabLabel} i18nText={label} />
                     </TouchableOpacity>
                 );
             })}

@@ -1,33 +1,25 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import { store } from 'app-redux/store';
-import { restoreToken } from 'app-redux/authentication/actions';
+import setUserInfo from 'app-redux/authentication/actions';
 import { logger } from 'utilities/helper';
 
-const KEY_TOKEN = 'TOKEN';
-const KEY_REFRESH_TOKEN = 'REFRESH_TOKEN';
-
-const TokenProvider = () => {
-    const setAllNewToken = (token: string, refreshToken: string) => {
+const TokenProvider = {
+    setAllNewToken: (token: string, refreshToken: string) => {
+        const { authentication } = store.getState();
         logger(`Got new token = ${token}`);
         logger(`Got new refreshToken = ${refreshToken}`);
-        store.dispatch(restoreToken(token, refreshToken));
-    };
-
-    const getToken = (): string => {
+        store.dispatch(setUserInfo({ userToken: token, refreshToken, user: authentication?.user || undefined }));
+    },
+    getToken: () => {
         const { authentication } = store.getState();
         return authentication.userToken || '';
-    };
-
-    const getRefreshToken = (): string => {
+    },
+    getRefreshToken: () => {
         const { authentication } = store.getState();
         return authentication.refreshToken || '';
-    };
-
-    const clearToken = () => {
-        store.dispatch(restoreToken('', ''));
-    };
-
-    return { setAllNewToken, getToken, getRefreshToken, clearToken };
+    },
+    clearToken: () => {
+        store.dispatch(setUserInfo({}));
+    },
 };
 
 export default TokenProvider;

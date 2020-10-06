@@ -6,7 +6,7 @@ const RegisterScreen: React.FunctionComponent = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <StyledText>{'Register screen'}</StyledText>
+                <StyledText originValue={'Register screen'} />
             </View>
         </SafeAreaView>
     );
