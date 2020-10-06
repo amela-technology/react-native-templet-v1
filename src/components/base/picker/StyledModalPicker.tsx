@@ -42,9 +42,8 @@ const PickerItem = ({ check, onChange, label }: { check: boolean; onChange?(): v
                         fontSize: 16,
                         color: check ? Themes.COLORS.black : 'gray',
                     }}
-                >
-                    {label}
-                </StyledText>
+                    originValue={label}
+                />
             </TouchableOpacity>
         </View>
     );
@@ -93,10 +92,10 @@ const StyledModalPicker = (props: StyledImageProps) => {
     return (
         <View style={props.customStyle}>
             {props.title ? (
-                <StyledText customStyle={[styles.title, props.customTitleStyle]}>{props.title}</StyledText>
+                <StyledText customStyle={[styles.title, props.customTitleStyle]} i18nText={props.title} />
             ) : null}
             <StyledTouchable customStyle={styles.content} onPress={renderPicker}>
-                <StyledText>{exitsLabel?.toString() || ''}</StyledText>
+                <StyledText i18nText={exitsLabel?.toString() || ''} />
                 <StyledIcon source={props.icon ? props.icon : Images.icons.selected} size={13} />
             </StyledTouchable>
             <Portal>
@@ -106,7 +105,7 @@ const StyledModalPicker = (props: StyledImageProps) => {
                     HeaderComponent={() => {
                         return (
                             <View style={styles.headerContainer}>
-                                <StyledText style={styles.headerTitle}>{props?.title || ''}</StyledText>
+                                <StyledText customStyle={styles.headerTitle} i18nText={props?.title || ''} />
                             </View>
                         );
                     }}

@@ -75,7 +75,7 @@ request.interceptors.response.use(
         if (errorMessage === 'RefreshToken_NotExist') {
             logger('RefreshToken_NotExist => logout');
             // logout here
-            AuthenticateService.logOut();
+            AuthenticateService().logOut();
             return Promise.reject(error);
         }
         if (

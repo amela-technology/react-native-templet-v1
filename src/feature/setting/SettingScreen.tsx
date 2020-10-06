@@ -7,8 +7,8 @@ import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 const SettingView: React.FunctionComponent = () => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <StyledText>Setting</StyledText>
-            <StyledButton onPress={() => AuthenticateService.logOut()} title={'Log out'} />
+            <StyledText originValue={'Setting'} />
+            <StyledButton onPress={() => AuthenticateService().logOut()} title={'Log out'} />
         </View>
     );
 };

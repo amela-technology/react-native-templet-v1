@@ -24,7 +24,7 @@ const HomeUserListScreen: React.FunctionComponent = () => {
                     noDataTextI18Key={'No data'}
                     renderItem={({ item }: any) => (
                         <View style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <StyledText>{item?.name}</StyledText>
+                            <StyledText originValue={item?.name || ''} />
                         </View>
                     )}
                 />

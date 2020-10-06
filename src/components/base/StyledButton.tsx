@@ -13,7 +13,7 @@ interface StyledButtonProps {
 const StyledButton: React.FunctionComponent<StyledButtonProps> = (props: StyledButtonProps) => {
     return (
         <StyledTouchable customStyle={styles.container} onPress={props.onPress} onLongPress={props.onLongPress}>
-            <StyledText customStyle={styles.title}>{props.title}</StyledText>
+            <StyledText i18nText={props.title} customStyle={styles.title} />
         </StyledTouchable>
     );
 };

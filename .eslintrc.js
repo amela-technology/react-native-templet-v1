@@ -63,6 +63,7 @@ module.exports = {
         'no-use-before-define': ['error', { variables: false }],
         'no-param-reassign': 'off',
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
+        'react/display-name': 'off',
     },
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
