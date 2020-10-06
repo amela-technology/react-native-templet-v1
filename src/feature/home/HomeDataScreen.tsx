@@ -2,13 +2,13 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import StyledText from 'components/base/StyledText';
 import StyledHeader from 'components/common/StyledHeader';
+import { getUserDetail } from 'api/modules/api-app/general';
 import { useRequest } from 'ahooks';
-import apiGeneral from 'api/modules/api-app/general';
 import { StyledButton } from 'components/base';
 import UserCard from './components/UserCard';
 
 const HomeDataScreen: React.FunctionComponent = () => {
-    const { loading, data, run, error } = useRequest(apiGeneral.getUserDetail, {
+    const { loading, data, run, error } = useRequest(getUserDetail, {
         manual: true,
     });
 

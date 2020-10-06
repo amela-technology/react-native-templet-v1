@@ -9,10 +9,6 @@ export interface User {
     email: string;
 }
 
-const apiGeneral = {
-    resources: (): Promise<any> => request.get(`/resources`),
-    getUserDetail: (id: number): Promise<User> => request.get(`users/${id}`),
-    getUsers: (config: AxiosRequestConfig): Promise<Array<User>> => request.get(`users`, config),
-};
-
-export default apiGeneral;
+export const getResources = (): Promise<any> => request.get(`/resources`);
+export const getUserDetail = (id: number): Promise<User> => request.get(`users/${id}`);
+export const getUsers = (config: AxiosRequestConfig): Promise<Array<User>> => request.get(`users`, config);

@@ -3,13 +3,18 @@ import { View, SafeAreaView } from 'react-native';
 import { StyledButton } from 'components/base';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import { useLogin } from 'utilities/authenticate/AuthenticateService';
+import { logger } from 'utilities/helper';
 
 const LoginScreen: React.FunctionComponent = () => {
-    const { loading, login, error } = useLogin({ username: '2313123', password: '231231313' });
+    const { loading, requestLogin, error } = useLogin({ username: '2313123', password: '231231313' });
 
     const doLogin = () => {
-        login();
+        requestLogin();
     };
+
+    if (error) {
+        logger(error);
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

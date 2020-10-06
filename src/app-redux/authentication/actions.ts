@@ -1,18 +1,8 @@
-import { SIGN_IN, AuthenticationTypes, SIGN_OUT, RESTORE_TOKEN } from './types';
+import { SET_USER_INFO, AuthenticationTypes, AuthenticationData } from './types';
 
-export const signIn = (token: string, refreshToken: string, userId: number): AuthenticationTypes => ({
-    type: SIGN_IN,
-    token,
-    refreshToken,
-    userId,
+const setUserInfo = (data: AuthenticationData): AuthenticationTypes => ({
+    type: SET_USER_INFO,
+    data,
 });
 
-export const signOut = (): AuthenticationTypes => ({
-    type: SIGN_OUT,
-});
-
-export const restoreToken = (restoreTokenStr: string, restoreRefreshToken: string): AuthenticationTypes => ({
-    type: RESTORE_TOKEN,
-    restoreToken: restoreTokenStr,
-    restoreRefreshToken,
-});
+export default setUserInfo;

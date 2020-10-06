@@ -2,11 +2,11 @@ import * as React from 'react';
 import { View } from 'react-native';
 import StyledHeader from 'components/common/StyledHeader';
 import { StyledList, StyledText } from 'components/base';
-import apiGeneral from 'api/modules/api-app/general';
+import { getUsers } from 'api/modules/api-app/general';
 import usePaging from 'hooks/usePaging';
 
 const HomeUserListScreen: React.FunctionComponent = () => {
-    const { list, loading, loadingMore, onLoadMore, refreshing, onRefresh } = usePaging(apiGeneral.getUsers);
+    const { list, loading, loadingMore, onLoadMore, refreshing, onRefresh } = usePaging(getUsers);
     return (
         <View style={{ flex: 1 }}>
             <StyledHeader title={'Home User List'} />
