@@ -5,10 +5,10 @@ import { logger } from 'utilities/helper';
 
 const TokenProvider = () => {
     const setAllNewToken = (token: string, refreshToken: string) => {
-        const authenticationReducer = store.getState().authentication;
+        const { authentication } = store.getState();
         logger(`Got new token = ${token}`);
         logger(`Got new refreshToken = ${refreshToken}`);
-        store.dispatch(setUserInfo({ userToken: token, refreshToken, user: authenticationReducer?.user || undefined }));
+        store.dispatch(setUserInfo({ userToken: token, refreshToken, user: authentication?.user || undefined }));
     };
 
     const getToken = (): string => {
@@ -22,10 +22,7 @@ const TokenProvider = () => {
     };
 
     const clearToken = () => {
-        const authenticationReducer = store.getState().authentication;
-        store.dispatch(
-            setUserInfo({ userToken: '', refreshToken: '', user: authenticationReducer?.user || undefined }),
-        );
+        store.dispatch(setUserInfo({}));
     };
 
     return { setAllNewToken, getToken, getRefreshToken, clearToken };
