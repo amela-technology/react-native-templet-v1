@@ -8,7 +8,7 @@ const SettingView: React.FunctionComponent = () => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <StyledText originValue={'Setting'} />
-            <StyledButton onPress={() => AuthenticateService().logOut()} title={'Log out'} />
+            <StyledButton onPress={() => AuthenticateService.logOut()} title={'Log out'} />
         </View>
     );
 };

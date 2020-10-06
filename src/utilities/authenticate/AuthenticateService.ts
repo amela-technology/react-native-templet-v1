@@ -20,24 +20,14 @@ interface LoginRequest {
     error: any;
 }
 
-const AuthenticateService = () => {
-    const refreshToken = (inputRefreshToken: string) => {
-        return request.post(AUTH_URL_REFRESH_TOKEN, {
+const AuthenticateService = {
+    refreshToken: (inputRefreshToken: string) =>
+        request.post(AUTH_URL_REFRESH_TOKEN, {
             refresh_token: inputRefreshToken,
-        });
-    };
-
-    const logOut = () => {
-        store.dispatch(
-            setUserInfo({
-                userToken: undefined,
-                refreshToken: undefined,
-                user: undefined,
-            }),
-        );
-    };
-
-    return { refreshToken, logOut };
+        }),
+    logOut: () => {
+        store.dispatch(setUserInfo({}));
+    },
 };
 
 export const useLogin = (options: LoginRequestParams): LoginRequest => {
