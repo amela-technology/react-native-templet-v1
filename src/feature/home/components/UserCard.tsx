@@ -35,7 +35,7 @@ const UserCard: React.FunctionComponent<UserCardProps> = (props: UserCardProps) 
         return (
             <View style={styles.container}>
                 <View style={[styles.image, { backgroundColor: Themes.COLORS.placeHolderGray }]} />
-                <StyledText style={styles.name} i18nText={'Error, User not exits'} />
+                <StyledText customStyle={styles.name} i18nText={'Error, User not exits'} />
                 <View style={styles.info}>
                     <View style={styles.infoContainer}>
                         <StyledText customStyle={{ flex: 1 }} i18nText={'Phone: '} />

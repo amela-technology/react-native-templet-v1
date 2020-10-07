@@ -98,7 +98,7 @@ const StyledHeader: React.FunctionComponent<StyledHeaderProps> = (props: StyledH
                     {...props}
                 />
             </View>
-            <StyledText style={styles.defaultHeader} i18nText={props.title || ''} />
+            <StyledText customStyle={styles.defaultHeader} i18nText={props.title || ''} />
             <View onLayout={onLayoutAction}>
                 <StyledHeaderAction customAction={props.customAction} defaultWidthAction={defaultSize} />
             </View>
