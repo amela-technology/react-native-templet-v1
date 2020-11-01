@@ -7,6 +7,8 @@ import Images from 'assets/images';
 import StyledModalPicker from 'components/base/picker/StyledModalPicker';
 import StyledHeader from 'components/common/StyledHeader';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
+import useLoading from 'components/base/modal/useLoading';
+import { wait } from 'utilities/helper';
 
 const dataPicker = [
     { name: 'label1', id: 1 },
@@ -31,7 +33,16 @@ const dataPicker = [
 const HomeScreen: React.FunctionComponent = () => {
     const navigation = useNavigation();
     const modal = useModal();
+    const loading = useLoading();
     const [valuePicker, setValuePicker] = React.useState(1);
+
+    const fakeCallAPI = () => {
+        loading.show();
+        wait(2000).then(() => {
+            loading.dismiss();
+        });
+    };
+
     return (
         <View style={{ flex: 1 }}>
             <StyledHeader title={'Home Screen'} />
@@ -82,6 +93,7 @@ const HomeScreen: React.FunctionComponent = () => {
                     title={'User List Screen'}
                     onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_USER_LIST)}
                 />
+                <Button title={'Trigger Loading'} onPress={fakeCallAPI} />
             </View>
         </View>
     );
