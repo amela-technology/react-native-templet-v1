@@ -12,7 +12,11 @@ interface StyledButtonProps {
 
 const StyledButton: React.FunctionComponent<StyledButtonProps> = (props: StyledButtonProps) => {
     return (
-        <StyledTouchable customStyle={styles.container} onPress={props.onPress} onLongPress={props.onLongPress}>
+        <StyledTouchable
+            customStyle={[styles.container, props.customStyle]}
+            onPress={props.onPress}
+            onLongPress={props.onLongPress}
+        >
             <StyledText i18nText={props.title} customStyle={styles.title} />
         </StyledTouchable>
     );
@@ -22,7 +26,7 @@ const styles = StyleSheet.create({
     container: {
         height: 42,
         width: 128,
-        borderColor: 'red',
+        borderColor: Themes.COLORS.primary,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,

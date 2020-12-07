@@ -1,21 +1,21 @@
 import { store } from 'app-redux/store';
-import setUserInfo from 'app-redux/authentication/actions';
+import { setUserInfo } from 'app-redux/userInfo/actions';
 import { logger } from 'utilities/helper';
 
 const TokenProvider = {
     setAllNewToken: (token: string, refreshToken: string) => {
-        const { authentication } = store.getState();
+        const { userInfo } = store.getState();
         logger(`Got new token = ${token}`);
         logger(`Got new refreshToken = ${refreshToken}`);
-        store.dispatch(setUserInfo({ userToken: token, refreshToken, user: authentication?.user || undefined }));
+        store.dispatch(setUserInfo({ token, refreshToken, user: userInfo?.user || undefined }));
     },
     getToken: () => {
-        const { authentication } = store.getState();
-        return authentication.userToken || '';
+        const { userInfo } = store.getState();
+        return userInfo.token || '';
     },
     getRefreshToken: () => {
-        const { authentication } = store.getState();
-        return authentication.refreshToken || '';
+        const { userInfo } = store.getState();
+        return userInfo.refreshToken || '';
     },
     clearToken: () => {
         store.dispatch(setUserInfo({}));

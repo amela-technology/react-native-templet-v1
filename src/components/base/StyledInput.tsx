@@ -7,12 +7,12 @@ interface StyledInputProps extends TextInputProps {
     placeholderTextColor?: string;
 }
 
-const StyledInput: React.FunctionComponent<StyledInputProps> = (props: StyledInputProps) => {
+const StyledInput = (props: StyledInputProps, ref: any) => {
     const input = React.useRef<TextInput>(null);
 
     return (
         <TextInput
-            ref={input}
+            ref={ref || input}
             style={[styles.textInput, props.customStyle]}
             placeholderTextColor={props.placeholderTextColor || 'black'}
             placeholder={props.placeholder}
@@ -23,12 +23,14 @@ const StyledInput: React.FunctionComponent<StyledInputProps> = (props: StyledInp
 };
 const styles: any = StyleSheet.create({
     textInput: {
-        height: 32,
-        width: 128,
+        width: 250,
         margin: 4,
         padding: 2,
-        borderBottomWidth: 1,
-        borderBottomColor: 'black',
+        borderWidth: 1,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        borderColor: 'black',
+        borderRadius: 5,
     },
 });
-export default StyledInput;
+export default React.forwardRef(StyledInput);

@@ -60,7 +60,7 @@ module.exports = {
                 tsx: 'never',
             },
         ],
-        'no-use-before-define': ['error', { variables: false }],
+        'no-use-before-define': 'off',
         'no-param-reassign': 'off',
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
         'react/display-name': 'off',
