@@ -6,15 +6,12 @@ import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
 import { apiLogger } from 'utilities/logger';
 
-const AUTH_URL_REFRESH_TOKEN = `https://asm-api.test.amela.vn/v1/app/auth/refresh-token`;
+const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}auth/refresh-token`;
 
-// const DEFAULT_ERROR_MESSAGE = i18next.t('errorMessage.common.requestFailed');
 const DEFAULT_ERROR_MESSAGE = 'Unknown Error';
 
 const request = axios.create({
-    // baseURL: Config.API_URL,
-    baseURL: 'https://5f72a4c26833480016a9be1a.mockapi.io/amlearn/',
-    // baseURL: 'https://asm-api.test.amela.vn/v1/app',
+    baseURL: Config.API_URL,
     timeout: 8000,
     headers: { Accept: '*/*' },
 });
@@ -37,9 +34,9 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
 request.interceptors.request.use(
     async (config: any) => {
         // Do something before api is sent
-        const userToken = TokenProvider.getToken();
-        if (userToken) {
-            config.headers.Authorization = `Bearer ${userToken}`;
+        const token = TokenProvider.getToken();
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
@@ -55,11 +52,7 @@ request.interceptors.request.use(
 );
 
 request.interceptors.response.use(
-    (response: any) => {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
-        return response.data;
-    },
+    (response: any) => response.data,
     async (error: any) => {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
@@ -115,7 +108,7 @@ request.interceptors.response.use(
         }
         error.message = errorMessage || DEFAULT_ERROR_MESSAGE;
         error.keyMessage = errorKey || '';
-        return Promise.reject(error);
+        return Promise.reject(error.message);
     },
 );
 

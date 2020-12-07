@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { ProgressiveImage, StyledText } from 'components/base';
 import { StyleSheet, View } from 'react-native';
-import { User } from 'api/modules/api-app/general';
 import { Themes } from 'assets/themes';
 
-interface UserCardProps {
-    data?: User;
-    loading: boolean;
-}
-
-const UserCard: React.FunctionComponent<UserCardProps> = (props: UserCardProps) => {
+const UserCard = (props: any) => {
     const { data, loading } = props;
 
     if (loading) {

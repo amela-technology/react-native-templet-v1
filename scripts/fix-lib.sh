@@ -6,6 +6,6 @@ if [ ./react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js ]; t
   cp ./react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js ../node_modules/./react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js
 fi
 
-if [ ./react-native-keyboard-aware-scroll-view/lib/KeyboardAwareScrollView.js ]; then
-  cp ./react-native-keyboard-aware-scroll-view/lib/KeyboardAwareScrollView.js ../node_modules/./react-native-keyboard-aware-scroll-view/lib/KeyboardAwareScrollView.js
+if [ ./react-native-config/ReadDotEnv.rb ]; then
+  cp ./react-native-config/ReadDotEnv.rb ../node_modules/./react-native-config/ios/ReactNativeConfig/ReadDotEnv.rb
 fi

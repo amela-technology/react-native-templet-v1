@@ -28,7 +28,7 @@ const StyledTouchable: React.FunctionComponent<StyledTouchableProps> = (props: S
             style={({ pressed }) => [
                 {
                     // backgroundColor: pressed ? '#dbdbd9' : undefined,
-                    // opacity: pressed ? 0.6 : 1,
+                    opacity: pressed ? 0.6 : 1,
                 },
                 customStyle,
             ]}

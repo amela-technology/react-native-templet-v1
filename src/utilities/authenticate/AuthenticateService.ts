@@ -1,24 +1,27 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import request from 'api/request';
 import { store } from 'app-redux/store';
-import setUserInfo from 'app-redux/authentication/actions';
+import { setUserInfo, logOutUser } from 'app-redux/userInfo/actions';
 import { logger } from 'utilities/helper';
-import { useRequest } from 'ahooks';
-import apiUser from 'api/modules/api-app/user';
-import { login } from 'api/modules/api-app/authenticate';
+import { getProfile, login } from 'api/modules/api-app/authenticate';
+import { useState } from 'react';
+import AlertMessage from 'components/base/AlertMessage';
 
 const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
-
 export interface LoginRequestParams extends AxiosRequestConfig {
-    username: string;
+    email: string;
     password: string;
 }
 
 interface LoginRequest {
     loading: boolean;
     requestLogin: () => Promise<void>;
-    error: any;
 }
+
+export const isLogin = () => {
+    const { userInfo } = store.getState();
+    return !!userInfo?.token;
+};
 
 const AuthenticateService = {
     refreshToken: (inputRefreshToken: string) =>
@@ -26,66 +29,37 @@ const AuthenticateService = {
             refresh_token: inputRefreshToken,
         }),
     logOut: () => {
-        store.dispatch(setUserInfo({}));
+        store.dispatch(logOutUser());
+    },
+    handlerLogin: (user: any) => {
+        const saveUserInfor = setUserInfo(user);
+        store.dispatch(saveUserInfor);
     },
 };
 
 export const useLogin = (options: LoginRequestParams): LoginRequest => {
-    const { loading, run, error } = useRequest(login, {
-        manual: true,
-        throwOnError: true,
-    });
-
-    const userInfoRequest = useRequest(apiUser.getUserDetail, {
-        manual: true,
-        throwOnError: true,
-    });
-
-    let errorData;
-    if (error || userInfoRequest.error) {
-        errorData = {
-            loginError: error,
-            userInfoError: userInfoRequest.error,
-        };
-    }
-
+    const [loading, setLoading] = useState(true);
     const requestLogin = async () => {
         try {
-            const response = await run(options.username, options.password);
-            if (response) {
-                const userResponse = await userInfoRequest.run();
-                const signInAction = setUserInfo({
-                    userToken: response.token,
-                    refreshToken: response.refreshToken,
-                    user: {
-                        id: userResponse.id,
-                        name: userResponse.name,
-                        email: userResponse.email,
-                    },
-                });
-                store.dispatch(signInAction);
-            }
+            const response = await login(options);
+            const signInAction = setUserInfo(response?.data);
+            store.dispatch(signInAction);
+            const userResponse = await getProfile();
+            AuthenticateService.handlerLogin({
+                ...response,
+                user: userResponse,
+            });
         } catch (e) {
+            AlertMessage(e);
             logger(e);
         } finally {
-            logger('You should remove finally in your code', true);
-            const signInAction = setUserInfo({
-                userToken: 'DUMMY_TOKEN',
-                refreshToken: 'DUMMY_REFRESH',
-                user: {
-                    id: 1,
-                    name: 'username',
-                    email: 'username@gmail.com',
-                },
-            });
-            store.dispatch(signInAction);
+            setLoading(false);
         }
     };
 
     return {
         loading,
         requestLogin,
-        error: errorData,
     };
 };
 
