@@ -6,7 +6,7 @@ Below you'll find information about performing common tasks.
 ...
 ## Introdution
 - Easy to start
-- React native version 0.61.5
+- React native version 0.63.4
 - Fully using typescript for typing
 - Folder structs using package-by-feature (why)
 - Redux, redux-saga, redux-persist, redux-logger
@@ -25,7 +25,7 @@ Below you'll find information about performing common tasks.
 2. Go to project's root directory, `cd <your project name>`
 3. Remove `.git` folder,  `rm -rf .git`
 4. Open `package.json` and change the `name` property with your project name
-5. Open `app.json` and replace `'ReactNativeBase'` by your project name 
+5. Open `app.json` and replace `'ReactNativeBase'` by your project name
 
 6. Remove to line 35, 36 `android` & `ios` in `.gitignore`
 
@@ -33,19 +33,19 @@ Below you'll find information about performing common tasks.
 
 8. Run `npm run init-project` to create iOS & Android Folders.
 
-9. Run your project with `npm run android` or `npm run ios` 
+9. Run your project with `npm run android` or `npm run ios`
 
 ## Getting Started IOS
 
 1. Check workspaces of project in project/ios/${PROJECT_NAME}.xcworkspace
 2. Go to Project workspaces in Xocde delete everything except project name
-3. Should delete them in pod file 
-4. Setup react-native config following guide: https://docs.google.com/document/d/1EGlP-Z0OAfJ0n6DIHD1iQEFvZFulwKvD/edit
+3. Should delete them in pod file
+4. Setup react-native config following guide: https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
 
 ## Getting Started Android
 
 1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
-2. Setup react-native config following guide: https://docs.google.com/document/d/1EGlP-Z0OAfJ0n6DIHD1iQEFvZFulwKvD/edit
+2. Setup react-native config following guide: https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
 
 ## Available Scripts
 
@@ -71,19 +71,19 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 
 #### `npm run android`
 
-Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator. 
+Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator.
 
 #### `npm lint`
  Run linter check source code
- 
+
 #### `npm lint-fix`
  Run linter fix source code
- 
+
 #### `npm assets-link`
  Link assets and font from **src/assets** to Native project
 ## Folder structures
 ```
-.   folder contain file to fixing, batch lib    
+.   folder contain file to fixing, batch lib
 ├── scripts
 │   ├── react-native-keyboard-aware-scroll-view
 │   │   └── lib
@@ -92,7 +92,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   ├── react-native-size-matters
 │   │   └── scaling-utils.js
 │   └── fix-lib.sh
-|   folder contain source code of project 
+|   folder contain source code of project
 ├── src
 |   |   folder contain api content of project
 │   ├── api
@@ -128,7 +128,8 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   │   │   ├── DialogManager.tsx
 │   │   │   │   └── index.tsx
 │   │   │   ├── picker
-│   │   │   │   └── StyledModalPicker.tsx
+│   │   │   │   └── StyledPicker.tsx
+│   │   │   │   └── StyledPickerView.tsx
 │   │   │   ├── StyledButton.tsx
 │   │   │   ├── StyledIcon.tsx
 │   │   │   ├── StyledImage.tsx
@@ -172,8 +173,8 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   │   ├── options.ts
 │   │   │   ├── routes.ts
 │   │   │   └── transition.ts
-│   │   ├── sence
-│   │   │   └── RootSences.tsx
+│   │   ├── scene
+│   │   │   └── RootScenes.tsx
 │   │   └── NavigationService.ts
 │   ├── redux
 │   │   ├── authentication

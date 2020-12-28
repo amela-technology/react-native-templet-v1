@@ -1,6 +1,11 @@
 export default {
     common: {
         defaultLanguage: 'English',
+        close: '閉じる',
+        noText: 'テキストなし',
+        noData: 'データなし',
+        cancel: 'キャンセル',
+        confirm: '決定',
     },
     modalInput: {
         title: 'hello',
@@ -14,8 +19,8 @@ export default {
     },
     alert: {
         button: {
-            cancel: 'いいえ',
-            ok: 'はい',
+            no: 'いいえ',
+            yes: 'はい',
         },
     },
     noData: {
@@ -39,7 +44,7 @@ export default {
     registerAccount: {
         password: 'パスワード',
         passwordConfirm: 'パスワード（再入力）',
-        backbutton: '前の画面',
+        backButton: '前の画面',
         title: '新規会員登録はこちら',
         passwordPlaceholder: 'パスワード',
     },
@@ -50,8 +55,8 @@ export default {
         emailNotRegister: '入力したメールアドレスがまだ登録されていません',
         validatePassword: 'パスワードは半角英数字で6文字以上入力する必要があります',
         emailInvalid: 'メールアドレスの形式が間違っています。',
-        passwordLength: 'At lest 6 character of password',
-        confirmPasswordLength: 'At lest 6 character of confirm password',
+        passwordLength: 'At least 6 character of password',
+        confirmPasswordLength: 'At least 6 character of confirm password',
         passwordNotMatch: '入力された新パスワードが一致しません。ご確認ください。',
         emailEmpty: '全ての項目を入力してください。',
         messageLength: '1文字以上 255文字以内',
@@ -64,7 +69,7 @@ export default {
         title: '認証コード',
         titleForgotPassword: 'パスワードを忘れた',
         sendForgotPassword: '確認',
-        backbutton: '前の画面',
+        backButton: '前の画面',
         descriptionNext:
             '入力したメールアドレスに通知メールを送信しました。\n 認証コードを入力し、「次へ」ボタンを押してください。有効期限は24時間です。',
         descriptionConfirm:

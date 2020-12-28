@@ -10,7 +10,7 @@ import { navigate } from 'navigation/NavigationService';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 
 const LoginScreen: React.FunctionComponent = () => {
-    const [user, setUser] = useState({ email: 'hoan.nguyen@amela.vn', password: '123123q' });
+    const [user, setUser] = useState({ email: 'hoan.nguyen@amela.vn', password: '123123' });
     const passwordRef = useRef<any>(null);
     const { t } = useTranslation();
     const { loading, requestLogin } = useLogin(user);
