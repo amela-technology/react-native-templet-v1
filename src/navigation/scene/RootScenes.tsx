@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'app-redux/rootReducer';
 import { APP_ROUTE } from '../config/routes';
 import navigationConfigs from '../config/options';
-import AuthStack from './AuthSences';
-import MainTabContainer from './TabSences';
+import MainTabContainer from './TabScenes';
+import AuthStack from './AuthScenes';
 
 const MainStack = createStackNavigator();
 

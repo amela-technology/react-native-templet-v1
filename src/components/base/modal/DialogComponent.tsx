@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Modal, { ModalProps } from 'react-native-modal';
 
 const DialogComponent: React.FunctionComponent<ModalProps> = (props: ModalProps) => {

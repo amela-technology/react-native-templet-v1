@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
+import i18next from 'i18next';
 import { Platform } from 'react-native';
+import Picker from 'react-native-picker';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -20,4 +22,13 @@ export function logger(msg: string, isWarning?: boolean, params?: any): void {
         if (params) console.warn(msg, params);
         else console.warn(msg);
     }
+}
+
+export function initPicker(params?: any) {
+    Picker.init({
+        pickerTextEllipsisLen: 10,
+        pickerCancelBtnText: i18next.t('common.cancel'),
+        pickerConfirmBtnText: i18next.t('common.confirm'),
+        ...params,
+    });
 }

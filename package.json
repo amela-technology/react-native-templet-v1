@@ -45,6 +45,7 @@
         "react-native-modalize": "^2.0.8",
         "react-native-onesignal": "^3.9.3",
         "react-native-permissions": "^3.0.0",
+        "react-native-picker": "^4.3.7",
         "react-native-portalize": "^1.0.7",
         "react-native-reanimated": "^1.13.2",
         "react-native-root-siblings": "^4.1.0",

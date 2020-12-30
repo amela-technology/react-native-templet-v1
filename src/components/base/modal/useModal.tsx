@@ -1,6 +1,7 @@
 import React from 'react';
+import { View } from 'react-native';
 import RootSiblings from 'react-native-root-siblings';
-import DialogComponent from './DialogComponent';
+import ModalComponent from './ModalComponent';
 
 const DESTROY_TIMEOUT = 100;
 interface ModalElement {
@@ -28,15 +29,7 @@ const useModal = (): any => {
 
     const add = (props: any, callback: (() => void) | undefined, modalId: number): void => {
         const dialog = new RootSiblings(
-            (
-                <DialogComponent
-                    {...props}
-                    modalId={modalId}
-                    onModalHide={(id: number) => {
-                        onDialogDismissed(props.onDismissed, id);
-                    }}
-                />
-            ),
+            <ModalComponent {...props} modalId={modalId} onBackdropPressed={props.onBackdropPress} />,
             callback,
         );
         const modalElement: ModalElement = {
@@ -64,18 +57,9 @@ const useModal = (): any => {
     };
 
     const update = (props: any, callback: (modalId: number) => void, modalId: number): void => {
-        currentModal(modalId)?.element?.update(
-            <DialogComponent
-                {...currentModal(modalId)?.props}
-                {...props}
-                onDismiss={() => {
-                    onDialogDismissed(props.onDismissed);
-                }}
-            />,
-            () => {
-                callback?.(modalId);
-            },
-        );
+        currentModal(modalId)?.element?.update(<View />, () => {
+            callback?.(modalId);
+        });
     };
 
     const show = (props: any, callback?: (() => void) | undefined, modalId?: number): void => {
@@ -83,7 +67,6 @@ const useModal = (): any => {
         add(
             {
                 ...props,
-                isVisible: true,
             },
             callback,
             id,
@@ -92,19 +75,12 @@ const useModal = (): any => {
 
     const dismiss = (modalId?: number, callback?: (id: number | undefined) => void): void => {
         const id = modalId || getTopModalElementId(modalId);
-        const props = currentModal(id)?.props;
-        currentModal(id)?.element?.update(
-            <DialogComponent
-                {...props}
-                isVisible={false}
-                onModalHide={() => {
-                    onDialogDismissed(props.onDismissed);
-                }}
-            />,
-            () => {
-                callback?.(id);
-            },
-        );
+        currentModal(id)?.element?.update(<View />, () => {
+            callback?.(id);
+        });
+        if (modalElements.indexOf(currentModal(id) as ModalElement) > -1) {
+            modalElements.splice(modalElements.indexOf(currentModal(id) as ModalElement), 1);
+        }
     };
 
     const dismissAll = (callback: () => void) => {

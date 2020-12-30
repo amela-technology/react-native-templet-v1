@@ -8,11 +8,11 @@ const AlertMessage = (message: string, title?: string, onPressOk?: any, cancel?:
         cancel
             ? [
                   {
-                      text: i18next.t('alert.button.cancel'),
+                      text: i18next.t('alert.button.no'),
                       style: 'default',
                   },
                   {
-                      text: i18next.t('alert.button.ok'),
+                      text: i18next.t('alert.button.yes'),
                       onPress: () => {
                           if (typeof onPressOk === 'function') {
                               onPressOk();
@@ -23,7 +23,7 @@ const AlertMessage = (message: string, title?: string, onPressOk?: any, cancel?:
               ]
             : [
                   {
-                      text: i18next.t('alert.button.ok'),
+                      text: i18next.t('alert.button.yes'),
                       onPress: () => {
                           if (typeof onPressOk === 'function') {
                               onPressOk();

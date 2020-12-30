@@ -9,3 +9,7 @@ fi
 if [ ./react-native-config/ReadDotEnv.rb ]; then
   cp ./react-native-config/ReadDotEnv.rb ../node_modules/./react-native-config/ios/ReactNativeConfig/ReadDotEnv.rb
 fi
+
+if [ ./react-native-picker/index.d.ts ]; then
+  cp ./react-native-picker/index.d.ts ../node_modules/./react-native-picker/index.d.ts
+fi

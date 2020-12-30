@@ -4,7 +4,7 @@ import en from 'assets/locates/en';
 import jp from 'assets/locates/jp';
 import { initReactI18next } from 'react-i18next';
 
-const DEFAULT_LANG = 'en';
+const DEFAULT_LANG = 'jp';
 
 export const getLanguage = (): string => {
     const lan = getLocales();

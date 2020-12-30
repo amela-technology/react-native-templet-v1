@@ -16,6 +16,7 @@ import SettingView from 'feature/setting/SettingScreen';
 import HomeUserListScreen from 'feature/home/HomeUserListScreen';
 import NotificationScreen from 'feature/notification/NotificationScreen';
 import { View } from 'react-native';
+import { Host } from 'react-native-portalize';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
