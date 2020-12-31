@@ -1,0 +1,19 @@
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "api": "./src/api",
+        "services": "./src/services/",
+        "shared": "./src/shared/",
+        "assets": "./src/assets/",
+        "feature": "./src/feature/",
+        "hooks": "./src/hooks/",
+        "navigation": "./src/navigation",
+        "components": "./src/components",
+        "app-redux": "./src/app-redux",
+        "utilities": "./src/utilities"
+      }
+    }]
+  ]
+}
