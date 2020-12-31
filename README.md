@@ -10,7 +10,7 @@ Below you'll find information about performing common tasks.
 - Fully using typescript for typing
 - Folder structs using package-by-feature (why)
 - Redux, redux-saga, redux-persist, redux-logger
-- React navigation v4 (we have plan for upgrade to v5 when release)
+- React navigation v5
 - 100% functional component with hook
 - Alot of custom components
 - i18next for multiple language

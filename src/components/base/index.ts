@@ -9,6 +9,7 @@ import StyledIcon from './StyledIcon';
 import StyledWebView from './StyledWebView';
 import ProgressiveImage from './ProgressiveImage';
 import StyledIndicator from './StyledIndicator';
+import StyledListViewSelected from './list-view-selected/StyledListViewSelected';
 
 export {
     StyledButton,
@@ -22,4 +23,5 @@ export {
     StyledWebView,
     ProgressiveImage,
     StyledIndicator,
+    StyledListViewSelected,
 };
