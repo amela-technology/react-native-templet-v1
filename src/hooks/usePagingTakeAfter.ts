@@ -1,13 +1,11 @@
 import { useRequest, useUnmount } from 'ahooks';
 import axios, { AxiosRequestConfig } from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import { store } from 'app-redux/store';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const { CancelToken } = axios;
+const pageSize = 10;
 
-const SIZE_LIMIT = 10;
-
-const usePaging = (
+const usePagingTakeAfter = (
     requestPaging: (config: AxiosRequestConfig) => Promise<any>,
     cacheKey: string,
     initialParams?: any,
@@ -16,21 +14,21 @@ const usePaging = (
 ) => {
     const [refreshing, setRefreshing] = useState(false);
     const [loadingMore, setLoadingMore] = useState(false);
-    const [pageIndex, setPageIndex] = useState(1);
     const [list, setList] = useState<Array<any>>([]);
     const [error, setError] = useState<Error | null>();
     const [params, setParams] = useState<any>(initialParams);
     const [noMore, setNoMore] = useState(false);
+
     const source = CancelToken.source();
     useEffect(() => {
-        if (pageIndex > 1) {
-            setLoadingMore(true);
-        }
-        runRequest(pageIndex, SIZE_LIMIT, params);
-    }, [pageIndex]);
+        runRequest(params);
+        return () => {
+            source.cancel('useEffect cleanup...');
+        };
+    }, []);
     useEffect(() => {
         if (refreshing) {
-            setPageIndex(1);
+            runRequest({ takeAfter: '' });
         }
     }, [refreshing]);
     useEffect(() => {
@@ -38,28 +36,29 @@ const usePaging = (
             onRefresh();
         }
     }, [params]);
-    const handleOnSuccess = (data: any, cbParams: any) => {
-        const responseData = data || {};
-        const newList: [] = responseData.data || [];
+    const handleOnSuccess = (data: any) => {
+        const responseData = data?.data || {};
+        const newList: [] = responseData || [];
         if (refreshing) {
             setList(newList);
         } else if (newList.length > 0) {
             setList([...list, ...newList]);
         }
-        setNoMore(pageIndex >= responseData?.totalPages);
+        setNoMore(!data?.hasMore);
         setRefreshing(false);
         setLoadingMore(false);
+        setError(null);
+        onSuccess?.(data);
     };
 
-    const handleOnError = (e: Error, cbParams: any) => {
+    const handleOnError = (e: Error) => {
         setError(error);
         setRefreshing(false);
         setLoadingMore(false);
-        onError?.(e, cbParams);
+        onError?.(e);
     };
 
     const umiRequest = useRequest(requestPaging, {
-        loadMore: false,
         manual: true,
         onSuccess: handleOnSuccess,
         onError: handleOnError,
@@ -68,20 +67,17 @@ const usePaging = (
     });
 
     // config request paging
-    const runRequest = (requestPageIndex: number, pageSize?: number, otherParams?: any) => {
+    const runRequest = (otherParams?: any) => {
+        const paramsQuery = {
+            pageSize,
+            takeAfter: list?.[list?.length - 1]?.lastTimeSent,
+            ...otherParams,
+        };
         umiRequest.run({
-            params: {
-                pageIndex: requestPageIndex,
-                pageSize: pageSize || SIZE_LIMIT,
-                ...otherParams,
-            },
+            params: paramsQuery,
             cancelToken: source.token,
         });
     };
-
-    useUnmount(() => {
-        source.cancel('useEffect cleanup...');
-    });
 
     const onRefresh = () => {
         setRefreshing(true);
@@ -89,8 +85,7 @@ const usePaging = (
 
     const onLoadMore = () => {
         if (!noMore) {
-            setLoadingMore(true);
-            setPageIndex(pageIndex + 1);
+            runRequest(params);
         }
     };
 
@@ -107,4 +102,4 @@ const usePaging = (
     };
 };
 
-export default usePaging;
+export default usePagingTakeAfter;
