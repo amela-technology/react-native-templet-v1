@@ -116,9 +116,9 @@ const StyledList = (props: Props, ref: any) => {
             ref={list}
             contentContainerStyle={styles}
             keyExtractor={keyExtractor}
-            initialNumToRender={15}
-            onEndReached={handleEndReached}
-            onEndReachedThreshold={0.5}
+            initialNumToRender={10}
+            // onEndReached={handleEndReached}
+            onEndReachedThreshold={0.01}
             onMomentumScrollBegin={onMomentumScrollBegin}
             ListEmptyComponent={renderNoData}
             showsVerticalScrollIndicator={false}
