@@ -42,6 +42,23 @@ Below you'll find information about performing common tasks.
 3. Should delete them in pod file 
 4. Setup react-native config following guide: https://docs.google.com/document/d/1EGlP-Z0OAfJ0n6DIHD1iQEFvZFulwKvD/edit
 
+Note: Fix error "No permission handled detected".
+
+Add this line to `Info.plist`:
+```
+<key>NSCameraUsageDescription</key>
+<string>YOUR TO REQUEST CAMERA PERMISSION</string>
+```
+ 
+ Add to `Podfile`: 
+ ```
+target 'YourAwesomeProject' do
+ #...
+ permissions_path = '../node_modules/react-native-permissions/ios'
+ pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+ end
+ ```
+
 ## Getting Started Android
 
 1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
