@@ -58,7 +58,7 @@ target 'YourAwesomeProject' do
  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
  end
  ```
-
+Run `yarn` and `rebuild project`
 ## Getting Started Android
 
 1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
