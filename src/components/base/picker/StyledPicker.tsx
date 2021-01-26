@@ -36,21 +36,21 @@ const StyledPicker = (props: PickerProps) => {
             setItem(data[0]?.toString());
             Picker.select(data);
             props.onConfirm(data[0]?.toString());
-            modal.dismiss();
+            modal.dismiss?.();
         },
         [item, props.dataList],
     );
 
     const handleCancel = () => {
-        modal.dismiss();
+        modal.dismiss?.();
     };
 
     const handleShowPicker = () => {
-        modal.show({
+        modal.show?.({
             children: <View />,
             onBackdropPress: () => {
                 Picker.hide();
-                modal.dismiss();
+                modal.dismiss?.();
             },
         });
         const newData = [];
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 8,
         height: DEFAULT_HEIGHT,
-        width: Metrics.screenWidth * 0.9,
+        width: '90%',
     },
     txtItem: {
         fontWeight: 'bold',

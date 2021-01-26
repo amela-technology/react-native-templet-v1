@@ -8,7 +8,6 @@ import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import useLoading from 'components/base/modal/useLoading';
 import { wait } from 'utilities/helper';
 import StyledPicker from 'components/base/picker/StyledPicker';
-import Metrics from 'assets/metrics';
 
 const dataPicker = [
     'label1',
@@ -48,7 +47,7 @@ const HomeScreen: React.FunctionComponent = () => {
                 <Button
                     title={'Modal'}
                     onPress={() => {
-                        modal.show({
+                        modal.show?.({
                             children: (
                                 <View style={styles.contModalContent}>
                                     <StyledText originValue={'Hello'} />
@@ -57,11 +56,11 @@ const HomeScreen: React.FunctionComponent = () => {
                                         dataList={dataPicker}
                                         onConfirm={handleConfirm}
                                     />
-                                    <Button title={'hide'} onPress={() => modal.dismiss()} />
+                                    <Button title={'hide'} onPress={() => modal.dismiss?.()} />
                                 </View>
                             ),
                             onBackdropPress: () => {
-                                modal.dismiss();
+                                modal.dismiss?.();
                             },
                         });
                     }}
@@ -92,11 +91,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
     },
     contModalContent: {
-        height: Metrics.screenHeight * 0.4,
+        width: '50%', // Define width and height of modal here
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
     },
 });
 
