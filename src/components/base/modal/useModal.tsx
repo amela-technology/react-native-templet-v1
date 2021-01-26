@@ -4,13 +4,33 @@ import RootSiblings from 'react-native-root-siblings';
 import ModalComponent from './ModalComponent';
 
 const DESTROY_TIMEOUT = 100;
+
+interface UseModalProps {
+    getTopModalElementId?(modalId?: number): void;
+    currentModal?(modalId?: number): void;
+    add?(props: ModalProps, callback: (() => void) | undefined, modalId: number): void;
+    destroy?(modalId?: number): void;
+    onDialogDismissed?(onDismissed: any, modalId?: number): void;
+    update?(callback: (modalId: number) => void, modalId: number): void;
+    show?(props: ModalProps, callback?: (() => void) | undefined, modalId?: number): void;
+    dismiss?(modalId?: number, callback?: (id: number | undefined) => void): void;
+    dismissAll?(callback: () => void): void;
+}
+
+interface ModalProps {
+    children?: any;
+    width?: any;
+    height?: any;
+    isFromBottom?: boolean;
+    onBackdropPress?(): void;
+}
 interface ModalElement {
     id: number;
     element: RootSiblings;
-    props: any;
+    props: ModalProps;
 }
 
-const useModal = (): any => {
+const useModal = (): UseModalProps => {
     let modalElements: ModalElement[] = [];
 
     const getTopModalElementId = (modalId?: number): number => {
@@ -27,9 +47,18 @@ const useModal = (): any => {
         return modalElements.find((e: ModalElement) => e.id === modalId);
     };
 
-    const add = (props: any, callback: (() => void) | undefined, modalId: number): void => {
+    const add = (props: ModalProps, callback: (() => void) | undefined, modalId: number): void => {
         const dialog = new RootSiblings(
-            <ModalComponent {...props} modalId={modalId} onBackdropPressed={props.onBackdropPress} />,
+            (
+                <ModalComponent
+                    {...props}
+                    modalId={modalId}
+                    onBackdropPressed={props.onBackdropPress}
+                    isFromBottom={props.isFromBottom}
+                    height={props.height}
+                    width={props.width}
+                />
+            ),
             callback,
         );
         const modalElement: ModalElement = {
@@ -56,13 +85,13 @@ const useModal = (): any => {
         destroy(modalId);
     };
 
-    const update = (props: any, callback: (modalId: number) => void, modalId: number): void => {
+    const update = (callback: (modalId: number) => void, modalId: number): void => {
         currentModal(modalId)?.element?.update(<View />, () => {
             callback?.(modalId);
         });
     };
 
-    const show = (props: any, callback?: (() => void) | undefined, modalId?: number): void => {
+    const show = (props: ModalProps, callback?: (() => void) | undefined, modalId?: number): void => {
         const id = modalId || modalElements.length;
         add(
             {
