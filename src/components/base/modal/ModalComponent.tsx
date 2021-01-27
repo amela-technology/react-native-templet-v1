@@ -24,32 +24,34 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom }: any) => {
     }).start();
 
     return (
-        <View style={[styles.contWrapper]}>
+        <View style={styles.contWrapper}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => onBackdropPressed(onBackdropPressed)}
                 style={styles.contBlurLayout}
             />
-            <Animated.View
-                style={[
-                    {
-                        transform: [{ translateY: startValue }],
-                    },
-                    {
-                        width: paramWidth,
-                        height: paramHeight,
-                        alignSelf: paramWidth === Metrics.screenWidth ? undefined : 'center',
-                    },
-                ]}
-            >
-                {React.cloneElement(children, {
-                    style: {
-                        ...children?.props?.style,
-                        width: '100%',
-                        height: '100%',
-                    },
-                })}
-            </Animated.View>
+            {children?.props?.style ? (
+                <Animated.View
+                    style={[
+                        {
+                            transform: [{ translateY: startValue }],
+                        },
+                        {
+                            width: paramWidth,
+                            height: paramHeight,
+                            alignSelf: paramWidth === Metrics.screenWidth ? undefined : 'center',
+                        },
+                    ]}
+                >
+                    {React.cloneElement(children, {
+                        style: {
+                            ...children?.props?.style,
+                            width: '100%',
+                            height: '100%',
+                        },
+                    })}
+                </Animated.View>
+            ) : null}
         </View>
     );
 };
