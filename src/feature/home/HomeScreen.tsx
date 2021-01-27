@@ -43,7 +43,12 @@ const HomeScreen: React.FunctionComponent = () => {
         <View style={{ flex: 1 }}>
             <StyledHeader title={'Home Screen'} />
             <View style={styles.contScreen}>
-                <StyledPicker currentValue={valuePicker} dataList={dataPicker} onConfirm={handleConfirm} />
+                <StyledPicker
+                    label="HEHEHE" // Test label of styledPicker
+                    currentValue={valuePicker}
+                    dataList={dataPicker}
+                    onConfirm={handleConfirm}
+                />
                 <Button
                     title={'Modal'}
                     onPress={() => {

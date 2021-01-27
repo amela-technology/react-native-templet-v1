@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Images from 'assets/images';
 import Picker from 'react-native-picker';
@@ -23,23 +23,22 @@ interface PickerProps {
 }
 
 const StyledPicker = (props: PickerProps) => {
+    const [currentLabel, setCurrentLabel] = useState(props.label);
     const [item, setItem] = useState(props.currentValue || props.dataList[0]);
     const { t } = useTranslation();
     const modal = useModal();
 
-    const handleConfirm = useCallback(
-        (data: any) => {
-            if (data[0]?.toString() === props.dataList.indexOf(item)?.toString()) {
-                data.pop();
-                data.push(props.dataList[0]);
-            }
-            setItem(data[0]?.toString());
-            Picker.select(data);
-            props.onConfirm(data[0]?.toString());
-            modal.dismiss?.();
-        },
-        [item, props.dataList],
-    );
+    const handleConfirm = (data: any) => {
+        if (data[0]?.toString() === props.dataList.indexOf(item)?.toString()) {
+            data.pop();
+            data.push(props.dataList[0]);
+        }
+        setItem(data[0]?.toString());
+        if (currentLabel) setCurrentLabel(undefined);
+        Picker.select(data);
+        props.onConfirm(data[0]?.toString());
+        modal.dismiss?.();
+    };
 
     const handleCancel = () => {
         modal.dismiss?.();
@@ -74,7 +73,7 @@ const StyledPicker = (props: PickerProps) => {
                 style={[styles.contWholePicker, props.customStyle]}
                 disabled={props.isPickerDisable || false}
             >
-                <StyledText originValue={props.label || item} customStyle={[styles.txtItem, props.customLabelStyle]} />
+                <StyledText originValue={currentLabel || item} customStyle={[styles.txtItem, props.customLabelStyle]} />
                 {props.isPickerDisable ? null : (
                     <StyledImage
                         source={Images.icons.selected}
