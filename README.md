@@ -49,8 +49,8 @@ Add this line to `Info.plist`:
 <key>NSCameraUsageDescription</key>
 <string>YOUR TO REQUEST CAMERA PERMISSION</string>
 ```
- 
- Add to `Podfile`: 
+
+ Add to `Podfile`:
  ```
 target 'YourAwesomeProject' do
  #...
@@ -142,11 +142,11 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 │   │   ├── base
 │   │   │   ├── modal
 │   │   │   │   ├── DialogComponent.tsx
-│   │   │   │   ├── DialogManager.tsx
-│   │   │   │   └── index.tsx
+│   │   │   │   ├── ModalComponent.tsx
+│   │   │   │   ├── useLoading.tsx
+│   │   │   │   └── useModal.tsx
 │   │   │   ├── picker
 │   │   │   │   └── StyledPicker.tsx
-│   │   │   │   └── StyledPickerView.tsx
 │   │   │   ├── StyledButton.tsx
 │   │   │   ├── StyledIcon.tsx
 │   │   │   ├── StyledImage.tsx
