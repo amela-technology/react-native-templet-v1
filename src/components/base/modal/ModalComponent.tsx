@@ -3,16 +3,22 @@ import Metrics from 'assets/metrics';
 import React from 'react';
 import { Animated, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-const ModalComponent = ({ children, onBackdropPressed, isFromBottom }: any) => {
+const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalWrapperWidth, modalWrapperHeight }: any) => {
     const calculateLength = ({ length, type }: { length?: string | number; type: string }) => {
         if (length && typeof length === 'string') {
+            if (!RegExp(/^\d+%$/g).test(length)) {
+                console.error('ModalWrapperWidth or ModalWrapperHeight must be formatted as XX%');
+                return 0;
+            }
             return ((type === 'height' ? Metrics.screenHeight : Metrics.screenWidth) * parseFloat(length)) / 100;
         }
-        if (type === 'height') return Metrics.screenHeight * 0.7;
-        return Metrics.screenWidth;
+        if (length && typeof length === 'number') {
+            return length;
+        }
+        return 0;
     };
-    const paramHeight = calculateLength({ length: children?.props?.style?.height, type: 'height' });
-    const paramWidth = calculateLength({ length: children?.props?.style?.width, type: 'width' });
+    const paramHeight = calculateLength({ length: modalWrapperHeight, type: 'height' });
+    const paramWidth = calculateLength({ length: modalWrapperWidth, type: 'width' });
     const paramEndValue = paramHeight ? (isFromBottom ? (Metrics.screenHeight - paramHeight) / 2 : 0) : 0;
     const startValue = new Animated.Value(Metrics.screenHeight);
     const endValue = new Animated.Value(paramEndValue);
@@ -24,40 +30,31 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom }: any) => {
     }).start();
 
     return (
-        <View style={styles.contWrapper}>
+        <View style={styles.contLayoutAndModal}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => onBackdropPressed(onBackdropPressed)}
                 style={styles.contBlurLayout}
             />
-            {children?.props?.style ? (
-                <Animated.View
-                    style={[
-                        {
-                            transform: [{ translateY: startValue }],
-                        },
-                        {
-                            width: paramWidth,
-                            height: paramHeight,
-                            alignSelf: paramWidth === Metrics.screenWidth ? undefined : 'center',
-                        },
-                    ]}
-                >
-                    {React.cloneElement(children, {
-                        style: {
-                            ...children?.props?.style,
-                            width: '100%',
-                            height: '100%',
-                        },
-                    })}
-                </Animated.View>
-            ) : null}
+            <Animated.View
+                style={[
+                    {
+                        transform: [{ translateY: startValue }],
+                        width: paramWidth,
+                        height: paramHeight,
+                        alignSelf: paramWidth === Metrics.screenWidth ? undefined : 'center',
+                        backgroundColor: 'pink', // To detect the wrapper and the content
+                    },
+                ]}
+            >
+                {children}
+            </Animated.View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    contWrapper: {
+    contLayoutAndModal: {
         height: '100%',
         width: '100%',
         position: 'absolute',
@@ -67,7 +64,6 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         position: 'absolute',
-        justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0,0.5)',
     },
 });

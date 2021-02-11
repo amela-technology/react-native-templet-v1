@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
-import StyledText from 'components/base/StyledText';
 import { useNavigation } from '@react-navigation/native';
 import useModal from 'components/base/modal/useModal';
 import StyledHeader from 'components/common/StyledHeader';
@@ -8,6 +7,7 @@ import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import useLoading from 'components/base/modal/useLoading';
 import { wait } from 'utilities/helper';
 import StyledPicker from 'components/base/picker/StyledPicker';
+import ModalContent from './components/ModalContent';
 
 const dataPicker = [
     'label1',
@@ -27,6 +27,7 @@ const HomeScreen: React.FunctionComponent = () => {
     const modal = useModal();
     const loading = useLoading();
     const [valuePicker, setValuePicker] = React.useState(dataPicker[0]);
+    const [currentValue, setCurrentValue] = React.useState(0);
 
     const fakeCallAPI = () => {
         loading.show();
@@ -44,7 +45,7 @@ const HomeScreen: React.FunctionComponent = () => {
             <StyledHeader title={'Home Screen'} />
             <View style={styles.contScreen}>
                 <StyledPicker
-                    label="HEHEHE" // Test label of styledPicker
+                    label="HEHEHE"
                     currentValue={valuePicker}
                     dataList={dataPicker}
                     onConfirm={handleConfirm}
@@ -53,17 +54,19 @@ const HomeScreen: React.FunctionComponent = () => {
                     title={'Modal'}
                     onPress={() => {
                         modal.show?.({
+                            // children: <View />,
                             children: (
-                                <View style={styles.contModalContent}>
-                                    <StyledText originValue={'Hello'} />
-                                    <StyledPicker
-                                        currentValue={valuePicker}
-                                        dataList={dataPicker}
-                                        onConfirm={handleConfirm}
-                                    />
-                                    <Button title={'hide'} onPress={() => modal.dismiss?.()} />
-                                </View>
+                                <ModalContent
+                                    currentValue={currentValue}
+                                    handleCallback={() => {
+                                        alert('Test callback from inside modal');
+                                    }}
+                                    handleSetValue={setCurrentValue}
+                                    closeModal={() => modal.dismiss?.()}
+                                />
                             ),
+                            modalWrapperWidth: '100%',
+                            modalWrapperHeight: 'aaa%',
                             onBackdropPress: () => {
                                 modal.dismiss?.();
                             },
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
     },
     contModalContent: {
-        width: '50%', // Define width and height of modal here
+        // flex: 1, // Must have flex: 1 in here
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
