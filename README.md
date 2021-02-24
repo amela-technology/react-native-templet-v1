@@ -54,9 +54,10 @@ Add this line to `Info.plist`:
 <string>YOUR TO REQUEST CAMERA PERMISSION</string>
 ```
 
-Add to `Podfile`:
 
-```
+=======
+Add to `Podfile`:
+ 
 target 'YourAwesomeProject' do
 #...
 permissions_path = '../node_modules/react-native-permissions/ios'
@@ -154,11 +155,11 @@ Link assets and font from **src/assets** to Native project
 │   │   ├── base
 │   │   │   ├── modal
 │   │   │   │   ├── DialogComponent.tsx
-│   │   │   │   ├── DialogManager.tsx
-│   │   │   │   └── index.tsx
+│   │   │   │   ├── ModalComponent.tsx
+│   │   │   │   ├── useLoading.tsx
+│   │   │   │   └── useModal.tsx
 │   │   │   ├── picker
 │   │   │   │   └── StyledPicker.tsx
-│   │   │   │   └── StyledPickerView.tsx
 │   │   │   ├── StyledButton.tsx
 │   │   │   ├── StyledIcon.tsx
 │   │   │   ├── StyledImage.tsx

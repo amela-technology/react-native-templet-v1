@@ -19,8 +19,8 @@ interface UseModalProps {
 
 interface ModalProps {
     children?: any;
-    width?: any;
-    height?: any;
+    modalWrapperWidth?: string | number;
+    modalWrapperHeight?: string | number;
     isFromBottom?: boolean;
     onBackdropPress?(): void;
 }
@@ -55,8 +55,8 @@ const useModal = (): UseModalProps => {
                     modalId={modalId}
                     onBackdropPressed={props.onBackdropPress}
                     isFromBottom={props.isFromBottom}
-                    height={props.height}
-                    width={props.width}
+                    modalWrapperWidth={props.modalWrapperWidth}
+                    modalWrapperHeight={props.modalWrapperHeight}
                 />
             ),
             callback,
