@@ -3,27 +3,29 @@ This project was development by **Amela Technology**
 Below you'll find information about performing common tasks.
 
 ## Table of Contents
-...
-## Introdution
-- Easy to start
-- React native version 0.63.4
-- Fully using typescript for typing
-- Folder structs using package-by-feature (why)
-- Redux, redux-saga, redux-persist, redux-logger
-- React navigation v5
-- 100% functional component with hook
-- Alot of custom components
-- i18next for multiple language
-- Custom hooks for share state logic between components
-- Eslint using prettier plugin for checking code convention
-- Husky for pre-commit (we check lint have no errors first when commit)
 
+...
+
+## Introdution
+
+-   Easy to start
+-   React native version 0.63.4
+-   Fully using typescript for typing
+-   Folder structs using package-by-feature (why)
+-   Redux, redux-saga, redux-persist, redux-logger
+-   React navigation v5
+-   100% functional component with hook
+-   Alot of custom components
+-   i18next for multiple language
+-   Custom hooks for share state logic between components
+-   Eslint using prettier plugin for checking code convention
+-   Husky for pre-commit (we check lint have no errors first when commit)
 
 ## Getting Started
 
 1. Clone this repo, `git clone https://github.com/amela-technology/react-native-templet-v1.git <your project name>`
 2. Go to project's root directory, `cd <your project name>`
-3. Remove `.git` folder,  `rm -rf .git`
+3. Remove `.git` folder, `rm -rf .git`
 4. Open `package.json` and change the `name` property with your project name
 5. Open `app.json` and replace `'ReactNativeBase'` by your project name
 
@@ -34,6 +36,7 @@ Below you'll find information about performing common tasks.
 8. Run `npm run init-project` to create iOS & Android Folders.
 
 9. Run your project with `npm run android` or `npm run ios`
+10. If using codepush, replace `project-name` in `package.json` by your project name in appcenter.
 
 ## Getting Started IOS
 
@@ -45,20 +48,25 @@ Below you'll find information about performing common tasks.
 Note: Fix error "No permission handled detected".
 
 Add this line to `Info.plist`:
+
 ```
 <key>NSCameraUsageDescription</key>
 <string>YOUR TO REQUEST CAMERA PERMISSION</string>
 ```
 
- Add to `Podfile`:
- ```
+
+=======
+Add to `Podfile`:
+ 
 target 'YourAwesomeProject' do
- #...
- permissions_path = '../node_modules/react-native-permissions/ios'
- pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
- end
- ```
+#...
+permissions_path = '../node_modules/react-native-permissions/ios'
+pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+end
+```
+
 Run `yarn` and `rebuild project`
+
 ## Getting Started Android
 
 1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
@@ -91,14 +99,19 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator.
 
 #### `npm lint`
- Run linter check source code
+
+Run linter check source code
 
 #### `npm lint-fix`
- Run linter fix source code
+
+Run linter fix source code
 
 #### `npm assets-link`
- Link assets and font from **src/assets** to Native project
+
+Link assets and font from **src/assets** to Native project
+
 ## Folder structures
+
 ```
 .   folder contain file to fixing, batch lib
 ├── scripts

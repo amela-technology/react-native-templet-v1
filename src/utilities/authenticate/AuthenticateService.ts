@@ -6,6 +6,7 @@ import { logger } from 'utilities/helper';
 import { getProfile, login } from 'api/modules/api-app/authenticate';
 import { useState } from 'react';
 import AlertMessage from 'components/base/AlertMessage';
+import { deleteTagOneSignal, pushTagMember } from 'utilities/notification';
 
 const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
 export interface LoginRequestParams extends AxiosRequestConfig {
@@ -15,7 +16,7 @@ export interface LoginRequestParams extends AxiosRequestConfig {
 
 interface LoginRequest {
     loading: boolean;
-    requestLogin: () => Promise<void>;
+    requestLogin: (values: any) => Promise<void>;
 }
 
 export const isLogin = () => {
@@ -30,24 +31,25 @@ const AuthenticateService = {
         }),
     logOut: () => {
         store.dispatch(logOutUser());
+        deleteTagOneSignal();
     },
     handlerLogin: (user: any) => {
-        const saveUserInfor = setUserInfo(user);
-        store.dispatch(saveUserInfor);
+        const saveUserInfo = setUserInfo(user);
+        store.dispatch(saveUserInfo);
+        pushTagMember(user?.user?.id);
     },
 };
 
-export const useLogin = (options: LoginRequestParams): LoginRequest => {
-    const [loading, setLoading] = useState(true);
-    const requestLogin = async () => {
+export const useLogin = (): LoginRequest => {
+    const [loading, setLoading] = useState(false);
+    const requestLogin = async (options: LoginRequestParams) => {
         try {
+            setLoading(true);
             const response = await login(options);
-            const signInAction = setUserInfo(response?.data);
-            store.dispatch(signInAction);
-            const userResponse = await getProfile();
+            const userResponse = await getProfile(response?.data?.token);
             AuthenticateService.handlerLogin({
-                ...response,
-                user: userResponse,
+                ...response.data,
+                user: userResponse?.data,
             });
         } catch (e) {
             AlertMessage(e);

@@ -1,7 +1,7 @@
 import request from 'api/request';
 
-export const getProfile = () => request.get(`profile`);
-
+export const getProfile = (token?: string) =>
+    request.get(`profile`, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
 export const login = (params: any) => request.post(`auth/login`, params);
 export const register = (params: any) => request.post(`auth/register`, params);
 export const forgotPassword = (email: string) => request.post(`auth/forgot-password`, { email });
