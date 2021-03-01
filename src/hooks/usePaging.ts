@@ -46,7 +46,6 @@ const usePaging = (
             });
         }
     };
-    // config request paging
     const runRequest = async (requestPageIndex: number, pageSize?: number, otherParams?: any) => {
         try {
             const res = await requestPaging({
