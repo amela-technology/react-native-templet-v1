@@ -26,11 +26,10 @@ const usePaging = (
         onRefresh();
     }, [params]);
     const handleOnSuccess = (data: any) => {
-        const responseData = data || {};
-        const newList: [] = responseData.data || [];
+        const newList: [] = data.data || [];
         const tempData = {
             ...pagingData,
-            noMore: pagingData.pageIndex >= responseData?.totalPages,
+            noMore: pagingData.pageIndex >= data?.totalPages,
             refreshing: false,
             loadingMore: false,
         };
