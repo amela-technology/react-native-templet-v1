@@ -45,27 +45,25 @@ Below you'll find information about performing common tasks.
 3. Should delete them in pod file
 4. Setup react-native config following guide: https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
 
-Note: Fix error "No permission handled detected".
+## Note: Fix error "No permission handled detected".
 
 Add this line to `Info.plist`:
-
 ```
 <key>NSCameraUsageDescription</key>
 <string>YOUR TO REQUEST CAMERA PERMISSION</string>
 ```
 
-
-=======
 Add to `Podfile`:
- 
+``` 
 target 'YourAwesomeProject' do
-#...
+#... other code - add two line below
 permissions_path = '../node_modules/react-native-permissions/ios'
 pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+#... other code - add two line above
 end
 ```
-
 Run `yarn` and `rebuild project`
+
 
 ## Getting Started Android
 
@@ -113,6 +111,7 @@ Link assets and font from **src/assets** to Native project
 ## Folder structures
 
 ```
+
 .   folder contain file to fixing, batch lib
 ├── scripts
 │   ├── react-native-keyboard-aware-scroll-view
