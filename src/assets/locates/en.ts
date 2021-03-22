@@ -16,6 +16,7 @@ export default {
         home: 'Home',
         notification: 'Notification',
         setting: 'Setting',
+        account: 'Account',
     },
     alert: {
         button: {
@@ -60,6 +61,11 @@ export default {
         passwordNotMatch: '入力された新パスワードが一致しません。ご確認ください。',
         emailEmpty: '全ての項目を入力してください。',
         messageLength: '1文字以上 255文字以内',
+        maxLength: 'The maximum length is {{len}}.',
+        minLength: 'The minimum length is {{len}}.',
+        require: '{{field}} is required.',
+        notMatchPassword: 'Password do not match',
+        phoneInvalid: 'Invalid Phone Number',
     },
     sendOTPMessage: {
         success: '新規コードを送りました。',
