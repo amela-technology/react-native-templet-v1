@@ -15,6 +15,7 @@ import HomeDataScreen from 'feature/home/HomeDataScreen';
 import SettingView from 'feature/setting/SettingScreen';
 import HomeUserListScreen from 'feature/home/HomeUserListScreen';
 import NotificationScreen from 'feature/notification/NotificationScreen';
+import AccountView from 'feature/account/AccountView';
 import { View } from 'react-native';
 import { Host } from 'react-native-portalize';
 
@@ -50,6 +51,12 @@ const MainTabContainer = () => {
             name: TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT,
             title: t('tab.setting'),
             component: SettingView,
+            icon: Images.icons.tab.setting,
+        },
+        {
+            name: TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT,
+            title: t('tab.account'),
+            component: AccountView,
             icon: Images.icons.tab.setting,
         },
     ];

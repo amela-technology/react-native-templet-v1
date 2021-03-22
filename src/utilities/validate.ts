@@ -2,13 +2,15 @@ import * as React from 'react';
 import AlertMessage from 'components/base/AlertMessage';
 import i18next from './i18next';
 
+export const regexEmail = /^(([^<>()[\]\\x.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const regexPhone = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+
 export const validateEmail = (email: string) => {
-    const re = /^(([^<>()[\]\\x.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (email.trim() === '') {
         AlertMessage(i18next.t('validateMessage.emailEmpty'));
         return false;
     }
-    if (!re.test(String(email).toLowerCase())) {
+    if (!regexEmail.test(String(email).toLowerCase())) {
         AlertMessage(i18next.t('validateMessage.emailInvalid'));
         return false;
     }
