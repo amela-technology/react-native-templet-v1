@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { memo } from 'react';
 import { StyleProp, Image, ImageStyle, ImageProps } from 'react-native';
 import { scale } from 'react-native-size-matters';
 
@@ -17,4 +17,4 @@ const StyledIcon = (props: Props) => {
     );
 };
 
-export default React.memo(StyledIcon);
+export default memo(StyledIcon);

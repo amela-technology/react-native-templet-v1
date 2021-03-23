@@ -1,6 +1,5 @@
 import { uploadImage } from 'api/modules/api-app/general';
 import ImagePicker from 'react-native-image-crop-picker';
-import { requestMultiple, PERMISSIONS } from 'react-native-permissions';
 import { logger } from 'utilities/helper';
 import { checkCamera, checkPhoto } from 'utilities/permissions';
 

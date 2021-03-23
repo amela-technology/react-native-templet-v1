@@ -32,12 +32,12 @@ const UserCard = (props: any) => {
                 <StyledText customStyle={styles.name} i18nText={'Error, User not exits'} />
                 <View style={styles.info}>
                     <View style={styles.infoContainer}>
-                        <StyledText customStyle={{ flex: 1 }} i18nText={'Phone: '} />
-                        <StyledText customStyle={{ flex: 3 }} i18nText={'Error, User not exits'} />
+                        <StyledText customStyle={styles.flex1} i18nText={'Phone: '} />
+                        <StyledText customStyle={styles.flex3} i18nText={'Error, User not exits'} />
                     </View>
                     <View style={styles.infoContainerMargin}>
-                        <StyledText customStyle={{ flex: 1 }} i18nText={'Email: '} />
-                        <StyledText customStyle={{ flex: 3 }} i18nText={'Error, User not exits'} />
+                        <StyledText customStyle={styles.flex1} i18nText={'Email: '} />
+                        <StyledText customStyle={styles.flex3} i18nText={'Error, User not exits'} />
                     </View>
                 </View>
             </View>
@@ -50,12 +50,12 @@ const UserCard = (props: any) => {
             <StyledText customStyle={styles.name} originValue={data.name} />
             <View style={styles.info}>
                 <View style={styles.infoContainer}>
-                    <StyledText customStyle={{ flex: 1 }} i18nText={'Phone: '} />
-                    <StyledText customStyle={{ flex: 3 }} originValue={data.phone} />
+                    <StyledText customStyle={styles.flex1} i18nText={'Phone: '} />
+                    <StyledText customStyle={styles.flex3} originValue={data.phone} />
                 </View>
                 <View style={styles.infoContainerMargin}>
-                    <StyledText customStyle={{ flex: 1 }} i18nText={'Email: '} />
-                    <StyledText customStyle={{ flex: 3 }} originValue={data.email} />
+                    <StyledText customStyle={styles.flex1} i18nText={'Email: '} />
+                    <StyledText customStyle={styles.flex3} originValue={data.email} />
                 </View>
             </View>
         </View>
@@ -95,6 +95,12 @@ const styles = StyleSheet.create({
         height: 14,
         backgroundColor: Themes.COLORS.placeHolderGray,
         borderRadius: 6,
+    },
+    flex1: {
+        flex: 1,
+    },
+    flex3: {
+        flex: 3,
     },
 });
 

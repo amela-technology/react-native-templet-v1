@@ -1,27 +1,40 @@
-import React, { useState } from 'react';
-import Images from 'assets/images';
-import { View, SafeAreaView, StyleSheet, Platform } from 'react-native';
-import { StyledButton, StyledImage, StyledInput } from 'components/base';
-import { Themes } from 'assets/themes';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { navigate } from 'navigation/NavigationService';
-import { useTranslation } from 'react-i18next';
-import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { forgotPassword } from 'api/modules/api-app/authenticate';
-import { validateEmail } from 'utilities/validate';
+import { Themes } from 'assets/themes';
+import { StyledButton } from 'components/base';
 import AlertMessage from 'components/base/AlertMessage';
+import StyledInputForm from 'components/base/StyledInputForm';
+import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
+import { navigate } from 'navigation/NavigationService';
+import React, { FunctionComponent } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { requireField } from 'utilities/format';
+import { isIos } from 'utilities/helper';
+import * as yup from 'yup';
 
-const SendEmailScreen: React.FunctionComponent = ({ route }: any) => {
+const SendEmailScreen: FunctionComponent = ({ route }: any) => {
     const { t } = useTranslation();
-    const [email, setEmail] = useState('');
-    const confirm = async () => {
+    const schema = yup.object().shape({
+        email: yup
+            .string()
+            .required(() => requireField('Email'))
+            .email('validateMessage.emailInvalid'),
+    });
+    const form = useForm({
+        mode: 'all',
+        resolver: yupResolver(schema),
+    });
+    const {
+        handleSubmit,
+        formState: { isValid },
+    } = form;
+    const confirm = async ({ email }: any) => {
         try {
-            console.log('validateEmail', validateEmail(email));
-            if (!validateEmail(email)) {
-                return;
-            }
             await forgotPassword(email);
-            navigate(AUTHENTICATE_ROUTE.SENDOTP, { email });
+            navigate(AUTHENTICATE_ROUTE.SEND_OTP, { email });
         } catch (error) {
             AlertMessage(error);
         }
@@ -33,21 +46,23 @@ const SendEmailScreen: React.FunctionComponent = ({ route }: any) => {
                     style={styles.content}
                     contentContainerStyle={styles.contentContainer}
                     enableOnAndroid={true}
-                    enableAutomaticScroll={Platform.OS === 'ios'}
+                    enableAutomaticScroll={isIos}
                     showsVerticalScrollIndicator={false}
                 >
-                    <StyledInput
-                        value={email}
-                        onChangeText={setEmail}
-                        placeholder={t('register.emailPlaceholder')}
-                        keyboardType="email-address"
-                        returnKeyType={'next'}
-                        onSubmitEditing={confirm}
-                    />
+                    <FormProvider {...form}>
+                        <StyledInputForm
+                            name={'email'}
+                            placeholder={t('register.emailPlaceholder')}
+                            keyboardType="email-address"
+                            returnKeyType={'next'}
+                            onSubmitEditing={handleSubmit(confirm)}
+                        />
+                    </FormProvider>
                     <StyledButton
                         title={'sendEmail.sendButtonTitle'}
-                        onPress={confirm}
-                        customStyle={styles.buttonSave}
+                        onPress={handleSubmit(confirm)}
+                        customStyle={[styles.buttonSave, !isValid && { backgroundColor: 'lightgray' }]}
+                        disabled={!isValid}
                     />
                 </KeyboardAwareScrollView>
             </View>

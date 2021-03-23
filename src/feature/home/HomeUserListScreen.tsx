@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
 import StyledHeader from 'components/common/StyledHeader';
 
-const HomeUserListScreen: React.FunctionComponent = () => {
+const HomeUserListScreen: FunctionComponent = () => {
     return (
         <View style={styles.container}>
             <StyledHeader title={'Home User List'} />

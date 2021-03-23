@@ -1,5 +1,5 @@
 import { Themes } from 'assets/themes';
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity, Text } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 
@@ -60,6 +60,6 @@ const styles = ScaledSheet.create({
         color: Themes.COLORS.black,
     },
 });
-export default React.memo(ItemListViewSelected, (prev, next) => {
+export default memo(ItemListViewSelected, (prev, next) => {
     return prev.isActive === next.isActive;
 });

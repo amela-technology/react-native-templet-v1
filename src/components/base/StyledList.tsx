@@ -1,13 +1,22 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { FlatList, FlatListProps, RefreshControl, View, TextStyle, StyleProp, ViewStyle } from 'react-native';
 import { Themes } from 'assets/themes';
+import React, {
+    forwardRef,
+    FunctionComponent,
+    memo,
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
-import NoData from './StyledNoData';
+import { FlatList, FlatListProps, RefreshControl, StyleProp, View, ViewStyle } from 'react-native';
 import StyledIndicator from './StyledIndicator';
+import NoData from './StyledNoData';
 
 interface Props extends FlatListProps<any> {
     [key: string]: any;
-    FlatListComponent?: React.FunctionComponent<any>;
+    FlatListComponent?: FunctionComponent<any>;
     loading?: boolean;
     data: any[];
     loadingMore?: boolean;
@@ -77,7 +86,7 @@ const StyledList = (props: Props, ref: any) => {
         setMomentumScrolled(false);
     }
 
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
         scrollToTop: () => {
             list?.current?.scrollToOffset({ animated: true, offset: 0 });
         },
@@ -137,4 +146,4 @@ const StyledList = (props: Props, ref: any) => {
     );
 };
 
-export default React.memo(React.forwardRef(StyledList));
+export default memo(forwardRef(StyledList));

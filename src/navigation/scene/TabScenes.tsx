@@ -1,23 +1,20 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import navigationConfigs from 'navigation/config/options';
-import { isIos } from 'utilities/helper';
-import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import StyledTabBar from 'navigation/components/StyledTabBar';
-import { useTranslation } from 'react-i18next';
+import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
-
+import AccountView from 'feature/account/AccountView';
+import HomeDataScreen from 'feature/home/HomeDataScreen';
+import HomeDetailScreen from 'feature/home/HomeDetailScreen';
 // Screen
 import HomeScreen from 'feature/home/HomeScreen';
-import HomeDetailScreen from 'feature/home/HomeDetailScreen';
-import HomeDataScreen from 'feature/home/HomeDataScreen';
-import SettingView from 'feature/setting/SettingScreen';
 import HomeUserListScreen from 'feature/home/HomeUserListScreen';
 import NotificationScreen from 'feature/notification/NotificationScreen';
-import AccountView from 'feature/account/AccountView';
-import { View } from 'react-native';
-import { Host } from 'react-native-portalize';
+import SettingView from 'feature/setting/SettingScreen';
+import StyledTabBar from 'navigation/components/StyledTabBar';
+import navigationConfigs from 'navigation/config/options';
+import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { isIos } from 'utilities/helper';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();

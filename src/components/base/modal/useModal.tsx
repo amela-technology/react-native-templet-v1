@@ -118,7 +118,17 @@ const useModal = (): UseModalProps => {
         });
     };
 
-    return { getTopModalElementId, currentModal, add, destroy, onDialogDismissed, update, show, dismiss, dismissAll };
+    return {
+        getTopModalElementId,
+        currentModal,
+        add,
+        destroy,
+        onDialogDismissed,
+        update,
+        show,
+        dismiss,
+        dismissAll,
+    };
 };
 
 export default useModal;

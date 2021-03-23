@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { ActivityIndicator, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { Themes } from 'assets/themes';
 import StyledText from './StyledText';
@@ -16,11 +16,11 @@ interface StyledListNoDataProps {
 const NO_DATA_TEXT = 'No data';
 const RELOAD = 'Reload';
 
-const StyledNoData: React.FunctionComponent<StyledListNoDataProps> = (props: StyledListNoDataProps) => {
+const StyledNoData: FunctionComponent<StyledListNoDataProps> = (props: StyledListNoDataProps) => {
     return (
         <View style={[styles.container, props.customStyle]}>
             {props.loading ? (
-                <View style={{ alignItems: 'center' }}>
+                <View style={styles.loadingContainer}>
                     <ActivityIndicator />
                 </View>
             ) : (
@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
     textReload: {
         margin: 12,
         color: Themes.COLORS.primary,
+    },
+    loadingContainer: {
+        alignItems: 'center',
     },
 });
 

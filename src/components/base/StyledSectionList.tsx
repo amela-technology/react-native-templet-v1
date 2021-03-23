@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { FunctionComponent, memo, useRef, useState } from 'react';
 import { ActivityIndicator, RefreshControl, SectionList, SectionListProps, View } from 'react-native';
 import { Themes } from 'assets/themes';
 import NoData from './StyledNoData';
@@ -8,7 +8,7 @@ interface Props extends SectionListProps<any> {
     loading?: boolean;
     sections: any[];
     noDataText?: string;
-    ListHeaderComponent?: React.FunctionComponent;
+    ListHeaderComponent?: FunctionComponent;
     scrollEnabled?: boolean;
     noDataCanRefresh?: boolean;
     customStyle?: any;
@@ -117,4 +117,4 @@ const StyledSectionList = (props: Props) => {
     );
 };
 
-export default React.memo(StyledSectionList);
+export default memo(StyledSectionList);

@@ -1,13 +1,14 @@
 /* eslint-disable no-nested-ternary */
 import Metrics from 'assets/metrics';
 import React from 'react';
-import { Animated, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { logger } from 'utilities/helper';
 
 const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalWrapperWidth, modalWrapperHeight }: any) => {
     const calculateLength = ({ length, type }: { length?: string | number; type: string }) => {
         if (length && typeof length === 'string') {
             if (!RegExp(/^\d+%$/g).test(length)) {
-                console.error('ModalWrapperWidth or ModalWrapperHeight must be formatted as XX%');
+                logger('ModalWrapperWidth or ModalWrapperHeight must be formatted as XX%', true);
                 return 0;
             }
             return ((type === 'height' ? Metrics.screenHeight : Metrics.screenWidth) * parseFloat(length)) / 100;

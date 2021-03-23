@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 
-const NotificationTabs: React.FunctionComponent = () => {
+const NotificationTabs: FunctionComponent = () => {
     return (
         <View>
             <Text>I am HomeTabs screen</Text>

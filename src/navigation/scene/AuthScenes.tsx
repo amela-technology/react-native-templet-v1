@@ -15,9 +15,9 @@ const AuthStack = () => (
     <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs} keyboardHandlingEnabled={isIos}>
         <MainStack.Screen name={AUTHENTICATE_ROUTE.LOGIN} component={LoginScreen} />
         <MainStack.Screen name={AUTHENTICATE_ROUTE.REGISTER} component={RegisterScreen} />
-        <MainStack.Screen name={AUTHENTICATE_ROUTE.FORGOTPASS} component={ForgotPasswordScreen} />
-        <MainStack.Screen name={AUTHENTICATE_ROUTE.SENDOTP} component={SendOTP} />
-        <MainStack.Screen name={AUTHENTICATE_ROUTE.CHANGEPASS} component={ChangePass} />
+        <MainStack.Screen name={AUTHENTICATE_ROUTE.FORGOT_PASS} component={ForgotPasswordScreen} />
+        <MainStack.Screen name={AUTHENTICATE_ROUTE.SEND_OTP} component={SendOTP} />
+        <MainStack.Screen name={AUTHENTICATE_ROUTE.CHANGE_PASS} component={ChangePass} />
     </MainStack.Navigator>
 );
 

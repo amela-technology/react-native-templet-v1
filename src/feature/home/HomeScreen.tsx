@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useModal from 'components/base/modal/useModal';
@@ -22,12 +22,12 @@ const dataPicker = [
     'label10',
 ];
 
-const HomeScreen: React.FunctionComponent = () => {
+const HomeScreen: FunctionComponent = () => {
     const navigation = useNavigation();
     const modal = useModal();
     const loading = useLoading();
-    const [valuePicker, setValuePicker] = React.useState(dataPicker[0]);
-    const [currentValue, setCurrentValue] = React.useState(0);
+    const [valuePicker, setValuePicker] = useState(dataPicker[0]);
+    const [currentValue, setCurrentValue] = useState(0);
 
     const fakeCallAPI = () => {
         loading.show();

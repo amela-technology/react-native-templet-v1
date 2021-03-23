@@ -15,7 +15,7 @@ const useLoading = () => {
                 <DialogComponent
                     animationIn="fadeIn"
                     animationOut="fadeOut"
-                    style={{ width: '30%', alignSelf: 'center' }}
+                    style={styles.dialogStyle}
                     isVisible={true}
                     {...props}
                 >
@@ -41,7 +41,7 @@ const useLoading = () => {
             <DialogComponent
                 animationIn="fadeIn"
                 animationOut="fadeOut"
-                style={{ width: '30%', alignSelf: 'center' }}
+                style={styles.dialogStyle}
                 isVisible={false}
                 {...props}
             >
@@ -82,6 +82,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    dialogStyle: {
+        width: '30%',
+        alignSelf: 'center',
     },
 });
 

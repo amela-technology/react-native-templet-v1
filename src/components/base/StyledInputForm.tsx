@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 import { StyleProp, TextInputProps, TextStyle, View, ViewStyle } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
@@ -10,10 +10,9 @@ interface FormInputProps extends StyledInputProps {
     name: string;
     rules?: RegisterOptions;
     defaultValue?: string;
-    label?: string;
 }
 
-const StyledInputForm = React.forwardRef((props: FormInputProps, ref: any) => {
+const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
     const { name, rules, defaultValue = '', onChangeText, ...inputProps } = props;
     const formContext = useFormContext();
     const { control, errors } = formContext;

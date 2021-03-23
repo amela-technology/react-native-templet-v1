@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { ActivityIndicator, ActivityIndicatorProps, StyleSheet } from 'react-native';
 import { Themes } from 'assets/themes';
 
-const StyledIndicator: React.FunctionComponent<ActivityIndicatorProps> = (props: ActivityIndicatorProps) => {
+const StyledIndicator: FunctionComponent<ActivityIndicatorProps> = (props: ActivityIndicatorProps) => {
     return <ActivityIndicator color={Themes.COLORS.primary} size={'small'} style={styles.container} {...props} />;
 };
 

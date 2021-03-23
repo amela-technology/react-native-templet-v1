@@ -7,7 +7,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import i18next from 'utilities/i18next';
+import { requireField } from 'utilities/format';
 import { regexPhone } from 'utilities/validate';
 import * as yup from 'yup';
 
@@ -17,9 +17,6 @@ const DEFAULT_FORM = {
     phone: '',
     password: '12345678',
     confirmPassword: '12345678',
-};
-const requireField = (field: string) => {
-    return i18next.t('validateMessage.require', { field }) || '';
 };
 
 const AccountView = () => {
