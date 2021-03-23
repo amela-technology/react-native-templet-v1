@@ -5,6 +5,7 @@ import Size from 'assets/sizes';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import { logger } from 'utilities/helper';
+import { memo } from 'react';
 
 interface StyledTextProps extends TextProps {
     customStyle?: StyleProp<TextStyle>;
@@ -55,4 +56,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default React.memo(StyledText);
+export default memo(StyledText);

@@ -24,7 +24,7 @@ const ModalContent = (props: ModalContentProps) => {
         'label9',
         'label10',
     ];
-    const [valuePicker, setValuePicker] = React.useState(dataPicker[0]);
+    const [valuePicker, setValuePicker] = useState(dataPicker[0]);
     const handleConfirm = (item: string) => {
         setValuePicker(item);
     };

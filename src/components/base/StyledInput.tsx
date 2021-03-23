@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import { Themes } from 'assets/themes';
+import React, { useState, forwardRef, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
+    ColorValue,
+    ReturnKeyTypeOptions,
     StyleProp,
     StyleSheet,
     TextInput,
@@ -7,12 +11,7 @@ import {
     TextStyle,
     View,
     ViewStyle,
-    ReturnKeyTypeOptions,
-    ColorValue,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import Size from 'assets/sizes';
-import { Themes } from 'assets/themes';
 import StyledText from './StyledText';
 
 export interface StyledInputProps extends TextInputProps {
@@ -31,7 +30,7 @@ export interface StyledInputProps extends TextInputProps {
 
 const StyledInput = (props: StyledInputProps, ref: any) => {
     const [isFocused, setIsFocused] = useState(false);
-    const input = React.useRef<TextInput>(null);
+    const input = useRef<TextInput>(null);
     const { t } = useTranslation();
     return (
         <View style={[styles.container, props.containerStyle]}>
@@ -45,7 +44,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 style={[
                     styles.textInput,
                     props.customStyle,
-                    !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
+                    // !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
                 ]}
                 placeholderTextColor={props.placeholderTextColor || Themes.COLORS.placeHolderGray}
                 placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
@@ -58,7 +57,8 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 blurOnSubmit={!!props.customReturnKeyType}
                 {...props}
             />
-            {!!props?.errorMessage && !isFocused && (
+            {!!props?.errorMessage && (
+                // {!!props?.errorMessage && !isFocused && (
                 <StyledText i18nText={props.errorMessage} customStyle={[styles.errorMessage, props.customErrorStyle]} />
             )}
         </View>
@@ -77,9 +77,10 @@ const styles: any = StyleSheet.create({
     errorMessage: {
         fontSize: 12,
         color: Themes.COLORS.borderInputError,
+        marginTop: 5,
     },
     container: {
         marginBottom: 10,
     },
 });
-export default React.forwardRef(StyledInput);
+export default forwardRef(StyledInput);

@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 
-const Logo: React.FunctionComponent = () => {
+const Logo: FunctionComponent = () => {
     return (
         <View>
             <Text>I am Logo</Text>

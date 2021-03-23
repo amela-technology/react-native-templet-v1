@@ -3,7 +3,6 @@ import OneSignal from 'react-native-onesignal';
 import Config from 'react-native-config';
 import { isLogin } from 'utilities/authenticate/AuthenticateService';
 import { store } from 'app-redux/store';
-import { navigate } from 'navigation/NavigationService';
 import { logger } from 'utilities/helper';
 import { notificationRead } from 'api/modules/api-app/notification';
 

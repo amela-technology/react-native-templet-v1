@@ -5,6 +5,7 @@ const common = {
     blue: 'blue',
     placeHolderGray: 'rgba(216, 216, 216, 0.6)',
     borderInputError: '#ff0000',
+    green: 'green',
 };
 
 const Light = {

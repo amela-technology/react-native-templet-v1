@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import i18next from 'i18next';
 import { Alert } from 'react-native';
-import { check, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
+import { check, PERMISSIONS, RESULTS, openSettings, request } from 'react-native-permissions';
 import { isIos, logger } from '../helper';
 
 export const checkCamera = async () => {
@@ -9,9 +9,16 @@ export const checkCamera = async () => {
         const checkPermission = await check(isIos ? PERMISSIONS.IOS.CAMERA : PERMISSIONS.ANDROID.CAMERA);
         if (checkPermission === RESULTS.BLOCKED) {
             showRequestPermission('camera');
+            return false;
         }
+        if (checkPermission === RESULTS.DENIED) {
+            const result = await request(isIos ? PERMISSIONS.IOS.CAMERA : PERMISSIONS.ANDROID.CAMERA);
+            return result === RESULTS.GRANTED;
+        }
+        return true;
     } catch (err) {
         logger(err);
+        return false;
     }
 };
 export const checkPhoto = async () => {
@@ -21,15 +28,43 @@ export const checkPhoto = async () => {
         );
         if (checkPermission === RESULTS.BLOCKED) {
             showRequestPermission('photo');
+            return false;
         }
+        if (checkPermission === RESULTS.DENIED) {
+            const result = await request(
+                isIos ? PERMISSIONS.IOS.PHOTO_LIBRARY : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+            );
+            return result === RESULTS.GRANTED;
+        }
+        return true;
     } catch (err) {
         logger(err);
+        return false;
+    }
+};
+
+export const checkAudio = async () => {
+    try {
+        const checkPermission = await check(isIos ? PERMISSIONS.IOS.MICROPHONE : PERMISSIONS.ANDROID.RECORD_AUDIO);
+        if (checkPermission === RESULTS.BLOCKED) {
+            showRequestPermission('audio');
+            return false;
+        }
+        if (checkPermission === RESULTS.DENIED) {
+            const result = await request(isIos ? PERMISSIONS.IOS.MICROPHONE : PERMISSIONS.ANDROID.RECORD_AUDIO);
+            return result === RESULTS.GRANTED;
+        }
+        return true;
+    } catch (err) {
+        logger(err);
+        return false;
     }
 };
 
 const messages: any = {
     camera: i18next.t('permissions.camera'),
     photo: i18next.t('permissions.photo'),
+    audio: i18next.t('permissions.audio'),
 };
 
 const showRequestPermission = (type: string) => {
@@ -44,7 +79,7 @@ const showRequestPermission = (type: string) => {
             },
             {
                 text: i18next.t('alert.button.yes'),
-                onPress: () => openSettings().catch(() => console.warn('cannot open settings')),
+                onPress: () => openSettings().catch(() => logger('cannot open settings', true)),
             },
         ],
         { cancelable: false },

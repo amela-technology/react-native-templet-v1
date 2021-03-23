@@ -1,13 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useCallback, useEffect, useState } from 'react';
-import socketIO from 'socket.io-client';
-import Config from 'react-native-config';
-import { useDispatch, useSelector } from 'react-redux';
-
-import Images from 'assets/images';
-import { getMessage } from 'api/modules/api-app/chat';
-import { GiftedChat } from 'react-native-gifted-chat';
 import { getProfile } from 'api/modules/api-app/authenticate';
+import { getMessage } from 'api/modules/api-app/chat';
+import Images from 'assets/images';
+import React, { useCallback, useEffect, useState } from 'react';
+import Config from 'react-native-config';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { useSelector } from 'react-redux';
+import socketIO from 'socket.io-client';
 import { logger } from './helper';
 
 export const socket = socketIO(`${Config.API_URL}?role=owner`, { timeout: 3000 });
@@ -16,7 +15,7 @@ export const SocketProvider = ({ children }: any) => {
     async function handleOnConnect() {
         socket.emit('authenticate', { token: userInfo?.token });
         // neu khong authen duoc het han token thi goi lại api de lay refresh token va authen lai
-        socket.on('unauthorized', async function () {
+        socket.on('unauthorized', async () => {
             await getProfile();
             socket.emit('authenticate', { token: userInfo?.token });
         });
@@ -165,7 +164,9 @@ export const useSocket = (id?: string) => {
         });
     };
     const sendMessage = (obj: any) => {
-        socket.emit('client-send-message', obj, (res: any) => {});
+        socket.emit('client-send-message', obj, (res: any) => {
+            logger('client-send-message', false, res);
+        });
     };
 
     return { leaveRoom, messages, onSend, getListMessage, setImage };

@@ -1,10 +1,8 @@
 /* eslint-disable no-nested-ternary */
-import React, { useRef, useState } from 'react';
-import Images from 'assets/images';
-import { StyledIcon, StyledImage, StyledTouchable } from 'components/base';
-import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
+import { StyledImage, StyledTouchable } from 'components/base';
+import React, { memo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleProp, View, ViewStyle, StyleSheet, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import ActionSheet from 'react-native-actionsheet';
 import { logger } from 'utilities/logger';
 import ImageUploader from './ImageUploader';
@@ -69,4 +67,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-export default React.memo(ImagePicker);
+export default memo(ImagePicker);

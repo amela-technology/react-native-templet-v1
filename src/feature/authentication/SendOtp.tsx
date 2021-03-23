@@ -1,21 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, SafeAreaView, StyleSheet } from 'react-native';
-import { StyledButton, StyledImage, StyledText, StyledTouchable } from 'components/base';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import CodeInput from 'react-native-confirmation-code-input';
-import { Themes } from 'assets/themes';
-import AlertMessage from 'components/base/AlertMessage';
 import { checkVerifyCode, forgotPassword, getVerifyCode, register } from 'api/modules/api-app/authenticate';
-import { useTranslation } from 'react-i18next';
-import { setUserInfo } from 'app-redux/userInfo/actions';
-import AuthenticateService from 'utilities/authenticate/AuthenticateService';
-import { navigate } from 'navigation/NavigationService';
+import { Themes } from 'assets/themes';
+import { StyledButton, StyledText, StyledTouchable } from 'components/base';
+import AlertMessage from 'components/base/AlertMessage';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
+import { navigate } from 'navigation/NavigationService';
+import React, { FunctionComponent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import CodeInput from 'react-native-confirmation-code-input';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
-import { useDispatch } from 'react-redux';
 
-const SendOTP: React.FunctionComponent = ({ route }: any) => {
-    const dispatch = useDispatch();
+const SendOTP: FunctionComponent = ({ route }: any) => {
     const [code, setCode] = useState('');
     const { t } = useTranslation();
     const { email, password } = route?.params;
@@ -38,7 +35,7 @@ const SendOTP: React.FunctionComponent = ({ route }: any) => {
             } else {
                 const verifyCode = await checkVerifyCode(email, code);
                 if (verifyCode?.data?.isValid) {
-                    navigate(AUTHENTICATE_ROUTE.CHANGEPASS, { email, code });
+                    navigate(AUTHENTICATE_ROUTE.CHANGE_PASS, { email, code });
                 } else {
                     AlertMessage(t('sendOTPMessage.invalidOTP'));
                 }
@@ -62,7 +59,7 @@ const SendOTP: React.FunctionComponent = ({ route }: any) => {
         }
     };
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={styles.flex1}>
             <KeyboardAwareScrollView enableOnAndroid={true} showsVerticalScrollIndicator={false}>
                 <View style={styles.container}>
                     <CodeInput
@@ -78,7 +75,7 @@ const SendOTP: React.FunctionComponent = ({ route }: any) => {
                         <StyledText customStyle={styles.resend} i18nText="sendOTP.resend" />
                     </StyledTouchable>
                     <StyledButton
-                        customStyle={{ flex: 1 }}
+                        customStyle={styles.flex1}
                         title={route?.params.register ? 'sendOTP.sendForgotPassword' : 'sendOTP.buttonNext'}
                         onPress={confirm}
                     />
@@ -118,6 +115,9 @@ const styles = StyleSheet.create({
         color: Themes.COLORS.black,
         textAlign: 'right',
         width: '100%',
+    },
+    flex1: {
+        flex: 1,
     },
 });
 export default SendOTP;

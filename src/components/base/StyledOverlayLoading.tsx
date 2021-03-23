@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, memo, useEffect } from 'react';
 import { StyleSheet, View, Modal, ActivityIndicator, Keyboard, ViewProps } from 'react-native';
 import { Themes } from 'assets/themes';
 
@@ -6,11 +6,11 @@ interface Props extends ViewProps {
     visible: boolean;
     textContent?: boolean;
     onRequestClose?(): void;
-    children?: React.FunctionComponent;
+    children?: FunctionComponent;
 }
 
 const StyledOverlayLoading = (props: Props) => {
-    React.useEffect(() => {
+    useEffect(() => {
         Keyboard.dismiss();
     }, [props.visible]);
 
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default React.memo(StyledOverlayLoading);
+export default memo(StyledOverlayLoading);

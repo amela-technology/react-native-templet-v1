@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Platform, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import Metrics from 'assets/metrics';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
@@ -6,11 +6,7 @@ import { StyledText } from 'components/base';
 import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
 
-const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
-    state,
-    descriptors,
-    navigation,
-}: BottomTabBarProps) => {
+const StyledTabBar: FunctionComponent<BottomTabBarProps> = ({ state, descriptors, navigation }: BottomTabBarProps) => {
     return (
         <View style={styles.tabContainer}>
             {state.routes.map((route: any, index: any) => {

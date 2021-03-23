@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Themes } from 'assets/themes';
 import { StyledText, StyledTouchable } from '.';
@@ -6,18 +6,21 @@ import { StyledText, StyledTouchable } from '.';
 interface StyledButtonProps {
     title: string;
     customStyle?: StyleProp<ViewStyle>;
-    onPress(): void;
+    onPress(params?: any): void;
     onLongPress?(): void;
+    disabled?: boolean;
 }
 
-const StyledButton: React.FunctionComponent<StyledButtonProps> = (props: StyledButtonProps) => {
+const StyledButton: FunctionComponent<StyledButtonProps> = (props: StyledButtonProps) => {
+    const { title, customStyle, onPress, onLongPress, disabled = false } = props;
     return (
         <StyledTouchable
-            customStyle={[styles.container, props.customStyle]}
-            onPress={props.onPress}
-            onLongPress={props.onLongPress}
+            customStyle={[styles.container, customStyle]}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            disabled={disabled}
         >
-            <StyledText i18nText={props.title} customStyle={styles.title} />
+            <StyledText i18nText={title} customStyle={styles.title} />
         </StyledTouchable>
     );
 };

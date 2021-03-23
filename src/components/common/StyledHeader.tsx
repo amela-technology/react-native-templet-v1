@@ -3,16 +3,16 @@ import Images from 'assets/images';
 import Metrics from 'assets/metrics';
 import { Themes } from 'assets/themes';
 import { StyledIcon, StyledText, StyledTouchable } from 'components/base';
-import * as React from 'react';
+import React, { FunctionComponent, memo, ReactNode, useCallback, useEffect, useState } from 'react';
 import { ImageStyle, ImageURISource, StyleProp, StyleSheet, TextStyle, View } from 'react-native';
 
 const useComponentSize = () => {
-    const [size, setSize] = React.useState<any>({
+    const [size, setSize] = useState<any>({
         width: undefined,
         height: undefined,
     });
 
-    const onLayout = React.useCallback((event) => {
+    const onLayout = useCallback((event) => {
         const { width, height } = event.nativeEvent.layout;
         setSize({ width, height });
     }, []);
@@ -21,7 +21,7 @@ const useComponentSize = () => {
 
 interface StyledHeaderLeadingProps {
     canGoBack?: boolean;
-    customLeading?: React.ReactNode;
+    customLeading?: ReactNode;
     onPressLeading?: () => void;
     backIcon?: ImageURISource;
     backIconCustomStyle?: StyleProp<ImageStyle>;
@@ -32,15 +32,12 @@ interface StyledHeaderLeadingProps {
 
 const StyledHeaderLeading = (props: StyledHeaderLeadingProps) => {
     if (props.customLeading) {
-        const Leading: React.FunctionComponent = props.customLeading as React.FunctionComponent;
+        const Leading: FunctionComponent = props.customLeading as FunctionComponent;
         return <Leading />;
     }
     if (props.canGoBack) {
         return (
-            <StyledTouchable
-                customStyle={{ alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center' }}
-                onPress={props.onPressLeading}
-            >
+            <StyledTouchable customStyle={styles.leadingCanGoBack} onPress={props.onPressLeading}>
                 <StyledIcon
                     source={props.backIcon || Images.icons.back}
                     size={35}
@@ -57,13 +54,13 @@ const StyledHeaderLeading = (props: StyledHeaderLeadingProps) => {
 };
 
 interface StyledHeaderActionProps {
-    customAction?: React.ReactNode;
+    customAction?: ReactNode;
     defaultWidthAction?: number;
 }
 
 const StyledHeaderAction = (props: StyledHeaderActionProps) => {
     if (props.customAction) {
-        const Action: React.FunctionComponent = props.customAction as React.FunctionComponent;
+        const Action: FunctionComponent = props.customAction as FunctionComponent;
         return <Action />;
     }
     return <View style={{ height: 35, width: props.defaultWidthAction || 60 }} />;
@@ -73,18 +70,18 @@ interface StyledHeaderProps extends StyledHeaderLeadingProps, StyledHeaderAction
     title?: string;
 }
 
-const StyledHeader: React.FunctionComponent<StyledHeaderProps> = (props: StyledHeaderProps) => {
+const StyledHeader: FunctionComponent<StyledHeaderProps> = (props: StyledHeaderProps) => {
     const navigation = useNavigation();
     const [sizeLeading, onLayoutLeading] = useComponentSize();
     const [sizeAction, onLayoutAction] = useComponentSize();
-    const [defaultSize, setDefaultSize] = React.useState(0);
+    const [defaultSize, setDefaultSize] = useState(0);
 
     const defaultLeading = () => {
         if (props.onPressLeading) props.onPressLeading();
         else navigation.goBack();
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         setDefaultSize(sizeAction.width > sizeLeading.width ? sizeAction.width : sizeLeading.width);
     }, [sizeLeading, sizeAction]);
 
@@ -121,8 +118,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: Themes.COLORS.white,
     },
+    leadingCanGoBack: {
+        alignSelf: 'flex-start',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 });
 
-export default React.memo(StyledHeader, (prevProps: StyledHeaderProps, nextProps: StyledHeaderProps) => {
+export default memo(StyledHeader, (prevProps: StyledHeaderProps, nextProps: StyledHeaderProps) => {
     return prevProps.title === nextProps.title;
 });

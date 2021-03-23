@@ -1,7 +1,6 @@
 import { useRequest, useUnmount } from 'ahooks';
 import axios, { AxiosRequestConfig } from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import { store } from 'app-redux/store';
+import { useEffect, useState } from 'react';
 
 const { CancelToken } = axios;
 

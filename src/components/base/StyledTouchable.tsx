@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { StyleProp, ViewStyle, Pressable, PressableProps } from 'react-native';
 import { logger } from 'utilities/helper';
 
@@ -11,7 +11,7 @@ interface StyledTouchableProps extends PressableProps {
     onLongPress?(): void;
 }
 
-const StyledTouchable: React.FunctionComponent<StyledTouchableProps> = (props: StyledTouchableProps) => {
+const StyledTouchable: FunctionComponent<StyledTouchableProps> = (props: StyledTouchableProps) => {
     const { customStyle, disabled, children, style } = props;
 
     if (style) {
@@ -20,7 +20,7 @@ const StyledTouchable: React.FunctionComponent<StyledTouchableProps> = (props: S
 
     return (
         <Pressable
-            accessibilityTraits={'button'}
+            accessibilityRole={'button'}
             disabled={disabled}
             android_disableSound={false}
             android_ripple={{ radius: 20 }}

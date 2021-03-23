@@ -1,6 +1,6 @@
 import { StyledListViewSelected } from 'components/base';
-import * as React from 'react';
-import { View } from 'react-native';
+import React, { FunctionComponent, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 const data = [
     { id: 1, name: 'One' },
@@ -8,10 +8,10 @@ const data = [
     { id: 3, name: 'Three' },
     { id: 4, name: 'Four' },
 ];
-const NotificationScreen: React.FunctionComponent = () => {
-    const [arraySelected, setArraySelected] = React.useState<any>([]);
+const NotificationScreen: FunctionComponent = () => {
+    const [arraySelected, setArraySelected] = useState<any>([]);
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.container}>
             <StyledListViewSelected
                 customStyle={{}}
                 data={data}
@@ -22,4 +22,11 @@ const NotificationScreen: React.FunctionComponent = () => {
         </View>
     );
 };
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 export default NotificationScreen;

@@ -1,6 +1,6 @@
-import { useRequest, useUnmount } from 'ahooks';
+import { useRequest } from 'ahooks';
 import axios, { AxiosRequestConfig } from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const { CancelToken } = axios;
 const pageSize = 10;

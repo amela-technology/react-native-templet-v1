@@ -4,6 +4,7 @@ import StyledHeader from 'components/common/StyledHeader';
 import request from 'api/request';
 import { StyledList } from 'components/base';
 import usePaging from 'hooks/usePaging';
+import { Themes } from 'assets/themes';
 
 const getListShift = ({ params }: any): Promise<any> => {
     return request.post('/owner/shift/status', params);
@@ -13,6 +14,11 @@ const HomeDataScreen: React.FunctionComponent = () => {
         getListShift,
         'cacheList',
         { blockStatus: 2 },
+    );
+    const renderItem = ({ index }: any) => (
+        <View style={styles.itemContainer}>
+            <Text>{index}</Text>
+        </View>
     );
     return (
         <View>
@@ -24,11 +30,7 @@ const HomeDataScreen: React.FunctionComponent = () => {
                 refreshing={list?.length ? false : refreshing}
                 data={list}
                 onEndReached={onLoadMore}
-                renderItem={({ item, index }: any) => (
-                    <View style={{ height: 100, backgroundColor: 'green' }}>
-                        <Text>{index}</Text>
-                    </View>
-                )}
+                renderItem={renderItem}
             />
         </View>
     );
@@ -41,6 +43,10 @@ const styles = StyleSheet.create({
     scene: {
         paddingHorizontal: 5,
         flexGrow: 1,
+    },
+    itemContainer: {
+        height: 100,
+        backgroundColor: Themes.COLORS.green,
     },
 });
 
