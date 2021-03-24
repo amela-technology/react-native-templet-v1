@@ -90,4 +90,7 @@ export default {
     picker: {
         pickItem: 'アイテムを選択してください',
     },
+    input: {
+        errorComponent: 'You need wrap input by Form Provider or passing "form = useForm( ... )" into input component',
+    },
 };

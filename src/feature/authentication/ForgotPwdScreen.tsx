@@ -1,4 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { forgotPassword } from 'api/modules/api-app/authenticate';
 import { Themes } from 'assets/themes';
 import { StyledButton } from 'components/base';
@@ -7,25 +6,18 @@ import StyledInputForm from 'components/base/StyledInputForm';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import { navigate } from 'navigation/NavigationService';
 import React, { FunctionComponent } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { requireField } from 'utilities/format';
 import { isIos } from 'utilities/helper';
-import * as yup from 'yup';
+import { regexEmail } from 'utilities/validate';
 
 const SendEmailScreen: FunctionComponent = ({ route }: any) => {
     const { t } = useTranslation();
-    const schema = yup.object().shape({
-        email: yup
-            .string()
-            .required(() => requireField('Email'))
-            .email('validateMessage.emailInvalid'),
-    });
     const form = useForm({
         mode: 'all',
-        resolver: yupResolver(schema),
     });
     const {
         handleSubmit,
@@ -49,15 +41,21 @@ const SendEmailScreen: FunctionComponent = ({ route }: any) => {
                     enableAutomaticScroll={isIos}
                     showsVerticalScrollIndicator={false}
                 >
-                    <FormProvider {...form}>
-                        <StyledInputForm
-                            name={'email'}
-                            placeholder={t('register.emailPlaceholder')}
-                            keyboardType="email-address"
-                            returnKeyType={'next'}
-                            onSubmitEditing={handleSubmit(confirm)}
-                        />
-                    </FormProvider>
+                    <StyledInputForm
+                        name={'email'}
+                        placeholder={t('register.emailPlaceholder')}
+                        keyboardType="email-address"
+                        returnKeyType={'next'}
+                        onSubmitEditing={handleSubmit(confirm)}
+                        form={form}
+                        rules={{
+                            pattern: {
+                                value: regexEmail,
+                                message: 'validateMessage.emailInvalid',
+                            },
+                            required: requireField('Email'),
+                        }}
+                    />
                     <StyledButton
                         title={'sendEmail.sendButtonTitle'}
                         onPress={handleSubmit(confirm)}

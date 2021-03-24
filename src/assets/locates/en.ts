@@ -93,4 +93,7 @@ export default {
         title: 'パスワードを忘れた',
         sendButtonTitle: '次へ',
     },
+    input: {
+        errorComponent: 'You need wrap input by Form Provider or passing "form = useForm( ... )" into input component',
+    },
 };
