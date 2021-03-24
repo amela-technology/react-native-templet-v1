@@ -10,7 +10,7 @@ module.exports = {
         'plugin:import/errors',
     ],
     parser: '@typescript-eslint/parser',
-    plugins: ['prettier', '@typescript-eslint', 'react-hooks', 'import'],
+    plugins: ['prettier', '@typescript-eslint', 'react-hooks', 'import', 'unused-imports'],
     settings: {
         react: {
             version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
@@ -33,7 +33,7 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/prefer-optional-chain': 'error',
         '@typescript-eslint/unbound-method': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/camelcase': 'off',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'off',
