@@ -44,7 +44,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 style={[
                     styles.textInput,
                     props.customStyle,
-                    // !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
+                    !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
                 ]}
                 placeholderTextColor={props.placeholderTextColor || Themes.COLORS.placeHolderGray}
                 placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
@@ -57,8 +57,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 blurOnSubmit={!!props.customReturnKeyType}
                 {...props}
             />
-            {!!props?.errorMessage && (
-                // {!!props?.errorMessage && !isFocused && (
+            {!!props?.errorMessage && !isFocused && (
                 <StyledText i18nText={props.errorMessage} customStyle={[styles.errorMessage, props.customErrorStyle]} />
             )}
         </View>
