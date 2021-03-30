@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { applyMiddleware, compose, createStore } from 'redux';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
 
 // import createSagaMiddleware from 'redux-saga';

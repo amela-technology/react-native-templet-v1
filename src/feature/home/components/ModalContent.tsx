@@ -41,7 +41,6 @@ const ModalContent = (props: ModalContentProps) => {
             <Button
                 title={'test alert'}
                 onPress={() => {
-                    props?.closeModal?.();
                     props?.handleCallback?.();
                 }}
             />
@@ -73,9 +72,12 @@ export default ModalContent;
 
 const styles = StyleSheet.create({
     contModalContent: {
-        width: Metrics.screenWidth * 0.9,
+        width: Metrics.screenWidth,
+        height: Metrics.screenHeight * 0.7,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
 });

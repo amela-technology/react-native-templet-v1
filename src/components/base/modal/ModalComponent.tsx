@@ -1,7 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import Metrics from 'assets/metrics';
-import React from 'react';
-import { Animated, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Themes } from 'assets/themes';
+import React, { useRef } from 'react';
+import { Animated, StyleSheet, TouchableOpacity, View, PanResponder } from 'react-native';
 import { useSelector } from 'react-redux';
 import ModalManager from './ModalManager';
 
@@ -19,6 +20,26 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalId }: 
         useNativeDriver: true,
     }).start();
 
+    const viewRef = useRef();
+    const panResponder = PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderGrant: () => true,
+        onPanResponderMove: (evt, gestureState) => {
+            const deltaMoveY = gestureState.dy > 0 ? gestureState.moveY : gestureState.y0;
+            (viewRef?.current as any).setNativeProps({
+                top: deltaMoveY,
+            });
+        },
+        onPanResponderRelease: (evt, gestureState) => {
+            if (evt.nativeEvent.pageY / Metrics.screenHeight > 0.7) onBackdropPressed();
+            else {
+                (viewRef?.current as any).setNativeProps({
+                    top: Metrics.screenHeight - paramHeight,
+                });
+            }
+        },
+    });
+
     return (
         <View style={styles.contLayoutAndModal}>
             <TouchableOpacity
@@ -27,6 +48,7 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalId }: 
                 style={styles.contBlurLayout}
             />
             <Animated.View
+                ref={viewRef}
                 style={[
                     {
                         transform:
@@ -40,6 +62,11 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalId }: 
                     },
                 ]}
             >
+                {isFromBottom ? (
+                    <View style={styles.contKnob} {...panResponder.panHandlers}>
+                        <View style={styles.knob} />
+                    </View>
+                ) : null}
                 {children}
             </Animated.View>
         </View>
@@ -58,6 +85,22 @@ const styles = StyleSheet.create({
         width: '100%',
         position: 'absolute',
         backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    contKnob: {
+        width: Metrics.screenWidth,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        height: 40,
+        zIndex: 1,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    knob: {
+        height: 8,
+        width: 35,
+        borderRadius: 4,
+        backgroundColor: Themes.COLORS.placeHolderGray,
     },
 });
 

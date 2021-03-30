@@ -5,6 +5,6 @@ export const updateModalList = (data: any) => ({
     data,
 });
 
-export const deleteLastItemModalList = () => ({
+export const resetModalList = () => ({
     type: ActionType.DELETE_LAST_MODALS,
 });

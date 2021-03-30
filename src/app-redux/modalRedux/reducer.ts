@@ -21,11 +21,10 @@ const modalRedux = (state = initialState, action: any) => {
             };
         }
         case ActionType.DELETE_LAST_MODALS: {
-            state.list.pop();
             return {
                 ...state,
                 actionOpening: false,
-                list: state.list,
+                list: [],
             };
         }
         default:

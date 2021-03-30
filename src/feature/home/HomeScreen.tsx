@@ -52,7 +52,7 @@ const HomeScreen: FunctionComponent = () => {
                 <Button
                     title={'Modal'}
                     onPress={() => {
-                        modal.show?.({
+                        modal.show({
                             children: (
                                 <ModalContent
                                     currentValue={currentValue}
@@ -60,9 +60,10 @@ const HomeScreen: FunctionComponent = () => {
                                         alert('Test callback from inside modal');
                                     }}
                                     handleSetValue={setCurrentValue}
-                                    closeModal={() => modal.dismiss?.()}
+                                    closeModal={() => modal.dismiss()}
                                 />
                             ),
+                            isFromBottom: true,
                             onBackdropPress: () => {
                                 modal.dismiss?.();
                             },

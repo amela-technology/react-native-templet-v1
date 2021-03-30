@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import Images from 'assets/images';
 import Picker from 'react-native-picker';
 import Metrics from 'assets/metrics';
 import { useTranslation } from 'react-i18next';
-import { handleUpdateModalList, initPicker } from 'utilities/helper';
+import { initPicker } from 'utilities/helper';
 import modal from 'components/base/modal/ModalManager';
 import { StyledImage, StyledText } from '..';
 import BackdropView from './BackdropView';

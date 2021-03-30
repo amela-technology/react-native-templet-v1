@@ -1,6 +1,6 @@
 import React from 'react';
 import RootSiblings from 'react-native-root-siblings';
-import { deleteLastItemModalList } from 'app-redux/modalRedux/actions';
+import { resetModalList } from 'app-redux/modalRedux/actions';
 import { View } from 'react-native';
 import { store } from 'app-redux/store';
 import ModalComponent from './ModalComponent';
@@ -102,7 +102,9 @@ class ModalManager {
         });
         if (this.modalElements.indexOf(this.currentModal(id) as ModalElement) > -1) {
             this.modalElements.splice(this.modalElements.indexOf(this.currentModal(id) as ModalElement), 1);
-            store.dispatch(deleteLastItemModalList());
+        }
+        if (this.modalElements.length === 0) {
+            store.dispatch(resetModalList());
         }
     };
 
