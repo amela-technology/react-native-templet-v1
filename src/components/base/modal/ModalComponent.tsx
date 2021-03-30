@@ -2,25 +2,14 @@
 import Metrics from 'assets/metrics';
 import React from 'react';
 import { Animated, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { logger } from 'utilities/helper';
+import { useSelector } from 'react-redux';
+import ModalManager from './ModalManager';
 
-const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalWrapperWidth, modalWrapperHeight }: any) => {
-    const calculateLength = ({ length, type }: { length?: string | number; type: string }) => {
-        if (length && typeof length === 'string') {
-            if (!RegExp(/^\d+%$/g).test(length)) {
-                logger('ModalWrapperWidth or ModalWrapperHeight must be formatted as XX%', true);
-                return 0;
-            }
-            return ((type === 'height' ? Metrics.screenHeight : Metrics.screenWidth) * parseFloat(length)) / 100;
-        }
-        if (length && typeof length === 'number') {
-            return length;
-        }
-        return 0;
-    };
-    const paramHeight = calculateLength({ length: modalWrapperHeight, type: 'height' });
-    const paramWidth = calculateLength({ length: modalWrapperWidth, type: 'width' });
-    const paramEndValue = paramHeight ? (isFromBottom ? (Metrics.screenHeight - paramHeight) / 2 : 0) : 0;
+const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalId }: any) => {
+    const modalRedux = useSelector((state: any) => state?.modalRedux);
+    const paramHeight = modalRedux.list[modalId]?.height;
+    const paramWidth = modalRedux.list[modalId]?.width;
+    const paramEndValue = paramHeight ? (isFromBottom ? (Metrics.screenHeight - paramHeight) / paramHeight : 0) : 0;
     const startValue = new Animated.Value(Metrics.screenHeight);
     const endValue = new Animated.Value(paramEndValue);
     const duration = 200;
@@ -40,11 +29,14 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalWrappe
             <Animated.View
                 style={[
                     {
-                        transform: [{ translateY: startValue }],
-                        width: paramWidth,
-                        height: paramHeight,
-                        alignSelf: paramWidth === Metrics.screenWidth ? undefined : 'center',
-                        backgroundColor: 'pink', // To detect the wrapper and the content
+                        transform:
+                            (modalRedux.list[modalId] && modalId < Number(ModalManager.currentModal()?.id)) ||
+                            (!modalRedux.actionOpening && modalId <= Number(ModalManager.currentModal()?.id))
+                                ? []
+                                : [{ translateY: startValue }],
+                        alignSelf: 'center',
+                        position: isFromBottom ? 'absolute' : 'relative',
+                        bottom: isFromBottom ? 0 : undefined,
                     },
                 ]}
             >
