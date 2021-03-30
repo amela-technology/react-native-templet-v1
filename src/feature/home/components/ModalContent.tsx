@@ -1,7 +1,12 @@
+import Metrics from 'assets/metrics';
 import { StyledText } from 'components/base';
+import modal from 'components/base/modal/ModalManager';
 import StyledPicker from 'components/base/picker/StyledPicker';
 import React, { useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import { handleUpdateModalList } from 'utilities/helper';
+import ModalContent2 from './ModalContent2';
 
 interface ModalContentProps {
     currentValue?: number;
@@ -30,7 +35,8 @@ const ModalContent = (props: ModalContentProps) => {
     };
 
     return (
-        <View style={styles.contModalContent}>
+        <View style={styles.contModalContent} onLayout={handleUpdateModalList}>
+            <TextInput style={{ height: 50, width: '100%' }} />
             <StyledText originValue={currentValue.toString()} />
             <Button
                 title={'test alert'}
@@ -47,6 +53,17 @@ const ModalContent = (props: ModalContentProps) => {
                     props?.handleSetValue?.(currentValue + 1);
                 }}
             />
+            <Button
+                title={'Modal'}
+                onPress={() => {
+                    modal.show?.({
+                        children: <ModalContent2 closeModal={() => modal.dismiss?.()} />,
+                        onBackdropPress: () => {
+                            modal.dismiss?.();
+                        },
+                    });
+                }}
+            />
             <Button title={'hide'} onPress={() => props?.closeModal?.()} />
         </View>
     );
@@ -56,7 +73,7 @@ export default ModalContent;
 
 const styles = StyleSheet.create({
     contModalContent: {
-        flex: 1, // Must have flex: 1 in here
+        width: Metrics.screenWidth * 0.9,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',

@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import useModal from 'components/base/modal/useModal';
 import StyledHeader from 'components/common/StyledHeader';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import useLoading from 'components/base/modal/useLoading';
 import { wait } from 'utilities/helper';
 import StyledPicker from 'components/base/picker/StyledPicker';
+import modal from 'components/base/modal/ModalManager';
 import ModalContent from './components/ModalContent';
 
 const dataPicker = [
@@ -24,7 +24,6 @@ const dataPicker = [
 
 const HomeScreen: FunctionComponent = () => {
     const navigation = useNavigation();
-    const modal = useModal();
     const loading = useLoading();
     const [valuePicker, setValuePicker] = useState(dataPicker[0]);
     const [currentValue, setCurrentValue] = useState(0);
@@ -54,7 +53,6 @@ const HomeScreen: FunctionComponent = () => {
                     title={'Modal'}
                     onPress={() => {
                         modal.show?.({
-                            // children: <View />,
                             children: (
                                 <ModalContent
                                     currentValue={currentValue}
@@ -65,8 +63,6 @@ const HomeScreen: FunctionComponent = () => {
                                     closeModal={() => modal.dismiss?.()}
                                 />
                             ),
-                            modalWrapperWidth: '100%',
-                            modalWrapperHeight: 'aaa%',
                             onBackdropPress: () => {
                                 modal.dismiss?.();
                             },
@@ -97,12 +93,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 50,
         paddingHorizontal: 25,
-    },
-    contModalContent: {
-        // flex: 1, // Must have flex: 1 in here
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 });
 

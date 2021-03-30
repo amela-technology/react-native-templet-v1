@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+import { updateModalList } from 'app-redux/modalRedux/actions';
+import { store } from 'app-redux/store';
 import i18next from 'i18next';
 import { Platform } from 'react-native';
 import Picker from 'react-native-picker';
@@ -31,4 +33,13 @@ export function initPicker(params?: any) {
         pickerConfirmBtnText: i18next.t('common.confirm'),
         ...params,
     });
+}
+
+export function handleUpdateModalList(event: any) {
+    store.dispatch(
+        updateModalList({
+            width: event?.nativeEvent?.layout?.width,
+            height: event?.nativeEvent?.layout?.height,
+        }),
+    );
 }

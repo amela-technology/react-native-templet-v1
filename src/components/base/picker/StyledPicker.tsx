@@ -4,9 +4,10 @@ import Images from 'assets/images';
 import Picker from 'react-native-picker';
 import Metrics from 'assets/metrics';
 import { useTranslation } from 'react-i18next';
-import { initPicker } from 'utilities/helper';
+import { handleUpdateModalList, initPicker } from 'utilities/helper';
+import modal from 'components/base/modal/ModalManager';
 import { StyledImage, StyledText } from '..';
-import useModal from '../modal/useModal';
+import BackdropView from './BackdropView';
 
 const DEFAULT_HEIGHT = Metrics.screenHeight * 0.055;
 
@@ -26,7 +27,6 @@ const StyledPicker = (props: PickerProps) => {
     const [currentLabel, setCurrentLabel] = useState(props.label);
     const [item, setItem] = useState(props.currentValue || props.dataList[0]);
     const { t } = useTranslation();
-    const modal = useModal();
 
     const handleConfirm = (data: any) => {
         if (data[0]?.toString() === props.dataList.indexOf(item)?.toString()) {
@@ -46,7 +46,7 @@ const StyledPicker = (props: PickerProps) => {
 
     const handleShowPicker = () => {
         modal.show?.({
-            children: <View />,
+            children: <BackdropView />,
             onBackdropPress: () => {
                 Picker.hide();
                 modal.dismiss?.();
