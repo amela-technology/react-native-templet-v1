@@ -103,9 +103,6 @@ class ModalManager {
         if (this.modalElements.indexOf(this.currentModal(id) as ModalElement) > -1) {
             this.modalElements.splice(this.modalElements.indexOf(this.currentModal(id) as ModalElement), 1);
         }
-        if (this.modalElements.length === 0) {
-            store.dispatch(resetModalList());
-        }
     };
 
     dismissAll = (callback: () => void) => {
