@@ -1,128 +1,93 @@
-import { useRequest, useUnmount } from 'ahooks'
-import axios, { AxiosRequestConfig } from 'axios'
-import { useCallback, useEffect, useState } from 'react'
-import request from 'api/config/request'
+import { useRequest, useUnmount } from 'ahooks';
+import axios, { AxiosRequestConfig } from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { store } from 'app-redux/store';
 
-const { CancelToken } = axios
+const { CancelToken } = axios;
 
-async function requestPaging(config: AxiosRequestConfig): Promise<{ success: boolean }> {
-    return await request.request(config)
-}
-const SIZE_LIMIT = 25
-const usePaging = (url: any, initialParams?: any, onSuccess?: any, onError?: any) => {
-    const [refreshing, setRefreshing] = useState(false)
-    const [loadingMore, setLoadingMore] = useState(false)
-    const [pageIndex, setPageIndex] = useState(1)
-    const [list, setList] = useState<Array<any>>([])
-    const [error, setError] = useState<any>()
-    const [params, setParams] = useState<any>(initialParams)
-    const [noMore, setNoMore] = useState(false)
-    const source = CancelToken.source()
+const SIZE_LIMIT = 10;
 
-    const handleOnSuccess = useCallback(
-        (data: any, params: any) => {
-            const responseData = data.data || {}
-            const newList: [] = responseData.data || []
-            if (refreshing) {
-                setList(newList)
-            } else if (newList.length > 0) {
-                setList([...list, ...newList])
-            }
-            setNoMore(pageIndex >= responseData?.totalPage)
-            setRefreshing(false)
-            setLoadingMore(false)
-            setError(null)
-            onSuccess?.(data, params)
-        },
-        [onSuccess, pageIndex, params, refreshing],
-    )
-    const handleOnError = useCallback(
-        (e: any, params: any) => {
-            setError(error)
-            setRefreshing(false)
-            setLoadingMore(false)
-            onError?.(e, params)
-        },
-        [onError, pageIndex, refreshing, params],
-    )
-
-    const umiRequest: any = useRequest(requestPaging, {
-        loadMore: false,
-        manual: true,
-        onSuccess: handleOnSuccess,
-        onError: handleOnError,
-        defaultLoading: true,
-    })
-
-    const runRequest = useCallback(
-        (params?: any) => {
-            umiRequest.run({
-                url,
-                method: 'POST',
-                data: {
-                    pageIndex,
-                    pageSize: SIZE_LIMIT,
-                    ...params,
-                },
-                config: {
-                    cancelToken: source.token,
-                },
-            })
-        },
-        [pageIndex, params, source],
-    )
+const usePaging = (
+    requestPaging: (config: AxiosRequestConfig) => Promise<any>,
+    initialParams?: any,
+    onSuccess?: (data?: any, cbParams?: any) => void,
+    onError?: (error: Error, cbParams?: any) => void,
+) => {
+    const [pagingData, _setPagingData] = useState({
+        refreshing: false,
+        loadingMore: false,
+        pageIndex: 1,
+        list: [],
+        noMore: false,
+    });
+    const setPagingData = (data: any) => {
+        _setPagingData(data);
+    };
+    const [params, setParams] = useState<any>(initialParams);
     useEffect(() => {
-        if (pageIndex > 1) {
-            setLoadingMore(true)
-        }
-        runRequest({
-            pageIndex,
-            pageSize: SIZE_LIMIT,
-            ...params,
-        })
-    }, [pageIndex])
-
+        runRequest(pagingData.pageIndex, SIZE_LIMIT, params);
+    }, [pagingData.pageIndex]);
     useEffect(() => {
-        if (!umiRequest.loading) {
-            onRefresh()
-        }
-    }, [params])
+        onRefresh();
+    }, [params]);
+    const handleOnSuccess = (data: any) => {
+        const responseData = data || {};
+        const newList: [] = responseData.data || [];
 
-    // useEffect(() => {
-    //     if (refreshing) {
-    //         console.log('refresh')
-    //         if (pageIndex > 1) {
-    //             setPageIndex(1)
-    //         }
-    //         if (pageIndex === 1) {
-    //             runRequest({
-    //                 pageIndex: 1,
-    //                 pageSize: SIZE_LIMIT,
-    //                 ...params,
-    //             })
-    //         }
-    //     }
-    // }, [refreshing, params, pageIndex])
-    useUnmount(() => {
-        source.cancel('useEffect cleanup...')
-    })
-    const onRefresh = useCallback(() => {
-        setRefreshing(true)
-        if (pageIndex > 1) {
-            setPageIndex(1)
+        if (pagingData.pageIndex === 1) {
+            setPagingData({
+                ...pagingData,
+                list: newList,
+                noMore: pagingData.pageIndex >= responseData?.totalPages,
+                refreshing: false,
+                loadingMore: false,
+            });
+        } else if (newList.length > 0) {
+            setPagingData({
+                ...pagingData,
+                list: [...pagingData.list, ...newList],
+                noMore: pagingData.pageIndex >= responseData?.totalPages,
+                refreshing: false,
+                loadingMore: false,
+            });
+        }
+    };
+    // config request paging
+    const runRequest = async (requestPageIndex: number, pageSize?: number, otherParams?: any) => {
+        const res = await requestPaging({
+            params: {
+                pageIndex: requestPageIndex,
+                pageSize: pageSize || SIZE_LIMIT,
+                ...otherParams,
+            },
+        });
+        handleOnSuccess(res);
+    };
+    const onRefresh = () => {
+        if (pagingData.pageIndex > 1) {
+            setPagingData({ ...pagingData, refreshing: true, pageIndex: 1 });
         } else {
-            runRequest({
-                pageIndex: 1,
-                pageSize: SIZE_LIMIT,
-                ...params,
-            })
+            runRequest(1, SIZE_LIMIT, params);
         }
-    }, [params, pageIndex])
-    const onLoadMore = useCallback(() => {
-        if (!loadingMore) {
-            setPageIndex(pageIndex + 1)
+    };
+
+    const onLoadMore = () => {
+        if (!pagingData.noMore) {
+            setPagingData({
+                ...pagingData,
+                loadingMore: true,
+                pageIndex: pagingData.pageIndex + 1,
+            });
         }
-    }, [pageIndex, loadingMore])
-    return { ...umiRequest, list, noMore, refreshing, loadingMore, onRefresh, onLoadMore, setParams, setList }
-}
-export default usePaging
+    };
+    return {
+        pagingData,
+        onRefresh,
+        onLoadMore,
+        params,
+        setParams,
+        _setPagingData,
+    };
+};
+
+export default usePaging;
