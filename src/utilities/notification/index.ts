@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import OneSignal from 'react-native-onesignal';
-import Config from 'react-native-config';
-import { isLogin } from 'utilities/authenticate/AuthenticateService';
-import { store } from 'app-redux/store';
-import { logger } from 'utilities/helper';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { notificationRead } from 'api/modules/api-app/notification';
+import { store } from 'app-redux/store';
+import { useEffect } from 'react';
+import Config from 'react-native-config';
+import OneSignal, { NotificationReceivedEvent } from 'react-native-onesignal';
+import { isLogin } from 'utilities/authenticate/AuthenticateService';
+import { logger } from 'utilities/helper';
 
 export const enumType = {
     System: 0,
@@ -36,13 +37,15 @@ export async function onMoveNavigation(data: any) {
 }
 export function handleNavigateNotification(data: any) {
     if (isLogin()) {
-        const payload = data?.notification?.payload?.additionalData;
-        onMoveNavigation(payload);
+        const { additionalData } = data?.notification;
+        onMoveNavigation(additionalData);
     }
 }
 
-function onReceived() {
-    logger('onReceived');
+function onReceived(data: NotificationReceivedEvent) {
+    logger('onReceived', undefined, data);
+    const notify = data.getNotification();
+    setTimeout(() => data.complete(notify), 0); // must need to show notify in tab bar
 }
 
 export const useOnesignal = (user?: any) => {
@@ -52,25 +55,27 @@ export const useOnesignal = (user?: any) => {
     }
     useEffect(() => {
         try {
-            const iosSetting = {
-                kOSSettingsKeyAutoPrompt: true,
-            };
-            OneSignal.init(Config.ONE_SIGNAL_APP_ID, iosSetting);
-            OneSignal.inFocusDisplaying(2); // show notification
-            OneSignal.registerForPushNotifications();
+            OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
+            // kOSSettingsKeyAutoPrompt is deprecated. If you omitted this previously or set it to true, you will now need to prompt the user by calling
+            OneSignal.promptForPushNotificationsWithUserResponse();
+            // registerForPushNotifications(): This is achieved by existing function promptForPushNotificationsWithUserResponse().
+            // OneSignal.registerForPushNotifications();
+
+            // inFocusDisplaying(): This was most likely set to 2 which means no additional changes need as this is the default in 4.x. Simply remove the function call.
+            // OneSignal.inFocusDisplaying(2); // show notification
+
             if (isLogin()) {
                 pushTagMember(user?.id);
             } else {
                 deleteTagOneSignal();
             }
-            OneSignal.addEventListener('received', onReceived);
-            OneSignal.addEventListener('opened', handleNavigateNotification);
+            OneSignal.setNotificationWillShowInForegroundHandler(onReceived);
+            OneSignal.setNotificationOpenedHandler(handleNavigateNotification);
         } catch (error) {
             logger(error);
         }
         return () => {
-            OneSignal.removeEventListener('received', onReceived);
-            OneSignal.removeEventListener('opened', handleNavigateNotification);
+            OneSignal.clearHandlers();
         };
     }, []);
 };
