@@ -54,7 +54,7 @@ Add this line to `Info.plist`:
 ```
 
 Add to `Podfile`:
-``` 
+```
 target 'YourAwesomeProject' do
 #... other code - add two line below
 permissions_path = '../node_modules/react-native-permissions/ios'
@@ -155,7 +155,8 @@ Link assets and font from **src/assets** to Native project
 │   │   │   ├── modal
 │   │   │   │   ├── DialogComponent.tsx
 │   │   │   │   ├── ModalComponent.tsx
-│   │   │   │   ├── useLoading.tsx
+│   │   │   │   ├── ModalManager.tsx
+│   │   │   │   └── useLoading.tsx
 │   │   │   │   └── useModal.tsx
 │   │   │   ├── picker
 │   │   │   │   └── StyledPicker.tsx
