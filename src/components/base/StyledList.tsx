@@ -28,14 +28,11 @@ interface Props extends FlatListProps<any> {
     noDataTextI18Key?: any;
     noDataStyle?: StyleProp<ViewStyle>;
     customStyle?: any;
-
     onLoadMore?(): void;
-
     onNoDataRefresh?(): void;
 }
 
 const StyledList = (props: Props, ref: any) => {
-    const [momentumScrolled, setMomentumScrolled] = useState(false);
     const list = useRef<FlatList>(null);
     const { t } = useTranslation();
     const { loading, loadingMore, data, ListHeaderComponent, refreshing, customStyle } = props;
@@ -44,8 +41,6 @@ const StyledList = (props: Props, ref: any) => {
 
     if (!hasData) {
         contentContainerStyle.flex = 1;
-        // contentContainerStyle.alignItems = 'center'
-        // contentContainerStyle.justifyContent = 'center'
     }
 
     let styles: StyleProp<ViewStyle>;
@@ -63,27 +58,9 @@ const StyledList = (props: Props, ref: any) => {
         if (props.onRefresh) props.onRefresh();
     }
 
-    // Bởi vì onEnReached call nhiều lần nên phải trick để chỉ call 1 lần thôi
-    useEffect(() => {
-        if (momentumScrolled) {
-            setMomentumScrolled(true);
-            if (props.onLoadMore) props.onLoadMore();
-        }
-    }, [momentumScrolled]);
-
-    function handleEndReached(info: any) {
-        if (!momentumScrolled) {
-            setMomentumScrolled(true);
-        }
-    }
-
     function handleNoDataRefresh() {
         const { onNoDataRefresh } = props;
         if (onNoDataRefresh) onNoDataRefresh();
-    }
-
-    function onMomentumScrollBegin() {
-        setMomentumScrolled(false);
     }
 
     useImperativeHandle(ref, () => ({
@@ -126,9 +103,7 @@ const StyledList = (props: Props, ref: any) => {
             contentContainerStyle={styles}
             keyExtractor={keyExtractor}
             initialNumToRender={10}
-            // onEndReached={handleEndReached}
             onEndReachedThreshold={0.01}
-            onMomentumScrollBegin={onMomentumScrollBegin}
             ListEmptyComponent={renderNoData}
             showsVerticalScrollIndicator={false}
             refreshControl={

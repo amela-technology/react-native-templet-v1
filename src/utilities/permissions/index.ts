@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 import i18next from 'i18next';
 import { Alert } from 'react-native';
+import Config from 'react-native-config';
 import { check, PERMISSIONS, RESULTS, openSettings, request } from 'react-native-permissions';
 import { isIos, logger } from '../helper';
 
@@ -15,7 +16,7 @@ export const checkCamera = async () => {
             const result = await request(isIos ? PERMISSIONS.IOS.CAMERA : PERMISSIONS.ANDROID.CAMERA);
             return result === RESULTS.GRANTED;
         }
-        if(checkPermission === RESULTS.UNAVAILABLE) {
+        if (checkPermission === RESULTS.UNAVAILABLE) {
             showPermissionUnavailable('camera');
             return false;
         }
@@ -40,7 +41,7 @@ export const checkPhoto = async () => {
             );
             return result === RESULTS.GRANTED;
         }
-        if(checkPermission === RESULTS.UNAVAILABLE) {
+        if (checkPermission === RESULTS.UNAVAILABLE) {
             showPermissionUnavailable('photo');
             return false;
         }
@@ -62,7 +63,7 @@ export const checkAudio = async () => {
             const result = await request(isIos ? PERMISSIONS.IOS.MICROPHONE : PERMISSIONS.ANDROID.RECORD_AUDIO);
             return result === RESULTS.GRANTED;
         }
-        if(checkPermission === RESULTS.UNAVAILABLE) {
+        if (checkPermission === RESULTS.UNAVAILABLE) {
             showPermissionUnavailable('audio');
             return false;
         }
@@ -81,7 +82,7 @@ const messages: any = {
 
 const showRequestPermission = (type: string) => {
     Alert.alert(
-        'Demo App',
+        Config.APP_NAME,
         messages[type],
         [
             {
@@ -98,15 +99,12 @@ const showRequestPermission = (type: string) => {
     );
 };
 
-const messagesUnavailable : any = {
+const messagesUnavailable: any = {
     camera: i18next.t('permissions.camera'),
     photo: i18next.t('permissions.photo'),
     audio: i18next.t('permissions.audio'),
 };
 
 const showPermissionUnavailable = (type: string) => {
-    Alert.alert(
-        'Demo App',
-        messagesUnavailable[type],
-    );
-}
+    Alert.alert(Config.APP_NAME, messagesUnavailable[type]);
+};

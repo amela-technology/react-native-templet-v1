@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import StyledHeader from 'components/common/StyledHeader';
 import request from 'api/request';
@@ -7,14 +7,10 @@ import usePaging from 'hooks/usePaging';
 import { Themes } from 'assets/themes';
 
 const getListShift = ({ params }: any): Promise<any> => {
-    return request.post('/owner/shift/status', params);
+    return request.post('/owner/shift/status', { params });
 };
-const HomeDataScreen: React.FunctionComponent = () => {
-    const { onLoadMore, onRefresh, list, noMore, refreshing, loadingMore, setParams, setList } = usePaging(
-        getListShift,
-        'cacheList',
-        { blockStatus: 2 },
-    );
+const HomeDataScreen: FunctionComponent = () => {
+    const { onLoadMore, onRefresh, pagingData } = usePaging(getListShift, { blockStatus: 2 });
     const renderItem = ({ index }: any) => (
         <View style={styles.itemContainer}>
             <Text>{index}</Text>
@@ -26,9 +22,9 @@ const HomeDataScreen: React.FunctionComponent = () => {
             <StyledList
                 contentContainerStyle={styles.scene}
                 onRefresh={onRefresh}
-                loading={loadingMore}
-                refreshing={list?.length ? false : refreshing}
-                data={list}
+                loading={pagingData.loadingMore}
+                refreshing={pagingData.list?.length ? false : pagingData.refreshing}
+                data={pagingData.list}
                 onEndReached={onLoadMore}
                 renderItem={renderItem}
             />

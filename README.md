@@ -48,13 +48,15 @@ Below you'll find information about performing common tasks.
 ## Note: Fix error "No permission handled detected".
 
 Add this line to `Info.plist`:
+
 ```
 <key>NSCameraUsageDescription</key>
 <string>YOUR TO REQUEST CAMERA PERMISSION</string>
 ```
 
 Add to `Podfile`:
-``` 
+
+```
 target 'YourAwesomeProject' do
 #... other code - add two line below
 permissions_path = '../node_modules/react-native-permissions/ios'
@@ -62,8 +64,8 @@ pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
 #... other code - add two line above
 end
 ```
-Run `yarn` and `rebuild project`
 
+Run `yarn` and `rebuild project`
 
 ## Getting Started Android
 
@@ -163,6 +165,7 @@ Link assets and font from **src/assets** to Native project
 │   │   │   ├── StyledIcon.tsx
 │   │   │   ├── StyledImage.tsx
 │   │   │   ├── StyledInput.tsx
+│   │   │   ├── StyledInputForm.tsx
 │   │   │   ├── StyledList.tsx
 │   │   │   ├── StyledNoData.tsx
 │   │   │   ├── StyledOverlayLoading.tsx
