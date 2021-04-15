@@ -13,3 +13,9 @@ export const toLocalStringTime = (date: Date): string => {
 export const requireField = (field: string) => {
     return i18next.t('validateMessage.require', { field }) || '';
 };
+
+export const getFirstName = (titleName: string) => {
+    let details = [];
+    details = titleName.split(' ');
+    return details[0].charAt(0) + details[details.length - 1].charAt(0);
+};
