@@ -53,10 +53,13 @@ request.interceptors.response.use(
     async (error: any) => {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
+
         const { response } = error || {}
         const { data } = response || {}
         const { errorMessage, errorKey, errorCode } = data || {}
-
+        if(error.message === 'common.networkError'){
+            return Promise.reject(error)
+        }
         const originalRequest = error.config
         if (
             ((error.response && error.response.status === 401) || errorMessage === 'Token_Expire') &&
