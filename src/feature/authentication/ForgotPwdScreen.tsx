@@ -12,7 +12,7 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { requireField } from 'utilities/format';
 import { isIos } from 'utilities/helper';
-import { regexEmail } from 'utilities/validate';
+import { REGEX_EMAIL } from 'utilities/validate';
 
 const SendEmailScreen: FunctionComponent = ({ route }: any) => {
     const { t } = useTranslation();
@@ -43,21 +43,21 @@ const SendEmailScreen: FunctionComponent = ({ route }: any) => {
                 >
                     <StyledInputForm
                         name={'email'}
-                        placeholder={t('register.emailPlaceholder')}
+                        placeholder={t('authen.register.emailPlaceholder')}
                         keyboardType="email-address"
                         returnKeyType={'next'}
                         onSubmitEditing={handleSubmit(confirm)}
                         form={form}
                         rules={{
                             pattern: {
-                                value: regexEmail,
-                                message: 'validateMessage.emailInvalid',
+                                value: REGEX_EMAIL,
+                                message: 'error.emailInvalid',
                             },
                             required: requireField('Email'),
                         }}
                     />
                     <StyledButton
-                        title={'sendEmail.sendButtonTitle'}
+                        title={'authen.sendEmail.sendButtonTitle'}
                         onPress={handleSubmit(confirm)}
                         customStyle={[styles.buttonSave, !isValid && { backgroundColor: 'lightgray' }]}
                         disabled={!isValid}
