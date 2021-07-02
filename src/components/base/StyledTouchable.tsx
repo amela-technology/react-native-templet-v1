@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StyleProp, ViewStyle, Pressable, PressableProps } from 'react-native';
 import { logger } from 'utilities/helper';
+import { throttle } from 'lodash';
 
 interface StyledTouchableProps extends PressableProps {
     customStyle?: StyleProp<ViewStyle>;
@@ -9,14 +10,20 @@ interface StyledTouchableProps extends PressableProps {
     onPressIn?(): void;
     onPressOut?(): void;
     onLongPress?(): void;
+    throttleTime?: number;
 }
 
+const configThrottle = { trailing: false };
+const onPressDefault = () => null;
+
 const StyledTouchable: FunctionComponent<StyledTouchableProps> = (props: StyledTouchableProps) => {
-    const { customStyle, disabled, children, style } = props;
+    const { customStyle, disabled, children, style, throttleTime = 500, onPress = onPressDefault } = props;
 
     if (style) {
         logger('You should use customStyle to implement this component to avoid conflict', true);
     }
+
+    const handlePress = throttle(onPress, throttleTime, configThrottle);
 
     return (
         <Pressable
@@ -33,6 +40,7 @@ const StyledTouchable: FunctionComponent<StyledTouchableProps> = (props: StyledT
                 customStyle,
             ]}
             {...props}
+            onPress={handlePress}
         >
             {children}
         </Pressable>

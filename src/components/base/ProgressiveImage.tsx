@@ -1,6 +1,8 @@
+import Images from 'assets/images';
 import { Themes } from 'assets/themes';
-import * as React from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Animated, Image, ImageProps, ImageSourcePropType, StyleSheet, View } from 'react-native';
+import { staticValue } from 'utilities/staticData';
 
 const styles = StyleSheet.create({
     imageOverlay: {
@@ -16,27 +18,37 @@ interface ProgressiveImageProps extends ImageProps {
     thumbSource?: ImageSourcePropType;
 }
 
-const ProgressiveImage: React.FunctionComponent<ProgressiveImageProps> = (props: ProgressiveImageProps) => {
-    const DEFAULT_IMAGE = { uri: 'https://medifactia.com/wp-content/uploads/2018/01/placeholder.png' };
-    const { thumbSource = DEFAULT_IMAGE, source, style } = props;
-    const [thumbnailAnimated] = React.useState(new Animated.Value(0));
-    const [imageAnimated] = React.useState(new Animated.Value(0));
-    const [error, setError] = React.useState<boolean>(false);
+const ProgressiveImage: FunctionComponent<ProgressiveImageProps> = (props: ProgressiveImageProps) => {
+    const { defaultImage } = Images.photo;
+    const { thumbSource = defaultImage, source = defaultImage, style } = props;
+    const [thumbnailAnimated] = useState(new Animated.Value(0));
+    const [imageAnimated] = useState(new Animated.Value(0));
+    const [error, setError] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (error) {
+            setError(false);
+        }
+    }, [source]);
+
     const handleThumbnailLoad = () => {
         Animated.timing(thumbnailAnimated, {
             toValue: 1,
             useNativeDriver: true,
+            duration: staticValue.TIME_IMAGE_LOAD,
         }).start();
     };
+
     const onImageLoad = () => {
         Animated.timing(imageAnimated, {
             toValue: 1,
             useNativeDriver: true,
+            duration: staticValue.TIME_IMAGE_LOAD,
         }).start();
     };
 
     if (error) {
-        return <Image {...props} source={DEFAULT_IMAGE} style={[style]} />;
+        return <Image {...props} source={defaultImage} style={[style]} />;
     }
 
     return (
@@ -44,7 +56,6 @@ const ProgressiveImage: React.FunctionComponent<ProgressiveImageProps> = (props:
             <Animated.Image
                 {...props}
                 source={thumbSource}
-                // onError={() => setError(true)}
                 style={[style, { opacity: thumbnailAnimated }]}
                 onLoad={handleThumbnailLoad}
                 blurRadius={1}

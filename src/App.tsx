@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { ActivityIndicator, LogBox } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -9,21 +9,28 @@ import { navigationRef } from 'navigation/NavigationService';
 import Navigation from 'navigation/scene/RootScenes';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import APIProvider from 'utilities/context/APIProvider';
+import { addMenuClearAsyncStorage } from 'utilities/helper';
 
 LogBox.ignoreLogs(['Require cycle:']);
 
-const App: React.FunctionComponent = () => (
-    <Provider store={store}>
-        <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-            <APIProvider>
-                <RootSiblingParent>
-                    <NavigationContainer ref={navigationRef}>
-                        <Navigation />
-                    </NavigationContainer>
-                </RootSiblingParent>
-            </APIProvider>
-        </PersistGate>
-    </Provider>
-);
+const App: FunctionComponent = () => {
+    useEffect(() => {
+        addMenuClearAsyncStorage();
+    }, []);
+
+    return (
+        <Provider store={store}>
+            <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+                <APIProvider>
+                    <RootSiblingParent>
+                        <NavigationContainer ref={navigationRef}>
+                            <Navigation />
+                        </NavigationContainer>
+                    </RootSiblingParent>
+                </APIProvider>
+            </PersistGate>
+        </Provider>
+    );
+};
 
 export default App;
