@@ -4,13 +4,15 @@ import { useIsFocused } from '@react-navigation/native';
 import { getMessage } from 'api/modules/api-app/chat';
 import Images from 'assets/images';
 import { StyledIcon } from 'components/base';
-import ImagePicker from 'components/common/ImagePicker';
+import { logger } from 'utilities/helper';
+// import ImagePicker from 'components/common/ImagePicker';
 import StyledHeader from 'components/common/StyledHeader';
 import { View, ActivityIndicator, Text } from 'react-native';
 import { GiftedChat, Composer, Send, Bubble } from 'react-native-gifted-chat';
 import { ScaledSheet, verticalScale } from 'react-native-size-matters';
 import { useSelector } from 'react-redux';
 import { useSocket } from 'utilities/SocketProvider';
+import { error } from 'react-native-gifted-chat/lib/utils';
 
 const ChatScreen = ({ route }: any) => {
     const { conversationId: id, name } = route?.params;
@@ -51,8 +53,8 @@ const ChatScreen = ({ route }: any) => {
         try {
             const fromTime = messages.length > 0 ? messages[messages.length - 1].createdAt : new Date().getTime();
             getListMessage(fromTime);
-        } catch (error) {
-            console.log();
+        } catch (e) {
+            logger(e);
         }
     };
     const renderSend = (props: any) => {
@@ -65,9 +67,9 @@ const ChatScreen = ({ route }: any) => {
     const renderComposer = (props: any) => {
         return (
             <View style={styles.composer}>
-                <ImagePicker setImage={setImage}>
+                {/* <ImagePicker setImage={setImage}>
                     <StyledIcon customStyle={{ marginLeft: 3 }} source={Images.icons.icPickImage} size={30} />
-                </ImagePicker>
+                </ImagePicker> */}
 
                 <Composer {...props} multiline textInputStyle={styles.input} placeholderTextColor={'#D2D2D2'} />
             </View>

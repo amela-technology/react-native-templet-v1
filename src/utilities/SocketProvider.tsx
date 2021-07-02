@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { getProfile } from 'api/modules/api-app/authenticate';
 import { getMessage } from 'api/modules/api-app/chat';
 import Images from 'assets/images';
@@ -90,7 +89,7 @@ export const useSocket = (id?: string) => {
     }, [image, conversationId]);
     const formatMessage = (item: any) => {
         return {
-            _id: item?.createdAt || item?._id,
+            _id: item?.createdAt || item?.id,
             text: item?.messageType === 0 && item?.body,
             createdAt: item?.createdAt,
             user: {

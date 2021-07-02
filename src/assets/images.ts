@@ -13,6 +13,8 @@ const Images = {
             check: require('./icon/ic_check_radio.png'),
             uncheck: require('./icon/ic_uncheck_radio.png'),
         },
+        avatar: {},
+        icSendMess: {},
     },
     photo: {},
 };

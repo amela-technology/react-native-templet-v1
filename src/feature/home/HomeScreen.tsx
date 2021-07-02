@@ -58,9 +58,9 @@ const HomeScreen: FunctionComponent = () => {
                             children: (
                                 <ModalContent
                                     currentValue={currentValue}
-                                    handleCallback={() => {
-                                        alert('Test callback from inside modal');
-                                    }}
+                                    // handleCallback={() => {
+                                    //     alert('Test callback from inside modal');
+                                    // }}
                                     handleSetValue={setCurrentValue}
                                     closeModal={() => modal.dismiss?.()}
                                 />
