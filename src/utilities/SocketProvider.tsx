@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import { getProfile } from 'api/modules/api-app/authenticate';
-import { getMessage } from 'api/modules/api-app/chat';
 import Images from 'assets/images';
 import React, { useCallback, useEffect, useState } from 'react';
 import Config from 'react-native-config';
@@ -54,7 +53,7 @@ export const useSocket = (id?: string) => {
     const userInfo = useSelector((state: any) => state?.userInfo);
     const [messages, setMessages] = useState<any>([]);
     // tuy vao tung api detail user User Data se khac nhau
-    const [dataUser, setUser] = useState({
+    const [dataUser] = useState({
         _id: Number(`1${userInfo?.honbuId}`),
         name: userInfo?.honbuName,
     });
@@ -98,7 +97,7 @@ export const useSocket = (id?: string) => {
                 avatar:
                     listStaff?.find(
                         (staff: any) => Number(`2${staff?.staffId}`) === Number(`${item?.memberType}${item?.memberId}`),
-                    )?.photo?.[0] || Images.icons?.avatar,
+                    )?.photo?.[0] || Images.icons?.back,
                 name:
                     listStaff?.find(
                         (staff: any) => Number(`2${staff?.staffId}`) === Number(`${item?.memberType}${item?.memberId}`),
@@ -107,19 +106,8 @@ export const useSocket = (id?: string) => {
             image: item?.messageType === 1 && item?.body,
         };
     };
-    const getListMessage = async (time?: any) => {
-        const params = {
-            conversationId,
-            lastTime: time || new Date().getTime(),
-            pageSize: 10,
-        };
-        const responseMessage = await getMessage(params);
-        const messagesNew = responseMessage?.data?.data.map((item: any) => {
-            return formatMessage(item);
-        });
-        setMessages((previousMessages: any) => {
-            return GiftedChat.append(messagesNew, previousMessages);
-        });
+    const getListMessage = async () => {
+        return 0;
     };
     const onSend = useCallback(
         (mess: any = [], messageType = 0) => {
@@ -145,7 +133,7 @@ export const useSocket = (id?: string) => {
                 conversationId,
                 lastTime: new Date().getTime(),
             },
-            (res: any) => {
+            () => {
                 cb?.();
             },
         );
@@ -159,7 +147,7 @@ export const useSocket = (id?: string) => {
             });
         });
         socket.off('reconnect');
-        socket.on('reconnect', (attempt: any) => {
+        socket.on('reconnect', () => {
             emitJoinRoom(getListMessage);
         });
     };

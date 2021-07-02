@@ -14,7 +14,7 @@ import { requireField } from 'utilities/format';
 import { isIos } from 'utilities/helper';
 import { regexEmail } from 'utilities/validate';
 
-const SendEmailScreen: FunctionComponent = ({ route }: any) => {
+const SendEmailScreen: FunctionComponent = () => {
     const { t } = useTranslation();
     const form = useForm({
         mode: 'all',

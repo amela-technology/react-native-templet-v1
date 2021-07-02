@@ -11,7 +11,7 @@ const LoginScreen: FunctionComponent = () => {
     const [user, setUser] = useState({ email: 'hoan.nguyen@amela.vn', password: '123123' });
     const passwordRef = useRef<any>(null);
     const { t } = useTranslation();
-    const { loading, requestLogin } = useLogin();
+    const { requestLogin } = useLogin();
     const onChangeEmail = (text: string) => {
         setUser({ ...user, email: text });
     };

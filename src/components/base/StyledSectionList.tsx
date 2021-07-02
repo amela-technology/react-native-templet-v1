@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FunctionComponent, memo, useRef, useState } from 'react';
 import { ActivityIndicator, RefreshControl, SectionList, SectionListProps, View } from 'react-native';
 import { Themes } from 'assets/themes';

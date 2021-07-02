@@ -1,10 +1,9 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { getMessage } from 'api/modules/api-app/chat';
 import Images from 'assets/images';
 import { StyledIcon } from 'components/base';
-import ImagePicker from 'components/common/ImagePicker';
 import StyledHeader from 'components/common/StyledHeader';
 import { View, ActivityIndicator, Text } from 'react-native';
 import { GiftedChat, Composer, Send, Bubble } from 'react-native-gifted-chat';
@@ -13,15 +12,15 @@ import { useSelector } from 'react-redux';
 import { useSocket } from 'utilities/SocketProvider';
 
 const ChatScreen = ({ route }: any) => {
-    const { conversationId: id, name } = route?.params;
+    const { conversationId: id } = route?.params;
     const userInfo = useSelector((state: any) => state?.userInfo);
     // tuy vao tung api detail user User Data se khac nhau
-    const [dataUser, setUser] = useState({
+    const [dataUser] = useState({
         _id: Number(`1${userInfo?.honbuId}`),
         name: userInfo?.honbuName,
     });
     const isFocus = useIsFocused();
-    const { leaveRoom, getListMessage, messages, onSend, setImage } = useSocket(id);
+    const { leaveRoom, getListMessage, messages, onSend } = useSocket(id);
     const [callOnScrollEnd, setCallOnScrollEnd] = React.useState(false);
     useEffect(() => {
         if (!isFocus) {
@@ -49,8 +48,7 @@ const ChatScreen = ({ route }: any) => {
 
     const onLoadEarlier = async () => {
         try {
-            const fromTime = messages.length > 0 ? messages[messages.length - 1].createdAt : new Date().getTime();
-            getListMessage(fromTime);
+            getListMessage();
         } catch (error) {
             console.log();
         }
@@ -58,17 +56,13 @@ const ChatScreen = ({ route }: any) => {
     const renderSend = (props: any) => {
         return (
             <Send {...props} containerStyle={{ alignItems: 'center', justifyContent: 'center', marginRight: 5 }}>
-                <StyledIcon source={Images.icons.icSendMess} size={20} />
+                <StyledIcon source={Images.icons.back} size={20} />
             </Send>
         );
     };
     const renderComposer = (props: any) => {
         return (
             <View style={styles.composer}>
-                <ImagePicker setImage={setImage}>
-                    <StyledIcon customStyle={{ marginLeft: 3 }} source={Images.icons.icPickImage} size={30} />
-                </ImagePicker>
-
                 <Composer {...props} multiline textInputStyle={styles.input} placeholderTextColor={'#D2D2D2'} />
             </View>
         );

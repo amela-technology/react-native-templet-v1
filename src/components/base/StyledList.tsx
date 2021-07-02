@@ -1,14 +1,5 @@
 import { Themes } from 'assets/themes';
-import React, {
-    forwardRef,
-    FunctionComponent,
-    memo,
-    useEffect,
-    useImperativeHandle,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import React, { forwardRef, FunctionComponent, memo, useImperativeHandle, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, FlatListProps, RefreshControl, StyleProp, View, ViewStyle } from 'react-native';
 import StyledIndicator from './StyledIndicator';
