@@ -72,6 +72,12 @@ Run `yarn` and `rebuild project`
 1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
 2. Setup react-native config following guide: https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
 
+## Getting Started CodePush
+
+1. Running the following command in terminal:
+   `npm install --save react-native-code-push`
+2. Then continue with installing the native module following this guide: https://github.com/microsoft/react-native-code-push
+
 ## Available Scripts
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
