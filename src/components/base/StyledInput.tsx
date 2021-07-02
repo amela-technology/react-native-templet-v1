@@ -66,10 +66,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
 const styles: any = StyleSheet.create({
     textInput: {
         width: 250,
-        padding: 2,
         borderWidth: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 15,
         borderColor: 'black',
         borderRadius: 5,
     },
