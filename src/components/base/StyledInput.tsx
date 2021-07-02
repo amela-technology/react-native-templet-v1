@@ -26,6 +26,35 @@ export interface StyledInputProps extends TextInputProps {
     ref?: any;
     errorMessage?: string;
     label?: string;
+    textContentType?:
+        | 'none'
+        | 'URL'
+        | 'addressCity'
+        | 'addressCityAndState'
+        | 'addressState'
+        | 'countryName'
+        | 'creditCardNumber'
+        | 'emailAddress'
+        | 'familyName'
+        | 'fullStreetAddress'
+        | 'givenName'
+        | 'jobTitle'
+        | 'location'
+        | 'middleName'
+        | 'name'
+        | 'namePrefix'
+        | 'nameSuffix'
+        | 'nickname'
+        | 'organizationName'
+        | 'postalCode'
+        | 'streetAddressLine1'
+        | 'streetAddressLine2'
+        | 'sublocality'
+        | 'telephoneNumber'
+        | 'username'
+        | 'password'
+        | 'newPassword'
+        | 'oneTimeCode';
 }
 
 const StyledInput = (props: StyledInputProps, ref: any) => {
@@ -50,7 +79,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
                 underlineColorAndroid={props.customUnderlineColor || 'transparent'}
                 autoCompleteType="email"
-                textContentType="emailAddress"
+                textContentType={props.textContentType || 'none'}
                 importantForAutofill="yes"
                 autoCorrect={false}
                 returnKeyType={props.customReturnKeyType || 'next'}
