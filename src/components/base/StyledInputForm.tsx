@@ -14,7 +14,7 @@ interface FormInputProps extends StyledInputProps {
 
 const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
     const { t } = useTranslation();
-    const { name, rules, defaultValue = '', onChangeText, onBlur, form, ...inputProps } = props;
+    const { name, rules, defaultValue = '', onChangeText, form, ...inputProps } = props;
     const formContext = useFormContext();
     if (!(formContext || form)) {
         logger(t('input.errorComponent'), true, '');
@@ -25,22 +25,18 @@ const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
     const onChangeInput = (text: string, onChangeControl: any) => {
         onChangeText ? onChangeText(text) : onChangeControl(text);
     };
-    const onBlurInput = (data: any, onBlurControl: any) => {
-        onBlur ? onBlur(data) : onBlurControl();
-    };
     return (
         <Controller
             control={control}
             name={name}
             defaultValue={defaultValue}
             rules={rules}
-            render={({ onChange, value, onBlur: onBlurControl }) => {
+            render={({ onChange, value }) => {
                 return (
                     <StyledInput
                         ref={ref}
                         value={value}
                         onChangeText={(text: string) => onChangeInput(text, onChange)}
-                        onBlur={(data: any) => onBlurInput(data, onBlurControl)}
                         errorMessage={errorMessage}
                         {...inputProps}
                     />
