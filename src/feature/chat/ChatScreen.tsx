@@ -9,12 +9,12 @@ import StyledHeader from 'components/common/StyledHeader';
 import { View, ActivityIndicator, Text } from 'react-native';
 import { GiftedChat, Composer, Send, Bubble } from 'react-native-gifted-chat';
 import { ScaledSheet, verticalScale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
 import { useSocket } from 'utilities/SocketProvider';
+import { useAppSelector } from 'app-redux/hooks';
 
 const ChatScreen = ({ route }: any) => {
     const { conversationId: id, name } = route?.params;
-    const userInfo = useSelector((state: any) => state?.userInfo);
+    const userInfo = useAppSelector((state) => state.userInfo);
     // tuy vao tung api detail user User Data se khac nhau
     const [dataUser, setUser] = useState({
         _id: Number(`1${userInfo?.honbuId}`),

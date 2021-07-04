@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import i18next from 'i18next';
 import { DevSettings, Platform } from 'react-native';
 import Picker from 'react-native-picker';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -42,3 +43,14 @@ export const addMenuClearAsyncStorage = () => {
         });
     }
 };
+
+export function generatePersistConfig(key: string, whitelist: string[]) {
+    return {
+        key,
+        whitelist,
+        version: 1,
+        debug: __DEV__,
+        storage: AsyncStorage,
+        stateReconciler: autoMergeLevel2,
+    };
+}
