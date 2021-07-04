@@ -1,24 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, View } from 'react-native';
 import StyledText from 'components/base/StyledText';
 import { StyledButton } from 'components/base';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
+import StyledView from 'components/base/StyledView';
+import { Themes } from 'assets/themes';
 
 const SettingView: FunctionComponent = () => {
     return (
-        <View style={styles.container}>
+        <StyledView flex={1} color={Themes.COLORS.white} middle justifyContent={'center'}>
             <StyledText originValue={'Setting'} />
             <StyledButton onPress={AuthenticateService.logOut} title={'Log out'} />
-        </View>
+        </StyledView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default SettingView;
