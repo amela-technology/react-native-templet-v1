@@ -1,17 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 import { getProfile } from 'api/modules/api-app/authenticate';
 import { getMessage } from 'api/modules/api-app/chat';
+import { useAppSelector } from 'app-redux/hooks';
 import Images from 'assets/images';
 import React, { useCallback, useEffect, useState } from 'react';
 import Config from 'react-native-config';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { useSelector } from 'react-redux';
 import socketIO from 'socket.io-client';
 import { logger } from './helper';
 
 export const socket = socketIO(`${Config.API_URL}?role=owner`, { timeout: 3000 });
 export const SocketProvider = ({ children }: any) => {
-    const userInfo = useSelector((state: any) => state.userInfo);
+    const userInfo = useAppSelector((state) => state.userInfo);
     async function handleOnConnect() {
         socket.emit('authenticate', { token: userInfo?.token });
         // neu khong authen duoc het han token thi goi lại api de lay refresh token va authen lai
@@ -51,7 +51,7 @@ export const SocketProvider = ({ children }: any) => {
 
 export const useSocket = (id?: string) => {
     const [conversationId, setConversationId] = useState(id);
-    const userInfo = useSelector((state: any) => state?.userInfo);
+    const userInfo = useAppSelector((state) => state.userInfo);
     const [messages, setMessages] = useState<any>([]);
     // tuy vao tung api detail user User Data se khac nhau
     const [dataUser, setUser] = useState({
@@ -59,7 +59,7 @@ export const useSocket = (id?: string) => {
         name: userInfo?.honbuName,
     });
     const [image, setImage] = useState<any>('');
-    const listStaff = useSelector((state: any) => state?.addStaff);
+    const listStaff = useAppSelector((state) => state.addStaff);
     const leaveRoom = () => {
         socket.emit('leave-room', { conversationId });
     };
