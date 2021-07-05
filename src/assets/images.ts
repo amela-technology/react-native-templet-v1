@@ -13,6 +13,7 @@ const Images = {
             check: require('./icon/ic_check_radio.png'),
             uncheck: require('./icon/ic_uncheck_radio.png'),
         },
+        dateTime: require('./icon/ic_date_time.png'),
     },
     photo: {},
 };
