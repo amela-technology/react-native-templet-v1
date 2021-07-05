@@ -23,9 +23,9 @@ const ChangePassword: FunctionComponent = ({ route }: any) => {
     const newPasswordRef = useRef<TextInput>(null);
 
     const changePasswordSchema = yup.object().shape({
-        oldPassword: yupValidate().password(),
-        newPassword: yupValidate().password('oldPassword', false),
-        confirmNewPassword: yupValidate().password('newPassword'),
+        oldPassword: yupValidate.password(),
+        newPassword: yupValidate.password('oldPassword', false),
+        confirmNewPassword: yupValidate.password('newPassword'),
     });
     const form = useForm({
         mode: 'all',
