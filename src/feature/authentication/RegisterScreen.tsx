@@ -19,9 +19,9 @@ const RegisterScreen: FunctionComponent = () => {
     const passwordConfirmRef = useRef<any>(null);
 
     const registerSchema = yup.object().shape({
-        email: yupValidate().email(),
-        password: yupValidate().password(),
-        confirmPassword: yupValidate().password('password'),
+        email: yupValidate.email(),
+        password: yupValidate.password(),
+        confirmPassword: yupValidate.password('password'),
     });
 
     const form = useForm({
