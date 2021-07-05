@@ -20,11 +20,11 @@ const DEFAULT_FORM = {
 
 const AccountView = () => {
     const schema = yup.object().shape({
-        username: yupValidate().name(),
-        email: yupValidate().email(),
-        phone: yupValidate().phone(),
-        password: yupValidate().password(),
-        confirmPassword: yupValidate().password('password'),
+        username: yupValidate.name(),
+        email: yupValidate.email(),
+        phone: yupValidate.phone(),
+        password: yupValidate.password(),
+        confirmPassword: yupValidate.password('password'),
     });
     const form = useForm({
         mode: 'onChange', // validate form onChange

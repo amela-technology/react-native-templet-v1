@@ -16,8 +16,8 @@ const LoginScreen: FunctionComponent = () => {
     const { loading, requestLogin } = useLogin();
 
     const yupSchema = yup.object().shape({
-        email: yupValidate().email(),
-        password: yupValidate().password(),
+        email: yupValidate.email(),
+        password: yupValidate.password(),
     });
 
     const form = useForm({
