@@ -19,10 +19,11 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
     const onCodeFilled = (codeVer: string) => {
         setCode(codeVer);
     };
+
     const confirm = async () => {
         try {
             if (code?.length < 5) {
-                AlertMessage(t('sendOTPMessage.invalidOTP'));
+                AlertMessage(t('alert.invalidOTP'));
                 return;
             }
             if (route?.params?.register) {
@@ -37,7 +38,7 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
                 if (verifyCode?.data?.isValid) {
                     navigate(AUTHENTICATE_ROUTE.CHANGE_PASS, { email, code });
                 } else {
-                    AlertMessage(t('sendOTPMessage.invalidOTP'));
+                    AlertMessage(t('alert.invalidOTP'));
                 }
             }
         } catch (error) {
@@ -45,19 +46,21 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
             AlertMessage(error);
         }
     };
+
     const resendOTP = async () => {
         try {
             if (route?.params?.register) {
                 await getVerifyCode(email);
-                AlertMessage(t('sendOTPMessage.success'));
+                AlertMessage(t('alert.success'));
                 return;
             }
             await forgotPassword(email);
-            AlertMessage(t('sendOTPMessage.success'));
+            AlertMessage(t('alert.success'));
         } catch (error) {
             AlertMessage(error);
         }
     };
+
     return (
         <SafeAreaView style={styles.flex1}>
             <KeyboardAwareScrollView enableOnAndroid={true} showsVerticalScrollIndicator={false}>
@@ -72,11 +75,13 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
                         onFulfill={onCodeFilled}
                     />
                     <StyledTouchable onPress={resendOTP} customStyle={styles.containerResend}>
-                        <StyledText customStyle={styles.resend} i18nText="sendOTP.resend" />
+                        <StyledText customStyle={styles.resend} i18nText="common.sendOTP.resend" />
                     </StyledTouchable>
                     <StyledButton
                         customStyle={styles.flex1}
-                        title={route?.params.register ? 'sendOTP.sendForgotPassword' : 'sendOTP.buttonNext'}
+                        title={
+                            route?.params.register ? 'common.sendOTP.sendForgotPassword' : 'common.sendOTP.buttonNext'
+                        }
                         onPress={confirm}
                     />
                 </View>
@@ -84,6 +89,7 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
         </SafeAreaView>
     );
 };
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -120,4 +126,5 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
+
 export default SendOTP;

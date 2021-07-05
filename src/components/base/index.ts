@@ -10,6 +10,7 @@ import StyledWebView from './StyledWebView';
 import ProgressiveImage from './ProgressiveImage';
 import StyledIndicator from './StyledIndicator';
 import StyledListViewSelected from './list-view-selected/StyledListViewSelected';
+import StyledInputForm from './StyledInputForm';
 
 export {
     StyledButton,
@@ -24,4 +25,5 @@ export {
     ProgressiveImage,
     StyledIndicator,
     StyledListViewSelected,
+    StyledInputForm,
 };
