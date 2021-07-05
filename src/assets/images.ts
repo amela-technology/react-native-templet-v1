@@ -14,7 +14,9 @@ const Images = {
             uncheck: require('./icon/ic_uncheck_radio.png'),
         },
     },
-    photo: {},
+    photo: {
+        defaultImage: require('./photo/img_default_image.png'),
+    },
 };
 
 export default Images;

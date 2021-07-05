@@ -229,9 +229,13 @@ Link assets and font from **src/assets** to Native project
 │   │   ├── upload
 │   │   │   ├── ImageUploader.ts
 │   │   │   └── awsApi.ts
+│   │   ├── format.ts
 │   │   ├── helper.ts
 │   │   ├── i18next.ts
-│   │   └── moment.ts
+│   │   ├── logger.ts
+│   │   ├── SocketProvider.tsx
+│   │   ├── staticData.ts
+│   │   └── validate.ts
 │   ├── App.tsx
 │   └── AppContext.tsx
 ├── README.md
