@@ -15,7 +15,9 @@ const Images = {
         },
         dateTime: require('./icon/ic_date_time.png'),
     },
-    photo: {},
+    photo: {
+        defaultImage: require('./photo/img_default_image.png'),
+    },
 };
 
 export default Images;

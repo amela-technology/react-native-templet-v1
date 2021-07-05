@@ -55,7 +55,7 @@ const StyledPicker = (props: PickerProps) => {
         const newData = [];
         initPicker({
             pickerData: props.dataList,
-            pickerTitleText: props.titleModalShowUp || t('picker.pickItem'),
+            pickerTitleText: props.titleModalShowUp || t('common.picker.pickItem'),
             selectedValue: [props.dataList.indexOf(item)],
             onPickerConfirm: handleConfirm,
             onPickerCancel: handleCancel,

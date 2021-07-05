@@ -15,6 +15,9 @@
         "lint:ts": "tslint 'src/**/*.{ts,tsx,js}'",
         "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
         "devtools": "react-devtools",
+        "no-edit": "git add . && git commit --amend --no-edit && git push origin HEAD -f",
+        "no-verify": "git add . && git commit --amend --no-edit --no-verify && git push origin HEAD -f",
+        "rebase": "git checkout develop && git pull origin develop && git checkout - && git rebase -",
         "buildAndroid": "cd android && ./gradlew assembleRelease&& adb -d install app/build/outputs/apk/release/app-release.apk",
         "bundleIOS": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
         "open-folder-apk": "open ./android/app/build/outputs/apk",
@@ -35,8 +38,8 @@
         "code-push-android-staging": "appcenter codepush release-react -a Amela/project-name -d Staging -t 1.0.0",
         "code-push-android-production": "appcenter codepush release-react -a Amela/project-name -d Production -t 1.0.0",
         "prepare": "husky install",
-        "push-develop": "yarn push-ios-dev && yarn push-android-dev",
-        "push-staging": "yarn push-ios-staging && yarn push-android-staging"
+        "push-develop": "yarn code-push-ios-develop && yarn code-push-android-develop",
+        "push-staging": "yarn code-push-ios-staging && yarn code-push-android-staging"
     },
     "dependencies": {
         "@hookform/resolvers": "1.3.5",
@@ -53,6 +56,7 @@
         "eslint-config-airbnb": "^18.2.1",
         "hash-object": "^0.1.7",
         "i18next": "^20.2.1",
+        "lodash": "^4.17.21",
         "react": "17.0.2",
         "react-hook-form": "6.15.5",
         "react-i18next": "^11.8.12",
@@ -62,7 +66,6 @@
         "react-native-code-push": "^7.0.0",
         "react-native-config": "^1.4.2",
         "react-native-confirmation-code-input": "^1.0.4",
-        "react-native-fast-image": "^8.3.4",
         "react-native-gesture-handler": "^1.10.3",
         "react-native-image-crop-picker": "^0.36.0",
         "react-native-keyboard-aware-scroll-view": "^0.9.3",

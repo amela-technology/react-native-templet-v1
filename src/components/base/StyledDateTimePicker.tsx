@@ -43,7 +43,7 @@ interface DateTimePickerPropsCustom {
     testID?: string;
 }
 
-interface IProps extends DateTimePickerPropsCustom {
+interface DateTimeProps extends DateTimePickerPropsCustom {
     title?: string;
     chooseDateTime: Date;
     setChooseDateTime: any;
@@ -53,9 +53,12 @@ interface IProps extends DateTimePickerPropsCustom {
     onConfirm?: any;
     onCancel?: any;
     formatDate?: string;
+    headerText?: string;
+    confirmText?: string;
+    cancelText?: string;
 }
 
-const StyledDateTimePicker = (props: IProps) => {
+const StyledDateTimePicker = (props: DateTimeProps) => {
     const {
         mode,
         chooseDateTime,
@@ -66,17 +69,18 @@ const StyledDateTimePicker = (props: IProps) => {
         onConfirm,
         onCancel,
         formatDate,
+        headerText,
+        confirmText,
+        cancelText,
     } = props;
     const [isPickerVisible, setIsPickerVisible] = useState(false);
 
     const { t } = useTranslation();
-    const hideDatePicker = () => {
-        setIsPickerVisible(false);
-    };
+
     const handleConfirm = (value: Date) => {
         onConfirm?.();
         setChooseDateTime(value);
-        hideDatePicker();
+        setIsPickerVisible(false);
     };
     const togglePicker = () => {
         setIsPickerVisible(!isPickerVisible);
@@ -110,7 +114,7 @@ const StyledDateTimePicker = (props: IProps) => {
 
     return (
         <View>
-            <TouchableOpacity onPress={togglePicker} style={[styles.buttonPicker, customStyle]}>
+            <TouchableOpacity activeOpacity={0.6} onPress={togglePicker} style={[styles.buttonPicker, customStyle]}>
                 <Text style={[titleStyle, { color: 'black' }]}>{getFormatDate()}</Text>
                 <StyledIcon source={iconDateTimeSource || Images.icons.dateTime} size={15} />
             </TouchableOpacity>
@@ -118,9 +122,9 @@ const StyledDateTimePicker = (props: IProps) => {
                 isVisible={isPickerVisible}
                 date={chooseDateTime || new Date()}
                 mode={mode || 'date'}
-                headerTextIOS={t('dateTimePicker.pickADate')}
-                confirmTextIOS={t('dateTimePicker.confirm')}
-                cancelTextIOS={t('dateTimePicker.cancel')}
+                headerTextIOS={headerText || t('dateTimePicker.pickADate')}
+                confirmTextIOS={confirmText || t('dateTimePicker.confirm')}
+                cancelTextIOS={cancelText || t('dateTimePicker.cancel')}
                 {...props}
                 onConfirm={handleConfirm}
                 onCancel={cancelPicker}

@@ -16,12 +16,15 @@ const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
     const { t } = useTranslation();
     const { name, rules, defaultValue = '', onChangeText, onBlur, form, ...inputProps } = props;
     const formContext = useFormContext();
+
     if (!(formContext || form)) {
-        logger(t('input.errorComponent'), true, '');
-        return <StyledInput errorMessage={'input.errorComponent'} editable={false} />;
+        logger(t('error.inputComponent'), true, '');
+        return <StyledInput errorMessage={'error.inputComponent'} editable={false} />;
     }
+
     const { control, errors } = formContext || form;
     const errorMessage = errors?.[name]?.message || '';
+    
     const onChangeInput = (text: string, onChangeControl: any) => {
         onChangeText ? onChangeText(text) : onChangeControl(text);
     };

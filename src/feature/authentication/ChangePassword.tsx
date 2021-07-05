@@ -11,41 +11,34 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView, StyleSheet, TextInput, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { requireField } from 'utilities/format';
 import { isIos } from 'utilities/helper';
+import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 
 const ChangePassword: FunctionComponent = ({ route }: any) => {
+    const { email, code } = route?.params || {};
     const { t } = useTranslation();
-    const changePassSchema = yup.object().shape({
-        oldPass: yup.string().required(() => requireField('Old Password')),
-        newPass: yup
-            .string()
-            .required(() => requireField('New Password'))
-            .test(
-                'len',
-                t('validateMessage.minLength', { len: 6 }),
-                (val: string | undefined) => !!val && val.length >= 6,
-            ),
-        confirmNewPass: yup
-            .string()
-            .required(() => requireField('Confirm New Password'))
-            .oneOf([yup.ref('newPass'), null], 'validateMessage.notMatchPassword'),
+
+    const passwordConfirmRef = useRef<TextInput>(null);
+    const newPasswordRef = useRef<TextInput>(null);
+
+    const changePasswordSchema = yup.object().shape({
+        oldPassword: yupValidate().password(),
+        newPassword: yupValidate().password('oldPassword', false),
+        confirmNewPassword: yupValidate().password('newPassword'),
     });
     const form = useForm({
         mode: 'all',
-        resolver: yupResolver(changePassSchema),
+        resolver: yupResolver(changePasswordSchema),
     });
     const {
         handleSubmit,
         formState: { isValid },
     } = form;
-    const passwordConfirmRef = useRef<TextInput>(null);
-    const newPassRef = useRef<TextInput>(null);
-    const { email, code } = route?.params || {};
-    const confirm = async ({ newPass }: any) => {
+
+    const confirm = async ({ password }: any) => {
         try {
-            await resetPassword(email, newPass, code);
+            await resetPassword(email, password, code);
             navigate(AUTHENTICATE_ROUTE.LOGIN);
         } catch (error) {
             AlertMessage(error);
@@ -64,24 +57,24 @@ const ChangePassword: FunctionComponent = ({ route }: any) => {
                 >
                     <FormProvider {...form}>
                         <StyledInputForm
-                            name={'oldPass'}
-                            placeholder={t('registerAccount.passwordPlaceholder')}
+                            name={'oldPassword'}
+                            placeholder={t('authen.register.passwordPlaceholder')}
                             maxLength={32}
-                            onSubmitEditing={() => newPassRef?.current?.focus()}
+                            onSubmitEditing={() => newPasswordRef?.current?.focus()}
                         />
                         <StyledInputForm
-                            name={'newPass'}
-                            ref={newPassRef}
-                            placeholder={t('registerAccount.passwordPlaceholder')}
+                            name={'newPassword'}
+                            ref={newPasswordRef}
+                            placeholder={t('authen.register.passwordPlaceholder')}
                             secureTextEntry={true}
                             returnKeyType={'next'}
                             maxLength={32}
                             onSubmitEditing={() => passwordConfirmRef?.current?.focus()}
                         />
                         <StyledInputForm
-                            name={'confirmNewPass'}
+                            name={'confirmNewPassword'}
                             ref={passwordConfirmRef}
-                            placeholder={t('registerAccount.passwordPlaceholder')}
+                            placeholder={t('authen.register.passwordPlaceholder')}
                             secureTextEntry={true}
                             returnKeyType={'next'}
                             maxLength={32}
@@ -89,7 +82,7 @@ const ChangePassword: FunctionComponent = ({ route }: any) => {
                         />
                     </FormProvider>
                     <StyledButton
-                        title={'register.confirm'}
+                        title={'authen.register.confirm'}
                         onPress={handleSubmit(confirm)}
                         disabled={!isValid}
                         customStyle={[styles.buttonSave, !isValid && { backgroundColor: 'lightgray' }]}
@@ -131,4 +124,5 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
 });
+
 export default ChangePassword;
