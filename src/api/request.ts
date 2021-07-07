@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Config from 'react-native-config';
-import i18next from 'utilities/i18next';
 import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';

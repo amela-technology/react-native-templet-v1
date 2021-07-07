@@ -1,130 +1,114 @@
-import { useNavigation } from '@react-navigation/native';
 import Images from 'assets/images';
 import Metrics from 'assets/metrics';
 import { Themes } from 'assets/themes';
 import { StyledIcon, StyledText, StyledTouchable } from 'components/base';
-import React, { FunctionComponent, memo, ReactNode, useCallback, useEffect, useState } from 'react';
-import { ImageStyle, ImageURISource, StyleProp, StyleSheet, TextStyle, View } from 'react-native';
+import { goBack } from 'navigation/NavigationService';
+import React from 'react';
+import { StyleProp, View, ViewProps, ViewStyle } from 'react-native';
+import { ScaledSheet } from 'react-native-size-matters';
+import { logger } from 'utilities/helper';
 
-const useComponentSize = () => {
-    const [size, setSize] = useState<any>({
-        width: undefined,
-        height: undefined,
-    });
-
-    const onLayout = useCallback((event) => {
-        const { width, height } = event.nativeEvent.layout;
-        setSize({ width, height });
-    }, []);
-    return [size, onLayout];
-};
-
-interface StyledHeaderLeadingProps {
-    canGoBack?: boolean;
-    customLeading?: ReactNode;
-    onPressLeading?: () => void;
-    backIcon?: ImageURISource;
-    backIconCustomStyle?: StyleProp<ImageStyle>;
-    backText?: string;
-    backTextCustomStyle?: StyleProp<TextStyle>;
-    defaultWidthLeading?: number;
-}
-
-const StyledHeaderLeading = (props: StyledHeaderLeadingProps) => {
-    if (props.customLeading) {
-        const Leading: FunctionComponent = props.customLeading as FunctionComponent;
-        return <Leading />;
-    }
-    if (props.canGoBack) {
-        return (
-            <StyledTouchable customStyle={styles.leadingCanGoBack} onPress={props.onPressLeading}>
-                <StyledIcon
-                    source={props.backIcon || Images.icons.back}
-                    size={35}
-                    customStyle={props.backIconCustomStyle || { tintColor: Themes.COLORS.white }}
-                />
-                <StyledText
-                    customStyle={props.backTextCustomStyle || { fontSize: 18, color: Themes.COLORS.white }}
-                    i18nText={props.backText || 'Back'}
-                />
-            </StyledTouchable>
-        );
-    }
-    return <View style={{ height: 35, width: props.defaultWidthLeading || 60 }} />;
-};
-
-interface StyledHeaderActionProps {
-    customAction?: ReactNode;
-    defaultWidthAction?: number;
-}
-
-const StyledHeaderAction = (props: StyledHeaderActionProps) => {
-    if (props.customAction) {
-        const Action: FunctionComponent = props.customAction as FunctionComponent;
-        return <Action />;
-    }
-    return <View style={{ height: 35, width: props.defaultWidthAction || 60 }} />;
-};
-
-interface StyledHeaderProps extends StyledHeaderLeadingProps, StyledHeaderActionProps {
+interface HeaderProps extends ViewProps {
+    isBack?: boolean;
     title?: string;
+    iconAction?: any;
+    customStyle?: StyleProp<ViewStyle>;
+    onPressAction?(): void;
+    isShadow?: boolean;
+    customHandleBackPress?(): void;
 }
 
-const StyledHeader: FunctionComponent<StyledHeaderProps> = (props: StyledHeaderProps) => {
-    const navigation = useNavigation();
-    const [sizeLeading, onLayoutLeading] = useComponentSize();
-    const [sizeAction, onLayoutAction] = useComponentSize();
-    const [defaultSize, setDefaultSize] = useState(0);
-
-    const defaultLeading = () => {
-        if (props.onPressLeading) props.onPressLeading();
-        else navigation.goBack();
+const StyledHeader = (props: HeaderProps) => {
+    const {
+        isBack = true,
+        title,
+        iconAction,
+        customStyle,
+        onPressAction,
+        isShadow = true,
+        customHandleBackPress,
+        style,
+    } = props;
+    const onBack = () => {
+        if (customHandleBackPress) {
+            customHandleBackPress();
+            return;
+        }
+        goBack();
     };
 
-    useEffect(() => {
-        setDefaultSize(sizeAction.width > sizeLeading.width ? sizeAction.width : sizeLeading.width);
-    }, [sizeLeading, sizeAction]);
+    if (style) {
+        logger('You should use customStyle to implement this component to avoid conflict', true);
+    }
 
     return (
-        <View style={styles.container}>
-            <View onLayout={onLayoutLeading}>
-                <StyledHeaderLeading
-                    canGoBack={navigation.canGoBack()}
-                    onPressLeading={defaultLeading}
-                    defaultWidthLeading={defaultSize}
-                    {...props}
-                />
-            </View>
-            <StyledText customStyle={styles.defaultHeader} i18nText={props.title || ''} />
-            <View onLayout={onLayoutAction}>
-                <StyledHeaderAction customAction={props.customAction} defaultWidthAction={defaultSize} />
+        <View style={[styles.container, customStyle, isShadow && styles.shadow]}>
+            <View style={styles.viewHeader}>
+                {isBack ? (
+                    <StyledTouchable onPress={onBack} customStyle={styles.buttonBack}>
+                        <StyledIcon source={Images.icons.back} size={30} />
+                    </StyledTouchable>
+                ) : (
+                    <View style={styles.buttonBack} />
+                )}
+                <StyledText i18nText={title || ' '} customStyle={styles.title} numberOfLines={1} />
+                {iconAction ? (
+                    <StyledTouchable onPress={onPressAction} customStyle={styles.buttonAction}>
+                        <StyledIcon source={iconAction} size={30} customStyle={styles.iconAction} />
+                    </StyledTouchable>
+                ) : (
+                    <View style={styles.buttonAction} />
+                )}
             </View>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     container: {
+        height: '60@vs',
+        backgroundColor: Themes.COLORS.white,
+        justifyContent: 'flex-end',
+        zIndex: 2,
         paddingTop: Metrics.safeTopPadding,
-        paddingHorizontal: 20,
-        backgroundColor: Themes.COLORS.primary,
+    },
+    viewHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: 110,
+        width: '100%',
+        marginBottom: '14@vs',
+        paddingHorizontal: '20@s',
     },
-    defaultHeader: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: Themes.COLORS.white,
-    },
-    leadingCanGoBack: {
-        alignSelf: 'flex-start',
-        flexDirection: 'row',
+    buttonBack: {
+        width: '25@vs',
+        height: '25@vs',
+        justifyContent: 'center',
         alignItems: 'center',
+    },
+    title: {
+        fontSize: '20@ms',
+        fontWeight: 'bold',
+        maxWidth: '80%',
+        color: Themes.COLORS.black,
+    },
+    buttonAction: {
+        width: '25@vs',
+        height: '25@vs',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    iconAction: {},
+    shadow: {
+        shadowColor: Themes.COLORS.black,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.17,
+        shadowRadius: 5.49,
+        elevation: 5,
     },
 });
 
-export default memo(StyledHeader, (prevProps: StyledHeaderProps, nextProps: StyledHeaderProps) => {
-    return prevProps.title === nextProps.title;
-});
+export default React.memo(StyledHeader);
