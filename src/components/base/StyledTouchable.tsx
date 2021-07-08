@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { StyleProp, ViewStyle, Pressable, PressableProps } from 'react-native';
+import { StyleProp, ViewStyle, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { logger } from 'utilities/helper';
 import { throttle } from 'lodash';
 
-interface StyledTouchableProps extends PressableProps {
+interface StyledTouchableProps extends TouchableOpacityProps {
     customStyle?: StyleProp<ViewStyle>;
     disabled?: boolean;
     onPress?(): void;
     onPressIn?(): void;
     onPressOut?(): void;
     onLongPress?(): void;
+    children?: any;
     throttleTime?: number;
 }
 
@@ -26,24 +27,10 @@ const StyledTouchable: FunctionComponent<StyledTouchableProps> = (props: StyledT
     const handlePress = throttle(onPress, throttleTime, configThrottle);
 
     return (
-        <Pressable
-            accessibilityRole={'button'}
-            disabled={disabled}
-            android_disableSound={false}
-            android_ripple={{ radius: 20 }}
-            hitSlop={20}
-            style={({ pressed }) => [
-                {
-                    // backgroundColor: pressed ? '#dbdbd9' : undefined,
-                    opacity: pressed ? 0.6 : 1,
-                },
-                customStyle,
-            ]}
-            {...props}
-            onPress={handlePress}
-        >
+
+        <TouchableOpacity activeOpacity={0.6} disabled={disabled} style={customStyle} onPress={handlePress} {...props}>
             {children}
-        </Pressable>
+        </TouchableOpacity>
     );
 };
 
