@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-
 import React from 'react';
 import { Platform, View, Image, StyleSheet } from 'react-native';
 import Metrics from 'assets/metrics';
