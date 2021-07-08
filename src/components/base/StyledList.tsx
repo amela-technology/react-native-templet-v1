@@ -1,5 +1,5 @@
 import { Themes } from 'assets/themes';
-import React, { forwardRef, FunctionComponent, memo, useImperativeHandle, useMemo, useRef } from 'react';
+import React, { forwardRef, FunctionComponent, memo, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, FlatListProps, RefreshControl, StyleProp, View, ViewStyle } from 'react-native';
 import StyledIndicator from './StyledIndicator';
@@ -54,12 +54,6 @@ const StyledList = (props: Props, ref: any) => {
         if (onNoDataRefresh) onNoDataRefresh();
     }
 
-    useImperativeHandle(ref, () => ({
-        scrollToTop: () => {
-            list?.current?.scrollToOffset({ animated: true, offset: 0 });
-        },
-    }));
-
     function renderFooter() {
         if (hasData && loadingMore) {
             return (
@@ -90,7 +84,7 @@ const StyledList = (props: Props, ref: any) => {
 
     return (
         <FlatListComponent
-            ref={list}
+            ref={ref || list}
             contentContainerStyle={styles}
             keyExtractor={keyExtractor}
             initialNumToRender={10}
