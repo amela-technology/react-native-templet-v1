@@ -34,7 +34,7 @@ const ModalComponent = ({ children, onBackdropPressed, isFromBottom, modalWrappe
         <View style={styles.contLayoutAndModal}>
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => onBackdropPressed(onBackdropPressed)}
+                onPress={() => onBackdropPressed?.(onBackdropPressed)}
                 style={styles.contBlurLayout}
             />
             <Animated.View

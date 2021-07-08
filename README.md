@@ -115,126 +115,9 @@ Link assets and font from **src/assets** to Native project
 ```
 
 .   folder contain file to fixing, batch lib
-├── scripts
-│   ├── react-native-keyboard-aware-scroll-view
-│   │   └── lib
-│   │       ├── KeyboardAwareFlatList.js
-│   │       └── KeyboardAwareScrollView.js
-│   ├── react-native-size-matters
-│   │   └── scaling-utils.js
-│   └── fix-lib.sh
-|   folder contain source code of project
-├── src
-|   |   folder contain api content of project
-│   ├── api
-│   │   ├── modules
-│   │   │   └── api-app
-│   │   │       └── general.ts
-│   │   ├── request.ts
-│   │   └── urls.ts
-│   ├── assets
-│   │   ├── fonts
-│   │   │   ├── Montserrat-Light.ttf
-│   │   │   ├── Montserrat-Regular.ttf
-│   │   │   └── Montserrat-SemiBold.ttf
-│   │   ├── icon
-│   │   │   ├── ic_back.png
-│   │   │   ├── ic_check_radio.png
-│   │   │   ├── ic_home.png
-│   │   │   ├── ic_notification.png
-│   │   │   ├── ic_select.png
-│   │   │   ├── ic_setting.png
-│   │   │   └── ic_uncheck_radio.png
-│   │   ├── locates
-│   │   │   ├── en.ts
-│   │   │   └── jp.ts
-│   │   ├── images.ts
-│   │   ├── metrics.ts
-│   │   ├── sizes.ts
-│   │   └── themes.ts
-│   ├── components
-│   │   ├── base
-│   │   │   ├── modal
-│   │   │   │   ├── DialogComponent.tsx
-│   │   │   │   ├── ModalComponent.tsx
-│   │   │   │   ├── useLoading.tsx
-│   │   │   │   └── useModal.tsx
-│   │   │   ├── picker
-│   │   │   │   └── StyledPicker.tsx
-│   │   │   ├── StyledButton.tsx
-│   │   │   ├── StyledIcon.tsx
-│   │   │   ├── StyledImage.tsx
-│   │   │   ├── StyledInput.tsx
-│   │   │   ├── StyledInputForm.tsx
-│   │   │   ├── StyledList.tsx
-│   │   │   ├── StyledNoData.tsx
-│   │   │   ├── StyledOverlayLoading.tsx
-│   │   │   ├── StyledSectionList.tsx
-│   │   │   ├── StyledText.tsx
-│   │   │   ├── StyledTouchable.tsx
-│   │   │   └── index.ts
-│   │   └── common
-│   │       └── Browser.tsx
-│   ├── feature
-│   │   ├── authentication
-│   │   │   ├── components
-│   │   │   │   └── Logo.tsx
-│   │   │   ├── ForgotPwdScreen.tsx
-│   │   │   ├── LoginScreen.tsx
-│   │   │   └── RegisterScreen.tsx
-│   │   ├── home
-│   │   │   ├── components
-│   │   │   │   └── HomeTabs.tsx
-│   │   │   └── HomeScreen.tsx
-│   │   ├── notification
-│   │   │   ├── components
-│   │   │   │   └── HomeTabs.tsx
-│   │   │   └── NotificationScreen.tsx
-│   │   └── setting
-│   │       ├── components
-│   │       │   └── HomeTabs.tsx
-│   │       └── SettingScreen.tsx
-│   ├── hooks
-│   │   ├── useApi.ts
-│   │   ├── useInput.ts
-│   │   └── usePaging.ts
-│   ├── navigation
-│   │   ├── components
-│   │   │   └── StyledTabBar.tsx
-│   │   ├── config
-│   │   │   ├── options.ts
-│   │   │   ├── routes.ts
-│   │   │   └── transition.ts
-│   │   ├── scene
-│   │   │   └── RootScenes.tsx
-│   │   └── NavigationService.ts
-│   ├── redux
-│   │   ├── authentication
-│   │   │   ├── actions.ts
-│   │   │   ├── reducer.ts
-│   │   │   └── types.ts
-│   │   ├── resource
-│   │   │   ├── actions.ts
-│   │   │   ├── reducer.ts
-│   │   │   └── types.ts
-│   │   ├── rootReducer.ts
-│   │   ├── rootSaga.ts
-│   │   └── store.ts
-│   ├── utilities
-│   │   ├── authenticate
-│   │   │   ├── AuthenticateService.ts
-│   │   │   └── TokenProvider.ts
-│   │   ├── types
-│   │   │   └── typing.d.ts
-│   │   ├── upload
-│   │   │   ├── ImageUploader.ts
-│   │   │   └── awsApi.ts
-│   │   ├── helper.ts
-│   │   ├── i18next.ts
-│   │   └── moment.ts
-│   ├── App.tsx
-│   └── AppContext.tsx
 ├── README.md
+├── __tests__
+│   └── App-test.tsx
 ├── app.json
 ├── babel.config.js
 ├── index.js
@@ -242,11 +125,169 @@ Link assets and font from **src/assets** to Native project
 ├── metro.config.js
 ├── package.json
 ├── react-native.config.js
+├── scripts
+│   ├── fix-lib.sh
+│   ├── react-native-config
+│   │   └── ReadDotEnv.rb
+│   ├── react-native-keyboard-aware-scroll-view
+│   │   └── lib
+│   │       ├── KeyboardAwareFlatList.js
+│   │       └── KeyboardAwareScrollView.js
+│   ├── react-native-picker
+│   │   └── index.d.ts
+│   └── react-native-size-matters
+│       └── scaling-utils.js
 ├── settings.json
+├── src
+│   ├── App.tsx
+│   ├── api
+│   │   ├── modules
+│   │   │   └── api-app
+│   │   │       ├── authenticate.ts
+│   │   │       ├── general.ts
+│   │   │       └── notification.ts
+│   │   └── request.ts
+│   ├── app-redux
+│   │   ├── resource
+│   │   │   ├── actions.ts
+│   │   │   ├── reducer.ts
+│   │   │   └── types.ts
+│   │   ├── rootReducer.ts
+│   │   ├── rootSaga.ts
+│   │   ├── store.ts
+│   │   └── userInfo
+│   │       ├── actions.ts
+│   │       ├── reducer.ts
+│   │       └── types.ts
+│   ├── assets
+│   │   ├── fonts
+│   │   │   ├── Montserrat-Light.ttf
+│   │   │   ├── Montserrat-Regular.ttf
+│   │   │   └── Montserrat-SemiBold.ttf
+│   │   ├── icon
+│   │   │   ├── ic_back.png
+│   │   │   ├── ic_check_radio.png
+│   │   │   ├── ic_home.png
+│   │   │   ├── ic_notification.png
+│   │   │   ├── ic_select.png
+│   │   │   ├── ic_setting.png
+│   │   │   └── ic_uncheck_radio.png
+│   │   ├── images.ts
+│   │   ├── locates
+│   │   │   ├── en.ts
+│   │   │   └── jp.ts
+│   │   ├── metrics.ts
+│   │   ├── photo
+│   │   │   └── img_default_image.png
+│   │   ├── sizes.ts
+│   │   └── themes.ts
+│   ├── components
+│   │   ├── base
+│   │   │   ├── AlertMessage.ts
+│   │   │   ├── ProgressiveImage.tsx
+│   │   │   ├── StyledButton.tsx
+│   │   │   ├── StyledIcon.tsx
+│   │   │   ├── StyledImage.tsx
+│   │   │   ├── StyledIndicator.tsx
+│   │   │   ├── StyledInput.tsx
+│   │   │   ├── StyledInputForm.tsx
+│   │   │   ├── StyledList.tsx
+│   │   │   ├── StyledNoData.tsx
+│   │   │   ├── StyledOverlayLoading.tsx
+│   │   │   ├── StyledSectionList.tsx
+│   │   │   ├── StyledText.tsx
+│   │   │   ├── StyledTouchable.tsx
+│   │   │   ├── StyledWebView.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── list-view-selected
+│   │   │   │   ├── StyledListViewSelected.tsx
+│   │   │   │   └── components
+│   │   │   │       └── ItemListViewSelected.tsx
+│   │   │   ├── modal
+│   │   │   │   ├── DialogComponent.tsx
+│   │   │   │   ├── ModalComponent.tsx
+│   │   │   │   ├── useLoading.tsx
+│   │   │   │   └── useModal.tsx
+│   │   │   └── picker
+│   │   │       ├── StyledModalPicker.tsx
+│   │   │       └── StyledPicker.tsx
+│   │   └── common
+│   │       └── StyledHeader.tsx
+│   ├── feature
+│   │   ├── account
+│   │   │   └── AccountView.tsx
+│   │   ├── authentication
+│   │   │   ├── ChangePassword.tsx
+│   │   │   ├── ForgotPwdScreen.tsx
+│   │   │   ├── LoginScreen.tsx
+│   │   │   ├── RegisterScreen.tsx
+│   │   │   ├── SendOtp.tsx
+│   │   │   └── components
+│   │   │       └── Logo.tsx
+│   │   ├── chat
+│   │   │   └── ChatScreen.tsx
+│   │   ├── home
+│   │   │   ├── HomeDataScreen.tsx
+│   │   │   ├── HomeDetailScreen.tsx
+│   │   │   ├── HomeScreen.tsx
+│   │   │   ├── HomeUserListScreen.tsx
+│   │   │   └── components
+│   │   │       ├── HomeTabs.tsx
+│   │   │       ├── ModalContent.tsx
+│   │   │       └── UserCard.tsx
+│   │   ├── notification
+│   │   │   ├── NotificationScreen.tsx
+│   │   │   └── components
+│   │   │       └── HomeTabs.tsx
+│   │   └── setting
+│   │       ├── SettingScreen.tsx
+│   │       └── components
+│   │           └── HomeTabs.tsx
+│   ├── hooks
+│   │   ├── useApi.ts
+│   │   ├── useInput.ts
+│   │   ├── usePaging.ts
+│   │   └── usePagingTakeAfter.ts
+│   ├── navigation
+│   │   ├── NavigationService.ts
+│   │   ├── components
+│   │   │   └── StyledTabBar.tsx
+│   │   ├── config
+│   │   │   ├── options.ts
+│   │   │   ├── routes.ts
+│   │   │   └── transition.ts
+│   │   └── scene
+│   │       ├── AuthScenes.tsx
+│   │       ├── RootScenes.tsx
+│   │       └── TabScenes.tsx
+│   └── utilities
+│       ├── CommonInterface.ts
+│       ├── SocketProvider.tsx
+│       ├── authenticate
+│       │   ├── AuthenticateService.ts
+│       │   └── TokenProvider.ts
+│       ├── context
+│       │   └── APIProvider.tsx
+│       ├── format.ts
+│       ├── helper.ts
+│       ├── i18next.ts
+│       ├── logger.ts
+│       ├── notification
+│       │   └── index.ts
+│       ├── permissions
+│       │   └── index.ts
+│       ├── staticData.ts
+│       ├── types
+│       │   └── typing.d.ts
+│       ├── upload
+│       │   ├── ImagePicker.tsx
+│       │   └── ImageUploader.ts
+│       ├── validate.ts
+│       └── yupValidate.ts
 ├── tsconfig.json
 └── yarn.lock
 
-38 directories, 88 files
+49 directories, 122 files
 
 
 ```

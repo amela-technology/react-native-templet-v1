@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
+import AsyncStorage from '@react-native-community/async-storage';
 import i18next from 'i18next';
-import { Platform } from 'react-native';
+import { DevSettings, Platform } from 'react-native';
 import Picker from 'react-native-picker';
 
 export const isAndroid = Platform.OS === 'android';
@@ -32,3 +33,12 @@ export function initPicker(params?: any) {
         ...params,
     });
 }
+
+export const addMenuClearAsyncStorage = () => {
+    if (__DEV__) {
+        DevSettings.addMenuItem('Clear AsyncStorage', () => {
+            AsyncStorage.clear();
+            DevSettings.reload();
+        });
+    }
+};

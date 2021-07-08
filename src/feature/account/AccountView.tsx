@@ -7,8 +7,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import { requireField } from 'utilities/format';
-import { regexPhone } from 'utilities/validate';
+import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 
 const DEFAULT_FORM = {
@@ -21,17 +20,11 @@ const DEFAULT_FORM = {
 
 const AccountView = () => {
     const schema = yup.object().shape({
-        username: yup.string().required(() => requireField('Username')),
-        email: yup.string().email('validateMessage.emailInvalid'),
-        phone: yup.string().matches(regexPhone, {
-            message: 'validateMessage.phoneInvalid',
-            excludeEmptyString: true, // skip empty string on validate
-        }),
-        password: yup.string().required(() => requireField('Password')),
-        confirmPassword: yup
-            .string()
-            .required(() => requireField('Confirm Password'))
-            .oneOf([yup.ref('password'), null], 'validateMessage.notMatchPassword'),
+        username: yupValidate.name(),
+        email: yupValidate.email(),
+        phone: yupValidate.phone(),
+        password: yupValidate.password(),
+        confirmPassword: yupValidate.password('password'),
     });
     const form = useForm({
         mode: 'onChange', // validate form onChange
@@ -45,9 +38,11 @@ const AccountView = () => {
         reset,
         handleSubmit,
     } = form;
+
     const onSubmit = (formData: any) => {
         AlertMessage(JSON.stringify(formData), 'Form Data');
     };
+
     const onChangeUsername = (text: string) => {
         form.setValue('username', text.length === 12 ? 'Custom onChangeText' : text, {
             shouldValidate: true, // validate when set value

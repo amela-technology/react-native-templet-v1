@@ -41,6 +41,8 @@ module.exports = {
         'react/self-closing-comp': 'error',
         'unused-imports/no-unused-vars-ts': 'off',
         'no-multi-spaces': 'warn',
+        'no-nested-ternary': 'off',
+        'import/prefer-default-export': 'off',
         'react/sort-comp': [
             1,
             {

@@ -1,13 +1,25 @@
-import React, { memo } from 'react';
-import FastImage, { FastImageProps } from 'react-native-fast-image';
+import Images from 'assets/images';
+import React, { memo, useEffect, useState } from 'react';
+import { ImageProps, Image } from 'react-native';
 
-interface StyledImageProps extends FastImageProps {
+interface StyledImageProps extends ImageProps {
     customStyle?: any;
 }
 
 const StyledImage = (props: StyledImageProps) => {
-    const { customStyle, resizeMode } = props;
-    return <FastImage style={customStyle} resizeMode={resizeMode} {...props} />;
+    const { customStyle, source } = props;
+    const { defaultImage } = Images.photo;
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (error) {
+            setError(false);
+        }
+    }, [source]);
+
+    return (
+        <Image {...props} style={customStyle} onError={() => setError(true)} source={error ? defaultImage : source} />
+    );
 };
 
 export default memo(StyledImage);

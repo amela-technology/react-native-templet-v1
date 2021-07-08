@@ -1,5 +1,5 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { BackHandler, View } from 'react-native';
 import RootSiblings from 'react-native-root-siblings';
 import ModalComponent from './ModalComponent';
 
@@ -31,7 +31,7 @@ interface ModalElement {
 }
 
 const useModal = (): UseModalProps => {
-    let modalElements: ModalElement[] = [];
+    const [modalElements, setModalElements] = useState<ModalElement[]>([]);
 
     const getTopModalElementId = (modalId?: number): number => {
         let returnId = modalId;
@@ -42,8 +42,6 @@ const useModal = (): UseModalProps => {
     };
 
     const currentModal = (modalId?: number): ModalElement | undefined => {
-        let returnId = modalId;
-        returnId = modalId || getTopModalElementId(modalId);
         return modalElements.find((e: ModalElement) => e.id === modalId);
     };
 
@@ -66,17 +64,15 @@ const useModal = (): UseModalProps => {
             element: dialog,
             props,
         };
-        modalElements.push(modalElement);
+        setModalElements([...modalElements, modalElement]);
     };
 
     const destroy = (modalId?: number): void => {
-        let id = modalId;
-        id = modalId || getTopModalElementId(modalId);
         const modal = modalElements.find((e: ModalElement) => e.id === modalId);
         setTimeout(() => {
             modal?.element.destroy();
             const arrFilter = modalElements.filter((e: ModalElement) => e.id !== modalId);
-            modalElements = [...arrFilter];
+            setModalElements(arrFilter);
         }, DESTROY_TIMEOUT);
     };
 
@@ -108,7 +104,9 @@ const useModal = (): UseModalProps => {
             callback?.(id);
         });
         if (modalElements.indexOf(currentModal(id) as ModalElement) > -1) {
-            modalElements.splice(modalElements.indexOf(currentModal(id) as ModalElement), 1);
+            const cloneModalElements = [...modalElements];
+            cloneModalElements.splice(modalElements.indexOf(currentModal(id) as ModalElement), 1);
+            setModalElements(cloneModalElements);
         }
     };
 
@@ -117,6 +115,20 @@ const useModal = (): UseModalProps => {
             dismiss(modal.id, callback);
         });
     };
+
+    const backAction = () => {
+        if (!modalElements.length) {
+            return false;
+        }
+        dismiss();
+        return true;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', backAction);
+
+        return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
+    }, [modalElements.length]);
 
     return {
         getTopModalElementId,
