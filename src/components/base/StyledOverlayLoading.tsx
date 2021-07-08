@@ -1,6 +1,7 @@
 import React, { FunctionComponent, memo, useEffect } from 'react';
-import { StyleSheet, View, Modal, ActivityIndicator, Keyboard, ViewProps } from 'react-native';
+import { StyleSheet, View, Modal, Keyboard, ViewProps, Image } from 'react-native';
 import { Themes } from 'assets/themes';
+import Images from 'assets/images';
 
 interface Props extends ViewProps {
     visible: boolean;
@@ -23,10 +24,10 @@ const StyledOverlayLoading = (props: Props) => {
             return <View style={[styles.container]}>{props.children}</View>;
         }
         return (
-            <View style={[styles.container]}>
+            <View style={styles.container}>
                 <View style={styles.background}>
                     <View style={styles.circle}>
-                        <ActivityIndicator color={Themes.COLORS.black} size={42} style={[styles.activityIndicator]} />
+                        <Image source={Images.photo.loadingBuffering} style={styles.loading} />
                     </View>
                 </View>
             </View>
@@ -70,6 +71,8 @@ const styles = StyleSheet.create({
         height: 36,
         borderRadius: 18,
         backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     textContainer: {
         flex: 1,
@@ -89,6 +92,10 @@ const styles = StyleSheet.create({
     },
     activityIndicator: {
         flex: 1,
+    },
+    loading: {
+        width: 20,
+        height: 20,
     },
 });
 

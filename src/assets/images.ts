@@ -16,6 +16,7 @@ const Images = {
     },
     photo: {
         defaultImage: require('./photo/img_default_image.png'),
+        loadingBuffering: require('./photo/loading_buffering.gif'),
     },
 };
 

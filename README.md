@@ -67,6 +67,16 @@ end
 
 Run `yarn` and `rebuild project`
 
+## Note: Fix error "StyledOverlayLoading doesn't work for android devices".
+Link Reference: https://stackoverflow.com/questions/50523233/gif-image-is-not-working-in-android-in-react-native/50523683
+When building your own native code, GIF and WebP are not supported by default on Android.
+You will need to add some optional modules in android/app/build.gradle, depending on the needs of your app.
+
+```
+implementation 'com.facebook.fresco:fresco:2.0.0'
+implementation 'com.facebook.fresco:animated-gif:2.0.0'
+```
+
 ## Getting Started Android
 
 1. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
