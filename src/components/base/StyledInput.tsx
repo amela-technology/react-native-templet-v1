@@ -12,6 +12,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
+import { autoCompleteType, textContentType } from 'utilities/CommonInterface';
 import StyledText from './StyledText';
 
 export interface StyledInputProps extends TextInputProps {
@@ -26,6 +27,8 @@ export interface StyledInputProps extends TextInputProps {
     ref?: any;
     errorMessage?: string;
     label?: string;
+    textContentType?: textContentType;
+    autoCompleteType?: autoCompleteType;
 }
 
 const StyledInput = (props: StyledInputProps, ref: any) => {
@@ -49,8 +52,8 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 placeholderTextColor={props.placeholderTextColor || Themes.COLORS.placeHolderGray}
                 placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
                 underlineColorAndroid={props.customUnderlineColor || 'transparent'}
-                autoCompleteType="email"
-                textContentType="emailAddress"
+                autoCompleteType={props.autoCompleteType || 'off'}
+                textContentType={props.textContentType || 'none'}
                 importantForAutofill="yes"
                 autoCorrect={false}
                 returnKeyType={props.customReturnKeyType || 'next'}
@@ -66,10 +69,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
 const styles: any = StyleSheet.create({
     textInput: {
         width: 250,
-        padding: 2,
         borderWidth: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 15,
         borderColor: 'black',
         borderRadius: 5,
     },
