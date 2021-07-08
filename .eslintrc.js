@@ -41,6 +41,8 @@ module.exports = {
         'react/self-closing-comp': 'error',
         'unused-imports/no-unused-vars-ts': 'off',
         'no-multi-spaces': 'warn',
+        'no-nested-ternary': 'off',
+        'import/prefer-default-export': 'off',
         'react/sort-comp': [
             1,
             {
@@ -64,7 +66,6 @@ module.exports = {
         'no-param-reassign': 'off',
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
         'react/display-name': 'off',
-        'import/prefer-default-export': 'off',
     },
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features

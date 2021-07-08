@@ -59,24 +59,24 @@ export const useOnesignal = (user?: any) => {
     }
 
     useEffect(() => {
-        try {
-            OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
-
-            // React Native OneSignal Ver4 Need pass function callback into function promptForPushNotificationsWithUserResponse to push notification in ios
-            OneSignal.promptForPushNotificationsWithUserResponse((response) => {
-                logger('User Accept Push Notification IOS:', false, response);
-            });
-
-            if (isLogin()) {
-                pushTagMember(user?.id);
-            } else {
-                deleteTagOneSignal();
+        setTimeout(() => {
+            try {
+                OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
+                // React Native OneSignal Ver4 Need pass function callback into function promptForPushNotificationsWithUserResponse to push notification in ios
+                OneSignal.promptForPushNotificationsWithUserResponse((response: any) => {
+                    logger('User Accept Push Notification IOS:', false, response);
+                });
+                if (isLogin()) {
+                    pushTagMember(user?.id);
+                } else {
+                    deleteTagOneSignal();
+                }
+                OneSignal.setNotificationWillShowInForegroundHandler(onReceived);
+                OneSignal.setNotificationOpenedHandler(handleNavigateNotification);
+            } catch (error) {
+                logger(error);
             }
-            OneSignal.setNotificationWillShowInForegroundHandler(onReceived);
-            OneSignal.setNotificationOpenedHandler(handleNavigateNotification);
-        } catch (error) {
-            logger(error);
-        }
+        }, 200);
         return () => {
             OneSignal.clearHandlers();
         };
