@@ -12,7 +12,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-import { autoCompleteType, textContentType } from './staticData';
+import { autoCompleteType, textContentType } from './CommonInterface';
 import StyledText from './StyledText';
 
 export interface StyledInputProps extends TextInputProps {
