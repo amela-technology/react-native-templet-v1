@@ -49,10 +49,9 @@ export const useLogin = (): LoginRequest => {
             store.dispatch(userInfoActions.getUserInfoRequest(response?.data?.token));
             AuthenticateService.handlerLogin({ ...response.data });
         } catch (e) {
+            setLoading(false);
             AlertMessage(e);
             logger(e);
-        } finally {
-            setLoading(false);
         }
     };
 

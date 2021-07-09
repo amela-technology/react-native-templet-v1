@@ -46,6 +46,7 @@
         "@react-native-community/async-storage": "^1.12.1",
         "@react-native-community/masked-view": "^0.1.11",
         "@react-navigation/bottom-tabs": "^5.11.11",
+        "@react-native-community/netinfo": "^6.0.0",
         "@react-navigation/native": "^5.9.4",
         "@react-navigation/stack": "^5.14.5",
         "ahooks": "^2.10.8",
