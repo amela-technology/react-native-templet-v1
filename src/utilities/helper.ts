@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import AsyncStorage from '@react-native-community/async-storage';
+import AlertMessage from 'components/base/AlertMessage';
 import i18next from 'i18next';
 import { DevSettings, Platform } from 'react-native';
 import Picker from 'react-native-picker';
@@ -41,4 +42,9 @@ export const addMenuClearAsyncStorage = () => {
             DevSettings.reload();
         });
     }
+};
+
+export const renderAlert = (message: string, callback: () => void) => {
+    AlertMessage(i18next.t(message));
+    callback();
 };

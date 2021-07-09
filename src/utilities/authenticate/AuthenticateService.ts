@@ -52,10 +52,9 @@ export const useLogin = (): LoginRequest => {
                 user: userResponse?.data,
             });
         } catch (e) {
+            setLoading(false);
             AlertMessage(e);
             logger(e);
-        } finally {
-            setLoading(false);
         }
     };
 
