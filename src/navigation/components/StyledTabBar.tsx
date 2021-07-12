@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { Platform, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React from 'react';
+import { Platform, View, Image, StyleSheet } from 'react-native';
 import Metrics from 'assets/metrics';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { StyledText } from 'components/base';
+import { StyledText, StyledTouchable } from 'components/base';
 import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
 
-const StyledTabBar: FunctionComponent<BottomTabBarProps> = ({ state, descriptors, navigation }: BottomTabBarProps) => {
+const StyledTabBar = ({ state, descriptors, navigation }: any) => {
     return (
         <View style={styles.tabContainer}>
             {state.routes.map((route: any, index: any) => {
@@ -32,8 +31,7 @@ const StyledTabBar: FunctionComponent<BottomTabBarProps> = ({ state, descriptors
                 };
 
                 return (
-                    <TouchableOpacity
-                        activeOpacity={1}
+                    <StyledTouchable
                         accessibilityRole="button"
                         // accessibilityStates={isFocused ? ['selected'] : []}
                         accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -41,18 +39,23 @@ const StyledTabBar: FunctionComponent<BottomTabBarProps> = ({ state, descriptors
                         onPress={onPress}
                         onLongPress={onLongPress}
                         key={route.key}
-                        style={[
-                            styles.tabButton,
-                            {
-                                backgroundColor: isFocused ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.25)',
-                            },
-                        ]}
+                        customStyle={[styles.tabButton]}
                     >
-                        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                        {/* @ts-ignore */}
-                        <Image source={options?.icon} style={[styles.tabIcon]} tintColor={Themes.COLORS.white} />
-                        <StyledText customStyle={styles.tabLabel} i18nText={options?.title || ''} />
-                    </TouchableOpacity>
+                        <Image
+                            source={options?.icon}
+                            style={[
+                                styles.tabIcon,
+                                { tintColor: isFocused ? Themes.COLORS.primary : Themes.COLORS.textPrimary },
+                            ]}
+                        />
+                        <StyledText
+                            customStyle={[
+                                styles.tabLabel,
+                                { color: isFocused ? Themes.COLORS.primary : Themes.COLORS.textPrimary },
+                            ]}
+                            i18nText={options?.title || ''}
+                        />
+                    </StyledTouchable>
                 );
             })}
         </View>
@@ -64,24 +67,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: Platform.OS === 'ios' ? Metrics.safeBottomPadding : 0,
         borderTopColor: '#DEE2E6',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderTopWidth: 1,
+        alignItems: Platform.OS === 'ios' ? 'flex-end' : 'center',
+        height: '8%',
     },
     tabButton: {
-        marginHorizontal: 5,
-        paddingVertical: 7,
-        paddingHorizontal: 5,
-        borderRadius: 50,
         alignItems: 'center',
     },
     tabIcon: {
         width: 17,
         height: 17,
         resizeMode: 'contain',
-        tintColor: Themes.COLORS.white,
+        marginBottom: 5,
     },
     tabLabel: {
-        color: Themes.COLORS.white,
         paddingLeft: Size.PADDING.defaultTextPadding,
         textAlign: 'center',
     },

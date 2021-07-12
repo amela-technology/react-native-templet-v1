@@ -54,7 +54,7 @@ const MainTabContainer = () => {
             name: TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT,
             title: t('tab.account'),
             component: AccountView,
-            icon: Images.icons.tab.setting,
+            icon: Images.icons.tab.account,
         },
     ];
     return (

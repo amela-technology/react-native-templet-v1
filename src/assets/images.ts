@@ -8,6 +8,7 @@ const Images = {
             home: require('./icon/ic_home.png'),
             notification: require('./icon/ic_notification.png'),
             setting: require('./icon/ic_setting.png'),
+            account: require('./icon/ic_account.png'),
         },
         radio: {
             check: require('./icon/ic_check_radio.png'),
