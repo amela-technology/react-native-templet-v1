@@ -66,10 +66,9 @@ const StyledHeader = (props: HeaderProps) => {
 
 const styles = ScaledSheet.create({
     container: {
-        height: '60@vs',
+        // height: '60@vs',
         backgroundColor: Themes.COLORS.white,
         justifyContent: 'flex-end',
-        zIndex: 2,
         paddingTop: Metrics.safeTopPadding,
     },
     viewHeader: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BackHandler, View } from 'react-native';
 import RootSiblings from 'react-native-root-siblings';
 import ModalComponent from './ModalComponent';
@@ -31,7 +31,7 @@ interface ModalElement {
 }
 
 const useModal = (): UseModalProps => {
-    const [modalElements, setModalElements] = useState<ModalElement[]>([]);
+    let modalElements: ModalElement[] = [];
 
     const getTopModalElementId = (modalId?: number): number => {
         let returnId = modalId;
@@ -64,7 +64,7 @@ const useModal = (): UseModalProps => {
             element: dialog,
             props,
         };
-        setModalElements([...modalElements, modalElement]);
+        modalElements = [...modalElements, modalElement];
     };
 
     const destroy = (modalId?: number): void => {
@@ -72,7 +72,7 @@ const useModal = (): UseModalProps => {
         setTimeout(() => {
             modal?.element.destroy();
             const arrFilter = modalElements.filter((e: ModalElement) => e.id !== modalId);
-            setModalElements(arrFilter);
+            modalElements = arrFilter;
         }, DESTROY_TIMEOUT);
     };
 
@@ -106,7 +106,7 @@ const useModal = (): UseModalProps => {
         if (modalElements.indexOf(currentModal(id) as ModalElement) > -1) {
             const cloneModalElements = [...modalElements];
             cloneModalElements.splice(modalElements.indexOf(currentModal(id) as ModalElement), 1);
-            setModalElements(cloneModalElements);
+            modalElements = cloneModalElements;
         }
     };
 
@@ -126,7 +126,6 @@ const useModal = (): UseModalProps => {
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', backAction);
-
         return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
     }, [modalElements.length]);
 

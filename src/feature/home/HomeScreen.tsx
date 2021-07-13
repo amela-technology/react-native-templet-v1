@@ -66,7 +66,7 @@ const HomeScreen: FunctionComponent = () => {
                                 />
                             ),
                             modalWrapperWidth: '100%',
-                            modalWrapperHeight: 'aaa%',
+                            modalWrapperHeight: '100%',
                             onBackdropPress: () => {
                                 modal.dismiss?.();
                             },
