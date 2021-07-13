@@ -37,11 +37,11 @@ const StyledPicker = (props: PickerProps) => {
         if (currentLabel) setCurrentLabel(undefined);
         Picker.select(data);
         props.onConfirm(data[0]?.toString());
-        modal.dismiss?.();
+        modal.dismissAll?.(() => null);
     };
 
     const handleCancel = () => {
-        modal.dismiss?.();
+        modal.dismissAll?.(() => null);
     };
 
     const handleShowPicker = () => {
@@ -49,7 +49,7 @@ const StyledPicker = (props: PickerProps) => {
             children: <View />,
             onBackdropPress: () => {
                 Picker.hide();
-                modal.dismiss?.();
+                modal.dismissAll?.(() => null);
             },
         });
         const newData = [];
@@ -60,11 +60,11 @@ const StyledPicker = (props: PickerProps) => {
             onPickerConfirm: handleConfirm,
             onPickerCancel: handleCancel,
         });
+
         newData.push(item || props.dataList[0]);
         Picker.select(newData);
         Picker.show();
     };
-
     return (
         <>
             <TouchableOpacity
@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
         aspectRatio: 5 / 9,
         position: 'absolute',
         right: 0,
+    },
+    wrapperViewModal: {
+        flex: 1,
     },
 });
 
