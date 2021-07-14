@@ -1,8 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Host } from 'react-native-portalize';
-import { useSelector } from 'react-redux';
-import { RootState } from 'app-redux/rootReducer';
+import { useAppSelector } from 'app-redux/hooks';
 import { APP_ROUTE } from '../config/routes';
 import navigationConfigs from '../config/options';
 import MainTabContainer from './TabScenes';
@@ -19,8 +18,8 @@ const AppStack = () => (
 );
 
 const Navigation: React.FunctionComponent = () => {
-    const { userInfo } = useSelector((state: RootState) => state);
-    if (!userInfo.token) {
+    const { token } = useAppSelector((state) => state.userInfo);
+    if (token) {
         return <AppStack />;
     }
     return <AuthStack />;

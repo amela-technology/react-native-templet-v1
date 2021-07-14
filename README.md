@@ -12,7 +12,7 @@ Below you'll find information about performing common tasks.
 -   React native version 0.63.4
 -   Fully using typescript for typing
 -   Folder structs using package-by-feature (why)
--   Redux, redux-saga, redux-persist, redux-logger
+-   Redux-toolkit, redux-saga, redux-persist, redux-logger
 -   React navigation v5
 -   100% functional component with hook
 -   Alot of custom components
@@ -148,17 +148,17 @@ Link assets and font from **src/assets** to Native project
 │   │   │       └── notification.ts
 │   │   └── request.ts
 │   ├── app-redux
-│   │   ├── resource
-│   │   │   ├── actions.ts
-│   │   │   ├── reducer.ts
-│   │   │   └── types.ts
-│   │   ├── rootReducer.ts
-│   │   ├── rootSaga.ts
+│   │   ├── sagas
+│   │   │   ├── userInfoSaga.ts
+│   │   │   ├── rootSaga.ts
+│   │   │   └── resourceSaga.ts
+│   │   ├── slices
+│   │   │   ├── initSlice.ts
+│   │   │   ├── userInfoSlice.ts
+│   │   │   ├── types.ts
+│   │   │   └── resourceSlice.ts
+│   │   ├── hooks.ts
 │   │   ├── store.ts
-│   │   └── userInfo
-│   │       ├── actions.ts
-│   │       ├── reducer.ts
-│   │       └── types.ts
 │   ├── assets
 │   │   ├── fonts
 │   │   │   ├── Montserrat-Light.ttf

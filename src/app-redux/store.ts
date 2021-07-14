@@ -1,34 +1,35 @@
-import AsyncStorage from '@react-native-community/async-storage';
-import { applyMiddleware, compose, createStore } from 'redux';
-// import logger from 'redux-logger'
-import { persistReducer, persistStore } from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+// import logger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas/rootSaga';
 
-// import createSagaMiddleware from 'redux-saga';
-import rootReducer from 'app-redux/rootReducer';
-// import rootSaga from './rootSaga';
+import resourceReducer from './slices/resourceSlice';
+import userInfoReducer from './slices/userInfoSlice';
 
-// persistInit
-const persistConfig = {
-    blacklist: ['AlertReducer'],
-    key: 'amela@2019',
-    debug: __DEV__,
-    storage: AsyncStorage,
+const rootReducer = {
+    resource: resourceReducer,
+    userInfo: userInfoReducer,
 };
 
-// const sagaMiddleware: any = createSagaMiddleware()
-//
-const middleware: any = [];
+const sagaMiddleware = createSagaMiddleware();
 
-if (__DEV__) {
-    // middleware.push(logger)
-}
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            immutableCheck: false,
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        })
+            // .concat(logger)
+            .prepend(sagaMiddleware),
+    devTools: __DEV__,
+});
 
-const reducer = persistReducer(persistConfig, rootReducer);
-
-const store = createStore(reducer, compose(applyMiddleware(...middleware)));
+sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
-
-// sagaMiddleware.run(rootSaga)
 
 export { store, persistor };
