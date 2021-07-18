@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React, { forwardRef } from 'react';
-import { Controller, RegisterOptions, useFormContext, UseFormMethods } from 'react-hook-form';
+import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { logger } from 'utilities/logger';
 import StyledInput, { StyledInputProps } from './StyledInput';
@@ -9,7 +9,7 @@ interface FormInputProps extends StyledInputProps {
     name: string;
     rules?: RegisterOptions;
     defaultValue?: string;
-    form?: UseFormMethods;
+    form?: any;
 }
 
 const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
@@ -22,11 +22,11 @@ const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
         return <StyledInput errorMessage={'error.inputComponent'} editable={false} />;
     }
 
-    const { control, errors } = formContext || form;
+    const { control, errors }: any = formContext || form;
     const errorMessage = errors?.[name]?.message || '';
     
     const onChangeInput = (text: string, onChangeControl: any) => {
-        onChangeText ? onChangeText(text) : onChangeControl(text);
+        onChangeText ? onChangeText?.(text) : onChangeControl?.(text);
     };
     return (
         <Controller
@@ -34,7 +34,7 @@ const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
             name={name}
             defaultValue={defaultValue}
             rules={rules}
-            render={({ onChange, value }) => {
+            render={({ onChange, value }: any) => {
                 return (
                     <StyledInput
                         ref={ref}

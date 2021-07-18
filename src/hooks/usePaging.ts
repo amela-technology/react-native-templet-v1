@@ -49,6 +49,10 @@ const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, 
 
     // config request paging
     const runRequest = async (requestPageIndex: number, pageSize?: number, otherParams?: any) => {
+        setPagingData({
+            ...pagingData,
+            noMore: true,
+        });
         const res = await requestPaging({
             params: {
                 pageIndex: requestPageIndex,
@@ -84,6 +88,7 @@ const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, 
         params,
         setParams,
         setPagingData,
+        loadingMore: pagingData.loadingMore,
     };
 };
 
