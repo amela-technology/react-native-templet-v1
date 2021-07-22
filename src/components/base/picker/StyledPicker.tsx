@@ -73,7 +73,9 @@ const StyledPicker = (props: PickerProps) => {
                 style={[styles.contWholePicker, props.customStyle]}
                 disabled={props.isPickerDisable || false}
             >
-                <StyledText originValue={currentLabel || item} customStyle={[styles.txtItem, props.customLabelStyle]} />
+                <View style={styles.contTxtItem}>
+                    <StyledText originValue={currentLabel || item} customStyle={[styles.txtItem, props.customLabelStyle]} />
+                </View>
                 {props.isPickerDisable ? null : (
                     <StyledImage
                         source={Images.icons.selected}
@@ -87,21 +89,27 @@ const StyledPicker = (props: PickerProps) => {
 
 const styles = StyleSheet.create({
     contWholePicker: {
+        flexDirection: 'row',
         backgroundColor: '#E6E6E7',
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'space-between',
         borderRadius: 8,
         height: DEFAULT_HEIGHT,
         width: '90%',
     },
+    contTxtItem: {
+        width: '85%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     txtItem: {
         fontWeight: 'bold',
         textAlign: 'center',
+        left: 0,
     },
     imgPicker: {
         height: DEFAULT_HEIGHT,
         aspectRatio: 5 / 9,
-        position: 'absolute',
         right: 0,
     },
     wrapperViewModal: {

@@ -6,12 +6,13 @@ import { APP_ROUTE } from '../config/routes';
 import navigationConfigs from '../config/options';
 import MainTabContainer from './TabScenes';
 import AuthStack from './AuthScenes';
+import { isIos } from 'utilities/helper';
 
 const MainStack = createStackNavigator();
 
 const AppStack = () => (
     <Host>
-        <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs}>
+        <MainStack.Navigator keyboardHandlingEnabled={isIos} headerMode={'none'} screenOptions={navigationConfigs}>
             <MainStack.Screen name={APP_ROUTE.MAIN_TAB} component={MainTabContainer} />
         </MainStack.Navigator>
     </Host>
