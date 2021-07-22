@@ -1,3 +1,4 @@
+import Metrics from 'assets/metrics';
 import { Themes } from 'assets/themes';
 import React, { useState, forwardRef, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -49,7 +50,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                     props.customStyle,
                     !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
                 ]}
-                placeholderTextColor={props.placeholderTextColor || Themes.COLORS.placeHolderGray}
+                placeholderTextColor={props.placeholderTextColor || Themes.COLORS.grey}
                 placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
                 underlineColorAndroid={props.customUnderlineColor || 'transparent'}
                 autoCompleteType={props.autoCompleteType || 'off'}
@@ -68,10 +69,10 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
 };
 const styles: any = StyleSheet.create({
     textInput: {
-        width: 250,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 5,
+        width: Metrics.screenWidth * 0.6,
+        borderRadius: 20,
+        padding: 10,
+        backgroundColor: Themes.COLORS.secondary,
     },
     errorMessage: {
         fontSize: 12,
@@ -79,7 +80,7 @@ const styles: any = StyleSheet.create({
         marginTop: 5,
     },
     container: {
-        marginBottom: 10,
+        marginVertical: 8,
     },
 });
 export default forwardRef(StyledInput);
