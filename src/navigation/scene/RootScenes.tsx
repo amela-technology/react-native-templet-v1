@@ -2,11 +2,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Host } from 'react-native-portalize';
 import { useAppSelector } from 'app-redux/hooks';
+import { isIos } from 'utilities/helper';
 import { APP_ROUTE } from '../config/routes';
 import navigationConfigs from '../config/options';
 import MainTabContainer from './TabScenes';
 import AuthStack from './AuthScenes';
-import { isIos } from 'utilities/helper';
 
 const MainStack = createStackNavigator();
 

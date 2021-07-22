@@ -51,7 +51,7 @@ export default {
             backButton: '前の画面',
             photo: 'Photo',
             camera: 'Camera',
-            cancel: 'cancel'
+            cancel: 'cancel',
         },
         sendEmail: {
             title: 'パスワードを忘れた',

@@ -74,7 +74,10 @@ const StyledPicker = (props: PickerProps) => {
                 disabled={props.isPickerDisable || false}
             >
                 <View style={styles.contTxtItem}>
-                    <StyledText originValue={currentLabel || item} customStyle={[styles.txtItem, props.customLabelStyle]} />
+                    <StyledText
+                        originValue={currentLabel || item}
+                        customStyle={[styles.txtItem, props.customLabelStyle]}
+                    />
                 </View>
                 {props.isPickerDisable ? null : (
                     <StyledImage

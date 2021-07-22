@@ -63,13 +63,10 @@ const LoginScreen: FunctionComponent = () => {
                         onChangeText={(text: string) => onChangeText('email', text)}
                     />
                     {errors?.email ? (
-                        <StyledText
-                            customStyle={styles.errorMessage}
-                            originValue={errors?.email?.message || ''}
-                        />
+                        <StyledText customStyle={styles.errorMessage} originValue={errors?.email?.message || ''} />
                     ) : (
-                            <View />
-                        )}
+                        <View />
+                    )}
 
                     <StyledInputForm
                         name="password"
@@ -81,29 +78,28 @@ const LoginScreen: FunctionComponent = () => {
                         onChangeText={(text: string) => onChangeText('password', text)}
                     />
                     {errors?.password ? (
-                        <StyledText
-                            customStyle={styles.errorMessage}
-                            originValue={errors?.password?.message || ''}
-                        />
+                        <StyledText customStyle={styles.errorMessage} originValue={errors?.password?.message || ''} />
                     ) : (
-                            <View />
-                        )}
-
+                        <View />
+                    )}
                 </FormProvider>
 
                 <StyledButton
                     onPress={handleSubmit(requestLogin)}
-                    title='authen.login.buttonLogin'
+                    title="authen.login.buttonLogin"
                     disabled={!isValid}
-                    customStyle={[styles.loginButton, { backgroundColor: isValid ? `rgba(252, 177, 3, 1)` : `rgba(252, 177, 3, 0.5)` }]}
+                    customStyle={[
+                        styles.loginButton,
+                        { backgroundColor: isValid ? `rgba(252, 177, 3, 1)` : `rgba(252, 177, 3, 0.5)` },
+                    ]}
                 />
 
                 <StyledTouchable onPress={goToForgotPassword} customStyle={styles.registerButton}>
-                    <StyledText i18nText='authen.login.forgotPasswordText' />
+                    <StyledText i18nText="authen.login.forgotPasswordText" />
                 </StyledTouchable>
 
                 <StyledTouchable onPress={doRegister} customStyle={styles.registerButton}>
-                    <StyledText i18nText='authen.login.registerText' />
+                    <StyledText i18nText="authen.login.registerText" />
                 </StyledTouchable>
             </SafeAreaView>
         </KeyboardAwareScrollView>
@@ -128,7 +124,7 @@ const styles = StyleSheet.create({
     },
     errorMessage: {
         color: Themes.COLORS.borderInputError,
-    }
+    },
 });
 
 export default LoginScreen;

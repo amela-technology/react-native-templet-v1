@@ -24,14 +24,14 @@ const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
 
     const { control, errors }: any = formContext || form;
     const errorMessage = errors?.[name]?.message || '';
-    
+
     const onChangeInput = (text: string, onChangeControl: any) => {
         onChangeText ? onChangeText?.(text) : onChangeControl?.(text);
     };
     return (
         <Controller
             control={control}
-            name={name}
+            name={name as any}
             defaultValue={defaultValue}
             rules={rules}
             render={({ onChange, value }: any) => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { forgotPassword } from 'api/modules/api-app/authenticate';
 import { Themes } from 'assets/themes';
 import { StyledButton } from 'components/base';
