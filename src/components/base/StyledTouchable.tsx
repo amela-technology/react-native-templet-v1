@@ -27,7 +27,6 @@ const StyledTouchable: FunctionComponent<StyledTouchableProps> = (props: StyledT
     const handlePress = throttle(onPress, throttleTime, configThrottle);
 
     return (
-
         <TouchableOpacity activeOpacity={0.6} disabled={disabled} style={customStyle} onPress={handlePress} {...props}>
             {children}
         </TouchableOpacity>

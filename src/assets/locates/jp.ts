@@ -51,7 +51,7 @@ export default {
             backButton: '前の画面',
             photo: 'Photo',
             camera: 'Camera',
-            cancel: 'cancel'
+            cancel: 'cancel',
         },
         sendEmail: {
             title: 'パスワードを忘れた',
@@ -75,8 +75,8 @@ export default {
         infoInvalid: 'Info invalid',
         notCompleted: '全ての項目に入力してください',
         validatePassword: 'パスワードは半角英数字で6文字以上入力する必要があります',
-        passwordLength: 'At least 6 character of password',
-        confirmPasswordLength: 'At least 6 character of confirm password',
+        passwordLength: 'At least 8 character of password',
+        confirmPasswordLength: 'At least 8 character of confirm password',
         passwordNotMatch: '入力された新パスワードが一致しません。ご確認ください。',
         duplicatePassword: 'Password is duplicate',
         emailExisted: 'メールアドレスが既に存在します',
@@ -84,7 +84,7 @@ export default {
         emailEmpty: '全ての項目を入力してください。',
         emailNotRegister: '入力したメールアドレスがまだ登録されていません',
         phoneInvalid: 'Phone number is invalid',
-        nameLength: 'At least 6 character of password',
+        nameLength: 'At least 8 character of password',
         trimSpace: 'Input cannot have space in start and end',
         messageLength: '1文字以上 255文字以内',
         require: '{{field}} is required.',

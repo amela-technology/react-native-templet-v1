@@ -1,7 +1,9 @@
 import { StyledText } from 'components/base';
+import useModal from 'components/base/modal/useModal';
 import StyledPicker from 'components/base/picker/StyledPicker';
 import React, { useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
+import ModalContent2 from './ModalContent2';
 
 interface ModalContentProps {
     currentValue?: number;
@@ -11,6 +13,7 @@ interface ModalContentProps {
 }
 
 const ModalContent = (props: ModalContentProps) => {
+    const modal = useModal();
     const [currentValue, setCurrentValue] = useState(props?.currentValue || 0);
     const dataPicker = [
         'label1',
@@ -33,21 +36,40 @@ const ModalContent = (props: ModalContentProps) => {
         <View style={styles.contModalContent}>
             <StyledText originValue={currentValue.toString()} />
             <Button
-                title={'test alert'}
-                onPress={() => {
-                    props?.closeModal?.();
-                    props?.handleCallback?.();
-                }}
-            />
-            <StyledPicker currentValue={valuePicker} dataList={dataPicker} onConfirm={handleConfirm} />
-            <Button
-                title={'up and up'}
+                title={'Increase number'}
                 onPress={() => {
                     setCurrentValue(currentValue + 1);
                     props?.handleSetValue?.(currentValue + 1);
                 }}
             />
-            <Button title={'hide'} onPress={() => props?.closeModal?.()} />
+            <Button
+                title={'Test alert with closing modal'}
+                onPress={() => {
+                    props?.closeModal?.();
+                    props?.handleCallback?.();
+                }}
+            />
+            <Button
+                title={'Test alert without closing modal'}
+                onPress={() => {
+                    props?.handleCallback?.();
+                }}
+            />
+            <StyledPicker currentValue={valuePicker} dataList={dataPicker} onConfirm={handleConfirm} />
+            <Button
+                title={'Open Modal 2'}
+                onPress={() => {
+                    modal.show?.({
+                        children: <ModalContent2 closeModal={() => modal.dismiss?.()} />,
+                        modalWrapperHeight: '70%',
+                        modalWrapperWidth: '100%',
+                        onBackdropPress: () => {
+                            modal.dismiss?.();
+                        },
+                    });
+                }}
+            />
+            <Button title={'Hide'} onPress={() => props?.closeModal?.()} />
         </View>
     );
 };

@@ -11,7 +11,7 @@ import {
     USERNAME_MIN_LENGTH,
 } from './validate';
 
-const yupValidate =  {
+const yupValidate = {
     name: () =>
         yup
             .string()
@@ -62,7 +62,7 @@ const yupValidate =  {
             .min(PASSWORD_MIN_LENGTH, i18next.t('error.passwordLength'))
             .max(PASSWORD_MAX_LENGTH, i18next.t('error.passwordLength'))
             .matches(REGEX_PASSWORD, i18next.t('error.validatePassword'));
-    }
+    },
 };
 
 export default yupValidate;

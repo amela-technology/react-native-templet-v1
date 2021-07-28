@@ -45,16 +45,15 @@ const HomeScreen: FunctionComponent = () => {
             <StyledHeader title={'Home Screen'} />
             <View style={styles.contScreen}>
                 <StyledPicker
-                    label="HEHEHE"
+                    label="Test Picker"
                     currentValue={valuePicker}
                     dataList={dataPicker}
                     onConfirm={handleConfirm}
                 />
                 <Button
-                    title={'Modal'}
+                    title={'Open Modal 1'}
                     onPress={() => {
                         modal.show?.({
-                            // children: <View />,
                             children: (
                                 <ModalContent
                                     currentValue={currentValue}
