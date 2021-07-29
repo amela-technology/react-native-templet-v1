@@ -84,7 +84,7 @@ export default {
         emailEmpty: '全ての項目を入力してください。',
         emailNotRegister: '入力したメールアドレスがまだ登録されていません',
         phoneInvalid: 'Phone number is invalid',
-        nameLength: 'At least 8 character of password',
+        nameLength: 'Minimum is 5 characters and maximum is 8 characters',
         trimSpace: 'Input cannot have space in start and end',
         messageLength: '1文字以上 255文字以内',
         require: '{{field}} is required.',

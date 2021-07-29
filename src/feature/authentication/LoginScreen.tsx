@@ -5,11 +5,16 @@ import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import { navigate } from 'navigation/NavigationService';
 import React, { FunctionComponent, useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useLogin } from 'utilities/authenticate/AuthenticateService';
 import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
+
+const DEFAULT_FORM: any = {
+    email: 'hoan.nguyen@amela.vn',
+    password: '123123123',
+};
 
 const LoginScreen: FunctionComponent = () => {
     const passwordRef = useRef<any>(null);
@@ -19,24 +24,18 @@ const LoginScreen: FunctionComponent = () => {
         email: yupValidate.email(),
         password: yupValidate.password(),
     });
-
     const form = useForm({
-        mode: 'all',
+        mode: 'onChange', // validate form onChange
+        defaultValues: DEFAULT_FORM,
         resolver: yupResolver(yupSchema),
-        defaultValues: { email: 'hoan.nguyen@amela.vn', password: '123123123' },
+        reValidateMode: 'onChange',
+        criteriaMode: 'firstError', // first error from each field will be gathered.
     });
     const {
-        formState: { isValid, errors },
-        setValue,
-        getValues,
+        formState: { isValid },
         handleSubmit,
     } = form;
 
-    const onChangeText = (field: 'email' | 'password', text: string) => {
-        setValue(field, text, {
-            shouldValidate: true,
-        });
-    };
     const doRegister = () => {
         navigate(AUTHENTICATE_ROUTE.REGISTER);
     };
@@ -47,6 +46,7 @@ const LoginScreen: FunctionComponent = () => {
     return (
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled"
             enableOnAndroid={true}
             showsVerticalScrollIndicator={false}
             enableResetScrollToCoords={false}
@@ -55,33 +55,19 @@ const LoginScreen: FunctionComponent = () => {
                 <FormProvider {...form}>
                     <StyledInputForm
                         name="email"
-                        value={getValues().email}
                         customPlaceHolder="authen.login.placeholderEmail"
                         keyboardType="email-address"
                         maxLength={32}
                         onSubmitEditing={() => passwordRef.current.focus()}
-                        onChangeText={(text: string) => onChangeText('email', text)}
                     />
-                    {errors?.email ? (
-                        <StyledText customStyle={styles.errorMessage} originValue={errors?.email?.message || ''} />
-                    ) : (
-                        <View />
-                    )}
-
                     <StyledInputForm
                         name="password"
-                        value={getValues().password}
                         customPlaceHolder="authen.login.placeholderPassword"
                         ref={passwordRef}
                         secureTextEntry
+                        returnKeyType="done"
                         maxLength={20}
-                        onChangeText={(text: string) => onChangeText('password', text)}
                     />
-                    {errors?.password ? (
-                        <StyledText customStyle={styles.errorMessage} originValue={errors?.password?.message || ''} />
-                    ) : (
-                        <View />
-                    )}
                 </FormProvider>
 
                 <StyledButton

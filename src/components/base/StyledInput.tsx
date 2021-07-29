@@ -69,7 +69,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
 };
 const styles: any = StyleSheet.create({
     textInput: {
-        width: Metrics.screenWidth * 0.6,
+        width: Metrics.screenWidth * 0.8,
         borderRadius: 20,
         padding: 10,
         backgroundColor: Themes.COLORS.secondary,
@@ -81,6 +81,7 @@ const styles: any = StyleSheet.create({
     },
     container: {
         marginVertical: 8,
+        width: Metrics.screenWidth * 0.8,
     },
 });
 export default forwardRef(StyledInput);
