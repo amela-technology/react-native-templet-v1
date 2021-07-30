@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from 'app-redux/store';
 import { NavigationContainer } from '@react-navigation/native';
-import 'utilities/i18next';
+import { loadLocaleLanguage } from 'utilities/i18next';
 import { navigationRef } from 'navigation/NavigationService';
 import Navigation from 'navigation/scene/RootScenes';
 import { RootSiblingParent } from 'react-native-root-siblings';
@@ -14,13 +14,16 @@ import { addMenuClearAsyncStorage } from 'utilities/helper';
 LogBox.ignoreLogs(['Require cycle:']);
 
 const App: FunctionComponent = () => {
+    const onBeforeLift = () => {
+        loadLocaleLanguage();
+    };
     useEffect(() => {
         addMenuClearAsyncStorage();
     }, []);
 
     return (
         <Provider store={store}>
-            <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+            <PersistGate loading={<ActivityIndicator />} persistor={persistor} onBeforeLift={onBeforeLift}>
                 <APIProvider>
                     <RootSiblingParent>
                         <NavigationContainer ref={navigationRef}>
