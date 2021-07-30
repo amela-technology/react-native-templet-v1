@@ -6,10 +6,12 @@ import rootSaga from './sagas/rootSaga';
 
 import resourceReducer from './slices/resourceSlice';
 import userInfoReducer from './slices/userInfoSlice';
+import languageReducer from './slices/languageSlice';
 
 const rootReducer = {
     resource: resourceReducer,
     userInfo: userInfoReducer,
+    languageKey: languageReducer,
 };
 
 const sagaMiddleware = createSagaMiddleware();
