@@ -39,7 +39,8 @@ const getUserInfoFailed: Reducer<PayloadAction<any>> = (state, { payload }) => {
 };
 
 const updateToken: Reducer<PayloadAction<Pick<IUserInfoState, 'token' | 'refreshToken'>>> = (state, { payload }) => {
-    state = { ...state, ...payload };
+    state.token = payload.token;
+    state.refreshToken = payload.refreshToken;
 };
 
 const logOut: Reducer = (state) => {
