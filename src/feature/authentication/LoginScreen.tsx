@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Themes } from 'assets/themes';
 import { StyledButton, StyledInputForm, StyledText, StyledTouchable } from 'components/base';
+import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import { navigate } from 'navigation/NavigationService';
 import React, { FunctionComponent, useRef } from 'react';
@@ -18,7 +19,7 @@ const DEFAULT_FORM: any = {
 
 const LoginScreen: FunctionComponent = () => {
     const passwordRef = useRef<any>(null);
-    const { requestLogin } = useLogin();
+    const { requestLogin, loading } = useLogin();
 
     const yupSchema = yup.object().shape({
         email: yupValidate.email(),
@@ -51,6 +52,7 @@ const LoginScreen: FunctionComponent = () => {
             showsVerticalScrollIndicator={false}
             enableResetScrollToCoords={false}
         >
+            <StyledOverlayLoading visible={loading} />
             <SafeAreaView style={styles.body}>
                 <FormProvider {...form}>
                     <StyledInputForm

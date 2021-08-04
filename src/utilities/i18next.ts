@@ -35,7 +35,7 @@ i18next.use(initReactI18next).init({
     interpolation: {
         escapeValue: false,
     },
-    lng: store.getState()?.languageKey?.data || getLanguage(),
+    lng: store?.getState()?.languageKey?.data || getLanguage(),
     fallbackLng: DEFAULT_LANG,
     resources: {
         en: {
@@ -48,7 +48,7 @@ i18next.use(initReactI18next).init({
 });
 
 export const loadLocaleLanguage = () => {
-    const lng = store.getState()?.languageKey?.data || DEFAULT_LANG;
+    const lng = store?.getState()?.languageKey?.data || DEFAULT_LANG;
     dayjs.locale(lng);
     i18next.addResourceBundle(lng, 'translation', lng === 'en' ? en : jp);
     i18next.changeLanguage(lng);

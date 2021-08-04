@@ -24,6 +24,10 @@ export default {
         picker: {
             pickItem: 'Please select an item',
         },
+        error: {
+            unknown: 'Unknown error.',
+            network: 'Network error.',
+        },
     },
 
     // screens
