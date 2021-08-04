@@ -24,6 +24,10 @@ export default {
         picker: {
             pickItem: 'アイテムを選択してください',
         },
+        error: {
+            unknown: '不明なエラーが発生しました。',
+            network: 'エラーが発生しました。暫くしてから、もう一度試してください。',
+        },
     },
 
     // screens

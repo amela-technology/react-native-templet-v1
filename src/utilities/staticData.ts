@@ -4,5 +4,6 @@ export const staticValue = {
 };
 
 export const ERRORS = {
-    network: 'NETWORK_FALSE',
+    default: 'common.error.unknown',
+    network: 'common.error.network',
 };

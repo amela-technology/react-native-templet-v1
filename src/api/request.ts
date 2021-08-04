@@ -2,18 +2,13 @@ import axios from 'axios';
 import Config from 'react-native-config';
 import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
-import { logger, renderAlert } from 'utilities/helper';
+import { logger } from 'utilities/helper';
 import NetInfo from '@react-native-community/netinfo';
 import { apiLogger } from 'utilities/logger';
 import { ERRORS } from 'utilities/staticData';
+import i18next from 'utilities/i18next';
 
 const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}auth/refresh-token`;
-
-const DEFAULT_ERROR_MESSAGE = 'Unknown Error';
-const NETWORK_ERROR_MESSAGE = 'common.networkError';
-
-let validNetwork = true;
-let isShowNetwork = false;
 
 const request = axios.create({
     baseURL: Config.API_URL,
@@ -36,11 +31,11 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
     failedQueue = [];
 };
 
-const rejectNetwork = (err: string, isNetWork: boolean) => {
-    if (isNetWork !== false) {
-        return Promise.reject(err);
+const rejectNetwork = (err: string, validNetwork: boolean) => {
+    if (validNetwork) {
+        return Promise.reject(i18next.t(err));
     }
-    return Promise.reject(ERRORS.network);
+    return Promise.reject(i18next.t(ERRORS.network));
 };
 
 request.interceptors.request.use(
@@ -49,15 +44,6 @@ request.interceptors.request.use(
         const token = TokenProvider.getToken();
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
-        }
-        const network: any = await NetInfo.fetch();
-        // validNetwork on first render in ios will return null
-        validNetwork = network.isInternetReachable && network.isConnected;
-        if (validNetwork === false && !isShowNetwork) {
-            isShowNetwork = true;
-            renderAlert(NETWORK_ERROR_MESSAGE, () => {
-                isShowNetwork = false;
-            });
         }
         return config;
     },
@@ -75,6 +61,12 @@ request.interceptors.request.use(
 request.interceptors.response.use(
     (response: any) => response.data,
     async (error: any) => {
+        // Check network first
+        const network: any = await NetInfo.fetch();
+        const validNetwork = network.isInternetReachable && network.isConnected;
+        if (!validNetwork) {
+            return rejectNetwork(error.message, validNetwork);
+        }
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         const { response } = error || {};
@@ -90,7 +82,7 @@ request.interceptors.response.use(
             logger('RefreshToken_NotExist => logout');
             // logout here
             AuthenticateService.logOut();
-            return Promise.reject(error);
+            return rejectNetwork(error, validNetwork);
         }
         if (
             ((error.response && error.response.status === 401) || errorMessage === 'Token_Expire') &&
@@ -127,7 +119,7 @@ request.interceptors.response.use(
                 isRefreshing = false;
             }
         }
-        error.message = errorMessage || DEFAULT_ERROR_MESSAGE;
+        error.message = errorMessage || ERRORS.default;
         error.keyMessage = errorKey || '';
         return rejectNetwork(error.message, validNetwork);
     },
