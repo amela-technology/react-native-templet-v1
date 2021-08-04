@@ -57,6 +57,5 @@ export function generatePersistConfig(key: string, whitelist: string[]) {
 }
 
 export const renderAlert = (message: string, callback: () => void) => {
-    AlertMessage(i18next.t(message));
-    callback();
+    AlertMessage(i18next.t(message), '', callback, undefined, false);
 };

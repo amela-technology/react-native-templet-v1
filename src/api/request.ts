@@ -2,13 +2,14 @@ import axios from 'axios';
 import Config from 'react-native-config';
 import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
-import { logger } from 'utilities/helper';
+import { logger, renderAlert } from 'utilities/helper';
 import NetInfo from '@react-native-community/netinfo';
 import { apiLogger } from 'utilities/logger';
 import { ERRORS } from 'utilities/staticData';
 import i18next from 'utilities/i18next';
 
 const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}auth/refresh-token`;
+let hasAnyNetworkDialogShown = false;
 
 const request = axios.create({
     baseURL: Config.API_URL,
@@ -31,8 +32,9 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
     failedQueue = [];
 };
 
-const rejectNetwork = (err: string, validNetwork: boolean) => {
-    if (validNetwork) {
+const rejectError = (err: string, validNetwork: boolean) => {
+    // Avoid being null
+    if (validNetwork !== false) {
         return Promise.reject(i18next.t(err));
     }
     return Promise.reject(i18next.t(ERRORS.network));
@@ -40,7 +42,7 @@ const rejectNetwork = (err: string, validNetwork: boolean) => {
 
 request.interceptors.request.use(
     async (config: any) => {
-        // Do something before api is sent
+        // Do something before API is sent
         const token = TokenProvider.getToken();
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -48,7 +50,7 @@ request.interceptors.request.use(
         return config;
     },
     (error: any) => {
-        // Do something with api error
+        // Do something with API error
         apiLogger(
             `%c FAILED ${error.response.method?.toUpperCase()} from ${error.response.config.url}:`,
             'background: red; color: #fff',
@@ -64,8 +66,12 @@ request.interceptors.response.use(
         // Check network first
         const network: any = await NetInfo.fetch();
         const validNetwork = network.isInternetReachable && network.isConnected;
-        if (!validNetwork) {
-            return rejectNetwork(error.message, validNetwork);
+        // validNetwork on first render in iOS will return NULL
+        if (validNetwork === false && !hasAnyNetworkDialogShown) {
+            hasAnyNetworkDialogShown = true;
+            renderAlert(i18next.t(ERRORS.network), () => {
+                hasAnyNetworkDialogShown = false;
+            });
         }
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
@@ -82,7 +88,7 @@ request.interceptors.response.use(
             logger('RefreshToken_NotExist => logout');
             // logout here
             AuthenticateService.logOut();
-            return rejectNetwork(error, validNetwork);
+            return rejectError(error, validNetwork);
         }
         if (
             ((error.response && error.response.status === 401) || errorMessage === 'Token_Expire') &&
@@ -96,7 +102,7 @@ request.interceptors.response.use(
                     originalRequest.headers.Authorization = `Bearer ${queuePromise.token}`;
                     return request(originalRequest);
                 } catch (err) {
-                    return rejectNetwork(err, validNetwork);
+                    return rejectError(err, validNetwork);
                 }
             }
             logger('refreshing token...');
@@ -114,14 +120,14 @@ request.interceptors.response.use(
                 return request(originalRequest);
             } catch (err) {
                 processQueue(err, null);
-                return rejectNetwork(err, validNetwork);
+                return rejectError(err, validNetwork);
             } finally {
                 isRefreshing = false;
             }
         }
         error.message = errorMessage || ERRORS.default;
         error.keyMessage = errorKey || '';
-        return rejectNetwork(error.message, validNetwork);
+        return rejectError(error.message, validNetwork);
     },
 );
 
