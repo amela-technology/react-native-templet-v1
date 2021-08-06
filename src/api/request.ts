@@ -86,7 +86,7 @@ request.interceptors.response.use(
         const originalRequest = error.config;
         if (errorMessage === 'RefreshToken_NotExist') {
             logger('RefreshToken_NotExist => logout');
-            // logout here
+            // Logout here
             AuthenticateService.logOut();
             return rejectError(error, validNetwork);
         }
@@ -119,6 +119,8 @@ request.interceptors.response.use(
                 processQueue(null, token);
                 return request(originalRequest);
             } catch (err) {
+                // Logout here
+                AuthenticateService.logOut();
                 processQueue(err, null);
                 return rejectError(err, validNetwork);
             } finally {
