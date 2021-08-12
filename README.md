@@ -38,7 +38,6 @@ amela-rn-cli
 ```
 4. Choose mode 1 - **Create a new project**
 5. Fill in these inputs: ***Project name***, ***Project display name***, ***App Code for Android keytool*** and ***repoURL*** in your command line.
-![image](./assetsReadMe/CLI_inputs.png)
 6. Press `Enter` and enjoy.
 7. For more information about AMELA-RN-CLI, please visit https://github.com/SpQuyt/amela-rn-cli
 
