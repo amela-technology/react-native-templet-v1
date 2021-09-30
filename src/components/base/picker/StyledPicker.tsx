@@ -5,8 +5,8 @@ import Picker from 'react-native-picker';
 import Metrics from 'assets/metrics';
 import { useTranslation } from 'react-i18next';
 import { initPicker } from 'utilities/helper';
-import { StyledImage, StyledText } from '..';
-import useModal from '../modal/useModal';
+import { StyledImage, StyledText, StyledTouchable } from '..';
+import ModalizeManager from '../modal/ModalizeManager';
 
 const DEFAULT_HEIGHT = Metrics.screenHeight * 0.055;
 
@@ -26,7 +26,7 @@ const StyledPicker = (props: PickerProps) => {
     const [currentLabel, setCurrentLabel] = useState(props.label);
     const [item, setItem] = useState(props.currentValue || props.dataList[0]);
     const { t } = useTranslation();
-    const modal = useModal();
+    const modalize = ModalizeManager();
 
     const handleConfirm = (data: any) => {
         if (data[0]?.toString() === props.dataList.indexOf(item)?.toString()) {
@@ -37,21 +37,32 @@ const StyledPicker = (props: PickerProps) => {
         if (currentLabel) setCurrentLabel(undefined);
         Picker.select(data);
         props.onConfirm(data[0]?.toString());
-        modal.dismissAll?.(() => null);
+        modalize.dismiss('modalPickerBackdrop');
     };
 
     const handleCancel = () => {
-        modal.dismissAll?.(() => null);
+        modalize.dismiss('modalPickerBackdrop');
     };
 
     const handleShowPicker = () => {
-        modal.show?.({
-            children: <View />,
-            onBackdropPress: () => {
-                Picker.hide();
-                modal.dismissAll?.(() => null);
+        modalize.show(
+            'modalPickerBackdrop',
+            <StyledTouchable
+                onPress={() => {
+                    Picker.hide();
+                    modalize.dismiss('modalPickerBackdrop');
+                }}
+                customStyle={{ height: Metrics.screenHeight }}
+            />,
+            {
+                modalStyle: {
+                    backgroundColor: 'transparent',
+                    minHeight: '100%',
+                },
+                adjustToContentHeight: true,
+                disableScrollIfPossible: false,
             },
-        });
+        );
         const newData = [];
         initPicker({
             pickerData: props.dataList,

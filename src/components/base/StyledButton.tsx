@@ -28,13 +28,14 @@ const StyledButton: FunctionComponent<StyledButtonProps> = (props: StyledButtonP
 
 const styles = StyleSheet.create({
     container: {
-        height: 42,
+        paddingVertical: 10,
         width: 128,
         borderColor: Themes.COLORS.primary,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
         borderWidth: 1,
+        marginTop: 10,
     },
 });
 

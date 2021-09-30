@@ -1,18 +1,19 @@
-import { StyledText } from 'components/base';
+import Metrics from 'assets/metrics';
+import { StyledText, StyledButton } from 'components/base';
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 interface ModalContentProps {
     handleCallback?(): void;
     handleSetValue?(currentValue: number): void;
-    closeModal?(): void;
+    closeModal(): void;
 }
 
 const ModalContent2 = (props: ModalContentProps) => {
     return (
         <View style={styles.contModalContent}>
             <StyledText i18nText={'This is 2nd modal!'} />
-            <Button title={'Hide'} onPress={() => props?.closeModal?.()} />
+            <StyledButton title={'Hide'} onPress={() => props?.closeModal?.()} />
         </View>
     );
 };
@@ -21,7 +22,7 @@ export default ModalContent2;
 
 const styles = StyleSheet.create({
     contModalContent: {
-        flex: 1, // Must have flex: 1 in here
+        height: Metrics.screenHeight,
         alignItems: 'center',
         justifyContent: 'center',
     },

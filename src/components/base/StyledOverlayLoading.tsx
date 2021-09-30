@@ -1,6 +1,8 @@
 import React, { FunctionComponent, memo, useEffect } from 'react';
 import { StyleSheet, View, Modal, ActivityIndicator, Keyboard, ViewProps } from 'react-native';
 import { Themes } from 'assets/themes';
+import Metrics from 'assets/metrics';
+import { isIos } from 'utilities/helper';
 
 interface Props extends ViewProps {
     visible: boolean;
@@ -9,7 +11,7 @@ interface Props extends ViewProps {
     children?: FunctionComponent;
 }
 
-const StyledOverlayLoading = (props: Props) => {
+const StyledOverlayLoading: any = (props: Props) => {
     useEffect(() => {
         Keyboard.dismiss();
     }, [props.visible]);
@@ -33,16 +35,40 @@ const StyledOverlayLoading = (props: Props) => {
         );
     };
 
-    return (
-        <Modal
-            onRequestClose={props.onRequestClose}
-            supportedOrientations={['portrait']}
-            transparent
-            visible={props.visible}
-        >
-            <Spinner />
-        </Modal>
-    );
+    const renderIosMode = () => {
+        return (
+            <Modal
+                onRequestClose={props.onRequestClose}
+                supportedOrientations={['portrait']}
+                transparent
+                visible={props.visible}
+            >
+                <Spinner />
+            </Modal>
+        );
+    };
+
+    const renderAndroidMode = () => {
+        return (
+            props.visible && (
+                <View
+                    style={{
+                        position: 'absolute',
+                        width: Metrics.screenWidth,
+                        height: Metrics.screenHeight,
+                        zIndex: 99,
+                        backgroundColor: 'rgba(0,0,0,0.4)',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <Spinner />
+                </View>
+            )
+        );
+    };
+
+    return isIos ? renderIosMode() : renderAndroidMode();
 };
 
 const styles = StyleSheet.create({
