@@ -1,4 +1,17 @@
 export default {
+    syncUpdate: {
+        appUpdate: 'App update',
+        continue: 'Continue',
+        install: 'Install',
+        ignore: 'Skip',
+        upToDate: 'Version is up to date',
+        updateTitle: 'Update available',
+        mandatoryUpdateMessage: 'An update needs to be installed:',
+        optionalUpdateMessage: 'An update is available:',
+        downloadingPackage: 'Downloading package...',
+        installingUpdate: 'Installing update',
+        updateInstalled: 'Update installed',
+    },
     common: {
         defaultLanguage: 'English',
         close: 'Close',

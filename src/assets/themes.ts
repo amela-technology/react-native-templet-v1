@@ -16,6 +16,9 @@ const Light = {
         secondary: '#E9ECEF',
         textPrimary: '#000000',
         textSecondary: '#607d8b',
+        backgroundModalUpdate: '#323232',
+        backdropModalUpdate: '#00000071',
+        progressUpdateColor: '#28A696',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',
