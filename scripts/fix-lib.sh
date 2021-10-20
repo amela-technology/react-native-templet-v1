@@ -13,3 +13,7 @@ fi
 if [ ./react-native-picker/index.d.ts ]; then
   cp ./react-native-picker/index.d.ts ../node_modules/./react-native-picker/index.d.ts
 fi
+
+if [ ./react-native-image-crop-picker/ImageCropPicker.m ]; then
+  cp ./react-native-image-crop-picker/ImageCropPicker.m ../node_modules/./react-native-image-crop-picker/ios/src/ImageCropPicker.m
+fi
