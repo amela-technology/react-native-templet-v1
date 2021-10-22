@@ -10,6 +10,7 @@ import Navigation from 'navigation/scene/RootScenes';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import APIProvider from 'utilities/context/APIProvider';
 import { addMenuClearAsyncStorage } from 'utilities/helper';
+import CodePushProgressDialog from 'components/common/CodePushProgressDialog';
 
 LogBox.ignoreLogs(['Require cycle:']);
 
@@ -27,6 +28,7 @@ const App: FunctionComponent = () => {
                 <APIProvider>
                     <RootSiblingParent>
                         <NavigationContainer ref={navigationRef}>
+                            <CodePushProgressDialog />
                             <Navigation />
                         </NavigationContainer>
                     </RootSiblingParent>
