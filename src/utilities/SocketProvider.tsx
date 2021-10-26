@@ -9,28 +9,24 @@ import { useSelector } from 'react-redux';
 import socketIO from 'socket.io-client';
 import { logger } from './helper';
 
-export const socket = socketIO(`${Config.API_URL}?role=owner`, { timeout: 3000 });
+export const socket = socketIO(Config.API_URL, { timeout: 3000 });
+let isConnectSocket = false;
 export const SocketProvider = ({ children }: any) => {
     const userInfo = useSelector((state: any) => state.userInfo);
-    async function handleOnConnect() {
-        socket.emit('authenticate', { token: userInfo?.token });
-        // neu khong authen duoc het han token thi goi lại api de lay refresh token va authen lai
-        socket.on('unauthorized', async () => {
-            await getProfile();
+    
+    const startSocket =  () =>  {
+        socket?.off('connect');
+        socket?.disconnect();
+        socket.on('connect', () => {
             socket.emit('authenticate', { token: userInfo?.token });
         });
-    }
-
-    function startSocket() {
-        socket.on('connect', () => {
-            handleOnConnect();
-        });
         socket.on('authenticated', () => {
+            isConnectSocket = true;
             logger('connected');
         });
         socket.connect();
     }
-    function stopSocket() {
+    const stopSocket = () =>  {
         socket?.off('connect');
         socket?.off('reconnect');
         socket?.off('authenticated');
@@ -38,13 +34,20 @@ export const SocketProvider = ({ children }: any) => {
         socket?.disconnect();
     }
     useEffect(() => {
-        if (userInfo?.token) {
+        if (userInfo?.token && !isConnectSocket) {
             startSocket();
         }
+    }, [userInfo?.token]);
+
+    useEffect(() => {
+        socket.on('unauthenticated', async () => {
+            isConnectSocket = false;
+            await getProfile();
+        });
         return () => {
             stopSocket();
         };
-    }, [userInfo?.token]);
+    },[])
 
     return <>{children}</>;
 };
