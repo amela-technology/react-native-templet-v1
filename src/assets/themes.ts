@@ -6,6 +6,7 @@ const common = {
     placeHolderGray: 'rgba(216, 216, 216, 0.6)',
     borderInputError: '#ff0000',
     green: 'green',
+    grey: 'grey',
 };
 
 const Light = {
@@ -15,6 +16,9 @@ const Light = {
         secondary: '#E9ECEF',
         textPrimary: '#000000',
         textSecondary: '#607d8b',
+        backgroundModalUpdate: '#323232',
+        backdropModalUpdate: '#00000071',
+        progressUpdateColor: '#28A696',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',

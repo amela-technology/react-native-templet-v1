@@ -10,26 +10,20 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { requireField } from 'utilities/format';
+import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 
 const RegisterScreen: FunctionComponent = () => {
     const { t } = useTranslation();
+    const passwordRef = useRef<any>(null);
+    const passwordConfirmRef = useRef<any>(null);
+
     const registerSchema = yup.object().shape({
-        email: yup.string().email('validateMessage.emailInvalid'),
-        password: yup
-            .string()
-            .required(() => requireField('Password'))
-            .test(
-                'len',
-                t('validateMessage.minLength', { len: 6 }),
-                (val: string | undefined) => !!val && val.length >= 6,
-            ),
-        confirmPassword: yup
-            .string()
-            .required(() => requireField('Confirm Password'))
-            .oneOf([yup.ref('password'), null], 'validateMessage.notMatchPassword'),
+        email: yupValidate.email(),
+        password: yupValidate.password(),
+        confirmPassword: yupValidate.password('password'),
     });
+
     const form = useForm({
         mode: 'onChange',
         resolver: yupResolver(registerSchema),
@@ -39,17 +33,16 @@ const RegisterScreen: FunctionComponent = () => {
         handleSubmit,
     } = form;
 
-    const passwordRef = useRef<any>(null);
-    const passwordConfirmRef = useRef<any>(null);
     const submit = async (user: any) => {
         const res = await checkIsExistEmail(user?.email);
         if (res?.data?.isExisted) {
-            AlertMessage(t('errorMessage.emailExisted'));
+            AlertMessage(t('error.emailExisted'));
             return;
         }
         await getVerifyCode(user?.email);
         navigate(AUTHENTICATE_ROUTE.SEND_OTP, { ...user, register: true });
     };
+
     return (
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
@@ -60,14 +53,14 @@ const RegisterScreen: FunctionComponent = () => {
                 <FormProvider {...form}>
                     <StyledInputForm
                         name={'email'}
-                        placeholder={t('register.emailPlaceholder')}
+                        placeholder={t('authen.register.emailPlaceholder')}
                         keyboardType="email-address"
                         returnKeyType={'next'}
                         onSubmitEditing={() => passwordRef.current.focus()}
                     />
                     <StyledInputForm
                         name={'password'}
-                        placeholder={t('registerAccount.passwordPlaceholder')}
+                        placeholder={t('authen.register.passwordPlaceholder')}
                         ref={passwordRef}
                         secureTextEntry={true}
                         returnKeyType={'next'}
@@ -76,7 +69,7 @@ const RegisterScreen: FunctionComponent = () => {
                     />
                     <StyledInputForm
                         name={'confirmPassword'}
-                        placeholder={t('registerAccount.passwordPlaceholder')}
+                        placeholder={t('authen.register.passwordPlaceholder')}
                         ref={passwordConfirmRef}
                         secureTextEntry={true}
                         returnKeyType={'next'}

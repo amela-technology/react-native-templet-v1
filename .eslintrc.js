@@ -4,8 +4,8 @@ module.exports = {
         'airbnb-base',
         'airbnb/hooks',
         'plugin:react/recommended',
+        'eslint:recommended',
         'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-        'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
         'plugin:prettier/recommended',
         'plugin:import/errors',
     ],
@@ -41,6 +41,8 @@ module.exports = {
         'react/self-closing-comp': 'error',
         'unused-imports/no-unused-vars-ts': 'off',
         'no-multi-spaces': 'warn',
+        'no-nested-ternary': 'off',
+        'import/prefer-default-export': 'off',
         'react/sort-comp': [
             1,
             {

@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
+import AsyncStorage from '@react-native-community/async-storage';
+import AlertMessage from 'components/base/AlertMessage';
 import i18next from 'i18next';
-import { Platform } from 'react-native';
+import { DevSettings, Platform } from 'react-native';
 import Picker from 'react-native-picker';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -32,3 +35,27 @@ export function initPicker(params?: any) {
         ...params,
     });
 }
+
+export const addMenuClearAsyncStorage = () => {
+    if (__DEV__) {
+        DevSettings.addMenuItem('Clear AsyncStorage', () => {
+            AsyncStorage.clear();
+            DevSettings.reload();
+        });
+    }
+};
+
+export function generatePersistConfig(key: string, whitelist: string[]) {
+    return {
+        key,
+        whitelist,
+        version: 1,
+        debug: __DEV__,
+        storage: AsyncStorage,
+        stateReconciler: autoMergeLevel2,
+    };
+}
+
+export const renderAlert = (message: string, callback: () => void) => {
+    AlertMessage(i18next.t(message), '', callback, undefined, false);
+};

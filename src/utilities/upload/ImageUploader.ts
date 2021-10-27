@@ -27,8 +27,8 @@ const ImageUploaded = {
 
     chooseImageFromCamera: () =>
         ImagePicker.openCamera({
-            width: MAX_WIDTH,
-            height: MAX_HEIGHT,
+            // width: MAX_WIDTH,
+            // height: MAX_HEIGHT,
             compressImageMaxWidth: MAX_WIDTH,
             compressImageMaxHeight: MAX_HEIGHT,
             waitAnimationEnd: true,
@@ -39,8 +39,8 @@ const ImageUploaded = {
 
     chooseImageFromGallery: () =>
         ImagePicker.openPicker({
-            width: MAX_WIDTH,
-            height: MAX_HEIGHT,
+            // width: MAX_WIDTH,
+            // height: MAX_HEIGHT,
             compressImageMaxWidth: MAX_WIDTH,
             compressImageMaxHeight: MAX_HEIGHT,
             // compressImageQuality: 100,

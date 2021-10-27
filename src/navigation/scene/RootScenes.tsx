@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Host } from 'react-native-portalize';
-import { useSelector } from 'react-redux';
-import { RootState } from 'app-redux/rootReducer';
+import { useAppSelector } from 'app-redux/hooks';
+import { isIos } from 'utilities/helper';
 import { APP_ROUTE } from '../config/routes';
 import navigationConfigs from '../config/options';
 import MainTabContainer from './TabScenes';
@@ -12,15 +12,15 @@ const MainStack = createStackNavigator();
 
 const AppStack = () => (
     <Host>
-        <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs}>
+        <MainStack.Navigator keyboardHandlingEnabled={isIos} headerMode={'none'} screenOptions={navigationConfigs}>
             <MainStack.Screen name={APP_ROUTE.MAIN_TAB} component={MainTabContainer} />
         </MainStack.Navigator>
     </Host>
 );
 
 const Navigation: React.FunctionComponent = () => {
-    const { userInfo } = useSelector((state: RootState) => state);
-    if (userInfo.token) {
+    const { token } = useAppSelector((state) => state.userInfo);
+    if (token) {
         return <AppStack />;
     }
     return <AuthStack />;

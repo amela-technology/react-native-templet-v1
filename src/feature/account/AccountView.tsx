@@ -5,13 +5,12 @@ import AlertMessage from 'components/base/AlertMessage';
 import StyledInputForm from 'components/base/StyledInputForm';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import { requireField } from 'utilities/format';
-import { regexPhone } from 'utilities/validate';
+import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const DEFAULT_FORM = {
+const DEFAULT_FORM: any = {
     username: 'test',
     email: 'test@test.com',
     phone: '',
@@ -21,17 +20,11 @@ const DEFAULT_FORM = {
 
 const AccountView = () => {
     const schema = yup.object().shape({
-        username: yup.string().required(() => requireField('Username')),
-        email: yup.string().email('validateMessage.emailInvalid'),
-        phone: yup.string().matches(regexPhone, {
-            message: 'validateMessage.phoneInvalid',
-            excludeEmptyString: true, // skip empty string on validate
-        }),
-        password: yup.string().required(() => requireField('Password')),
-        confirmPassword: yup
-            .string()
-            .required(() => requireField('Confirm Password'))
-            .oneOf([yup.ref('password'), null], 'validateMessage.notMatchPassword'),
+        username: yupValidate.name(),
+        email: yupValidate.email(),
+        phone: yupValidate.phone(),
+        password: yupValidate.password(),
+        confirmPassword: yupValidate.password('password'),
     });
     const form = useForm({
         mode: 'onChange', // validate form onChange
@@ -42,27 +35,31 @@ const AccountView = () => {
     });
     const {
         formState: { isValid },
-        reset,
+        setValue,
         handleSubmit,
     } = form;
+
     const onSubmit = (formData: any) => {
         AlertMessage(JSON.stringify(formData), 'Form Data');
     };
-    const onChangeUsername = (text: string) => {
-        form.setValue('username', text.length === 12 ? 'Custom onChangeText' : text, {
-            shouldValidate: true, // validate when set value
+
+    const onHandleReset = () => {
+        const fieldsArr = ['username', 'email', 'phone', 'password', 'confirmPassword'];
+        fieldsArr.forEach((fieldItem: any) => {
+            setValue(fieldItem, DEFAULT_FORM[fieldItem]);
         });
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAwareScrollView
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled"
+            enableOnAndroid={true}
+            showsVerticalScrollIndicator={false}
+            enableResetScrollToCoords={false}
+        >
             <FormProvider {...form}>
-                <StyledInputForm
-                    name={'username'}
-                    label="Username"
-                    returnKeyType="next"
-                    onChangeText={onChangeUsername}
-                />
+                <StyledInputForm name={'username'} label="Username" returnKeyType="next" />
                 <StyledInputForm name={'email'} label="Email" />
                 <StyledInputForm name={'phone'} label="Phone Number" />
                 <StyledInputForm secureTextEntry={true} name={'password'} label="Password" />
@@ -76,10 +73,10 @@ const AccountView = () => {
             >
                 <StyledText i18nText={'Submit'} customStyle={styles.textButton} />
             </StyledTouchable>
-            <StyledTouchable onPress={() => reset()} customStyle={styles.button}>
+            <StyledTouchable onPress={onHandleReset} customStyle={styles.button}>
                 <StyledText i18nText={'Reset'} customStyle={styles.textButton} />
             </StyledTouchable>
-        </View>
+        </KeyboardAwareScrollView>
     );
 };
 

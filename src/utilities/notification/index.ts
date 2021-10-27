@@ -1,11 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { notificationRead } from 'api/modules/api-app/notification';
 import { store } from 'app-redux/store';
 import { useEffect } from 'react';
 import Config from 'react-native-config';
-import OneSignal, { NotificationReceivedEvent } from 'react-native-onesignal';
+import OneSignal, { OSNotification } from 'react-native-onesignal';
 import { isLogin } from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
+
+type NotificationReceivedEvent = {
+    complete: (notification?: OSNotification) => void;
+    getNotification: () => OSNotification;
+};
 
 export const enumType = {
     System: 0,
@@ -53,27 +57,26 @@ export const useOnesignal = (user?: any) => {
         const { userInfo } = store.getState();
         user = userInfo?.user;
     }
+
     useEffect(() => {
-        try {
-            OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
-            // kOSSettingsKeyAutoPrompt is deprecated. If you omitted this previously or set it to true, you will now need to prompt the user by calling
-            OneSignal.promptForPushNotificationsWithUserResponse();
-            // registerForPushNotifications(): This is achieved by existing function promptForPushNotificationsWithUserResponse().
-            // OneSignal.registerForPushNotifications();
-
-            // inFocusDisplaying(): This was most likely set to 2 which means no additional changes need as this is the default in 4.x. Simply remove the function call.
-            // OneSignal.inFocusDisplaying(2); // show notification
-
-            if (isLogin()) {
-                pushTagMember(user?.id);
-            } else {
-                deleteTagOneSignal();
+        setTimeout(() => {
+            try {
+                OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
+                // React Native OneSignal Ver4 Need pass function callback into function promptForPushNotificationsWithUserResponse to push notification in ios
+                OneSignal.promptForPushNotificationsWithUserResponse((response: any) => {
+                    logger('User Accept Push Notification IOS:', false, response);
+                });
+                if (isLogin()) {
+                    pushTagMember(user?.id);
+                } else {
+                    deleteTagOneSignal();
+                }
+                OneSignal.setNotificationWillShowInForegroundHandler(onReceived);
+                OneSignal.setNotificationOpenedHandler(handleNavigateNotification);
+            } catch (error) {
+                logger(error);
             }
-            OneSignal.setNotificationWillShowInForegroundHandler(onReceived);
-            OneSignal.setNotificationOpenedHandler(handleNavigateNotification);
-        } catch (error) {
-            logger(error);
-        }
+        }, 200);
         return () => {
             OneSignal.clearHandlers();
         };

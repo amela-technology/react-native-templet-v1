@@ -18,12 +18,15 @@ interface ImagePickerProp {
 const ImagePicker = (props: ImagePickerProp) => {
     const { image, setImage, children } = props;
     const { t } = useTranslation();
+
     const actionSheet = useRef<any>(null);
     const [loading, setLoading] = useState(false);
-    const options = [t('register.cancel'), t('register.photo'), t('register.camera')];
+
+    const options = [t('authen.register.cancel'), t('authen.register.photo'), t('authen.register.camera')];
     const showActionSheet = () => {
         actionSheet?.current?.show();
     };
+
     const pickMainImage = async (index: number) => {
         try {
             setLoading(true);
@@ -35,6 +38,7 @@ const ImagePicker = (props: ImagePickerProp) => {
             setLoading(false);
         }
     };
+
     return (
         <View>
             <StyledTouchable customStyle={props.customStyle} onPress={showActionSheet}>
@@ -61,10 +65,12 @@ const ImagePicker = (props: ImagePickerProp) => {
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     loading: {
         alignItems: 'center',
         justifyContent: 'center',
     },
 });
+
 export default memo(ImagePicker);

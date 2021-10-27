@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const SIZE_LIMIT = 10;
 
@@ -12,12 +12,16 @@ const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, 
         noMore: false,
     });
     const [params, setParams] = useState<any>(initialParams);
-
+    const isFirstRun = useRef<any>(true);
     useEffect(() => {
         runRequest(pagingData.pageIndex, SIZE_LIMIT, params);
     }, [pagingData.pageIndex]);
 
     useEffect(() => {
+        if (isFirstRun?.current) {
+            isFirstRun.current = false;
+            return;
+        }
         onRefresh();
     }, [params]);
 
@@ -45,6 +49,10 @@ const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, 
 
     // config request paging
     const runRequest = async (requestPageIndex: number, pageSize?: number, otherParams?: any) => {
+        setPagingData({
+            ...pagingData,
+            noMore: true,
+        });
         const res = await requestPaging({
             params: {
                 pageIndex: requestPageIndex,
@@ -80,6 +88,7 @@ const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, 
         params,
         setParams,
         setPagingData,
+        loadingMore: pagingData.loadingMore,
     };
 };
 

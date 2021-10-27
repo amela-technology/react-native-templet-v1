@@ -1,29 +1,23 @@
-import { StyledText } from 'components/base';
+import { Themes } from 'assets/themes';
+import { StyledInput, StyledButton } from 'components/base';
+import ModalizeManager from 'components/base/modal/ModalizeManager';
 import StyledPicker from 'components/base/picker/StyledPicker';
 import React, { useState } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { dataPicker } from 'utilities/staticData';
+import ModalContent2 from './ModalContent2';
 
 interface ModalContentProps {
-    currentValue?: number;
+    currentValue: any;
     handleCallback?(): void;
-    handleSetValue?(currentValue: number): void;
+    handleSetValue(currentValue: any): void;
+    handleIncreaseNumber?(): void;
     closeModal?(): void;
 }
 
 const ModalContent = (props: ModalContentProps) => {
-    const [currentValue, setCurrentValue] = useState(props?.currentValue || 0);
-    const dataPicker = [
-        'label1',
-        'label2',
-        'label3',
-        'label4',
-        'label5',
-        'label6',
-        'label7',
-        'label8',
-        'label9',
-        'label10',
-    ];
+    const { handleSetValue } = props;
+    const modalize = ModalizeManager();
     const [valuePicker, setValuePicker] = useState(dataPicker[0]);
     const handleConfirm = (item: string) => {
         setValuePicker(item);
@@ -31,23 +25,42 @@ const ModalContent = (props: ModalContentProps) => {
 
     return (
         <View style={styles.contModalContent}>
-            <StyledText originValue={currentValue.toString()} />
-            <Button
-                title={'test alert'}
+            <StyledInput onChangeText={handleSetValue} placeholder="Please fill in input..." />
+            <StyledPicker
+                currentValue={valuePicker}
+                dataList={dataPicker}
+                onConfirm={handleConfirm}
+                customStyle={{ width: '80%' }}
+            />
+            <StyledButton
+                title={'Test alert with closing modal'}
                 onPress={() => {
                     props?.closeModal?.();
                     props?.handleCallback?.();
                 }}
+                customStyle={{ width: '80%' }}
             />
-            <StyledPicker currentValue={valuePicker} dataList={dataPicker} onConfirm={handleConfirm} />
-            <Button
-                title={'up and up'}
+            <StyledButton
+                title={'Test alert without closing modal'}
                 onPress={() => {
-                    setCurrentValue(currentValue + 1);
-                    props?.handleSetValue?.(currentValue + 1);
+                    props?.handleCallback?.();
+                }}
+                customStyle={{ width: '80%' }}
+            />
+            <StyledButton
+                title={'Open Modal 2'}
+                onPress={() => {
+                    modalize.show('modalTest2', <ModalContent2 closeModal={() => modalize.dismiss('modalTest2')} />, {
+                        modalStyle: {
+                            backgroundColor: Themes.COLORS.white,
+                        },
+                        modalTopOffset: 0,
+                        adjustToContentHeight: true,
+                        disableScrollIfPossible: false,
+                    });
                 }}
             />
-            <Button title={'hide'} onPress={() => props?.closeModal?.()} />
+            <StyledButton title={'Hide'} onPress={() => props?.closeModal?.()} />
         </View>
     );
 };
@@ -56,9 +69,9 @@ export default ModalContent;
 
 const styles = StyleSheet.create({
     contModalContent: {
-        flex: 1, // Must have flex: 1 in here
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingVertical: 20,
     },
 });

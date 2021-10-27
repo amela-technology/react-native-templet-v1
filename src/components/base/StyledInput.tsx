@@ -1,3 +1,4 @@
+import Metrics from 'assets/metrics';
 import { Themes } from 'assets/themes';
 import React, { useState, forwardRef, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +13,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
+import { autoCompleteType, textContentType } from 'utilities/CommonInterface';
 import StyledText from './StyledText';
 
 export interface StyledInputProps extends TextInputProps {
@@ -26,6 +28,8 @@ export interface StyledInputProps extends TextInputProps {
     ref?: any;
     errorMessage?: string;
     label?: string;
+    textContentType?: textContentType;
+    autoCompleteType?: autoCompleteType;
 }
 
 const StyledInput = (props: StyledInputProps, ref: any) => {
@@ -46,11 +50,11 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                     props.customStyle,
                     !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
                 ]}
-                placeholderTextColor={props.placeholderTextColor || Themes.COLORS.placeHolderGray}
+                placeholderTextColor={props.placeholderTextColor || Themes.COLORS.grey}
                 placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
                 underlineColorAndroid={props.customUnderlineColor || 'transparent'}
-                autoCompleteType="email"
-                textContentType="emailAddress"
+                autoCompleteType={props.autoCompleteType || 'off'}
+                textContentType={props.textContentType || 'none'}
                 importantForAutofill="yes"
                 autoCorrect={false}
                 returnKeyType={props.customReturnKeyType || 'next'}
@@ -65,13 +69,10 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
 };
 const styles: any = StyleSheet.create({
     textInput: {
-        width: 250,
-        padding: 2,
-        borderWidth: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 15,
-        borderColor: 'black',
-        borderRadius: 5,
+        width: Metrics.screenWidth * 0.8,
+        borderRadius: 20,
+        padding: 10,
+        backgroundColor: Themes.COLORS.secondary,
     },
     errorMessage: {
         fontSize: 12,
@@ -79,7 +80,8 @@ const styles: any = StyleSheet.create({
         marginTop: 5,
     },
     container: {
-        marginBottom: 10,
+        marginVertical: 8,
+        width: Metrics.screenWidth * 0.8,
     },
 });
 export default forwardRef(StyledInput);

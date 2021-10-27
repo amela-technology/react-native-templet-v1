@@ -1,38 +1,27 @@
 import React, { FunctionComponent, useState } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import useModal from 'components/base/modal/useModal';
 import StyledHeader from 'components/common/StyledHeader';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
-import useLoading from 'components/base/modal/useLoading';
 import { wait } from 'utilities/helper';
 import StyledPicker from 'components/base/picker/StyledPicker';
+import ModalizeManager from 'components/base/modal/ModalizeManager';
+import { dataPicker } from 'utilities/staticData';
+import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
+import { StyledButton } from 'components/base';
 import ModalContent from './components/ModalContent';
-
-const dataPicker = [
-    'label1',
-    'label2',
-    'label3',
-    'label4',
-    'label5',
-    'label6',
-    'label7',
-    'label8',
-    'label9',
-    'label10',
-];
 
 const HomeScreen: FunctionComponent = () => {
     const navigation = useNavigation();
-    const modal = useModal();
-    const loading = useLoading();
+    const modalize = ModalizeManager();
     const [valuePicker, setValuePicker] = useState(dataPicker[0]);
     const [currentValue, setCurrentValue] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const fakeCallAPI = () => {
-        loading.show();
+        setIsLoading(true);
         wait(2000).then(() => {
-            loading.dismiss();
+            setIsLoading(false);
         });
     };
 
@@ -43,49 +32,47 @@ const HomeScreen: FunctionComponent = () => {
     return (
         <View style={{ flex: 1 }}>
             <StyledHeader title={'Home Screen'} />
+            <StyledOverlayLoading visible={isLoading} />
             <View style={styles.contScreen}>
                 <StyledPicker
-                    label="HEHEHE"
+                    label="Test Picker"
                     currentValue={valuePicker}
                     dataList={dataPicker}
                     onConfirm={handleConfirm}
                 />
-                <Button
-                    title={'Modal'}
+                <StyledButton
+                    title="Open Modal 1"
                     onPress={() => {
-                        modal.show?.({
-                            // children: <View />,
-                            children: (
-                                <ModalContent
-                                    currentValue={currentValue}
-                                    handleCallback={() => {
-                                        alert('Test callback from inside modal');
-                                    }}
-                                    handleSetValue={setCurrentValue}
-                                    closeModal={() => modal.dismiss?.()}
-                                />
-                            ),
-                            modalWrapperWidth: '100%',
-                            modalWrapperHeight: 'aaa%',
-                            onBackdropPress: () => {
-                                modal.dismiss?.();
+                        modalize.show(
+                            'modalTest',
+                            <ModalContent
+                                currentValue={currentValue}
+                                handleSetValue={setCurrentValue}
+                                handleIncreaseNumber={() => setCurrentValue(currentValue + 1)}
+                                closeModal={() => modalize.dismiss('modalTest')}
+                                handleCallback={() => alert('Test callback from modal')}
+                            />,
+                            {
+                                isCenter: true,
+                                adjustToContentHeight: true,
+                                disableScrollIfPossible: false,
                             },
-                        });
+                        );
                     }}
                 />
-                <Button
+                <StyledButton
                     title={'Detail Screen'}
                     onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DETAIL)}
                 />
-                <Button
+                <StyledButton
                     title={'Data Screen'}
                     onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DATA)}
                 />
-                <Button
+                <StyledButton
                     title={'User List Screen'}
                     onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_USER_LIST)}
                 />
-                <Button title={'Trigger Loading'} onPress={fakeCallAPI} />
+                <StyledButton title={'Trigger Loading'} onPress={fakeCallAPI} />
             </View>
         </View>
     );
@@ -99,7 +86,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
     },
     contModalContent: {
-        // flex: 1, // Must have flex: 1 in here
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',

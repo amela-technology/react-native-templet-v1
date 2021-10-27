@@ -86,12 +86,12 @@ const showRequestPermission = (type: string) => {
         messages[type],
         [
             {
-                text: i18next.t('alert.button.no'),
+                text: i18next.t('common.cancel'),
                 onPress: () => logger('Cancel Pressed'),
                 style: 'default',
             },
             {
-                text: i18next.t('alert.button.yes'),
+                text: i18next.t('common.confirm'),
                 onPress: () => openSettings().catch(() => logger('cannot open settings', true)),
             },
         ],

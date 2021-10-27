@@ -1,29 +1,42 @@
+/* eslint-disable consistent-return */
 import i18next from 'i18next';
 import { getLocales } from 'react-native-localize';
 import en from 'assets/locates/en';
 import jp from 'assets/locates/jp';
 import { initReactI18next } from 'react-i18next';
+import { store } from 'app-redux/store';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ja';
+import 'dayjs/locale/en';
+import { updateLanguageKey } from 'app-redux/slices/languageSlice';
 
 const DEFAULT_LANG = 'jp';
 
-export const getLanguage = (): string => {
+export function getLanguage() {
     const lan = getLocales();
+    const listLng = ['jp', 'en'];
     try {
         const primaryLocate = lan[0];
-        return primaryLocate.languageCode;
+        let tempLng = primaryLocate?.languageCode?.toLowerCase();
+        if (tempLng === 'ja') {
+            tempLng = 'jp';
+        }
+        const lng = listLng.includes(tempLng) ? tempLng : DEFAULT_LANG;
+        // If you want to use DEFAULT_LANG only, comment above line + uncomment below line
+        // const lng = DEFAULT_LANG;
+        store.dispatch(updateLanguageKey(lng));
+        return lng;
     } catch (error) {
         return DEFAULT_LANG;
     }
-};
+}
 
 i18next.use(initReactI18next).init({
     interpolation: {
-        // React already does escaping
         escapeValue: false,
     },
-    lng: getLanguage(),
+    lng: store?.getState()?.languageKey?.data || getLanguage(),
     fallbackLng: DEFAULT_LANG,
-    // Using simple hardcoded resources for simple example
     resources: {
         en: {
             translation: en,
@@ -33,5 +46,12 @@ i18next.use(initReactI18next).init({
         },
     },
 });
+
+export const loadLocaleLanguage = () => {
+    const lng = store?.getState()?.languageKey?.data || DEFAULT_LANG;
+    dayjs.locale(lng);
+    i18next.addResourceBundle(lng, 'translation', lng === 'en' ? en : jp);
+    i18next.changeLanguage(lng);
+};
 
 export default i18next;
