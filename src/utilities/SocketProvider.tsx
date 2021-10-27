@@ -1,36 +1,32 @@
 /* eslint-disable no-underscore-dangle */
 import { getProfile } from 'api/modules/api-app/authenticate';
 import { getMessage } from 'api/modules/api-app/chat';
-import { useAppSelector } from 'app-redux/hooks';
 import Images from 'assets/images';
 import React, { useCallback, useEffect, useState } from 'react';
 import Config from 'react-native-config';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { useSelector } from 'react-redux';
 import socketIO from 'socket.io-client';
 import { logger } from './helper';
 
-export const socket = socketIO(`${Config.API_URL}?role=owner`, { timeout: 3000 });
+export const socket = socketIO(Config.API_URL, { timeout: 3000 });
+let isConnectSocket = false;
 export const SocketProvider = ({ children }: any) => {
-    const userInfo = useAppSelector((state) => state.userInfo);
-    async function handleOnConnect() {
-        socket.emit('authenticate', { token: userInfo?.token });
-        // neu khong authen duoc het han token thi goi lại api de lay refresh token va authen lai
-        socket.on('unauthorized', async () => {
-            await getProfile();
+    const userInfo = useSelector((state: any) => state.userInfo);
+    
+    const startSocket =  () =>  {
+        socket?.off('connect');
+        socket?.disconnect();
+        socket.on('connect', () => {
             socket.emit('authenticate', { token: userInfo?.token });
         });
-    }
-
-    function startSocket() {
-        socket.on('connect', () => {
-            handleOnConnect();
-        });
         socket.on('authenticated', () => {
+            isConnectSocket = true;
             logger('connected');
         });
         socket.connect();
     }
-    function stopSocket() {
+    const stopSocket = () =>  {
         socket?.off('connect');
         socket?.off('reconnect');
         socket?.off('authenticated');
@@ -38,20 +34,27 @@ export const SocketProvider = ({ children }: any) => {
         socket?.disconnect();
     }
     useEffect(() => {
-        if (userInfo?.token) {
+        if (userInfo?.token && !isConnectSocket) {
             startSocket();
         }
+    }, [userInfo?.token]);
+
+    useEffect(() => {
+        socket.on('unauthenticated', async () => {
+            isConnectSocket = false;
+            await getProfile();
+        });
         return () => {
             stopSocket();
         };
-    }, [userInfo?.token]);
+    },[])
 
     return <>{children}</>;
 };
 
 export const useSocket = (id?: string) => {
     const [conversationId, setConversationId] = useState(id);
-    const userInfo = useAppSelector((state) => state.userInfo);
+    const userInfo = useSelector((state: any) => state?.userInfo);
     const [messages, setMessages] = useState<any>([]);
     // tuy vao tung api detail user User Data se khac nhau
     const [dataUser, setUser] = useState({
@@ -59,7 +62,7 @@ export const useSocket = (id?: string) => {
         name: userInfo?.honbuName,
     });
     const [image, setImage] = useState<any>('');
-    const listStaff = useAppSelector((state) => state.addStaff);
+    const listStaff = useSelector((state: any) => state?.addStaff);
     const leaveRoom = () => {
         socket.emit('leave-room', { conversationId });
     };
