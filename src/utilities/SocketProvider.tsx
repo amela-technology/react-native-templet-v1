@@ -13,8 +13,8 @@ export const socket = socketIO(Config.API_URL, { timeout: 3000 });
 let isConnectSocket = false;
 export const SocketProvider = ({ children }: any) => {
     const userInfo = useSelector((state: any) => state.userInfo);
-    
-    const startSocket =  () =>  {
+
+    const startSocket = () => {
         socket?.off('connect');
         socket?.disconnect();
         socket.on('connect', () => {
@@ -25,14 +25,14 @@ export const SocketProvider = ({ children }: any) => {
             logger('connected');
         });
         socket.connect();
-    }
-    const stopSocket = () =>  {
+    };
+    const stopSocket = () => {
         socket?.off('connect');
         socket?.off('reconnect');
         socket?.off('authenticated');
         socket?.off('server-send-message');
         socket?.disconnect();
-    }
+    };
     useEffect(() => {
         if (userInfo?.token && !isConnectSocket) {
             startSocket();
@@ -47,7 +47,7 @@ export const SocketProvider = ({ children }: any) => {
         return () => {
             stopSocket();
         };
-    },[])
+    }, []);
 
     return <>{children}</>;
 };
