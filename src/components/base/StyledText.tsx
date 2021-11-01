@@ -2,10 +2,11 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
 import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
-import { useTranslation } from 'react-i18next';
+import { Normalize, useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import { logger } from 'utilities/helper';
 import { memo } from 'react';
+import { Resource } from 'utilities/i18next';
 
 interface StyledTextProps extends TextProps {
     customStyle?: StyleProp<TextStyle>;
@@ -19,7 +20,7 @@ interface StyledTextWithOriginValue extends StyledTextProps {
 
 interface StyledTextWithI18nValue extends StyledTextProps {
     originValue?: never;
-    i18nText: string;
+    i18nText: Normalize<Resource>;
 }
 
 type StyledTextCombineProps = StyledTextWithOriginValue | StyledTextWithI18nValue;
@@ -36,7 +37,7 @@ const StyledText = (props: StyledTextCombineProps) => {
     if (originValue) {
         value = originValue;
     } else if (i18nText || i18next.exists(i18nText || '', i18nParams)) {
-        value = t(i18nText || '', i18nParams);
+        value = t(i18nText as Normalize<Resource>, i18nParams);
     } else {
         value = i18nText || '';
     }

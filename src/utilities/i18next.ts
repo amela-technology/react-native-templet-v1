@@ -10,6 +10,7 @@ import 'dayjs/locale/ja';
 import 'dayjs/locale/en';
 import { updateLanguageKey } from 'app-redux/slices/languageSlice';
 
+export type Resource = typeof en & typeof jp;
 const DEFAULT_LANG = 'jp';
 
 export function getLanguage() {
