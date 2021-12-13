@@ -58,7 +58,7 @@
         "react-native": "0.64.2",
         "react-native-actionsheet": "^2.4.2",
         "react-native-aws3": "^0.0.9",
-        "react-native-code-push": "^7.0.1",
+        "react-native-code-push": "^6.4.1",
         "react-native-config": "^1.4.2",
         "react-native-confirmation-code-input": "^1.0.4",
         "react-native-gesture-handler": "^1.10.3",

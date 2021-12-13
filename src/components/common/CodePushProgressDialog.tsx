@@ -23,7 +23,7 @@ const CodePushProgressDialog = () => {
     willMount.current = false;
 
     useEffect(() => {
-        InteractionManager.runAfterInteractions(checkForUpdate)
+        InteractionManager.runAfterInteractions(checkForUpdate);
     }, []);
 
     useEffect(() => {
