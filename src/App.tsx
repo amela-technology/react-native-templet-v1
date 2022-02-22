@@ -13,6 +13,10 @@ import { addMenuClearAsyncStorage, getCodePushInfo } from 'utilities/helper';
 
 LogBox.ignoreLogs(['Require cycle:']);
 
+if (__DEV__) {
+    import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
 const App: FunctionComponent = () => {
     const onBeforeLift = () => {
         loadLocaleLanguage();
