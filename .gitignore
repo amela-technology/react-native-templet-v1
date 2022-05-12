@@ -23,17 +23,13 @@ DerivedData
 
 # Android/IntelliJ
 #
+build/
 .idea
 .gradle
 local.properties
 *.iml
+*.hprof
 
-# Visual Studio Code
-#
-.vscode/
-.history
-android
-ios
 # node.js
 #
 node_modules/
@@ -43,12 +39,14 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
+*.keystore
+!debug.keystore
 
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
 # screenshots whenever they are needed.
-# For more information about the recommended basicinfo visit:
+# For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
 */fastlane/report.xml
@@ -58,8 +56,9 @@ buck-out/
 # Bundle artifact
 *.jsbundle
 
-# CocoaPods
+# Ruby / CocoaPods
 /ios/Pods/
+/vendor/bundle/
 /ios/Podfile.lock
 yarn.lock
 package-lock.json
