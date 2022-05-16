@@ -8,7 +8,6 @@ import { loadLocaleLanguage } from 'utilities/i18next';
 import { navigationRef } from 'navigation/NavigationService';
 import Navigation from 'navigation/scene/RootScenes';
 import { RootSiblingParent } from 'react-native-root-siblings';
-import APIProvider from 'utilities/context/APIProvider';
 import { addMenuClearAsyncStorage, getCodePushInfo } from 'utilities/helper';
 
 LogBox.ignoreLogs(['Require cycle:']);
@@ -29,13 +28,11 @@ const App: FunctionComponent = () => {
     return (
         <Provider store={store}>
             <PersistGate loading={<ActivityIndicator />} persistor={persistor} onBeforeLift={onBeforeLift}>
-                <APIProvider>
-                    <RootSiblingParent>
-                        <NavigationContainer ref={navigationRef}>
-                            <Navigation />
-                        </NavigationContainer>
-                    </RootSiblingParent>
-                </APIProvider>
+                <RootSiblingParent>
+                    <NavigationContainer ref={navigationRef}>
+                        <Navigation />
+                    </NavigationContainer>
+                </RootSiblingParent>
             </PersistGate>
         </Provider>
     );
