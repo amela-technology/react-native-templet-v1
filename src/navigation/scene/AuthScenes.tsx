@@ -1,15 +1,15 @@
-import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import navigationConfigs from 'navigation/config/options';
-import { isIos } from 'utilities/helper';
-import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
+import ChangePassword from 'feature/authentication/ChangePassword';
+import ForgotPasswordScreen from 'feature/authentication/ForgotPwdScreen';
 import LoginScreen from 'feature/authentication/LoginScreen';
 import RegisterScreen from 'feature/authentication/RegisterScreen';
-import ForgotPasswordScreen from 'feature/authentication/ForgotPwdScreen';
 import SendOTP from 'feature/authentication/SendOtp';
-import ChangePassword from 'feature/authentication/ChangePassword';
+import navigationConfigs from 'navigation/config/options';
+import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
+import React from 'react';
+import { RootStackParamList } from './RootScenes';
 
-const MainStack = createStackNavigator();
+const MainStack = createStackNavigator<RootStackParamList>();
 
 const AuthStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>

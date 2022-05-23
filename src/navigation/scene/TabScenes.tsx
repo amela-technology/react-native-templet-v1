@@ -10,7 +10,7 @@ import HomeUserListScreen from 'feature/home/HomeUserListScreen';
 import NotificationScreen from 'feature/notification/NotificationScreen';
 import SettingView from 'feature/setting/SettingScreen';
 import StyledTabBar from 'navigation/components/StyledTabBar';
-import navigationConfigs from 'navigation/config/options';
+import navigationConfigs, { tabScreenOptions } from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -58,11 +58,11 @@ const MainTabContainer = () => {
     ];
     return (
         <MainTab.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT}
-            tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
-            {ArrayTabs.map(item => (
-                <MainTab.Screen key={item.name} options={{ ...item }} {...item} />
+            screenOptions={tabScreenOptions}
+            tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}
+        >
+            {ArrayTabs.map((item, index) => (
+                <MainTab.Screen key={`${index}`} options={{ ...item }} {...item} />
             ))}
         </MainTab.Navigator>
     );
