@@ -23,7 +23,7 @@ const initialState: IUserInfoState = {
     status: CommonStatus.IDLE,
 };
 
-const getUserInfoRequest: Reducer<PayloadAction<string>> = (state) => {
+const getUserInfoRequest: Reducer<PayloadAction<string>> = state => {
     state.status = CommonStatus.LOADING;
     delete state.error;
 };
@@ -43,7 +43,7 @@ const updateToken: Reducer<PayloadAction<Pick<IUserInfoState, 'token' | 'refresh
     state.refreshToken = payload.refreshToken;
 };
 
-const logOut: Reducer = (state) => {
+const logOut: Reducer = state => {
     delete state.token;
     delete state.refreshToken;
     delete state.user;

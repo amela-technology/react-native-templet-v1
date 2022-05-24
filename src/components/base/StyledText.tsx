@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
-import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
-import { Normalize, useTranslation } from 'react-i18next';
+import { Themes } from 'assets/themes';
 import i18next from 'i18next';
-import { logger } from 'utilities/helper';
+import * as React from 'react';
 import { memo } from 'react';
+import isEqual from 'react-fast-compare';
+import { Normalize, useTranslation } from 'react-i18next';
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
+import { logger } from 'utilities/helper';
 import { Resource } from 'utilities/i18next';
 
 interface StyledTextProps extends TextProps {
@@ -57,4 +58,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default memo(StyledText);
+export default memo(StyledText, isEqual);

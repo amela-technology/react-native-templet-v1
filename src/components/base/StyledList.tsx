@@ -1,5 +1,6 @@
 import { Themes } from 'assets/themes';
 import React, { forwardRef, FunctionComponent, memo, useMemo, useRef } from 'react';
+import isEqual from 'react-fast-compare';
 import { useTranslation } from 'react-i18next';
 import { FlatList, FlatListProps, RefreshControl, StyleProp, View, ViewStyle } from 'react-native';
 import StyledIndicator from './StyledIndicator';
@@ -106,4 +107,4 @@ const StyledList = (props: Props, ref: any) => {
     );
 };
 
-export default memo(forwardRef(StyledList));
+export default memo(forwardRef(StyledList), isEqual);

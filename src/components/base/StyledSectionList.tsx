@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { FunctionComponent, memo, useRef, useState } from 'react';
-import { ActivityIndicator, RefreshControl, SectionList, SectionListProps, View } from 'react-native';
 import { Themes } from 'assets/themes';
+import React, { FunctionComponent, memo, useRef, useState } from 'react';
+import isEqual from 'react-fast-compare';
+import { ActivityIndicator, RefreshControl, SectionList, SectionListProps, View } from 'react-native';
 import NoData from './StyledNoData';
 
 interface Props extends SectionListProps<any> {
@@ -118,4 +119,4 @@ const StyledSectionList = (props: Props) => {
     );
 };
 
-export default memo(StyledSectionList);
+export default memo(StyledSectionList, isEqual);
