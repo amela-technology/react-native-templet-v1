@@ -1,0 +1,25 @@
+diff --git a/node_modules/react-native-config/ios/ReactNativeConfig/ReadDotEnv.rb b/node_modules/react-native-config/ios/ReactNativeConfig/ReadDotEnv.rb
+index 6f80914..2836c95 100755
+--- a/node_modules/react-native-config/ios/ReactNativeConfig/ReadDotEnv.rb
++++ b/node_modules/react-native-config/ios/ReactNativeConfig/ReadDotEnv.rb
+@@ -23,6 +23,7 @@ def read_dot_env(envs_root)
+   dotenv = begin
+     # https://regex101.com/r/cbm5Tp/1
+     dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)\s*=\s*((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
++    comment_line_pattern=/^#.*$/
+ 
+     path = File.expand_path(File.join(envs_root, file.to_s))
+     if File.exist?(path)
+@@ -40,10 +41,8 @@ def read_dot_env(envs_root)
+ 
+     raw.split("\n").inject({}) do |h, line|
+       m = line.match(dotenv_pattern)
+-
+-      next h if line.nil? || line.strip.empty?
+-      next h if line.match(/^\s*#/)
+-
++      next h if line.nil? || line == '' || line == ' '
++      next h unless line.match(comment_line_pattern).nil?
+       if m.nil?
+         abort('Invalid entry in .env file. Please verify your .env file is correctly formatted.')
+       end
