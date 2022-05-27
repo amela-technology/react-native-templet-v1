@@ -20,3 +20,5 @@ export const dataPicker = [
     'label9',
     'label10',
 ];
+
+export const dataDropdown = ['option 1 ', 'option 2', 'option 3', 'option 4'];
