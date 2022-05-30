@@ -36,6 +36,7 @@
         "open-folder-aab": "open ./android/app/build/outputs/bundle"
     },
     "dependencies": {
+        "@alessiocancian/react-native-actionsheet": "^3.1.2",
         "@hookform/resolvers": "2.8.8",
         "@react-native-community/async-storage": "^1.12.1",
         "@react-native-community/cli": "^7.0.3",
@@ -55,10 +56,10 @@
         "i18next": "^21.8.0",
         "lodash": "^4.17.21",
         "react": "17.0.2",
+        "react-fast-compare": "^3.2.0",
         "react-hook-form": "7.31.1",
         "react-i18next": "^11.16.9",
         "react-native": "0.68.2",
-        "react-native-actionsheet": "^2.4.2",
         "react-native-aws3": "^0.0.9",
         "react-native-code-push": "^7.0.4",
         "react-native-config": "^1.4.5",
