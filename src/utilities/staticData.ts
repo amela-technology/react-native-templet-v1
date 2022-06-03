@@ -1,3 +1,5 @@
+import Metrics from 'assets/metrics';
+
 export const staticValue = {
     DEFAULT: 1,
     TIME_IMAGE_LOAD: 500,
@@ -20,3 +22,11 @@ export const dataPicker = [
     'label9',
     'label10',
 ];
+
+export const ITEM_HEIGHT = 40;
+export const ITEM_WIDTH = Metrics.screenWidth / 2.5;
+export const LINE_HEIGHT = 60;
+export const RECTANGLE_HEIGHT = 30;
+export const RECTANGLE_WIDTH = 50;
+export const HEXAGON_SIZE = 20;
+export const CIRCLE_SIZE = 6;
