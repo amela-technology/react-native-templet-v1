@@ -30,6 +30,13 @@ local.properties
 *.iml
 *.hprof
 
+# Visual Studio Code
+#
+android
+ios
+.vscode/
+.history
+
 # node.js
 #
 node_modules/

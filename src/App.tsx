@@ -10,7 +10,7 @@ import Navigation from 'navigation/scene/RootScenes';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { addMenuClearAsyncStorage, getCodePushInfo } from 'utilities/helper';
 
-LogBox.ignoreLogs(['Require cycle:']);
+LogBox.ignoreLogs(['Require cycle:', 'ViewPropTypes']);
 
 if (__DEV__) {
     import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));

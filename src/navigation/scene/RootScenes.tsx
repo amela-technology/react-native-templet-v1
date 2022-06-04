@@ -3,7 +3,6 @@ import { useAppSelector } from 'app-redux/hooks';
 import React from 'react';
 import isEqual from 'react-fast-compare';
 import { Host } from 'react-native-portalize';
-import { isIos } from 'utilities/helper';
 import navigationConfigs from '../config/options';
 import { APP_ROUTE } from '../config/routes';
 import AuthStack from './AuthScenes';
@@ -13,7 +12,7 @@ const MainStack = createStackNavigator();
 
 const AppStack = () => (
     <Host>
-        <MainStack.Navigator keyboardHandlingEnabled={isIos} headerMode={'none'} screenOptions={navigationConfigs}>
+        <MainStack.Navigator screenOptions={navigationConfigs}>
             <MainStack.Screen name={APP_ROUTE.MAIN_TAB} component={MainTabContainer} />
         </MainStack.Navigator>
     </Host>

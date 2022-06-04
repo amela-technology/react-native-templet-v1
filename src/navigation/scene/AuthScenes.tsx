@@ -12,7 +12,7 @@ import ChangePassword from 'feature/authentication/ChangePassword';
 const MainStack = createStackNavigator();
 
 const AuthStack = () => (
-    <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs} keyboardHandlingEnabled={isIos}>
+    <MainStack.Navigator screenOptions={navigationConfigs}>
         <MainStack.Screen name={AUTHENTICATE_ROUTE.LOGIN} component={LoginScreen} />
         <MainStack.Screen name={AUTHENTICATE_ROUTE.REGISTER} component={RegisterScreen} />
         <MainStack.Screen name={AUTHENTICATE_ROUTE.FORGOT_PASS} component={ForgotPasswordScreen} />

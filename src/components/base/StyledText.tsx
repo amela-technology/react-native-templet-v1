@@ -9,6 +9,7 @@ import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native'
 import { logger } from 'utilities/helper';
 import { Resource } from 'utilities/i18next';
 
+export type I18Type = Normalize<Resource>;
 interface StyledTextProps extends TextProps {
     customStyle?: StyleProp<TextStyle>;
     i18nParams?: any;
@@ -21,7 +22,7 @@ interface StyledTextWithOriginValue extends StyledTextProps {
 
 interface StyledTextWithI18nValue extends StyledTextProps {
     originValue?: never;
-    i18nText: Normalize<Resource>;
+    i18nText: I18Type;
 }
 
 type StyledTextCombineProps = StyledTextWithOriginValue | StyledTextWithI18nValue;
@@ -38,7 +39,7 @@ const StyledText = (props: StyledTextCombineProps) => {
     if (originValue) {
         value = originValue;
     } else if (i18nText || i18next.exists(i18nText || '', i18nParams)) {
-        value = t(i18nText as Normalize<Resource>, i18nParams);
+        value = t(i18nText as I18Type, i18nParams);
     } else {
         value = i18nText || '';
     }

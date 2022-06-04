@@ -11,6 +11,7 @@ import ProgressiveImage from './ProgressiveImage';
 import StyledIndicator from './StyledIndicator';
 import StyledListViewSelected from './list-view-selected/StyledListViewSelected';
 import StyledInputForm from './StyledInputForm';
+import CheckBox from './CheckBox';
 
 export {
     StyledButton,
@@ -26,4 +27,5 @@ export {
     StyledIndicator,
     StyledListViewSelected,
     StyledInputForm,
+    CheckBox,
 };
