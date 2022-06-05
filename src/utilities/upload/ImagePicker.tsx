@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import ActionSheet from '@alessiocancian/react-native-actionsheet';
 import { StyledImage, StyledTouchable } from 'components/base';
 import React, { memo, useRef, useState } from 'react';
@@ -32,7 +31,7 @@ const ImagePicker = (props: ImagePickerProp) => {
             setLoading(true);
             const uri = await ImageUploader.pickImage(index);
             setImage(uri || image);
-        } catch (err) {
+        } catch (err: any) {
             logger('err', err);
         } finally {
             setLoading(false);

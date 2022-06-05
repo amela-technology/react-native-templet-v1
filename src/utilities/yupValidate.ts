@@ -44,8 +44,9 @@ const yupValidate = {
     password: (ref?: string, isMatchCurrentPassword = true): any => {
         if (ref) {
             // NEW PASSWORD
-            if (!isMatchCurrentPassword)
+            if (!isMatchCurrentPassword) {
                 return yupValidate.password().not([yup.ref(ref), null], i18next.t('error.duplicatePassword'));
+            }
 
             // CONFIRM PASSWORD
             return yup

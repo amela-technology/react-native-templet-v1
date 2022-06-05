@@ -39,8 +39,7 @@ const StyledTabBar = ({ state, descriptors, navigation }: any) => {
                         onPress={onPress}
                         onLongPress={onLongPress}
                         key={route.key}
-                        customStyle={[styles.tabButton]}
-                    >
+                        customStyle={[styles.tabButton]}>
                         <Image
                             source={options?.icon}
                             style={[

@@ -9,6 +9,7 @@ module.exports = {
         'plugin:prettier/recommended',
         'plugin:import/errors',
     ],
+    ignorePatterns: ['*.svg', '*.json', '*.png', 'package.json', 'package-lock.json'],
     parser: '@typescript-eslint/parser',
     plugins: ['prettier', '@typescript-eslint', 'react-hooks', 'import', 'unused-imports'],
     settings: {
@@ -62,10 +63,12 @@ module.exports = {
                 tsx: 'never',
             },
         ],
-        'no-use-before-define': 'off',
         'no-param-reassign': 'off',
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
         'react/display-name': 'off',
+        '@typescript-eslint/no-empty-function': 1,
+        'default-param-last': 'off',
+        'no-use-before-define': 'off',
     },
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
