@@ -1,8 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Config from 'react-native-config';
-import i18next from 'utilities/i18next';
-import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
+import TokenProvider from 'utilities/authenticate/TokenProvider';
 import { logger } from 'utilities/helper';
 import { apiLogger } from 'utilities/logger';
 
@@ -32,7 +31,7 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
 };
 
 request.interceptors.request.use(
-    async (config: any) => {
+    async (config: AxiosRequestConfig) => {
         // Do something before api is sent
         const token = TokenProvider.getToken();
         if (token) {

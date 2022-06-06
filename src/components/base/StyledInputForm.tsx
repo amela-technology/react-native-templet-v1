@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { logger } from 'utilities/logger';
 import StyledInput, { StyledInputProps } from './StyledInput';
 
-interface FormInputProps extends StyledInputProps {
+interface Props extends StyledInputProps {
     name: string;
     rules?: RegisterOptions;
     defaultValue?: string;
     form?: UseFormMethods;
 }
 
-const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
+const StyledInputForm = forwardRef((props: Props, ref: any) => {
     const { t } = useTranslation();
     const { name, rules, defaultValue = '', onChangeText, onBlur, form, ...inputProps } = props;
     const formContext = useFormContext();
@@ -24,13 +24,14 @@ const StyledInputForm = forwardRef((props: FormInputProps, ref: any) => {
 
     const { control, errors } = formContext || form;
     const errorMessage = errors?.[name]?.message || '';
-    
+
     const onChangeInput = (text: string, onChangeControl: any) => {
         onChangeText ? onChangeText(text) : onChangeControl(text);
     };
     const onBlurInput = (data: any, onBlurControl: any) => {
         onBlur ? onBlur(data) : onBlurControl();
     };
+
     return (
         <Controller
             control={control}

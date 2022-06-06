@@ -1,9 +1,10 @@
+import { TypeParamsPaging } from 'api/modules/interface/common';
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 
 const SIZE_LIMIT = 10;
 
-const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, initialParams?: any) => {
+const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, initialParams?: TypeParamsPaging) => {
     const [pagingData, setPagingData] = useState({
         refreshing: false,
         loadingMore: false,

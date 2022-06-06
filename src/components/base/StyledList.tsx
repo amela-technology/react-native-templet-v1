@@ -1,24 +1,14 @@
 import { Themes } from 'assets/themes';
-import React, {
-    forwardRef,
-    FunctionComponent,
-    memo,
-    useEffect,
-    useImperativeHandle,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import React, { forwardRef, FunctionComponent, useImperativeHandle, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, FlatListProps, RefreshControl, StyleProp, View, ViewStyle } from 'react-native';
 import StyledIndicator from './StyledIndicator';
 import NoData from './StyledNoData';
 
 interface Props extends FlatListProps<any> {
-    [key: string]: any;
     FlatListComponent?: FunctionComponent<any>;
     loading?: boolean;
-    data: any[];
+    data: Array<any>;
     loadingMore?: boolean;
     noDataText?: string;
     ListHeaderComponent?: any;
@@ -121,4 +111,4 @@ const StyledList = (props: Props, ref: any) => {
     );
 };
 
-export default memo(forwardRef(StyledList));
+export default forwardRef(StyledList);

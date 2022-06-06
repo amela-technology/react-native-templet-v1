@@ -1,12 +1,12 @@
 import Images from 'assets/images';
 import React, { memo, useEffect, useState } from 'react';
-import { ImageProps, Image } from 'react-native';
+import { ImageProps, Image, StyleProp, ImageStyle } from 'react-native';
 
-interface StyledImageProps extends ImageProps {
-    customStyle?: any;
+interface Props extends ImageProps {
+    customStyle?: StyleProp<ImageStyle>;
 }
 
-const StyledImage = (props: StyledImageProps) => {
+const StyledImage = (props: Props) => {
     const { customStyle, source } = props;
     const { defaultImage } = Images.photo;
     const [error, setError] = useState(false);

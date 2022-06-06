@@ -1,5 +1,5 @@
 import { Themes } from 'assets/themes';
-import React, { useState, forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     ColorValue,
@@ -63,7 +63,9 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
         </View>
     );
 };
-const styles: any = StyleSheet.create({
+
+const styles = StyleSheet.create({
+    label: {},
     textInput: {
         width: 250,
         padding: 2,
@@ -82,4 +84,5 @@ const styles: any = StyleSheet.create({
         marginBottom: 10,
     },
 });
+
 export default forwardRef(StyledInput);

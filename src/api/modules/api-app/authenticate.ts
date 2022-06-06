@@ -1,9 +1,10 @@
 import request from 'api/request';
+import { TypeLogin, TypeRegister } from '../interface/authenticate';
 
 export const getProfile = (token?: string) =>
     request.get(`profile`, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
-export const login = (params: any) => request.post(`auth/login`, params);
-export const register = (params: any) => request.post(`auth/register`, params);
+export const login = (params: TypeLogin) => request.post(`auth/login`, params);
+export const register = (params: TypeRegister) => request.post(`auth/register`, params);
 export const forgotPassword = (email: string) => request.post(`auth/forgot-password`, { email });
 export const checkIsExistEmail = (email: string) => request.post(`auth/check-account-existed`, { email });
 export const getVerifyCode = (email: string) => request.post(`auth/request-verified-code`, { email });
