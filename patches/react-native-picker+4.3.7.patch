@@ -1,0 +1,47 @@
+diff --git a/node_modules/react-native-picker/android/build.gradle b/node_modules/react-native-picker/android/build.gradle
+index 40f4f26..55ad51f 100644
+--- a/node_modules/react-native-picker/android/build.gradle
++++ b/node_modules/react-native-picker/android/build.gradle
+@@ -22,6 +22,6 @@ android {
+ }
+ 
+ dependencies {
+-    compile fileTree(include: ['*.jar'], dir: 'libs')
+-    compile 'com.facebook.react:react-native:+'
++    implementation fileTree(include: ['*.jar'], dir: 'libs')
++    implementation 'com.facebook.react:react-native:+'
+ }
+diff --git a/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java b/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
+index 813a0bd..73ad137 100644
+--- a/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
++++ b/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
+@@ -6,7 +6,7 @@ import android.app.Dialog;
+ import android.graphics.Color;
+ import android.graphics.PixelFormat;
+ import android.graphics.Typeface;
+-import android.support.annotation.Nullable;
++import androidx.annotation.Nullable;
+ import android.text.TextUtils;
+ import android.view.Gravity;
+ import android.view.View;
+diff --git a/node_modules/react-native-picker/index.d.ts b/node_modules/react-native-picker/index.d.ts
+index 7c70938..ba9795f 100644
+--- a/node_modules/react-native-picker/index.d.ts
++++ b/node_modules/react-native-picker/index.d.ts
+@@ -158,6 +158,16 @@ interface PickerOptions {
+      */
+     pickerRowHeight?: number
+ 
++    /**
++     * Row width of the items in the picker
++     *
++     * Default is unknown
++     *
++     * @type {number}
++     * @memberof PickerOptions
++     */
++    pickerTextEllipsisLen?: number
++
+     /**
+      * Color of the text for the items in the picker
+      *

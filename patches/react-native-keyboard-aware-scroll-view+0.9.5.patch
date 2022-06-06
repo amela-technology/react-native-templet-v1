@@ -1,0 +1,18 @@
+diff --git a/node_modules/react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js b/node_modules/react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js
+index 9a60068..77ce1a7 100644
+--- a/node_modules/react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js
++++ b/node_modules/react-native-keyboard-aware-scroll-view/lib/KeyboardAwareFlatList.js
+@@ -1,6 +1,10 @@
+ /* @flow */
+ 
+-import { FlatList } from 'react-native'
+-import listenToKeyboardEvents from './KeyboardAwareHOC'
++import { FlatList } from 'react-native';
++import listenToKeyboardEvents from './KeyboardAwareHOC';
+ 
+-export default listenToKeyboardEvents(FlatList)
++const config = {
++    enableOnAndroid: true,
++};
++
++export default listenToKeyboardEvents(config)(FlatList);

@@ -1,0 +1,43 @@
+diff --git a/node_modules/react-native-image-crop-picker/ios/src/ImageCropPicker.m b/node_modules/react-native-image-crop-picker/ios/src/ImageCropPicker.m
+index 7101410..dcf8f88 100644
+--- a/node_modules/react-native-image-crop-picker/ios/src/ImageCropPicker.m
++++ b/node_modules/react-native-image-crop-picker/ios/src/ImageCropPicker.m
+@@ -71,8 +71,7 @@ RCT_EXPORT_MODULE();
+             @"forceJpg": @NO,
+             @"sortOrder": @"none",
+             @"cropperCancelText": @"Cancel",
+-            @"cropperChooseText": @"Choose",
+-            @"cropperRotateButtonsHidden": @NO
++            @"cropperChooseText": @"Choose"
+         };
+         self.compression = [[Compression alloc] init];
+     }
+@@ -874,12 +873,11 @@ RCT_EXPORT_METHOD(openCropper:(NSDictionary *)options
+             cropVC = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleCircular image:image];
+         } else {
+             cropVC = [[TOCropViewController alloc] initWithImage:image];
+-            CGFloat widthRatio = [[self.options objectForKey:@"width"] floatValue];
+-            CGFloat heightRatio = [[self.options objectForKey:@"height"] floatValue];
++            CGFloat widthRatio = image.size.width;
++            CGFloat heightRatio = image.size.height;
+             if (widthRatio > 0 && heightRatio > 0){
+                 CGSize aspectRatio = CGSizeMake(widthRatio, heightRatio);
+                 cropVC.customAspectRatio = aspectRatio;
+-                
+             }
+             cropVC.aspectRatioLockEnabled = ![[self.options objectForKey:@"freeStyleCropEnabled"] boolValue];
+             cropVC.resetAspectRatioEnabled = !cropVC.aspectRatioLockEnabled;
+@@ -890,12 +888,8 @@ RCT_EXPORT_METHOD(openCropper:(NSDictionary *)options
+         
+         cropVC.doneButtonTitle = [self.options objectForKey:@"cropperChooseText"];
+         cropVC.cancelButtonTitle = [self.options objectForKey:@"cropperCancelText"];
+-        cropVC.rotateButtonsHidden = [[self.options objectForKey:@"cropperRotateButtonsHidden"] boolValue];
+         
+-        cropVC.modalPresentationStyle = UIModalPresentationFullScreen;
+-        if (@available(iOS 15.0, *)) {
+-            cropVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+-        }
++        cropVC.modalPresentationStyle = UIModalPresentationFullScreen;\
+         
+         [[self getRootVC] presentViewController:cropVC animated:FALSE completion:nil];
+     });
