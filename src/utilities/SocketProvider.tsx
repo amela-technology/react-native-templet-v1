@@ -1,53 +1,37 @@
-/* eslint-disable no-underscore-dangle */
 import { getProfile } from 'api/modules/api-app/authenticate';
 import { getMessage } from 'api/modules/api-app/chat';
 import Images from 'assets/images';
 import React, { useCallback, useEffect, useState } from 'react';
 import Config from 'react-native-config';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { useSelector } from 'react-redux';
-import socketIO from 'socket.io-client';
+import socketIO, { Socket } from 'socket.io-client';
 import { logger } from './helper';
 
-export const socket = socketIO(Config.API_URL, { timeout: 3000 });
-let isConnectSocket = false;
+let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+
 export const SocketProvider = ({ children }: any) => {
     const userInfo = useSelector((state: any) => state.userInfo);
-
     const startSocket = () => {
-        socket?.off('connect');
-        socket?.disconnect();
+        socket = socketIO(Config.API_URL, { extraHeaders: { authorization: userInfo?.token } });
         socket.on('connect', () => {
-            socket.emit('authenticate', { token: userInfo?.token });
+            logger('connect success');
         });
-        socket.on('authenticated', () => {
-            isConnectSocket = true;
-            logger('connected');
+        socket.on('connect_error', async (err: any) => {
+            if (err.message === 'Unauthorized') {
+                logger('Unauthorized');
+                await getProfile();
+            } else {
+                logger('connect error');
+            }
         });
-        socket.connect();
-    };
-    const stopSocket = () => {
-        socket?.off('connect');
-        socket?.off('reconnect');
-        socket?.off('authenticated');
-        socket?.off('server-send-message');
-        socket?.disconnect();
     };
     useEffect(() => {
-        if (userInfo?.token && !isConnectSocket) {
+        if (userInfo?.token) {
             startSocket();
         }
     }, [userInfo?.token]);
-
-    useEffect(() => {
-        socket.on('unauthenticated', async () => {
-            isConnectSocket = false;
-            await getProfile();
-        });
-        return () => {
-            stopSocket();
-        };
-    }, []);
 
     return <>{children}</>;
 };
@@ -172,5 +156,5 @@ export const useSocket = (id?: string) => {
         });
     };
 
-    return { leaveRoom, messages, onSend, getListMessage, setImage };
+    return { leaveRoom, messages, onSend, getListMessage, setImage, socket };
 };
