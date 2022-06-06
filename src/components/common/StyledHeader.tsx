@@ -4,6 +4,7 @@ import { Themes } from 'assets/themes';
 import { StyledIcon, StyledText, StyledTouchable } from 'components/base';
 import { goBack } from 'navigation/NavigationService';
 import React from 'react';
+import isEqual from 'react-fast-compare';
 import { StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import { logger } from 'utilities/helper';
@@ -110,4 +111,4 @@ const styles = ScaledSheet.create({
     },
 });
 
-export default React.memo(StyledHeader);
+export default React.memo(StyledHeader, isEqual);

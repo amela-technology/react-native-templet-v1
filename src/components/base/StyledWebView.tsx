@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { memo } from 'react';
+import isEqual from 'react-fast-compare';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { WebView, WebViewProps } from 'react-native-webview';
 import { StyledText } from '.';
@@ -16,7 +17,7 @@ const StyledWebView = (props: WebViewProps) => {
                         <ActivityIndicator size={'large'} />
                     </View>
                 )}
-                renderError={(errorName) => (
+                renderError={errorName => (
                     <View style={styles.flex1}>
                         <StyledText originValue={`Error name: ${errorName}`} />
                         <StyledText customStyle={styles.textPullDown} originValue={'Pull down to try again'} />
@@ -39,4 +40,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default memo(StyledWebView);
+export default memo(StyledWebView, isEqual);

@@ -1,7 +1,8 @@
-import React, { FunctionComponent, memo, useEffect } from 'react';
-import { StyleSheet, View, Modal, ActivityIndicator, Keyboard, ViewProps } from 'react-native';
-import { Themes } from 'assets/themes';
 import Metrics from 'assets/metrics';
+import { Themes } from 'assets/themes';
+import React, { FunctionComponent, memo, useEffect } from 'react';
+import isEqual from 'react-fast-compare';
+import { ActivityIndicator, Keyboard, Modal, StyleSheet, View, ViewProps } from 'react-native';
 import { isIos } from 'utilities/helper';
 
 interface Props extends ViewProps {
@@ -41,8 +42,7 @@ const StyledOverlayLoading: any = (props: Props) => {
                 onRequestClose={props.onRequestClose}
                 supportedOrientations={['portrait']}
                 transparent
-                visible={props.visible}
-            >
+                visible={props.visible}>
                 <Spinner />
             </Modal>
         );
@@ -60,8 +60,7 @@ const StyledOverlayLoading: any = (props: Props) => {
                         backgroundColor: 'rgba(0,0,0,0.4)',
                         alignItems: 'center',
                         justifyContent: 'center',
-                    }}
-                >
+                    }}>
                     <Spinner />
                 </View>
             )
@@ -118,4 +117,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default memo(StyledOverlayLoading);
+export default memo(StyledOverlayLoading, isEqual);

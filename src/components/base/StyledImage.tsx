@@ -1,6 +1,7 @@
 import Images from 'assets/images';
 import React, { memo, useEffect, useState } from 'react';
-import { ImageProps, Image } from 'react-native';
+import isEqual from 'react-fast-compare';
+import { Image, ImageProps } from 'react-native';
 
 interface StyledImageProps extends ImageProps {
     customStyle?: any;
@@ -22,4 +23,4 @@ const StyledImage = (props: StyledImageProps) => {
     );
 };
 
-export default memo(StyledImage);
+export default memo(StyledImage, isEqual);

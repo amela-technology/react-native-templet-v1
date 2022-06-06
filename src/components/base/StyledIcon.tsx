@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { StyleProp, Image, ImageStyle, ImageProps } from 'react-native';
+import isEqual from 'react-fast-compare';
+import { Image, ImageProps, ImageStyle, StyleProp } from 'react-native';
 import { scale } from 'react-native-size-matters';
 
 interface Props extends ImageProps {
@@ -17,4 +18,4 @@ const StyledIcon = (props: Props) => {
     );
 };
 
-export default memo(StyledIcon);
+export default memo(StyledIcon, isEqual);
