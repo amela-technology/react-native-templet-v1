@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # tsc --noEmit &&
-npm run lint
+npm run lint:husky
