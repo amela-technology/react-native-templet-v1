@@ -1,14 +1,15 @@
-import React, { FunctionComponent, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import ActionSheet from '@alessiocancian/react-native-actionsheet';
 import { useNavigation } from '@react-navigation/native';
+import { StyledButton } from 'components/base';
+import ModalizeManager from 'components/base/modal/ModalizeManager';
+import StyledPicker from 'components/base/picker/StyledPicker';
+import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import StyledHeader from 'components/common/StyledHeader';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
+import React, { FunctionComponent, useRef, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { wait } from 'utilities/helper';
-import StyledPicker from 'components/base/picker/StyledPicker';
-import ModalizeManager from 'components/base/modal/ModalizeManager';
 import { dataPicker } from 'utilities/staticData';
-import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
-import { StyledButton } from 'components/base';
 import ModalContent from './components/ModalContent';
 
 const HomeScreen: FunctionComponent = () => {
@@ -17,6 +18,9 @@ const HomeScreen: FunctionComponent = () => {
     const [valuePicker, setValuePicker] = useState(dataPicker[0]);
     const [currentValue, setCurrentValue] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const actionSheet = useRef<any>(null);
+
+    const options = ['cancel', 'photo', 'camera'];
 
     const fakeCallAPI = () => {
         setIsLoading(true);
@@ -73,6 +77,15 @@ const HomeScreen: FunctionComponent = () => {
                     onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_USER_LIST)}
                 />
                 <StyledButton title={'Trigger Loading'} onPress={fakeCallAPI} />
+                <StyledButton title={'Action Sheet'} onPress={() => actionSheet?.current?.show()} />
+                <ActionSheet
+                    ref={actionSheet}
+                    options={options}
+                    cancelButtonIndex={0}
+                    onPress={(index: any) => console.log(index)}
+                    theme={'ios'}
+                    userInterfaceStyle={'dark'}
+                />
             </View>
         </View>
     );

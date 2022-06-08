@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
+import ActionSheet from '@alessiocancian/react-native-actionsheet';
 import { StyledImage, StyledTouchable } from 'components/base';
 import React, { memo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import ActionSheet from 'react-native-actionsheet';
 import { logger } from 'utilities/logger';
 import ImageUploader from './ImageUploader';
 
