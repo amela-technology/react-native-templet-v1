@@ -9,6 +9,7 @@ import { navigationRef } from 'navigation/NavigationService';
 import Navigation from 'navigation/scene/RootScenes';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { addMenuClearAsyncStorage, getCodePushInfo } from 'utilities/helper';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 LogBox.ignoreLogs(['Require cycle:', 'ViewPropTypes']);
 
@@ -26,15 +27,17 @@ const App: FunctionComponent = () => {
     }, []);
 
     return (
-        <Provider store={store}>
-            <PersistGate loading={<ActivityIndicator />} persistor={persistor} onBeforeLift={onBeforeLift}>
-                <RootSiblingParent>
-                    <NavigationContainer ref={navigationRef}>
-                        <Navigation />
-                    </NavigationContainer>
-                </RootSiblingParent>
-            </PersistGate>
-        </Provider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <Provider store={store}>
+                <PersistGate loading={<ActivityIndicator />} persistor={persistor} onBeforeLift={onBeforeLift}>
+                    <RootSiblingParent>
+                        <NavigationContainer ref={navigationRef}>
+                            <Navigation />
+                        </NavigationContainer>
+                    </RootSiblingParent>
+                </PersistGate>
+            </Provider>
+        </GestureHandlerRootView>
     );
 };
 
