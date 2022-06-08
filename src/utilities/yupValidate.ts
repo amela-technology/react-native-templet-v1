@@ -63,6 +63,9 @@ const yupValidate = {
             .max(PASSWORD_MAX_LENGTH, i18next.t('error.passwordLength'))
             .matches(REGEX_PASSWORD, i18next.t('error.validatePassword'));
     },
+    birthday: () => yup.string().required(() => requireField('birthday')),
+    labelPicker: () => yup.string().required(() => requireField('labelPicker')),
+    policy: () => yup.string().required(() => requireField('policy')),
 };
 
 export default yupValidate;

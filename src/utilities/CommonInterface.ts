@@ -1,4 +1,4 @@
-export type textContentType =
+export type TextContentType =
     | 'none'
     | 'URL'
     | 'addressCity'
@@ -27,7 +27,8 @@ export type textContentType =
     | 'password'
     | 'newPassword'
     | 'oneTimeCode';
-export type autoCompleteType =
+
+export type AutoCompleteType =
     | 'cc-csc'
     | 'cc-exp'
     | 'cc-exp-month'

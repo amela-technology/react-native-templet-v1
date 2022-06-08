@@ -76,7 +76,9 @@ export default {
         },
     },
     home: {},
-    account: {},
+    account: {
+        policy: 'I accepted policy.',
+    },
     notification: {},
     setting: {},
 

@@ -35,7 +35,7 @@ const HomeScreen: FunctionComponent = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <StyledHeader title={'Home Screen'} />
+            <StyledHeader title={'Home Screen'} isBack={false} />
             <StyledOverlayLoading visible={isLoading} />
             <View style={styles.contScreen}>
                 <StyledPicker

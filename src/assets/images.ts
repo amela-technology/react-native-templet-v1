@@ -14,6 +14,11 @@ const Images = {
             check: require('./icon/ic_check_radio.png'),
             uncheck: require('./icon/ic_uncheck_radio.png'),
         },
+        calendar: require('./icon/ic_calendar.png'),
+        checkBox: {
+            check: require('./icon/ic_check_square.png'),
+            uncheck: require('./icon/ic_uncheck_square.png'),
+        },
     },
     photo: {
         defaultImage: require('./photo/img_default_image.png'),

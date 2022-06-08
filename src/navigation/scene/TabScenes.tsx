@@ -1,7 +1,7 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
-import AccountView from 'feature/account/AccountView';
+import AccountScreen from 'feature/account/AccountScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
 import HomeDetailScreen from 'feature/home/HomeDetailScreen';
 // Screen
@@ -14,13 +14,12 @@ import navigationConfigs from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { isIos } from 'utilities/helper';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
 const HomeStack = () => (
-    <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs} keyboardHandlingEnabled={isIos}>
+    <MainStack.Navigator screenOptions={navigationConfigs}>
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME} component={HomeScreen} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DETAIL} component={HomeDetailScreen} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.WEB_VIEW} component={HomeDetailScreen} />
@@ -53,14 +52,17 @@ const MainTabContainer = () => {
         {
             name: TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT,
             title: t('tab.account'),
-            component: AccountView,
+            component: AccountScreen,
             icon: Images.icons.tab.account,
         },
     ];
     return (
-        <MainTab.Navigator tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
-            {ArrayTabs.map((item, index) => (
-                <MainTab.Screen key={`${index}`} options={{ ...item }} {...item} />
+        <MainTab.Navigator
+            screenOptions={{ headerShown: false }}
+            initialRouteName={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT}
+            tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
+            {ArrayTabs.map(item => (
+                <MainTab.Screen key={item.name} options={{ ...item }} {...item} />
             ))}
         </MainTab.Navigator>
     );
