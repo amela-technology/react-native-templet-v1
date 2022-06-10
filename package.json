@@ -35,7 +35,8 @@
         "android-build-apk-product": "rm -rf build && rm -rf android/build && export ENVFILE=.env.production && cd android && ./gradlew clean && ./gradlew assembleProductRelease && cd ..",
         "android-build-aab-product": "rm -rf build && rm -rf android/build && export ENVFILE=.env.production && cd android && ./gradlew clean && ./gradlew bundleProductRelease && cd ..",
         "open-folder-apk": "open ./android/app/build/outputs/apk",
-        "open-folder-aab": "open ./android/app/build/outputs/bundle"
+        "open-folder-aab": "open ./android/app/build/outputs/bundle",
+        "commit": "cz"
     },
     "dependencies": {
         "@alessiocancian/react-native-actionsheet": "^3.1.2",
@@ -100,6 +101,8 @@
     "devDependencies": {
         "@babel/core": "^7.17.10",
         "@babel/runtime": "^7.17.9",
+        "@commitlint/cli": "^17.0.0",
+        "@commitlint/config-conventional": "^17.0.0",
         "@react-native-community/eslint-config": "^3.0.1",
         "@types/jest": "^27.5.0",
         "@types/react-native": "^0.67.6",
@@ -111,6 +114,8 @@
         "@typescript-eslint/parser": "^5.23.0",
         "babel-jest": "^28.1.0",
         "babel-plugin-module-resolver": "^4.1.0",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
         "eslint": "^8.15.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-import-resolver-typescript": "^2.7.1",
@@ -141,5 +146,10 @@
             "json",
             "node"
         ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }

@@ -73,3 +73,5 @@ package-lock.json
 ios/tmp.xcconfig
 android/
 ios/
+.vscode/
+.history
