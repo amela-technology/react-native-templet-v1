@@ -3,19 +3,21 @@ import { useNavigation } from '@react-navigation/native';
 import { StyledButton } from 'components/base';
 import ModalizeManager from 'components/base/modal/ModalizeManager';
 import StyledPicker from 'components/base/picker/StyledPicker';
+import StyledModalDropdown from 'components/base/StyledModalDropdown';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import StyledHeader from 'components/common/StyledHeader';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React, { FunctionComponent, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { wait } from 'utilities/helper';
-import { dataPicker } from 'utilities/staticData';
+import { dataDropdown, dataPicker } from 'utilities/staticData';
 import ModalContent from './components/ModalContent';
 
 const HomeScreen: FunctionComponent = () => {
     const navigation = useNavigation();
     const modalize = ModalizeManager();
     const [valuePicker, setValuePicker] = useState(dataPicker[0]);
+    const [valueDropDown, setValueDropDown] = useState(dataDropdown[0]);
     const [currentValue, setCurrentValue] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const actionSheet = useRef<any>(null);
@@ -37,6 +39,7 @@ const HomeScreen: FunctionComponent = () => {
         <View style={{ flex: 1 }}>
             <StyledHeader title={'Home Screen'} isBack={false} />
             <StyledOverlayLoading visible={isLoading} />
+
             <View style={styles.contScreen}>
                 <StyledPicker
                     label="Test Picker"
@@ -85,6 +88,11 @@ const HomeScreen: FunctionComponent = () => {
                     onPress={(index: any) => console.log(index)}
                     theme={'ios'}
                     userInterfaceStyle={'dark'}
+                />
+                <StyledModalDropdown
+                    options={dataDropdown}
+                    label={'test modal dropdown'}
+                    setValueDropDown={setValueDropDown}
                 />
             </View>
         </View>

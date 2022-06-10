@@ -3,14 +3,12 @@ import { CardStyleInterpolators, StackNavigationOptions } from '@react-navigatio
 import { Themes } from 'assets/themes';
 import { Platform } from 'react-native';
 import transition from './transition';
-import { Platform } from 'react-native';
 
 const navigationConfigs: StackNavigationOptions = {
     cardStyle: {
         backgroundColor: Themes.COLORS.white,
         // paddingBottom: Metrics.safeBottomPadding,
     },
-    keyboardHandlingEnabled: Platform.OS === 'ios',
     headerShown: false,
     gestureEnabled: true,
     // gestureDirection: 'default',
