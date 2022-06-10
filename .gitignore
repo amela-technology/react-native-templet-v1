@@ -32,8 +32,7 @@ local.properties
 
 # Visual Studio Code
 #
-android
-ios
+
 .vscode/
 .history
 
@@ -71,7 +70,5 @@ yarn.lock
 package-lock.json
 # react-native-config codegen
 ios/tmp.xcconfig
-android/
-ios/
 .vscode/
 .history
