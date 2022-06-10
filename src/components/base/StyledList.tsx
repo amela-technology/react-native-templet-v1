@@ -7,7 +7,6 @@ import StyledIndicator from './StyledIndicator';
 import NoData from './StyledNoData';
 
 interface Props extends FlatListProps<any> {
-    [key: string]: any;
     FlatListComponent?: FunctionComponent<any>;
     loading?: boolean;
     data: any[];

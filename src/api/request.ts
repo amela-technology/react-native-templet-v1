@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Config from 'react-native-config';
 import TokenProvider from 'utilities/authenticate/TokenProvider';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
@@ -41,7 +41,7 @@ const rejectError = (err: string, validNetwork: boolean) => {
 };
 
 request.interceptors.request.use(
-    async (config: any) => {
+    async (config: AxiosRequestConfig) => {
         // Do something before API is sent
         const token = TokenProvider.getToken();
         if (token) {
@@ -102,7 +102,7 @@ request.interceptors.response.use(
                     originalRequest.headers.Authorization = `Bearer ${queuePromise.token}`;
                     return request(originalRequest);
                 } catch (err) {
-                    return rejectError(err, validNetwork);
+                    return rejectError(String(err), validNetwork);
                 }
             }
             logger('refreshing token...');
@@ -122,7 +122,7 @@ request.interceptors.response.use(
                 // Logout here
                 AuthenticateService.logOut();
                 processQueue(err, null);
-                return rejectError(err, validNetwork);
+                return rejectError(String(err), validNetwork);
             } finally {
                 isRefreshing = false;
             }

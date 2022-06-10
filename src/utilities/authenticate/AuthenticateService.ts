@@ -1,22 +1,18 @@
-import { AxiosRequestConfig } from 'axios';
-import request from 'api/request';
-import { store } from 'app-redux/store';
-import { logger } from 'utilities/helper';
+import { TypeLoginRequest } from 'api/interface/authenticate';
 import { login } from 'api/modules/api-app/authenticate';
-import { useState } from 'react';
-import AlertMessage from 'components/base/AlertMessage';
-import { deleteTagOneSignal, pushTagMember } from 'utilities/notification';
+import request from 'api/request';
 import { userInfoActions } from 'app-redux/slices/userInfoSlice';
+import { store } from 'app-redux/store';
+import AlertMessage from 'components/base/AlertMessage';
+import { useState } from 'react';
+import { logger } from 'utilities/helper';
+import { deleteTagOneSignal, pushTagMember } from 'utilities/notification';
 
 const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
-export interface LoginRequestParams extends AxiosRequestConfig {
-    email: string;
-    password: string;
-}
 
 interface LoginRequest {
     loading: boolean;
-    requestLogin: (values: any) => Promise<void>;
+    requestLogin: (values: TypeLoginRequest) => Promise<void>;
 }
 
 export const isLogin = () => {
@@ -42,14 +38,14 @@ const AuthenticateService = {
 
 export const useLogin = (): LoginRequest => {
     const [loading, setLoading] = useState(false);
-    const requestLogin = async (options: LoginRequestParams) => {
+    const requestLogin = async (options: TypeLoginRequest) => {
         try {
             setLoading(true);
             const response = await login(options);
             store.dispatch(userInfoActions.getUserInfoRequest(response?.data?.token));
             AuthenticateService.handlerLogin({ ...response.data });
         } catch (e) {
-            AlertMessage(e);
+            AlertMessage(String(e));
             logger(e);
         } finally {
             setLoading(false);
