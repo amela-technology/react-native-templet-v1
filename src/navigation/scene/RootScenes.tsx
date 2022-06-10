@@ -8,7 +8,9 @@ import { APP_ROUTE } from '../config/routes';
 import AuthStack from './AuthScenes';
 import MainTabContainer from './TabScenes';
 
-const MainStack = createStackNavigator();
+export type RootStackParamList = Record<string, any>;
+
+const MainStack = createStackNavigator<RootStackParamList>();
 
 const AppStack = () => (
     <Host>

@@ -18,7 +18,7 @@ export function wait(timeout: number): Promise<any> {
     });
 }
 
-export function logger(msg: string, isWarning?: boolean, params?: any): void {
+export function logger(msg: any, isWarning?: boolean, params?: any): void {
     if (__DEV__ && !isWarning) {
         if (params) console.log(msg, params);
         else console.log(msg);

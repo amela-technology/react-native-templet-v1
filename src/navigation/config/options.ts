@@ -1,13 +1,16 @@
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { CardStyleInterpolators, StackNavigationOptions } from '@react-navigation/stack';
 import { Themes } from 'assets/themes';
-import { CardStyleInterpolators } from '@react-navigation/stack';
+import { Platform } from 'react-native';
 import transition from './transition';
 import { Platform } from 'react-native';
 
-const navigationConfigs = {
+const navigationConfigs: StackNavigationOptions = {
     cardStyle: {
         backgroundColor: Themes.COLORS.white,
         // paddingBottom: Metrics.safeBottomPadding,
     },
+    keyboardHandlingEnabled: Platform.OS === 'ios',
     headerShown: false,
     gestureEnabled: true,
     // gestureDirection: 'default',
@@ -19,6 +22,10 @@ const navigationConfigs = {
         open: transition,
         close: transition,
     },
+};
+
+export const tabScreenOptions: BottomTabNavigationOptions = {
+    headerShown: false,
 };
 
 export default navigationConfigs;
