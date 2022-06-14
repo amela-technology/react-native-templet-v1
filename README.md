@@ -13,11 +13,11 @@ Below you'll find information about performing common tasks.
 # Introduction
 
 -   Easy to start
--   React-native version 0.63.4
+-   React-native version 0.68.2
 -   Fully using typescript for typing
 -   Folder structure using package-by-feature (why)
 -   Redux-toolkit, redux-saga, redux-persist, redux-logger
--   React-navigation v5
+-   React-navigation v6
 -   100% functional component with hooks
 -   A lot of custom/base components
 -   i18next for multiple languages
@@ -59,10 +59,10 @@ amela-rn-cli
 3. Remove `.git` folder, `rm -rf .git`
 4. Open `package.json` and change the `name` property with your project name
 5. Open `app.json` and replace `'ReactNativeBase'` by your project name
-6. Remove to line 35, 36 `android` & `ios` in `.gitignore`
-7. Run `yarn` or `npm install` to install dependencies
-8. Run `npm run init-project` to create iOS & Android Folders.
-9. Run your project with `npm run android` or `npm run ios`
+7. Run `yarn` or `npm install` 1st time to install dependencies. **It will have error, but don't worry we will make over it.**
+8. Run `yarn init-project` or `npm run init-project` to create iOS & Android Folders.
+9. Run `yarn` or `npm install` 2nd time.
+9. Run your project with `npm run android`/`yarn android` or `npm run ios`/`yarn ios`.
 10. If using CodePush, replace `project-name` in `package.json` by your project name in AppCenter.
 
 ### Setting up manually for iOS
@@ -107,15 +107,19 @@ Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
 
 ### `npm lint`
 
-Run linter check source code
+Run linter check source code.
 
 ### `npm lint-fix`
 
-Run linter fix source code
+Run linter fix source code.
 
 ### `npm assets-link`
 
-Link assets and font from **src/assets** to Native project
+Link assets and font from **src/assets** to Native project.
+
+### `yarn commit`
+
+Show list commit types to choose and execute commits (using commit-lint).
 
 ---
 
@@ -148,191 +152,198 @@ end
 # D. Folder structures
 
 ```
-.   folder contain file to fixing, batch lib
-├── Gemfile
-├── README.md
-├── ReactotronConfig.js
-├── __tests__
-│   └── App-test.tsx
-├── app.json
-├── babel.config.js
-├── code-push.command
-├── defaultIcon.jpeg
-├── index.js
-├── jest.config.js
-├── metro.config.js
-├── package.json
-├── react-native.config.js
-├── scripts
-│   ├── fix-lib.sh
-│   ├── react-native-config
-│   │   └── ReadDotEnv.rb
-│   ├── react-native-image-crop-picker
-│   │   └── ImageCropPicker.m
-│   ├── react-native-keyboard-aware-scroll-view
-│   │   └── lib
-│   │       ├── KeyboardAwareFlatList.js
-│   │       └── KeyboardAwareScrollView.js
-│   ├── react-native-picker
-│   │   └── index.d.ts
-│   ├── react-native-size-matters
-│   │   └── scaling-utils.js
-│   └── react-native-static-safe-area-insets
-├── settings.json
-├── src
-│   ├── App.tsx
-│   ├── api
-│   │   ├── modules
-│   │   │   └── api-app
-│   │   │       ├── authenticate.ts
-│   │   │       ├── general.ts
-│   │   │       └── notification.ts
-│   │   └── request.ts
-│   ├── app-redux
-│   │   ├── hooks.ts
-│   │   ├── sagas
-│   │   │   ├── resourceSaga.ts
-│   │   │   ├── rootSaga.ts
-│   │   │   └── userInfoSaga.ts
-│   │   ├── slices
-│   │   │   ├── initSlice.ts
-│   │   │   ├── languageSlice.ts
-│   │   │   ├── resourceSlice.ts
-│   │   │   ├── types.ts
-│   │   │   └── userInfoSlice.ts
-│   │   └── store.ts
-│   ├── assets
-│   │   ├── fonts
-│   │   │   ├── Montserrat-Light.ttf
-│   │   │   ├── Montserrat-Regular.ttf
-│   │   │   └── Montserrat-SemiBold.ttf
-│   │   ├── icon
-│   │   │   ├── ic_account.png
-│   │   │   ├── ic_back.png
-│   │   │   ├── ic_calendar.png
-│   │   │   ├── ic_check_radio.png
-│   │   │   ├── ic_check_square.png
-│   │   │   ├── ic_home.png
-│   │   │   ├── ic_notification.png
-│   │   │   ├── ic_select.png
-│   │   │   ├── ic_setting.png
-│   │   │   ├── ic_uncheck_radio.png
-│   │   │   └── ic_uncheck_square.png
-│   │   ├── images.ts
-│   │   ├── locates
-│   │   │   ├── en.ts
-│   │   │   └── jp.ts
-│   │   ├── metrics.ts
-│   │   ├── photo
-│   │   │   └── img_default_image.png
-│   │   ├── sizes.ts
-│   │   └── themes.ts
-│   ├── components
-│   │   ├── base
-│   │   │   ├── AlertMessage.ts
-│   │   │   ├── CheckBox.tsx
-│   │   │   ├── ProgressiveImage.tsx
-│   │   │   ├── StyledButton.tsx
-│   │   │   ├── StyledIcon.tsx
-│   │   │   ├── StyledImage.tsx
-│   │   │   ├── StyledIndicator.tsx
-│   │   │   ├── StyledInput.tsx
-│   │   │   ├── StyledInputForm.tsx
-│   │   │   ├── StyledList.tsx
-│   │   │   ├── StyledNoData.tsx
-│   │   │   ├── StyledOverlayLoading.tsx
-│   │   │   ├── StyledSectionList.tsx
-│   │   │   ├── StyledText.tsx
-│   │   │   ├── StyledTouchable.tsx
-│   │   │   ├── StyledWebView.tsx
-│   │   │   ├── index.ts
-│   │   │   ├── list-view-selected
-│   │   │   │   ├── StyledListViewSelected.tsx
-│   │   │   │   └── components
-│   │   │   │       └── ItemListViewSelected.tsx
-│   │   │   ├── modal
-│   │   │   │   ├── ModalizeCenterComponent.tsx
-│   │   │   │   └── ModalizeManager.tsx
-│   │   │   └── picker
-│   │   │       ├── StyledDateTimePicker.tsx
-│   │   │       ├── StyledModalPicker.tsx
-│   │   │       └── StyledPicker.tsx
-│   │   └── common
-│   │       ├── CodePushProgressDialog.tsx
-│   │       └── StyledHeader.tsx
-│   ├── feature
-│   │   ├── account
-│   │   │   └── AccountScreen.tsx
-│   │   ├── authentication
-│   │   │   ├── ChangePassword.tsx
-│   │   │   ├── ForgotPwdScreen.tsx
-│   │   │   ├── LoginScreen.tsx
-│   │   │   ├── RegisterScreen.tsx
-│   │   │   ├── SendOtp.tsx
-│   │   │   └── components
-│   │   │       └── Logo.tsx
-│   │   ├── chat
-│   │   │   └── ChatScreen.tsx
-│   │   ├── home
-│   │   │   ├── HomeDataScreen.tsx
-│   │   │   ├── HomeDetailScreen.tsx
-│   │   │   ├── HomeScreen.tsx
-│   │   │   ├── HomeUserListScreen.tsx
-│   │   │   └── components
-│   │   │       ├── HomeTabs.tsx
-│   │   │       ├── ModalContent.tsx
-│   │   │       ├── ModalContent2.tsx
-│   │   │       └── UserCard.tsx
-│   │   ├── notification
-│   │   │   ├── NotificationScreen.tsx
-│   │   │   └── components
-│   │   │       └── HomeTabs.tsx
-│   │   └── setting
-│   │       ├── SettingScreen.tsx
-│   │       └── components
-│   │           └── HomeTabs.tsx
-│   ├── hooks
-│   │   ├── useApi.ts
-│   │   ├── useInput.ts
-│   │   ├── usePaging.ts
-│   │   └── usePagingTakeAfter.ts
-│   ├── navigation
-│   │   ├── NavigationService.ts
-│   │   ├── components
-│   │   │   └── StyledTabBar.tsx
-│   │   ├── config
-│   │   │   ├── options.ts
-│   │   │   ├── routes.ts
-│   │   │   └── transition.ts
-│   │   └── scene
-│   │       ├── AuthScenes.tsx
-│   │       ├── RootScenes.tsx
-│   │       └── TabScenes.tsx
-│   └── utilities
-│       ├── CommonInterface.ts
-│       ├── SocketProvider.tsx
-│       ├── authenticate
-│       │   ├── AuthenticateService.ts
-│       │   └── TokenProvider.ts
-│       ├── format.ts
-│       ├── helper.ts
-│       ├── i18next.ts
-│       ├── logger.ts
-│       ├── notification
-│       │   └── index.ts
-│       ├── permissions
-│       │   └── index.ts
-│       ├── react-i18next.d.ts
-│       ├── staticData.ts
-│       ├── types
-│       │   └── typing.d.ts
-│       ├── upload
-│       │   ├── ImagePicker.tsx
-│       │   └── ImageUploader.ts
-│       ├── validate.ts
-│       └── yupValidate.ts
-├── tsconfig.json
-└── yarn.lock
+.babelrc
+.buckconfig
+.bundle
+   |-- config
+.eslintignore
+.eslintrc.js
+.gitignore
+.gitlab
+   |-- .gitkeep
+   |-- merge_request_templates
+   |   |-- Default.md
+.husky
+   |-- .gitignore
+   |-- commit-msg
+   |-- pre-commit
+.prettierrc.js
+.ruby-version
+.watchmanconfig
+Gemfile
+README.md
+ReactotronConfig.js
+__tests__
+   |-- App-test.tsx
+app.json
+babel.config.js
+code-push.command
+commitlint.config.js
+defaultIcon.jpeg
+index.js
+jest.config.js
+metro.config.js
+package.json
+patches
+   |-- react-native-config+1.4.5.patch
+   |-- react-native-image-crop-picker+0.37.3.patch
+   |-- react-native-keyboard-aware-scroll-view+0.9.5.patch
+   |-- react-native-picker+4.3.7.patch
+   |-- react-native-size-matters+0.4.0.patch
+   |-- react-native-static-safe-area-insets+2.1.1.patch
+react-native.config.js
+settings.json
+src
+   |-- App.tsx
+   |-- api
+   |   |-- interface
+   |   |   |-- authenticate.ts
+   |   |   |-- general.ts
+   |   |-- modules
+   |   |   |-- api-app
+   |   |   |   |-- authenticate.ts
+   |   |   |   |-- general.ts
+   |   |   |   |-- notification.ts
+   |   |-- request.ts
+   |-- app-redux
+   |   |-- hooks.ts
+   |   |-- sagas
+   |   |   |-- resourceSaga.ts
+   |   |   |-- rootSaga.ts
+   |   |   |-- userInfoSaga.ts
+   |   |-- slices
+   |   |   |-- initSlice.ts
+   |   |   |-- languageSlice.ts
+   |   |   |-- resourceSlice.ts
+   |   |   |-- types.ts
+   |   |   |-- userInfoSlice.ts
+   |   |-- store.ts
+   |-- assets
+   |   |-- fonts
+   |   |   |-- Montserrat-Light.ttf
+   |   |   |-- Montserrat-Regular.ttf
+   |   |   |-- Montserrat-SemiBold.ttf
+   |   |-- icon
+   |   |   |-- ic_account.png
+   |   |   |-- ic_back.png
+   |   |   |-- ic_calendar.png
+   |   |   |-- ic_check_radio.png
+   |   |   |-- ic_check_square.png
+   |   |   |-- ic_home.png
+   |   |   |-- ic_notification.png
+   |   |   |-- ic_select.png
+   |   |   |-- ic_setting.png
+   |   |   |-- ic_uncheck_radio.png
+   |   |   |-- ic_uncheck_square.png
+   |   |-- images.ts
+   |   |-- locates
+   |   |   |-- en.ts
+   |   |   |-- jp.ts
+   |   |-- metrics.ts
+   |   |-- photo
+   |   |   |-- img_default_image.png
+   |   |-- sizes.ts
+   |   |-- themes.ts
+   |-- components
+   |   |-- base
+   |   |   |-- AlertMessage.ts
+   |   |   |-- CheckBox.tsx
+   |   |   |-- ProgressiveImage.tsx
+   |   |   |-- StyledButton.tsx
+   |   |   |-- StyledIcon.tsx
+   |   |   |-- StyledImage.tsx
+   |   |   |-- StyledIndicator.tsx
+   |   |   |-- StyledInput.tsx
+   |   |   |-- StyledInputForm.tsx
+   |   |   |-- StyledList.tsx
+   |   |   |-- StyledModalDropdown.tsx
+   |   |   |-- StyledNoData.tsx
+   |   |   |-- StyledOverlayLoading.tsx
+   |   |   |-- StyledSectionList.tsx
+   |   |   |-- StyledText.tsx
+   |   |   |-- StyledTouchable.tsx
+   |   |   |-- StyledWebView.tsx
+   |   |   |-- index.ts
+   |   |   |-- list-view-selected
+   |   |   |   |-- StyledListViewSelected.tsx
+   |   |   |   |-- components
+   |   |   |   |   |-- ItemListViewSelected.tsx
+   |   |   |-- modal
+   |   |   |   |-- ModalizeCenterComponent.tsx
+   |   |   |   |-- ModalizeManager.tsx
+   |   |   |-- picker
+   |   |   |   |-- StyledDateTimePicker.tsx
+   |   |   |   |-- StyledModalPicker.tsx
+   |   |   |   |-- StyledPicker.tsx
+   |   |-- common
+   |   |   |-- CodePushProgressDialog.tsx
+   |   |   |-- StyledHeader.tsx
+   |-- feature
+   |   |-- account
+   |   |   |-- AccountScreen.tsx
+   |   |-- authentication
+   |   |   |-- ChangePassword.tsx
+   |   |   |-- ForgotPwdScreen.tsx
+   |   |   |-- LoginScreen.tsx
+   |   |   |-- RegisterScreen.tsx
+   |   |   |-- SendOtp.tsx
+   |   |-- chat
+   |   |   |-- ChatScreen.tsx
+   |   |-- home
+   |   |   |-- HomeDataScreen.tsx
+   |   |   |-- HomeDetailScreen.tsx
+   |   |   |-- HomeScreen.tsx
+   |   |   |-- HomeUserListScreen.tsx
+   |   |   |-- components
+   |   |   |   |-- ModalContent.tsx
+   |   |   |   |-- ModalContent2.tsx
+   |   |   |   |-- UserCard.tsx
+   |   |-- notification
+   |   |   |-- NotificationScreen.tsx
+   |   |-- setting
+   |   |   |-- SettingScreen.tsx
+   |-- hooks
+   |   |-- useApi.ts
+   |   |-- useInput.ts
+   |   |-- usePaging.ts
+   |   |-- usePagingTakeAfter.ts
+   |-- navigation
+   |   |-- NavigationService.ts
+   |   |-- components
+   |   |   |-- StyledTabBar.tsx
+   |   |-- config
+   |   |   |-- options.ts
+   |   |   |-- routes.ts
+   |   |   |-- transition.ts
+   |   |-- scene
+   |   |   |-- AuthScenes.tsx
+   |   |   |-- RootScenes.tsx
+   |   |   |-- TabScenes.tsx
+   |-- utilities
+   |   |-- CommonInterface.ts
+   |   |-- SocketProvider.tsx
+   |   |-- authenticate
+   |   |   |-- AuthenticateService.ts
+   |   |   |-- TokenProvider.ts
+   |   |-- enum.ts
+   |   |-- format.ts
+   |   |-- helper.ts
+   |   |-- i18next.ts
+   |   |-- logger.ts
+   |   |-- notification
+   |   |   |-- index.ts
+   |   |-- permissions
+   |   |   |-- index.ts
+   |   |-- react-i18next.d.ts
+   |   |-- staticData.ts
+   |   |-- types
+   |   |   |-- typing.d.ts
+   |   |-- upload
+   |   |   |-- ImagePicker.tsx
+   |   |   |-- ImageUploader.ts
+   |   |-- validate.ts
+   |   |-- yupValidate.ts
+tsconfig.json
 
-50 directories, 134 files
+50 directories, 152 files
 ```
