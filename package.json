@@ -16,7 +16,7 @@
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "lint:ts": "tslint 'src/**/*.{ts,tsx,js}'",
         "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-        "lint:husky": "eslint $(git diff --name-only | grep -E '(.js$|.ts$|.tsx$)')",
+        "lint:husky": "eslint $(git diff --staged --name-only | grep -E '(.js$|.ts$|.tsx$)')",
         "devtools": "react-devtools",
         "get-tree": "tree -I 'android|ios|node_modules'",
         "no-edit": "git add . && git commit --amend --no-edit && git push origin HEAD -f",
