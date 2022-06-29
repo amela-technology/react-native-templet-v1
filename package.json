@@ -22,6 +22,8 @@
         "no-edit": "git add . && git commit --amend --no-edit && git push origin HEAD -f",
         "no-verify": "git add . && git commit --amend --no-edit --no-verify && git push origin HEAD -f",
         "rebase": "git checkout develop && git pull origin develop && git checkout - && git rebase -",
+        "stash": "git stash && yarn rebase && git stash pop",
+        "add-except-android-ios": "git add --all -- ':!android/*' ':!ios/*'",
         "buildAndroid": "cd android && ./gradlew assembleRelease&& adb -d install app/build/outputs/apk/release/app-release.apk",
         "bundleIOS": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
         "android-run-debug-develop": "react-native run-android --no-jetifier --variant=devDebug --appId 'com.amela.vn.dev'",
