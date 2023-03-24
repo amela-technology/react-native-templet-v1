@@ -20,6 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+ios/.xcode.env.local
 
 # Android/IntelliJ
 #
@@ -65,8 +66,6 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
-/ios/Podfile.lock
-yarn.lock
 package-lock.json
 # react-native-config codegen
 ios/tmp.xcconfig
