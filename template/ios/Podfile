@@ -32,6 +32,9 @@ target 'DemoApp' do
 
   pod 'react-native-config', :path => '../node_modules/react-native-config'
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+
   # Flags change depending on the env values.
   flags = get_default_flags()
 
