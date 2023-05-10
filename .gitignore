@@ -5,3 +5,4 @@ template/ios/Pods
 template/ios/tmp.xcconfig
 template/android/app/build/
 template/ios/app/build/
+template/.env
