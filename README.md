@@ -272,3 +272,10 @@ Show list commit types to choose and execute commits (using commit-lint).
 
 43 directories, 131 files
 ```
+---
+# E. Road-map
+- [x]   Convert base into `react-native-cli` template.
+- [ ]   New way of using `react-hook-form`.
+- [ ]   Remove redundant files/folders (maybe create a folder `demo` that contains all sample UI/components in it).
+- [ ]   Rename files in folder `base`, `common` (maybe remove prefix **`Styled`**)
+- [ ]   Find a way to integrate UI/UX 3rd party.
