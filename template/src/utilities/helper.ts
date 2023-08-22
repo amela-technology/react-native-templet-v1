@@ -28,15 +28,6 @@ export function logger(msg: any, isWarning?: boolean, params?: any): void {
     }
 }
 
-export function initPicker(params?: any) {
-    Picker.init({
-        pickerTextEllipsisLen: 10,
-        pickerCancelBtnText: i18next.t('common.cancel'),
-        pickerConfirmBtnText: i18next.t('common.confirm'),
-        ...params,
-    });
-}
-
 export const addMenuClearAsyncStorage = () => {
     if (__DEV__) {
         DevSettings.addMenuItem('Clear AsyncStorage', () => {
