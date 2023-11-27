@@ -4,27 +4,28 @@ Below you'll find information about performing common tasks.
 
 # Table of Contents
 
--   Introduction
--   A. Getting started
--   B. Available scripts
--   C. Common errors
--   D. Template folder structures
+- Introduction
+- A. Getting started
+- B. Available scripts
+- C. Common errors
+- D. Template folder structures
+- E. [Document run and deploy](/template/RUN_DEPLOY.md)
 
 # Introduction
 
--   Easy to start
--   React-native version 0.71.4
--   Fully using typescript for typing
--   Folder structure using package-by-feature (why)
--   Redux-toolkit, redux-saga, redux-persist, redux-logger
--   React-navigation v6
--   100% functional component with hooks
--   A lot of custom/base components
--   i18next for multiple languages
--   Custom hooks for share state logic between components
--   Eslint with Prettier plugin for checking code convention
--   Husky for pre-commit (we check lint to make sure we have no errors first when commit)
--   Amela React-native CLI
+- Easy to start
+- React-native version 0.71.4
+- Fully using typescript for typing
+- Folder structure using package-by-feature (why)
+- Redux-toolkit, redux-saga, redux-persist, redux-logger
+- React-navigation v6
+- 100% functional component with hooks
+- A lot of custom/base components
+- i18next for multiple languages
+- Custom hooks for share state logic between components
+- Eslint with Prettier plugin for checking code convention
+- Husky for pre-commit (we check lint to make sure we have no errors first when commit)
+- Amela React-native CLI
 
 ---
 
@@ -272,10 +273,13 @@ Show list commit types to choose and execute commits (using commit-lint).
 
 43 directories, 131 files
 ```
+
 ---
+
 # E. Road-map
-- [x]   Convert base into `react-native-cli` template.
-- [ ]   New way of using `react-hook-form`.
-- [ ]   Remove redundant files/folders (maybe create a folder `demo` that contains all sample UI/components in it).
-- [ ]   Rename files in folder `base`, `common` (maybe remove prefix **`Styled`**)
-- [ ]   Find a way to integrate UI/UX 3rd party.
+
+- [x] Convert base into `react-native-cli` template.
+- [ ] New way of using `react-hook-form`.
+- [ ] Remove redundant files/folders (maybe create a folder `demo` that contains all sample UI/components in it).
+- [ ] Rename files in folder `base`, `common` (maybe remove prefix **`Styled`**)
+- [ ] Find a way to integrate UI/UX 3rd party.
