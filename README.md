@@ -13,19 +13,19 @@ Below you'll find information about performing common tasks.
 
 # Introduction
 
-- Easy to start
-- React-native version 0.71.4
-- Fully using typescript for typing
-- Folder structure using package-by-feature (why)
-- Redux-toolkit, redux-saga, redux-persist, redux-logger
-- React-navigation v6
-- 100% functional component with hooks
-- A lot of custom/base components
-- i18next for multiple languages
-- Custom hooks for share state logic between components
-- Eslint with Prettier plugin for checking code convention
-- Husky for pre-commit (we check lint to make sure we have no errors first when commit)
-- Amela React-native CLI
+-   Easy to start
+-   React-native version 0.73.0
+-   Fully using typescript for typing
+-   Folder structure using package-by-feature (why)
+-   Redux-toolkit, redux-saga, redux-persist, redux-logger
+-   React-navigation v6
+-   100% functional component with hooks
+-   A lot of custom/base components
+-   i18next for multiple languages
+-   Custom hooks for share state logic between components
+-   Eslint with Prettier plugin for checking code convention
+-   Husky for pre-commit (we check lint to make sure we have no errors first when commit)
+-   Amela React-native CLI
 
 ---
 
@@ -33,23 +33,7 @@ Below you'll find information about performing common tasks.
 
 ## I. Automatically with AMELA-RN-CLI
 
-1. Install globally package `amela-rn-cli`
-
-```
-npm i -g amela-rn-cli
-```
-
-2. Move to a folder you use to create new project.
-3. Run command below
-
-```
-amela-rn-cli
-```
-
-4. Choose mode 1 - **Create a new project**
-5. Fill in these inputs: **_Project name_**, and **_repoURL_** in your command line.
-6. Press `Enter` and enjoy.
-7. For more information about AMELA-RN-CLI, please visit https://github.com/SpQuyt/amela-rn-cli
+--To Be Determined--
 
 ## II. Manually step-by-step method
 
@@ -60,7 +44,7 @@ amela-rn-cli
 
 ### Some manual setups
 
-1. Setup react-native config following guide: https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
+1. Setup react-native config following guide (deprecated - need upgrade): https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
 2. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
 
 ---
@@ -79,7 +63,7 @@ npm start  --reset-cache
 yarn start  --reset-cache
 ```
 
-### `npm test` or `yarn test` _(in development)_
+### `npm test` or `yarn test` (in development)
 
 Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
 
@@ -97,14 +81,13 @@ Show list commit types to choose and execute commits (using commit-lint).
 
 ```
 .
+├── App.tsx
 ├── Gemfile
 ├── Gemfile.lock
-├── ReactotronConfig.js
+├── ReactotronConfig.tsx
 ├── __tests__
-│   └── App-test.tsx
+│   └── App.test.tsx
 ├── app.json
-├── babel.config.js
-├── code-push.command
 ├── commitlint.config.js
 ├── defaultIcon.jpeg
 ├── environment
@@ -113,10 +96,11 @@ Show list commit types to choose and execute commits (using commit-lint).
 ├── metro.config.js
 ├── package.json
 ├── patches
-│   ├── react-native+0.71.4.patch
-│   ├── react-native-image-crop-picker+0.37.3.patch
+│   ├── react-native+0.73.0.patch
+│   ├── react-native-code-push+8.1.0.patch
+│   ├── react-native-image-crop-picker+0.40.2.patch
 │   ├── react-native-keyboard-aware-scroll-view+0.9.5.patch
-│   └── react-native-size-matters+0.4.0.patch
+│   └── react-native-size-matters+0.4.2.patch
 ├── react-native.config.js
 ├── settings.json
 ├── src

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { ActivityIndicator, LogBox } from 'react-native';
+import { ActivityIndicator, LogBox, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from 'app-redux/store';

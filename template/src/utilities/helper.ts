@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AlertMessage from 'components/base/AlertMessage';
 import i18next from 'i18next';
 import { DevSettings, Platform } from 'react-native';
