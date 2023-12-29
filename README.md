@@ -37,14 +37,20 @@ Below you'll find information about performing common tasks.
 
 ## II. Manually step-by-step method
 
+### Note before installation
+1. NodeJS version must be >= **version 18**
+2. Android Studio must be >= **version Giraffe**
+3. CocoaPods must be = **version 1.14.3**
+
 ### Installation
 
-1. `npx react-native init <your-project-name> --template https://github.com/amela-technology/react-native-templet-v1` (For example: `npx react-native init TestProject --template https://github.com/amela-technology/react-native-templet-v1`)
+1. `npx react-native init <your-project-name> --template react-native-template-amela` 
+(For example: `npx react-native init TestProject --template react-native-template-amela`)
 2. If you cloned your GIT project into a folder, copy & paste content of this template into that folder.
 
 ### Some manual setups
 
-1. Setup react-native config following guide (deprecated - need upgrade): https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s
+1. ~~Setup react-native config following guide (deprecated - need upgrade): https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s |~~
 2. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
 
 ---
