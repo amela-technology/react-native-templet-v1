@@ -10,22 +10,23 @@ Below you'll find information about performing common tasks.
 - C. Common errors
 - D. Template folder structures
 - E. [Document run and deploy](/template/RUN_DEPLOY.md)
+- F. Roadmap
 
 # Introduction
 
--   Easy to start
--   React-native version 0.73.0
--   Fully using typescript for typing
--   Folder structure using package-by-feature (why)
--   Redux-toolkit, redux-saga, redux-persist, redux-logger
--   React-navigation v6
--   100% functional component with hooks
--   A lot of custom/base components
--   i18next for multiple languages
--   Custom hooks for share state logic between components
--   Eslint with Prettier plugin for checking code convention
--   Husky for pre-commit (we check lint to make sure we have no errors first when commit)
--   Amela React-native CLI
+- Easy to start
+- React-native version 0.73.0
+- Fully using typescript for typing
+- Folder structure using package-by-feature (why)
+- Redux-toolkit, redux-saga, redux-persist, redux-logger
+- React-navigation v6
+- 100% functional component with hooks
+- A lot of custom/base components
+- i18next for multiple languages
+- Custom hooks for share state logic between components
+- Eslint with Prettier plugin for checking code convention
+- Husky for pre-commit (we check lint to make sure we have no errors first when commit)
+- Amela React-native CLI
 
 ---
 
@@ -37,16 +38,32 @@ Below you'll find information about performing common tasks.
 
 ## II. Manually step-by-step method
 
-### Note before installation
-1. NodeJS version must be >= **version 18**
-2. Android Studio must be >= **version Giraffe**
-3. CocoaPods must be = **version 1.14.3**
+### <mark>[!] Note before installation</mark>
+
+> - _NodeJS version must be >= **version 18**_
+> - _Android Studio must be >= **version Giraffe**_
+> - _CocoaPods must be >= **version 1.14.0**_
+> - _Must install [patch-package](https://github.com/ds300/patch-package)._
 
 ### Installation
 
-1. `npx react-native init <your-project-name> --template react-native-template-amela` 
-(For example: `npx react-native init TestProject --template react-native-template-amela`)
-2. If you cloned your GIT project into a folder, copy & paste content of this template into that folder.
+1. **Use `yarn` <mark>[Recommended]</mark>**
+
+- Must installed **yarn** before.
+- npx react-native init **your-project-name** --template react-native-template-amela --pm yarn --skip-git-init true --install-pods true
+
+  > _`npx react-native init TestProject --template react-native-template-amela --pm yarn --skip-git-init true --install-pods true`_
+
+2. **Use `npm`**
+
+- npx react-native init **your-project-name** --template react-native-template-amela --skip-git-init true --install-pods true
+
+  > _`npx react-native init TestProject --template react-native-template-amela --skip-git-init true --install-pods true`_
+
+### <mark>[!] Note after installation</mark>
+
+> - _Copy all installed files and folders into your GIT project._
+> - _Copy **.gitignore** file from **THIS REPOSITORY** into your GIT project (**.gitignore** is removed while `npx init`)_
 
 ### Some manual setups
 
@@ -266,7 +283,11 @@ Show list commit types to choose and execute commits (using commit-lint).
 
 ---
 
-# E. Road-map
+# E. Document run and deploy
+
+[Document run and deploy](/template/RUN_DEPLOY.md)
+
+# F. Road-map
 
 - [x] Convert base into `react-native-cli` template.
 - [ ] New way of using `react-hook-form`.
