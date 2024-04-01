@@ -3,12 +3,9 @@ apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
 project.ext.envConfigFiles = [
-    devdebug: "./environment/.env.development",
-    devrelease: "./environment/.env.development",
-    stagingdebug: "./environment/.env.staging",
-    stagingrelease: "./environment/.env.staging",
-    productdebug: "./environment/.env.production",
-    productrelease: "./environment/.env.production",
+    dev: "./environment/.env.development",
+    staging: "./environment/.env.staging",
+    product: "./environment/.env.production",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -93,7 +90,7 @@ android {
         versionCode Integer.valueOf(env.get("ANDROID_APP_VERSION_CODE"))
         multiDexEnabled true
         versionName env.get("ANDROID_APP_VERSION_NAME")
-        resValue "string", "build_config_package", env.get("ANDROID_APP_ID")
+        resValue "string", "build_config_package", "com.demoapp"
     }
     signingConfigs {
         debug {
@@ -131,6 +128,19 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+        applicationVariants.all{
+            variant ->
+                variant.outputs.each{
+                    // Below line we are setting a name for our apk.
+                    output->
+                        project.ext { appName = 'demoapp' }
+                        def formattedDate = new Date().format('yyyyMMdd-HHmm')
+                        def newName = output.outputFile.name
+                        def versionName = env.get("ANDROID_APP_VERSION_NAME")
+                        newName = newName.replace("app-", "$project.ext.appName-$formattedDate-$versionName-")
+                        output.outputFileName  = newName
+                }
         }
     }
     flavorDimensions "environment"

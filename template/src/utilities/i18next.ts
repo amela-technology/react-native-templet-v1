@@ -46,6 +46,7 @@ i18next.use(initReactI18next).init({
             translation: jp,
         },
     },
+    compatibilityJSON: 'v3'
 });
 
 export const loadLocaleLanguage = () => {

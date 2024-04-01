@@ -63,11 +63,12 @@ Below you'll find information about performing common tasks.
 ### <mark>[!] Note after installation</mark>
 
 > - _Copy all installed files and folders into your GIT project._
-> - _Copy **.gitignore** file from **THIS REPOSITORY** into your GIT project (**.gitignore** is removed while `npx init`)_
+> - _Copy **.gitignore** file from **THIS REPOSITORY** into your GIT project (**.gitignore** is removed while `npx react-native init`)_
+> - _Duplicate file **.env.development** from folder **environment** to your root project. Rename to **.env** https://prnt.sc/K23PXoWJ19tn_
 
 ### Some manual setups
 
-1. ~~Setup react-native config following guide (deprecated - need upgrade): https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s |~~
+1. ~~Setup react-native config (Amela-style) following guide (deprecated - need upgrade): https://docs.google.com/document/d/1sPg4N7iXEgD_NzbXBRD_SzHPo4p48uJIgG_fC9hK48s |~~
 2. Setup modalize following guide: https://jeremybarbet.github.io/react-native-modalize/#/INSTALLATION
 
 ---
@@ -107,7 +108,7 @@ Show list commit types to choose and execute commits (using commit-lint).
 ├── App.tsx
 ├── Gemfile
 ├── Gemfile.lock
-├── ReactotronConfig.tsx
+├── reactotron.config.js
 ├── __tests__
 │   └── App.test.tsx
 ├── app.json

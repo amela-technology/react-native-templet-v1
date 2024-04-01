@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import Reactotron from '../../ReactotronConfig';
+import Reactotron from '../../reactotron.config';
 import rootSaga from './sagas/rootSaga';
 
 import resourceReducer from './slices/resourceSlice';
