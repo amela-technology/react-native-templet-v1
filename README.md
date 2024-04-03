@@ -50,15 +50,15 @@ Below you'll find information about performing common tasks.
 1. **Use `yarn` <mark>[Recommended]</mark>**
 
 - Must installed **yarn** before.
-- npx react-native init **your-project-name** --template react-native-template-amela --pm yarn --skip-git-init true --install-pods true
+- npx react-native init **your-project-name** --template react-native-template-amela --pm yarn --skip-git-init true --install-pods true --verbose
 
-  > _`npx react-native init TestProject --template react-native-template-amela --pm yarn --skip-git-init true --install-pods true`_
+  > _`npx react-native init TestProject --template react-native-template-amela --pm yarn --skip-git-init true --install-pods true --verbose`_
 
 2. **Use `npm`**
 
-- npx react-native init **your-project-name** --template react-native-template-amela --skip-git-init true --install-pods true
+- npx react-native init **your-project-name** --template react-native-template-amela --skip-git-init true --install-pods true --verbose
 
-  > _`npx react-native init TestProject --template react-native-template-amela --skip-git-init true --install-pods true`_
+  > _`npx react-native init TestProject --template react-native-template-amela --skip-git-init true --install-pods true --verbose`_
 
 ### <mark>[!] Note after installation</mark>
 
