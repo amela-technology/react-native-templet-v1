@@ -21,6 +21,7 @@ const App: FunctionComponent = () => {
     const onBeforeLift = () => {
         loadLocaleLanguage();
     };
+    console.log('huhu');
     useEffect(() => {
         addMenuClearAsyncStorage();
         getCodePushInfo();
