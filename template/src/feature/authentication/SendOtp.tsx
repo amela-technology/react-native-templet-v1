@@ -7,7 +7,7 @@ import { navigate } from 'navigation/NavigationService';
 import React, { FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import CodeInput from 'react-native-confirmation-code-input';
+import { CodeField } from 'react-native-confirmation-code-field';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
@@ -65,15 +65,9 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
         <SafeAreaView style={styles.flex1}>
             <KeyboardAwareScrollView enableOnAndroid={true} showsVerticalScrollIndicator={false}>
                 <View style={styles.container}>
-                    <CodeInput
+                    {/* <CodeField
                         keyboardType="numeric"
-                        space={10}
-                        size={30}
-                        activeColor={Themes.COLORS.black}
-                        containerStyle={styles.otpInput}
-                        codeInputStyle={styles.underlineStyleBase}
-                        onFulfill={onCodeFilled}
-                    />
+                    /> */}
                     <StyledTouchable onPress={resendOTP} customStyle={styles.containerResend}>
                         <StyledText customStyle={styles.resend} i18nText="common.sendOTP.resend" />
                     </StyledTouchable>
